@@ -78,7 +78,8 @@ export default function FrequentlyAskQuestion() {
       sx={{
         flexGrow: 1,
         maxWidth: 1080,
-        m: "50px 20px",
+        m: "40px 0px",
+        px: 2,
       }}
     >
       <Box
@@ -86,7 +87,6 @@ export default function FrequentlyAskQuestion() {
         sx={{
           width: "100%",
           border: `1px solid #e7ecf1`,
-
           position: "relative",
         }}
       >

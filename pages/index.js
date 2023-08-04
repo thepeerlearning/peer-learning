@@ -6,6 +6,7 @@ import learnGirl from "../public/images/learn-girl.jpg.jpg";
 import learnMan from "../public/images/learn-man.jpg.jpg";
 import learnWoman from "../public/images/learn-woman.jpg.jpg";
 import { SubmitButton } from "../src/components/forms/buttons";
+import { StyledCard } from "../src/components/forms/textFields";
 import {
   AfricanMapIcon,
   CirclePersonIcon,
@@ -14,19 +15,16 @@ import {
   LocationIcon,
   MessageIcon,
   RedArrowUp,
-  RedPersonIcon,
 } from "../src/components/svg";
+import { RedCircleProfileIcon } from "../src/components/svg/menuIcons";
+import { Colors } from "../src/components/themes/colors";
 import { Fonts } from "../src/components/themes/fonts";
 import MetaData from "../src/utils/meta";
+import FrequentlyAskQuestion from "../src/views/home/frequently-asked-questions";
 import HomeLayout from "../src/views/home/layout";
 import VideoPlayer from "../src/views/home/videoPlayer";
-import { Colors } from "../src/components/themes/colors";
-import { RedCircleProfileIcon } from "../src/components/svg/menuIcons";
-import { StyledCard } from "../src/components/forms/textFields";
-import FrequentlyAskQuestion from "../src/views/home/frequently-asked-questions";
 
 const styledBox = {
-  // width: "100%",
   maxWidth: 346.656,
   height: 156,
   padding: "0px 14.597px 3px 14.797px",
@@ -44,7 +42,7 @@ const styledBox = {
 const styledCardBox = {
   width: "100%",
   maxWidth: { xs: "100%", sm: 500, lg: 426 },
-  height: { xs: 420, md: 300, xl: "auto" },
+  height: { xs: "auto", md: 300, xl: "auto" },
   padding: "16px 22px",
   display: "flex",
   flexDirection: "column",
@@ -95,7 +93,6 @@ export default function IndexPage() {
         <Box
           component="div"
           sx={{
-            // maxWidth: 1200,
             display: "flex",
             padding: {
               xs: "55px 0 0",
@@ -423,7 +420,6 @@ export default function IndexPage() {
       <Box
         component="div"
         sx={{
-          // maxWidth: 1440,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -432,7 +428,6 @@ export default function IndexPage() {
             sm: "150px 75px 15px 75px",
             md: "100px 75px 100px 75px",
           },
-          // gap: "140px",
         }}
       >
         <Box component="div">
@@ -497,7 +492,7 @@ export default function IndexPage() {
           }}
         >
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <StyledCard sx={styledCardBox}>
                 <RedCircleProfileIcon />
                 <Box
@@ -524,7 +519,7 @@ export default function IndexPage() {
                 </Box>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <StyledCard sx={styledCardBox}>
                 <RedCircleProfileIcon />
 
@@ -552,7 +547,7 @@ export default function IndexPage() {
                 </Box>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <StyledCard sx={styledCardBox}>
                 <RedCircleProfileIcon />
 
@@ -699,7 +694,10 @@ export default function IndexPage() {
                         font: `normal normal 400 19px/60px ${Fonts.secondary}`,
                       }}
                     >
-                      8 classes / month $12/class
+                      8 classes / month{" "}
+                      <Box sx={{ display: "inline-flex", ml: 1 }}>
+                        $12/class
+                      </Box>
                     </Box>
                   </Box>
                   <SubmitButton
@@ -771,7 +769,10 @@ export default function IndexPage() {
                         font: `normal normal 400 19px/60px ${Fonts.secondary}`,
                       }}
                     >
-                      8 classes / month $12/class
+                      8 classes / month{" "}
+                      <Box sx={{ display: "inline-flex", ml: 1 }}>
+                        $12/class
+                      </Box>
                     </Box>
                   </Box>
                   <SubmitButton
@@ -843,7 +844,10 @@ export default function IndexPage() {
                         font: `normal normal 400 19px/60px ${Fonts.secondary}`,
                       }}
                     >
-                      8 classes / month $12/class
+                      8 classes / month{" "}
+                      <Box sx={{ display: "inline-flex", ml: 1 }}>
+                        $12/class
+                      </Box>
                     </Box>
                   </Box>
                   <SubmitButton

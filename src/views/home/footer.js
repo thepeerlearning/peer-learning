@@ -148,6 +148,48 @@ export default function Footer() {
                   </Link>
                 </Box>
               </Grid>
+
+              <Grid item xs={6} sm={3}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "8px",
+                    mt: 1.5,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      font: `normal normal 700 14px/24px ${Fonts.secondary}`,
+                      color: "#0D1825",
+                    }}
+                  >
+                    Legal
+                  </Box>
+                  <Link
+                    underline="hover"
+                    href="/terms-and-conditions"
+                    sx={{
+                      font: `normal normal 400 14px/24px ${Fonts.secondary}`,
+                      color: "#0D1825",
+                    }}
+                  >
+                    Terms and conditions
+                  </Link>
+                  <Link
+                    underline="hover"
+                    href="/refund-and-cancellation"
+                    sx={{
+                      font: `normal normal 400 14px/24px ${Fonts.secondary}`,
+                      color: "#0D1825",
+                    }}
+                  >
+                    Refund and cancellation
+                  </Link>
+                </Box>
+              </Grid>
               <Grid item xs={6} sm={3}>
                 <Box
                   sx={{
@@ -238,47 +280,6 @@ export default function Footer() {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={6} sm={3}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                    gap: "8px",
-                    mt: 1.5,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      font: `normal normal 700 14px/24px ${Fonts.secondary}`,
-                      color: "#0D1825",
-                    }}
-                  >
-                    Legal
-                  </Box>
-                  <Link
-                    underline="hover"
-                    href="/terms-and-conditions"
-                    sx={{
-                      font: `normal normal 400 14px/24px ${Fonts.secondary}`,
-                      color: "#0D1825",
-                    }}
-                  >
-                    Terms and conditions
-                  </Link>
-                  <Link
-                    underline="hover"
-                    href="/refund-and-cancellation"
-                    sx={{
-                      font: `normal normal 400 14px/24px ${Fonts.secondary}`,
-                      color: "#0D1825",
-                    }}
-                  >
-                    Refund and cancellation
-                  </Link>
-                </Box>
-              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -288,8 +289,6 @@ export default function Footer() {
           width: "100%",
           maxWidth: { xs: 342, sm: 385 },
           display: "flex",
-          // justifyContent: { xs: "center", sm: "flex-start" },
-          // alignItems: { xs: "center", sm: "flex-start" },
           padding: { xs: "35px 43.64px 3px 43px", sm: "30px 0px 0px 0px" },
           font: `normal normal 400 15px/24px ${Fonts.secondary}`,
           letterSpacing: "0.2px",
