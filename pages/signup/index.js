@@ -104,6 +104,9 @@ export default function SignupPage() {
   const handlePrev = () =>
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
+  const handlePaymentNext = () =>
+    setActiveStep((prevActiveStep) => prevActiveStep + 2);
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -117,6 +120,20 @@ export default function SignupPage() {
     }
   };
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const step = localStorage.getItem("step");
+      if (step) {
+        return step === "account_created"
+          ? handleNext()
+          : step === "class_schedule"
+          ? handlePaymentNext()
+          : step === "completed"
+          ? router.push("/signup/email-confirmation")
+          : null;
+      }
+    }
+  }, []);
   return (
     <Box
       component="div"

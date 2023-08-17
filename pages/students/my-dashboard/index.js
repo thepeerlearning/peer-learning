@@ -144,16 +144,16 @@ export default function DashboardPage() {
                 gap: "36px",
                 borderRadius: "33px",
                 padding: "10px 16px",
-                background: Colors.primary,
+                background: Colors.secondary,
                 color: Colors.light,
                 textTransform: "uppercase",
                 font: `normal normal 500 16px/24px ${Fonts.secondary}`,
                 cursor: "pointer",
                 transition: "all 0.3ms",
                 "&:hover": {
-                  transform: "scale(0.992)",
+                  transform: "scale(0.99)",
                   fontSize: "15.992px",
-                  background: Colors.secondary,
+                  background: "rgba(247,11,88,0.95)",
                 },
               }}
             >

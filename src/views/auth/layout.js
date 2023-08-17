@@ -65,7 +65,7 @@ export default function AuthLayout({ children }) {
               alignItem: "center",
               background: `rgba(245, 249, 255, 0.80) 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
-              pt: "130px",
+              pt: "100px",
               pl: { sm: "50px", lg: "120px", xl: "230px" },
               pr: 20,
             }}

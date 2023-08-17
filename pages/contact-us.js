@@ -1,66 +1,159 @@
-import { Box, Link } from "@mui/material";
-import Head from "next/head";
-import { Fonts } from "../src/components/themes/fonts";
-import HomeLayout from "../src/views/home/layout";
+import { Box, Button, Grid } from "@mui/material";
+import { useRouter } from "next/router";
+import { StyledCard } from "../src/components/forms/textFields";
 import { Colors } from "../src/components/themes/colors";
+import { Fonts } from "../src/components/themes/fonts";
+import MetaData from "../src/utils/meta";
+import FrequentlyAskQuestion from "../src/views/home/frequently-asked-questions";
+import HomeLayout from "../src/views/home/layout";
+import TeamSlides from "../src/views/home/teamSlides";
+import { EmailIcon, LocationIcon } from "../src/components/svg";
 
 export default function ContactUsPage() {
   return (
-    <div>
-      <Head>
-        <title>Contact us Page | Peer learning </title>
-        <meta name="description" content="peer learning contact us  page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Box component="div">
+      <MetaData title="Peer learning" content="Peer learning home page " />
       <Box
+        component="div"
         sx={{
           width: "100%",
-          height: 500,
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           flexDirection: "column",
-          mt: 5,
-          font: `normal normal 400 20px/40px ${Fonts.primary}`,
+          alignItems: "center",
+          background: "#FFF",
+          gap: "140px",
         }}
       >
-        <Box component="h1">Contact us page</Box>
         <Box
+          component="div"
           sx={{
-            width: "100%",
-            height: 500,
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+
+            p: {
+              xs: "155px 24px",
+              sm: "150px 75px 15px 75px",
+              md: "150px 75px 15px 75px",
+              xl: "200px 300px 150px 300px",
+            },
+
             flexDirection: "column",
-            mt: 5,
-            font: `normal normal 400 20px/40px ${Fonts.primary}`,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "40px",
           }}
         >
-          <Box component="h1">Home page</Box>
-          <Box component="h4">
-            Please click{" "}
-            <Link
-              underline="hover"
-              href="/admin/dashboard"
+          <Box
+            component="h1"
+            sx={{
+              width: "100%",
+              maxWidth: 1154,
+              margin: 0,
+              mt: -2,
+              textAlign: "center",
+              color: Colors.black,
+              font: {
+                xs: `normal normal 700 33px/39px ${Fonts.secondary}`,
+                sm: `normal normal 700 49px/58px ${Fonts.secondary}`,
+              },
+            }}
+          >
+            Got a question for us?
+            <Box
+              component="h2"
               sx={{
-                mr: 0.2,
-                "&:hover": {
-                  transform: "scale(0.95)",
-                  color: Colors.secondary,
-                },
+                maxWidth: 680,
+                margin: 1,
+                display: "block",
+                color: "#0D1825",
+                textAlign: "center",
+                font: `normal normal 400 20px/28.5px ${Fonts.secondary}`,
               }}
             >
-              here
-            </Link>{" "}
-            to go the admin part
+              We value your feedback, questions, and suggestions, and we want to
+              hear from you. Please reach out to us using any of the methods
+              listed below.
+            </Box>
+          </Box>
+          <Box>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={6}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <EmailIcon />
+                  <Box
+                    sx={{
+                      color: Colors.secondary,
+                      textAlign: "center",
+                      font: `normal normal 700 21px/31.92px ${Fonts.secondary}`,
+                      letterSpacing: "-0.48px",
+                    }}
+                  >
+                    Email us
+                  </Box>
+                  <Box
+                    sx={{
+                      color: Colors.primary,
+                      textAlign: "center",
+                      font: `normal normal 400 20px/25.6px ${Fonts.secondary}`,
+                      letterSpacing: "-0.48px",
+                    }}
+                  >
+                    hello@thepeerlearning.com
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <LocationIcon />
+                  <Box
+                    sx={{
+                      color: Colors.secondary,
+                      textAlign: "center",
+                      font: `normal normal 700 21px/31.92px ${Fonts.secondary}`,
+                      letterSpacing: "-0.48px",
+                    }}
+                  >
+                    Address
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      maxWidth: 510,
+                      color: Colors.primary,
+                      textAlign: "center",
+                      font: `normal normal 400 20px/25.6px ${Fonts.secondary}`,
+                      letterSpacing: "-0.48px",
+                    }}
+                  >
+                    1007 N Orange St. 4th Floor Suite #2355 Wilmington, Delaware
+                    19801, United States
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
+        <FrequentlyAskQuestion />
       </Box>
-    </div>
+    </Box>
   );
 }
 
 ContactUsPage.getLayout = function getLayout(page) {
-  return <HomeLayout title="My profile">{page}</HomeLayout>;
+  return <HomeLayout>{page}</HomeLayout>;
 };

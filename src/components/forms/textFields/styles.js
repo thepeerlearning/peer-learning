@@ -6,6 +6,7 @@ import { Box, FormHelperText } from "@mui/material";
 import { Colors } from "../../themes/colors";
 import { Fonts } from "../../themes/fonts";
 import Select from "react-select";
+import PhoneInput from "react-phone-number-input";
 
 export const FormsRow = styled.div`
   display: flex;
@@ -45,8 +46,8 @@ export const PasswordIcon = styled.span`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 12px;
-  top: 30px;
+  right: 8px;
+  top: 31px;
   width: 56px;
   height: 44px;
   padding: 12px 18px;
@@ -66,7 +67,7 @@ export const InputLabel = styled.label`
   font: normal normal 700 15px/19px ${Fonts.secondary};
   letter-spacing: 0px;
   color: #001b38;
-  text-transform: none;
+  text-transform: capitalize;
   margin-left: 5px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
 `;
@@ -87,14 +88,16 @@ export const InputTextElement = styled.input`
   font: normal normal 400 16px/20px ${Fonts.secondary};
   border: ${(props) =>
     props.disabled
-      ? `1px solid ${Colors.greyLight}`
+      ? `1px solid ${Colors.greyLightest}`
       : props.error
       ? `1px solid ${Colors.buttonError}`
       : `1px solid #E6EBEC`};
   box-sizing: border-box;
   border-radius: 8px;
   background: ${(props) =>
-    props.disabled ? Colors.greyLight : `#F3F2F0 0% 0% no-repeat padding-box`};
+    props.disabled
+      ? Colors.greyLightest
+      : `#F3F2F0 0% 0% no-repeat padding-box`};
   color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   gap: 12px;
@@ -103,7 +106,7 @@ export const InputTextElement = styled.input`
   &:hover {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -115,7 +118,7 @@ export const InputTextElement = styled.input`
   :focus-within {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -132,8 +135,69 @@ export const InputTextElement = styled.input`
     margin-top: 2px;
   }
 `;
+
+//PHONE MUBER
+export const PhoneNumberTextField = styled(PhoneInput)`
+  &.PhoneInput {
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.height ? props.height : "44px")};
+    margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
+      ${(props) => (props.hmargin ? hmargin : 0)};
+    padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+      ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+    border: ${(props) =>
+      props.disabled
+        ? `1px solid ${Colors.greyLightest}`
+        : props.error
+        ? `1px solid ${Colors.buttonError}`
+        : `1px solid #E6EBEC`};
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: ${(props) =>
+      props.disabled
+        ? Colors.greyLightest
+        : `#F3F2F0 0% 0% no-repeat padding-box`};
+    color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
+    gap: 12px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    position: relative;
+  }
+  & .PhoneInputInput {
+    background-color: transparent;
+    border: none;
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.height ? props.height : "44px")};
+    margin: 0;
+    padding: 0;
+    font: normal normal 400 16px/20px ${Fonts.secondary};
+    &:hover {
+      border: none;
+      outline: none;
+    }
+    &:focus {
+      outline: none;
+    }
+    :focus-within {
+      border: none;
+      outline: none;
+    }
+    ::placeholder {
+      display: flex;
+      padding: 0px 10px 0px 0px;
+      align-items: flex-start;
+      color: ${Colors.placeholder};
+      font: normal normal 400 14px/20px ${Fonts.primary};
+    }
+    & + & {
+      margin-top: 2px;
+    }
+    // height: 100%;
+    // weight: 100%;
+  }
+`;
 //SEARCH FIELD
-//Text input
+
 export const InputSearchElement = styled(InputTextElement)`
   background: ${Colors.light};
   padding: 10.5px 10px 10.5px 35px;
@@ -162,7 +226,7 @@ export const SelectInput = styled.select`
   font: normal normal 400 16px/20px ${Fonts.secondary};
   border: ${(props) =>
     props.disabled
-      ? `1px solid ${Colors.greyLight}`
+      ? `1px solid ${Colors.greyLightest}`
       : props.error
       ? `1px solid ${Colors.buttonError}`
       : `1px solid #E6EBEC`};
@@ -178,7 +242,7 @@ export const SelectInput = styled.select`
   &:hover {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -190,7 +254,7 @@ export const SelectInput = styled.select`
   :focus-within {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -228,7 +292,7 @@ export const MultiSelect = styled(Select)`
     cursor:pointer;
 }
 & .Select__multi-value__label{
-    background: ${Colors.greyLight};
+    background: ${Colors.greyLightest};
     color:${Colors.textColor}
     border-radius: 5px;
 }
@@ -302,7 +366,9 @@ export const MultiSelect = styled(Select)`
         : Colors.borderColor};
   border-radius: 5px;
    background: ${(props) =>
-     props.disabled ? Colors.greyLight : `#F3F2F0 0% 0% no-repeat padding-box`};
+     props.disabled
+       ? Colors.greyLightest
+       : `#F3F2F0 0% 0% no-repeat padding-box`};
   color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   gap: 12px;
@@ -312,7 +378,7 @@ export const MultiSelect = styled(Select)`
  &:hover {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -324,7 +390,7 @@ export const MultiSelect = styled(Select)`
   :focus-within {
     border: ${(props) =>
       props.disabled
-        ? `1px solid ${Colors.greyLight}`
+        ? `1px solid ${Colors.greyLightest}`
         : props.error
         ? `1px solid ${Colors.buttonError}`
         : `1px solid ${Colors.stroke}`};
@@ -422,6 +488,12 @@ export const InputElWrapper = styled.fieldset`
   padding-top: 0;
   padding-bottom: 0px;
   margin: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-block-start: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-block-end: 0;
   margin-bottom: 4px;
   line-height: 0;
   border: 0;
@@ -495,14 +567,16 @@ export const InputFileBox = styled(Box)`
   font: normal normal 400 16px/20px ${Fonts.secondary};
   border: ${(props) =>
     props.disabled
-      ? `1px solid ${Colors.greyLight}`
+      ? `1px solid ${Colors.greyLightest}`
       : props.error
       ? `1px solid ${Colors.buttonError}`
       : `1px solid #E6EBEC`};
   box-sizing: border-box;
   border-radius: 8px;
   background: ${(props) =>
-    props.disabled ? Colors.greyLight : `#F3F2F0 0% 0% no-repeat padding-box`};
+    props.disabled
+      ? Colors.greyLightest
+      : `#F3F2F0 0% 0% no-repeat padding-box`};
   color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   text-align: left;

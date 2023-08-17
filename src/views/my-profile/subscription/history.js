@@ -75,7 +75,6 @@ export default function SubscriptionHistory() {
           width: "100%",
           display: "flex",
           color: "#111827",
-          p: "0 17.5px",
           font: {
             xs: `normal normal 600 22px/26px ${Fonts.Jakarta}`,
             sm: `normal normal 600 24px/36px ${Fonts.Jakarta}`,

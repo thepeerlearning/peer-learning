@@ -1,16 +1,27 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Grid, Link } from "@mui/material";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SubmitButton } from "../../../src/components/forms/buttons";
 import { TextField } from "../../../src/components/forms/textFields";
+import Snackbars from "../../../src/components/snackbar";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
+import { forgotpassword } from "../../../src/redux/slices/auth";
 import AuthLayout from "../../../src/views/auth/layout";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+
   // form validation rules
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -26,8 +37,21 @@ export default function ForgotPasswordPage() {
   });
   function onSubmit(data) {
     const { email } = data;
-    console.log("email", email);
+    setLoading(true);
+    dispatch(forgotpassword({ email }))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+        router.push("/email-confirmation");
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+    return false;
   }
+  const handleCloseSnack = () => setError(false);
+  const handleCloseSuccessSnack = () => setSuccess(false);
 
   return (
     <Box>
@@ -95,19 +119,16 @@ export default function ForgotPasswordPage() {
                   register={register}
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12}>
                 <Box
                   sx={{
                     mt: "27px",
-                    p: "0 17.5px",
                   }}
                 >
-                  <SubmitButton
-                  // disabled={loading} loading={loading}
-                  >
+                  <SubmitButton disabled={loading} loading={loading}>
                     Send link
                   </SubmitButton>
                 </Box>
@@ -137,6 +158,18 @@ export default function ForgotPasswordPage() {
           </Box>
         </Grid>
       </Grid>
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={message}
+        isOpen={error}
+      />{" "}
+      <Snackbars
+        variant="success"
+        handleClose={handleCloseSuccessSnack}
+        message={"Email sent successfully"}
+        isOpen={success}
+      />
     </Box>
   );
 }

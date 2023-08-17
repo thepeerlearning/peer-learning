@@ -48,7 +48,7 @@ export default function Header({ window }) {
     },
     {
       name: "Company",
-      link: "/company",
+      link: "/about-us",
     },
     {
       name: "Contact us",

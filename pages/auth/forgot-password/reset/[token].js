@@ -1,32 +1,58 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Grid, Link } from "@mui/material";
 import Head from "next/head";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { SubmitButton } from "../../../src/components/forms/buttons";
-import { PasswordField } from "../../../src/components/forms/textFields";
-import PasswordStrength from "../../../src/components/forms/textFields/passwordStrength";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
-import AuthLayout from "../../../src/views/auth/layout";
+import { SubmitButton } from "../../../../src/components/forms/buttons";
+import { PasswordField } from "../../../../src/components/forms/textFields";
+import PasswordStrength from "../../../../src/components/forms/textFields/passwordStrength";
+import Snackbars from "../../../../src/components/snackbar";
+import { Colors } from "../../../../src/components/themes/colors";
+import { Fonts } from "../../../../src/components/themes/fonts";
+import { resetpassword } from "../../../../src/redux/slices/auth";
+import { clearMessage } from "../../../../src/redux/slices/message";
+import AuthLayout from "../../../../src/views/auth/layout";
 
 export default function ResetPasswordPage() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  const oneLowerCase = /^(?=.*?[a-z])/;
+  const oneUpperCase = /^(?=.*?[A-Z])/;
+  const isNumberRegex = /\d/;
+  const specialCharacterRegex = /[!@#$%&*()_+\-=\[\]{};':"\\,.<>\/?]/;
 
+  const handleCloseSnack = () => setError(false);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   // form validation rules
   const validationSchema = Yup.object().shape({
     password: Yup.string()
-      .min(8, "Must have atleast 8 english characters")
-      .required("Password is required"),
+      .required("Password is required")
+      .min(8, "Password must have atleast 8 english characters")
+      .matches(oneUpperCase, "Password shoud contain uppercase")
+      .matches(oneLowerCase, "Password shoud contain lowercase")
+      .matches(isNumberRegex, "Password shoud contain atleast 1 number")
+      .matches(
+        specialCharacterRegex,
+        "Password shoud contain atleast 1 special character"
+      ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
   });
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   // get functions to build form with useForm() hook
   const {
@@ -39,7 +65,22 @@ export default function ResetPasswordPage() {
   });
   function onSubmit(data) {
     const { password } = data;
-    console.log("password", password);
+    const inputData = {
+      token: router.query.token,
+      email: "Zmxhc2h1cDRhbGxAZ21haWwuY29t",
+      password,
+    };
+    setLoading(true);
+    dispatch(resetpassword({ inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+    return false;
   }
   const password = watch("password");
 
@@ -70,7 +111,7 @@ export default function ResetPasswordPage() {
           >
             New password
             <Box
-              component="h6"
+              component="span"
               sx={{
                 textAlign: "left",
                 maxWidth: 375,
@@ -133,12 +174,9 @@ export default function ResetPasswordPage() {
                 <Box
                   sx={{
                     mt: "27px",
-                    p: "0 17.5px",
                   }}
                 >
-                  <SubmitButton
-                  // disabled={loading} loading={loading}
-                  >
+                  <SubmitButton disabled={loading} loading={loading}>
                     Set new password
                   </SubmitButton>
                 </Box>
@@ -168,6 +206,12 @@ export default function ResetPasswordPage() {
           </Box>
         </Grid>
       </Grid>
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={message}
+        isOpen={error}
+      />
     </Box>
   );
 }

@@ -12,6 +12,13 @@
   background: #d13232 !important;
   font-size: 12px;
 }
+
+.info {
+  background: #fff !important;
+  color: #0a2540 !important;
+  font: normal normal 300 17px/30.5px Helvetica, sans-serif;
+  text-align: center;
+}
 .message {
   display: flex;
   align-items: center;

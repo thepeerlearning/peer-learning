@@ -423,7 +423,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
           sx={{
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
-              position: "absolute",
+              position: "fixed",
               background: `${Colors.light} 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
               width: drawerWidth,

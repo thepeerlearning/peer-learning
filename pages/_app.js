@@ -8,8 +8,11 @@ import "aos/dist/aos.css";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { forwardRef, useEffect, useState } from "react";
+import "react-phone-number-input/style.css";
+import { Provider } from "react-redux";
 import { Fonts } from "../src/components/themes/fonts";
 import createEmotionCache from "../src/lib/createEmotionCache";
+import { store } from "../src/redux/store";
 import "../styles/globals.css";
 import theme from "../styles/muiTheme";
 
@@ -53,8 +56,9 @@ function MyApp({
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-
-          {getLayout(<Component {...pageProps} />)}
+          <Provider store={store}>
+            {getLayout(<Component {...pageProps} />)}
+          </Provider>
         </ThemeProvider>
       </CacheProvider>
 

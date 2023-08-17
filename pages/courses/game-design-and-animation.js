@@ -1,16 +1,19 @@
 import { Box, Grid } from "@mui/material";
-import { StyledCard } from "../../src/components/forms/textFields";
+import Image from "next/image";
+import learnBoy from "../../public/images/design-boy.png";
+import {
+  BadgeIcon,
+  ClockIcon,
+  GlobeIcon,
+  LevelIcon,
+  ListIcon,
+} from "../../src/components/svg";
 import { Colors } from "../../src/components/themes/colors";
 import { Fonts } from "../../src/components/themes/fonts";
-
-import learnBoy from "../../public/images/design-boy.png";
-
 import MetaData from "../../src/utils/meta";
 import FrequentlyAskQuestion from "../../src/views/home/frequently-asked-questions";
+import GameAndAnimationSyllabus from "../../src/views/home/gAndA-syllabus";
 import HomeLayout from "../../src/views/home/layout";
-import { SubmitButton } from "../../src/components/forms/buttons";
-import { useRouter } from "next/router";
-import Image from "next/image";
 
 export default function GameAndAnimationPage() {
   return (
@@ -40,8 +43,8 @@ export default function GameAndAnimationPage() {
               width: "100%",
               p: {
                 xs: "80px 24px 55px",
-                sm: "150px 75px 15px 75px",
-                md: "150px 75px 15px 75px",
+                sm: "150px 45px 50px 0",
+                md: "150px 45px 50px 0",
                 xl: "150px 110px 40px 110px",
               },
               flexDirection: "column",
@@ -60,8 +63,9 @@ export default function GameAndAnimationPage() {
                     flexDirection: "column",
                     p: {
                       xs: "80px 24px 55px",
-                      sm: "150px 75px 15px 75px",
-                      md: "150px 75px 15px 75px",
+                      sm: "0px 75px 15px 70px",
+                      md: "0px 75px 15px 50px",
+                      lg: "0px 75px 15px 50px",
                       xl: "0px 120px 40px 0px",
                     },
                   }}
@@ -101,7 +105,7 @@ export default function GameAndAnimationPage() {
                       width: "100%",
                       color: Colors.primary,
                       font: `normal normal 400 16px/28px ${Fonts.secondary}`,
-                      textAlign: "justify",
+                      textAlign: "start",
                       m: 0,
                     }}
                   >
@@ -154,81 +158,201 @@ export default function GameAndAnimationPage() {
               display: "flex",
               width: "100%",
               p: {
-                xs: "80px 24px 55px",
-                sm: "150px 75px 15px 75px",
-                md: "150px 75px 15px 75px",
-                xl: "0px 110px 40px 110px",
+                xs: "40px 24px 40px",
+                sm: "20px 50px 20px 50px",
+                md: "20px 50px 20px 50px",
+                xl: "20px 110px 20px 110px",
               },
-              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-
               background: Colors.primary,
             }}
           >
             <Box
               component="div"
               sx={{
-                display: "flex",
                 width: "100%",
-                maxWidth: 1440,
-                p: {
-                  xs: "80px 24px 55px",
-                  sm: "150px 75px 15px 75px",
-                  md: "150px 75px 15px 75px",
-                  xl: "150px 110px 40px 110px",
-                },
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-
+                maxWidth: 1400,
+                display: "flex",
                 background: Colors.primary,
               }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={2.4}>
                   <Box
                     sx={{
                       width: "100%",
+                      maxWidth: 120,
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      justifyContent: "space-between",
                       color: Colors.light,
                     }}
                   >
-                    A
+                    <LevelIcon />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        color: Colors.light,
+                        font: `normal normal 400 14px/21px ${Fonts.secondary}`,
+                      }}
+                    >
+                      Skill level
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          color: Colors.light,
+                          font: `normal normal 700 22px/28.2px ${Fonts.secondary}`,
+                        }}
+                      >
+                        Level 1
+                      </Box>
+                    </Box>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={2.4}>
                   <Box
                     sx={{
                       width: "100%",
+                      maxWidth: 140,
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      justifyContent: "space-between",
                       color: Colors.light,
                     }}
                   >
-                    B
+                    <ClockIcon />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        color: Colors.light,
+                        font: `normal normal 400 14px/21px ${Fonts.secondary}`,
+                      }}
+                    >
+                      Class duration
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          color: Colors.light,
+                          font: `normal normal 700 22px/28.2px ${Fonts.secondary}`,
+                        }}
+                      >
+                        1 hour
+                      </Box>
+                    </Box>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={2.4}>
                   <Box
                     sx={{
                       width: "100%",
+                      maxWidth: 150,
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      justifyContent: "space-between",
                       color: Colors.light,
                     }}
                   >
-                    C
+                    <GlobeIcon />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        color: Colors.light,
+                        font: `normal normal 400 14px/21px ${Fonts.secondary}`,
+                      }}
+                    >
+                      Delivery method
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          color: Colors.light,
+                          font: `normal normal 700 22px/28.2px ${Fonts.secondary}`,
+                        }}
+                      >
+                        Online
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={2.8}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      maxWidth: 300,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      color: Colors.light,
+                    }}
+                  >
+                    <BadgeIcon />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        color: Colors.light,
+                        font: `normal normal 400 14px/21px ${Fonts.secondary}`,
+                      }}
+                    >
+                      Certificate of completion
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          color: Colors.light,
+                          font: `normal normal 700 22px/28.2px ${Fonts.secondary}`,
+                        }}
+                      >
+                        Included with paid plans
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      maxWidth: 130,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      color: Colors.light,
+                    }}
+                  >
+                    <ListIcon />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        color: Colors.light,
+                        font: `normal normal 400 14px/21px ${Fonts.secondary}`,
+                      }}
+                    >
+                      Prerequisites
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          color: Colors.light,
+                          font: `normal normal 700 22px/28.2px ${Fonts.secondary}`,
+                        }}
+                      >
+                        None
+                      </Box>
+                    </Box>
                   </Box>
                 </Grid>
               </Grid>
             </Box>
           </Box>
         </Box>
+        <GameAndAnimationSyllabus />
         <FrequentlyAskQuestion />
       </Box>
     </Box>

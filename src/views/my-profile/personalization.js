@@ -44,6 +44,9 @@ export default function Personalization() {
     resolver: yupResolver(validationSchema),
     defaultValues: {
       country: "Nigeria",
+      dob: "12/12/2010",
+      gender: "Female",
+      childName: "Jane Doe",
       //   img: undefined,
     },
   });
@@ -73,7 +76,6 @@ export default function Personalization() {
       gender
     );
   }
-  console.log("photo", photo);
   return (
     <StyledCard
       sx={{
@@ -95,7 +97,6 @@ export default function Personalization() {
           width: "100%",
           display: "flex",
           color: "#111827",
-          p: "0 17.5px",
           font: {
             xs: `normal normal 600 22px/26px ${Fonts.Jakarta}`,
             sm: `normal normal 600 24px/36px ${Fonts.Jakarta}`,
@@ -136,16 +137,18 @@ export default function Personalization() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <Select
               id="gender"
               htmlFor="gender"
               name="gender"
-              type="date"
               label="Gender"
               register={register}
               error={errors.gender ? true : false}
               helper={errors.gender?.message}
-            />
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </Select>
           </Grid>{" "}
           <Grid item xs={12} sm={6}>
             <Select
@@ -189,7 +192,7 @@ export default function Personalization() {
                         <InputFileBox
                           component="label"
                           htmlFor="img"
-                          sx={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer" }}
                           error={errors.img ? true : false}
                         >
                           Upload profile picture
@@ -207,7 +210,7 @@ export default function Personalization() {
             </Card>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box component="div" sx={{ maxWidth: 280, padding: "8px 17.5px" }}>
+            <Box component="div" sx={{ maxWidth: 280 }}>
               <SubmitButton>Update Personalization</SubmitButton>
             </Box>
           </Grid>

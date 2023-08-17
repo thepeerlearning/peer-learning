@@ -9,9 +9,10 @@ import HomeLayout from "../src/views/home/layout";
 import TeamSlides from "../src/views/home/teamSlides";
 
 export default function AboutUsPage() {
+  const router = useRouter();
   return (
     <Box component="div">
-      <MetaData title="Peer learning" content="Peer learning home page " />
+      <MetaData title="Peer learning" content="Peer learning about page " />
       <Box
         component="div"
         sx={{
@@ -29,7 +30,7 @@ export default function AboutUsPage() {
             display: "flex",
 
             p: {
-              xs: "55px 24px",
+              xs: "155px 24px",
               sm: "150px 75px 15px 75px",
               md: "150px 75px 15px 75px",
               xl: "150px 300px 150px 300px",
@@ -213,7 +214,7 @@ export default function AboutUsPage() {
         </Box>
       </Box>
       {/* PEERLEARNIG TEAM */}
-      <Box
+      {/* <Box
         component="div"
         sx={{
           width: "100%",
@@ -265,18 +266,18 @@ export default function AboutUsPage() {
           </Box>
         </Box>
         <TeamSlides />
-      </Box>
+      </Box> */}
       {/* COURSES */}
       <Box
         component="div"
         sx={{
           width: "100%",
-          background: Colors.primary,
+          background: Colors.light,
           display: "inline-flex",
           flexDirection: "column",
           alignItems: "center",
           p: {
-            xs: "55px 24px",
+            xs: "155px 24px",
             sm: "150px 75px 15px 75px",
             md: "100px 75px 100px 75px",
           },
@@ -284,7 +285,7 @@ export default function AboutUsPage() {
       >
         <Box
           sx={{
-            color: Colors.light,
+            color: Colors.dark,
             font: `normal normal 300 15px/55px ${Fonts.secondary}`,
             textAlign: "center",
           }}
@@ -301,7 +302,7 @@ export default function AboutUsPage() {
               },
               letterSpacing: "-1.28px",
               textAlign: "center",
-              color: "#F5F5F7",
+              color: Colors.dark,
               // m: 0,
             }}
           >
@@ -381,6 +382,7 @@ export default function AboutUsPage() {
                       transform: "scale(0.99)",
                     },
                   }}
+                  onClick={() => router.push("/careers")}
                 >
                   Apply
                 </Button>
@@ -464,6 +466,7 @@ export default function AboutUsPage() {
                       transform: "scale(0.99)",
                     },
                   }}
+                  onClick={() => router.push("/careers")}
                 >
                   Apply
                 </Button>
@@ -478,11 +481,11 @@ export default function AboutUsPage() {
             maxWidth: 740,
             font: {
               xs: `normal normal 700 25px/32px ${Fonts.secondary}`,
-              sm: `normal normal 700 46px/32px ${Fonts.secondary}`,
+              sm: `normal normal 700 48px/54.99px ${Fonts.secondary}`,
             },
             letterSpacing: "-1.28px",
             textAlign: "center",
-            color: "#F5F5F7",
+            color: Colors.dark,
             // m: 0,
           }}
         >
@@ -490,8 +493,9 @@ export default function AboutUsPage() {
           <Box
             sx={{
               textAlign: "center",
-              color: Colors.light,
-              font: `normal normal 300 15px/55px ${Fonts.secondary}`,
+              color: Colors.dark,
+              font: `normal normal 300 18px/24px ${Fonts.secondary}`,
+              letterSpacing: "-0.48px",
             }}
           >
             Stages when you apply for a job at Peer Learning.
@@ -508,7 +512,7 @@ export default function AboutUsPage() {
         >
           <Grid container spacing={2}>
             <Grid item xs={6} sm={2.4}>
-              <StyledCard sx={{ pl: 2 }}>
+              <StyledCard sx={{ pl: 2, pr: 1, background: "#0D1825" }}>
                 <Box
                   sx={{
                     width: "100%",
@@ -530,10 +534,9 @@ export default function AboutUsPage() {
                   component="p"
                   sx={{
                     textAlign: "left",
-
                     textTransform: "none",
+                    color: Colors.light,
                     mt: 0,
-                    color: "#001B38",
                     font: `normal normal 400 13px/19.25px ${Fonts.secondary}`,
                   }}
                 >
@@ -542,7 +545,7 @@ export default function AboutUsPage() {
               </StyledCard>
             </Grid>
             <Grid item xs={6} sm={2.4}>
-              <StyledCard sx={{ pl: 2 }}>
+              <StyledCard sx={{ pl: 2, pr: 1, background: "#0D1825" }}>
                 <Box
                   sx={{
                     width: "100%",
@@ -566,8 +569,8 @@ export default function AboutUsPage() {
                     textAlign: "left",
                     textTransform: "none",
                     mt: 0,
-                    color: "#001B38",
                     font: `normal normal 400 13px/19.25px ${Fonts.secondary}`,
+                    color: Colors.light,
                   }}
                 >
                   First call interview To know each other
@@ -575,7 +578,7 @@ export default function AboutUsPage() {
               </StyledCard>
             </Grid>
             <Grid item xs={6} sm={2.4}>
-              <StyledCard sx={{ pl: 2 }}>
+              <StyledCard sx={{ pl: 2, pr: 1, background: "#0D1825" }}>
                 <Box
                   sx={{
                     width: "100%",
@@ -599,8 +602,8 @@ export default function AboutUsPage() {
                     textAlign: "left",
                     textTransform: "none",
                     mt: 0,
-                    color: "#001B38",
                     font: `normal normal 400 13px/19.25px ${Fonts.secondary}`,
+                    color: Colors.light,
                   }}
                 >
                   Demo teaching in any programming language
@@ -608,7 +611,7 @@ export default function AboutUsPage() {
               </StyledCard>
             </Grid>
             <Grid item xs={6} sm={2.4}>
-              <StyledCard sx={{ pl: 2 }}>
+              <StyledCard sx={{ pl: 2, pr: 1, background: "#0D1825" }}>
                 <Box
                   sx={{
                     width: "100%",
@@ -632,8 +635,8 @@ export default function AboutUsPage() {
                     textAlign: "left",
                     textTransform: "none",
                     mt: 0,
-                    color: "#001B38",
                     font: `normal normal 400 13px/19.25px ${Fonts.secondary}`,
+                    color: Colors.light,
                   }}
                 >
                   Live technical coding task.
@@ -642,7 +645,7 @@ export default function AboutUsPage() {
             </Grid>
 
             <Grid item xs={6} sm={2.4}>
-              <StyledCard sx={{ pl: 2 }}>
+              <StyledCard sx={{ pl: 2, pr: 1, background: "#0D1825" }}>
                 <Box
                   sx={{
                     width: "100%",
@@ -666,8 +669,8 @@ export default function AboutUsPage() {
                     textAlign: "left",
                     textTransform: "none",
                     mt: 0,
-                    color: "#001B38",
                     font: `normal normal 400 13px/19.25px ${Fonts.secondary}`,
+                    color: Colors.light,
                   }}
                 >
                   Job offer.
@@ -677,62 +680,12 @@ export default function AboutUsPage() {
           </Grid>
         </Box>
       </Box>
-      {/* FREQUESTLY ASKED QUESTIONS */}
-      <Box
-        component="div"
-        sx={{
-          width: "100%",
-          background: "rgba(249, 250, 251, 1)",
-          display: "inline-flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "70px",
-          p: {
-            xs: "55px 24px",
-            sm: "150px 75px 15px 75px",
-            md: "100px 75px 100px 75px",
-          },
-        }}
-      >
-        <Box
-          component="h2"
-          sx={{
-            maxWidth: 750,
-            font: {
-              xs: `normal normal 700 18px/26px ${Fonts.secondary}`,
-              sm: `normal normal 700 25px/36px ${Fonts.secondary}`,
-            },
-            textAlign: "center",
-            color: "#0D1825",
-            m: "0 auto",
-          }}
-        >
-          Frequently Asked Questions (FAQs)
-          <Box
-            component="h4"
-            sx={{
-              width: "100%",
-              maxWidth: 466,
-              textAlign: "center",
-              color: "#0D1825",
-              m: "20px auto 0",
-              font: {
-                xs: `normal normal 300 15px/152.023% ${Fonts.secondary}`,
-                sm: `normal normal 300 18px/152.023% ${Fonts.secondary}`,
-              },
-            }}
-          >
-            If others are inquiring, it&apos;s likely that you have similar
-            thoughts. To assist you, here are some useful answers.
-          </Box>
-        </Box>
-        <FrequentlyAskQuestion />
-      </Box>
+
+      <FrequentlyAskQuestion />
     </Box>
   );
 }
 
 AboutUsPage.getLayout = function getLayout(page) {
-  return <HomeLayout title="My profile">{page}</HomeLayout>;
+  return <HomeLayout>{page}</HomeLayout>;
 };

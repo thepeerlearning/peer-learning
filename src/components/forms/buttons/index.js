@@ -48,8 +48,8 @@ export const SubmitButton = ({
     >
       {loading ? (
         <ThreeDots
-          height="38"
-          width="38"
+          height="28"
+          width="28"
           radius="9"
           color={Colors.light}
           ariaLabel="three-dots-loading"

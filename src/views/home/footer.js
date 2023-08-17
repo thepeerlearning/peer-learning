@@ -24,7 +24,7 @@ export default function Footer() {
         alignItems: "flex-start",
         background: Colors.light,
         p: {
-          xs: "55px 24px",
+          xs: "155px 24px",
           sm: "150px 75px 150px 75px",
           md: "200px 100px 75px 100px",
         },
@@ -148,7 +148,6 @@ export default function Footer() {
                   </Link>
                 </Box>
               </Grid>
-
               <Grid item xs={6} sm={3}>
                 <Box
                   sx={{
@@ -289,14 +288,18 @@ export default function Footer() {
           width: "100%",
           maxWidth: { xs: 342, sm: 385 },
           display: "flex",
-          padding: { xs: "35px 43.64px 3px 43px", sm: "30px 0px 0px 0px" },
-          font: `normal normal 400 15px/24px ${Fonts.secondary}`,
+          pt: 3.75,
+          font: {
+            xs: `normal normal 400 12px/24px ${Fonts.secondary}`,
+            sm: `normal normal 400 15px/24px ${Fonts.secondary}`,
+          },
           letterSpacing: "0.2px",
           borderTop: "1px solid rgba(17, 24, 39, 0.10)",
         }}
       >
-        &#169;<Box sx={{ color: Colors.primary, display: "flex" }}>{year}</Box>.
-        Peer slearning Technologies. All rights reserved
+        &#169;
+        <Box sx={{ color: Colors.primary, display: "inline-flex" }}>{year}</Box>
+        . Peer slearning Technologies. All rights reserved
       </Box>
     </Box>
   );

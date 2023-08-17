@@ -1,6 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Close } from "@mui/icons-material";
-import { Box, Button, Dialog, Grid, Slide } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  Grid,
+  IconButton,
+  Slide,
+  Tab,
+  Tabs,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import PropTypes from "prop-types";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -15,65 +28,161 @@ import { InputElWrapper } from "../../components/forms/textFields/styles";
 import { CircledAdd } from "../../components/svg/menuIcons";
 import { Colors } from "../../components/themes/colors";
 import { Fonts } from "../../components/themes/fonts";
-import { scheduleArray, timezones } from "../../utils/data";
+import { scheduleArray } from "../../utils/data";
 import Snackbars from "../../components/snackbar";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourses } from "../../redux/slices/courses";
 
+const StyledTabs = styled(Tabs)({
+  width: 300,
+  borderRadius: `0px 0px 0px 3px`,
+  background: `${Colors.light} 0% 0% no-repeat padding-box`,
+  borderRight: `2px solid rgba(0, 0, 0, 0.50)`,
+  padding: "40px 0",
+  "& .MuiTabs-indicator": {
+    display: "none",
+  },
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  textTransform: "none",
+  cursor: "pointer",
+  color: "#262626",
+  padding: "4px 8px",
+  margin: "10px 0",
+  font: `normal normal 400 12px/28px ${Fonts.secondary}`,
+  "&:hover": {
+    color: "#262626",
+  },
+  "&.Mui-selected": {
+    background: Colors.secondary,
+    p: "4px 8px",
+    cursor: "pointer",
+    color: Colors.light,
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: Colors.light,
+  },
+}));
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box>
+          <Box component="div">{children}</Box>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function ClassSchedule({ next, back }) {
   const [selected, setSelected] = React.useState([]);
-  const [limit, setLimit] = React.useState(false);
   const [availability, setAvailability] = React.useState(
     "Add (8) schedule options"
   );
+  const [limit, setLimit] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
+  const [weekLimit, setWeekLimit] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(0);
+  const [timezones, setTimeZones] = React.useState(null);
+  const [price, setPrice] = React.useState(null);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.courses);
+
+  const handleChange = (event, newValue) => setValue(newValue);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleReselect = () => {
     setLimit(false);
     setOpen(true);
+    setSelected([]);
+    setValue(0);
   };
-  const handleTimeClick = (schedule) => {
-    if (selected.length >= 9) {
-      const index = selected.findIndex(
-        (item) => item.name === schedule.name && item.id === schedule.id
-      );
-      if (index !== -1) {
-        const updatedItems = [...selected];
-        updatedItems.splice(index, 1);
-        setSelected(updatedItems);
-      } else {
-        setDisabled(true);
-        setLimit(true);
-      }
+
+  const handleWeekSelect = () => {
+    setSelected([]);
+    setValue(0);
+  };
+
+  const handleTimeClick = (item) => {
+    if (selected.length < 8 && selected.includes(item)) {
+      setSelected(selected.filter((selectedItem) => selectedItem !== item));
     } else {
-      const exists = selected.some(
-        (obj) => obj.name === schedule.name && obj.time === schedule.time
-      );
-      if (!exists) {
-        setSelected((prevArray) => [...prevArray, schedule]);
+      if (selected.length >= 8) {
+        setLimit(true);
+        setDisabled(true);
       }
-      const index = selected.findIndex(
-        (item) => item.name === schedule.name && item.id === schedule.id
-      );
-      if (index !== -1) {
-        const updatedItems = [...selected];
-        updatedItems.splice(index, 1);
-        setSelected(updatedItems);
+      const weekLength = selected.filter((obj) => {
+        return obj.weekId === item.weekId;
+      });
+      if (weekLength.length < 2) {
+        setSelected([...selected, item]);
+      } else {
+        setWeekLimit(true);
       }
-      setDisabled(false);
-      setLimit(false);
     }
   };
 
   React.useEffect(() => {
+    dispatch(getCourses());
+  }, [dispatch]);
+
+  React.useEffect(() => {
     setTimeout(() => {
       setLimit(false);
+      setWeekLimit(false);
     }, 3500);
   }, [limit]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLimit(false);
+      setWeekLimit(false);
+    }, 3500);
+  }, [limit]);
+  React.useEffect(() => {
+    async function getTimeZones() {
+      const res = await axios.get("https://worldtimeapi.org/api/timezone");
+      const data = await res.data;
+
+      setTimeZones(data);
+    }
+    getTimeZones();
+  }, []);
   React.useEffect(() => {
     if (selected.length !== 0) {
       const renderClasses = (
@@ -82,7 +191,7 @@ export default function ClassSchedule({ next, back }) {
             display: "flex",
           }}
         >
-          <Grid container rowSpacing={2} columnSpacing={1}>
+          <Grid container spacing={2}>
             {selected.map((opt, index) => (
               <Grid item xs={12} sm={6} lg={4} key={opt.id}>
                 <InputElWrapper>
@@ -90,30 +199,30 @@ export default function ClassSchedule({ next, back }) {
                     component="span"
                     sx={{
                       color: "#425466",
-                      font: `normal normal 300 14px/24px Helvetica Neue`,
+                      font: `normal normal 300 14px/24px ${Fonts.secondary}`,
                       letterSpacing: "0.2px",
                     }}
                   >
                     {index === 0
-                      ? "First option"
+                      ? "Week 1 option 1"
                       : index === 1
-                      ? "Second option"
+                      ? "Week 1 option 2"
                       : index === 2
-                      ? "Third option"
+                      ? "Week 2 option 1"
                       : index === 3
-                      ? "Fourth option"
+                      ? "Week 2 option 2"
                       : index === 4
-                      ? "Fifth option"
+                      ? "Week 3 option 1"
                       : index === 5
-                      ? "sixth option"
+                      ? "Week 3 option 2"
                       : index === 6
-                      ? "Seventh option"
-                      : "Eighth option"}
+                      ? "Week 4 option 1"
+                      : "Week 4 option 1"}
                   </Box>
                   <Box
                     key={opt.id}
                     sx={{
-                      width: 153,
+                      width: "100%",
                       padding: "8px 11px",
                       display: "flex",
                       justifyContent: "center",
@@ -140,13 +249,15 @@ export default function ClassSchedule({ next, back }) {
       setAvailability("Add (8) schedule options");
     }
   }, [selected]);
+
   const handleCloseSnack = () => {
     setLimit(false);
+    setWeekLimit(false);
   };
   // form validation rules
   const validationSchema = Yup.object().shape({
     timezone: Yup.string().required("First name is required"),
-    course: Yup.string().required("Course is required"),
+    course: Yup.string().required("course is required"),
     startDate: Yup.string().required("Preferred start date is required?"),
   });
 
@@ -154,18 +265,40 @@ export default function ClassSchedule({ next, back }) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      timezone: "(UTC+01:00) West Central Africa",
-      course: "Web Development | Ages: 10 - 13",
-    },
   });
+
+  const course = watch("course");
+
+  React.useEffect(() => {
+    const selectedCourse = data?.find((cou) => cou.id === course);
+    if (selectedCourse) {
+      setPrice(selectedCourse?.pretty_amount);
+    }
+  }, [course, data]);
+
   function onSubmit(data) {
-    const { days, password } = data;
-    console.log("days, password", days, password);
-    next();
+    // const { days, password } = data;
+    const selectedItems = selected?.reduce((week, item) => {
+      const id = item.weekId;
+      const theWeek = { week: item.week, day: item.name, time: item.time };
+      if (!week[id]) {
+        week[id] = [];
+      }
+      week[id].push(theWeek);
+      return week;
+    }, {});
+
+    const schedules = Object.keys(selectedItems).map((id) => ({
+      id,
+      items: selectedItems[id],
+    }));
+
+    console.log(schedules, data);
+    // next();
   }
   return (
     <Box component="div" sx={{ width: "100%" }}>
@@ -201,7 +334,6 @@ export default function ClassSchedule({ next, back }) {
               borderBottom: `1px solid #F3F4F7`,
               display: "flex",
               flexDirection: "column",
-              // m: "auto",
               width: "fit-content",
               py: { xs: 4, sm: 5 },
             }}
@@ -219,9 +351,9 @@ export default function ClassSchedule({ next, back }) {
                   helper={errors.timezone?.message}
                   // disabled={loading}
                 >
-                  {timezones.map((time) => (
-                    <option value={time.text} key={time.text}>
-                      {time.value}
+                  {timezones?.map((timezone) => (
+                    <option value={timezone} key={timezone}>
+                      {timezone}
                     </option>
                   ))}
                 </Select>
@@ -230,24 +362,37 @@ export default function ClassSchedule({ next, back }) {
                 <Select
                   id="course"
                   htmlFor="course"
-                  label="course"
-                  name="Select Course"
+                  name="course"
+                  label="Select course"
                   placeholder="Web Development | Ages: 10 - 13"
                   register={register}
                   error={errors.course ? true : false}
                   helper={errors.course?.message}
                   // disabled={loading}
                 >
-                  <option value="Web Development | Ages: 10 - 13">
-                    Web Development | Ages: 10 - 13
-                  </option>{" "}
-                  <option value="Game design and animation  | Ages: 7 - 9">
-                    Game design and animation | Ages: 7 - 9
-                  </option>{" "}
-                  <option value="Python | Ages: 11 - 15">
-                    Python | Ages: 11 - 15
-                  </option>
+                  {data?.map((data) => (
+                    <option value={data.id} key={data.id}>
+                      {data.title} | Ages: {data.age_range}
+                    </option>
+                  ))}
                 </Select>
+                {price && (
+                  <Box
+                    component="h4"
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      alignItems: "flex-end",
+                      color: "#001B38",
+                      m: 0,
+                      font: `normal normal 500 18px/28px ${Fonts.secondary}`,
+                      letterSpacing: "-1.2px",
+                    }}
+                  >
+                    {price}
+                  </Box>
+                )}
               </Grid>
 
               <Grid item xs={12}>
@@ -258,11 +403,11 @@ export default function ClassSchedule({ next, back }) {
                   name="availability"
                   placeholder="12:00 AM"
                   onClick={handleClickOpen}
-                  icon={selected.length >= 1 ? null : <CircledAdd />}
+                  icon={selected.length > 0 ? null : <CircledAdd />}
                 >
                   {
                     <Box component="div">
-                      {availability}{" "}
+                      {availability}
                       {selected.length >= 1 ? (
                         <Box
                           sx={{
@@ -282,7 +427,7 @@ export default function ClassSchedule({ next, back }) {
                               borderRadius: "8px",
                               padding: "8px 0",
                               color: Colors.textColor,
-                              font: `normal normal 500 14px/20px "Helvetica Neue"`,
+                              font: `normal normal 500 14px/20px ${Fonts.secondary}`,
                             }}
                           >
                             Reselect
@@ -297,16 +442,22 @@ export default function ClassSchedule({ next, back }) {
                   TransitionComponent={Transition}
                   keepMounted
                   onClose={handleClose}
-                  aria-describedby="alert-dialog-slide-description"
-                  maxWidth="1140px"
+                  fullScreen={fullScreen}
+                  aria-labelledby="responsive-dialog-title"
+                  PaperProps={{
+                    sx: {
+                      width: "100%",
+                      maxWidth: 750,
+                    },
+                  }}
                 >
                   <Box
                     sx={{
+                      width: "100%",
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      padding: "16px 16px 0px",
-                      borderBottom: `1px solid ${Colors.stroke}`,
+                      borderBottom: `2px solid rgba(0, 0, 0, 0.50)`,
                     }}
                   >
                     <Box
@@ -314,115 +465,333 @@ export default function ClassSchedule({ next, back }) {
                       sx={{
                         width: "100%",
                         display: "flex",
-                        flexDirection: "column",
-                        color: Colors.black,
-                        font: {
-                          sm: `normal normal 500 30px/48px ${Fonts.secondary}`,
-                        },
-                        letterSpacing: "-1.2px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        color: "#161616",
+                        textAlign: "center",
+                        font: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                        padding: 2,
                         m: { xs: "40px 0 0px", sm: 0 },
                       }}
                     >
-                      Select time
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          fontWeight: 700,
+                          mr: 0.35,
+                        }}
+                      >
+                        Time Availability:
+                      </Box>{" "}
+                      Please select 2 classes on a weekly basis.
                     </Box>
-                    <Close
-                      onClick={handleClose}
-                      sx={{
-                        color: Colors.black,
-                        fontSize: 25,
-                        cursor: "pointer",
-                        mb: 1.125,
-                        p: 0.1,
-                        "&:hover": {
-                          background: Colors.stroke,
-                          p: 0.25,
-                          borderRadius: "50%",
-                        },
-                      }}
-                    />
+                    {/* <Box sx={{ padding: "8px 16px 0 16px" }}> */}
+                    <IconButton onClick={handleClose}>
+                      <Close
+                        sx={{
+                          color: Colors.black,
+                          fontSize: 25,
+                          cursor: "pointer",
+                          "&:hover": {
+                            p: 0.25,
+                          },
+                        }}
+                      />
+                    </IconButton>
+                    {/* </Box> */}
                   </Box>
                   <Box
                     component="div"
                     sx={{
                       width: "100%",
-                      my: 3,
-                      pt: 0,
-                      px: 2,
+                      display: "flex",
+                      flexGrow: 1,
                     }}
                   >
-                    <Grid container spacing={0}>
-                      {scheduleArray.map((schedule, i) => {
-                        return (
-                          <Grid item xs={6} sm={2} key={schedule.id}>
-                            <Box
-                              sx={{
-                                width: 100,
-                                height: 40,
-                                padding: "8px 11px",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                borderRadius: "5px",
-                                color: Colors.textColor,
-                                font: `normal normal 700 16px/30px Helvetica Neue`,
-                              }}
-                            >
-                              {schedule.name}
-                            </Box>
+                    <StyledTabs
+                      orientation="vertical"
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <StyledTab label="Week 1" {...a11yProps(0)} />
+                      <StyledTab label="Week 2" {...a11yProps(1)} />
+                      <StyledTab label="Week 3" {...a11yProps(2)} />
+                      <StyledTab label="Week 4" {...a11yProps(3)} />
+                    </StyledTabs>
 
-                            {schedule.option.map((opt, i) => {
-                              const exists = selected.some(
-                                (obj) =>
-                                  (obj.name === schedule.name && obj.time) ===
-                                  opt.time
-                              );
-                              return (
+                    {scheduleArray.map((sch, i) => {
+                      return (
+                        <TabPanel value={value} index={i} key={sch.id}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                            }}
+                          >
+                            <Grid container spacing={0}>
+                              <Grid item xs={12}>
                                 <Box
-                                  key={opt.time}
                                   sx={{
-                                    width: 100,
-                                    height: 40,
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    borderBottom: `2px solid rgba(0, 0, 0, 0.50)`,
+                                  }}
+                                >
+                                  <Box
+                                    component="h1"
+                                    sx={{
+                                      width: "100%",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      color: "#161616",
+                                      textAlign: "center",
+                                      font: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    <Box
+                                      sx={{
+                                        display: "inline-flex",
+                                        fontWeight: 700,
+                                        mr: 0.35,
+                                      }}
+                                    >
+                                      Number of classes selected:
+                                    </Box>{" "}
+                                    {selected.length}
+                                  </Box>
+                                  <Box sx={{ padding: "8px 16px 0 16px" }}>
+                                    <Button onClick={handleWeekSelect}>
+                                      Resect
+                                    </Button>
+                                  </Box>
+                                </Box>
+                              </Grid>
+
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
                                     padding: "8px 11px",
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
                                     borderRadius: "5px",
-
-                                    background: exists
-                                      ? "rgba(99, 91, 255, 0.5)"
-                                      : "rgba(99, 91, 255, 0.10)",
                                     mt: 2,
                                     mx: 2,
-                                    cursor:
-                                      selected.length >= 9
-                                        ? "not-allowed"
-                                        : "pointer",
-                                    color: "#425466",
-                                    font: `normal normal 500 13px/24px Helvetica Neue`,
-                                    letterSpacing: "0.2px",
-                                    "&:hover": {
-                                      fontSize: 12,
-                                      textTransform: "scale(0.98)",
-                                      background: "rgba(99, 91, 255, 0.2)",
-                                    },
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
                                   }}
-                                  onClick={() => handleTimeClick(opt)}
-                                  disabled={disabled}
                                 >
-                                  {+opt.time >= 9
-                                    ? `${opt.time}:00 AM`
-                                    : `${opt.time}:00 PM`}
+                                  Mon
                                 </Box>
-                              );
-                            })}
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
+                              </Grid>
+
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
+                                    padding: "8px 11px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    mt: 2,
+                                    mx: 2,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                  }}
+                                >
+                                  Tue
+                                </Box>
+                              </Grid>
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
+                                    padding: "8px 11px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    mt: 2,
+                                    mx: 2,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                  }}
+                                >
+                                  Wed
+                                </Box>
+                              </Grid>
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
+                                    padding: "8px 11px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    mt: 2,
+                                    mx: 2,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                  }}
+                                >
+                                  Thu
+                                </Box>
+                              </Grid>
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
+                                    padding: "8px 11px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    mt: 2,
+                                    mx: 2,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                  }}
+                                >
+                                  Fri
+                                </Box>
+                              </Grid>
+                              <Grid item xs={2}>
+                                <Box
+                                  sx={{
+                                    width: 75,
+                                    height: 28,
+                                    padding: "8px 11px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    mt: 2,
+                                    mx: 2,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                  }}
+                                >
+                                  Sat
+                                </Box>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Box
+                                  className="line"
+                                  sx={{
+                                    borderBottomColor: `2rgba(0, 0, 0, 0.50)`,
+                                  }}
+                                ></Box>
+                              </Grid>
+                              {sch.schedule.map((item) => (
+                                <>
+                                  <Grid item xs={2} key={item.id}>
+                                    {item.option.map((opt, i) => {
+                                      const exists = selected.some((obj) => {
+                                        return (
+                                          obj.weekId === opt.weekId &&
+                                          obj.name === opt.name &&
+                                          obj.time === opt.time
+                                        );
+                                      });
+                                      return (
+                                        <Box
+                                          key={opt.time}
+                                          sx={{
+                                            width: 77,
+                                            height: 28,
+                                            padding: "8px 11px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            borderRadius: "5px",
+                                            background: exists
+                                              ? Colors.secondary
+                                              : "transparent",
+                                            mt: 2,
+                                            mx: 2,
+                                            cursor:
+                                              selected.length >= 8
+                                                ? "not-allowed"
+                                                : "pointer",
+                                            color: exists
+                                              ? Colors.light
+                                              : "rgba(0, 0, 0, 0.85)",
+                                            font: `normal normal 500 10px/28px ${Fonts.secondary}`,
+                                            "&:hover": {
+                                              fontSize: 12,
+                                              textTransform: "scale(0.99)",
+                                              background: "rgba(247,11,88,0.2)",
+                                            },
+                                          }}
+                                          onClick={() => handleTimeClick(opt)}
+                                          disabled={disabled}
+                                        >
+                                          {+opt.time >= 9
+                                            ? `${opt.time}:00 AM`
+                                            : `${opt.time}:00 PM`}
+                                        </Box>
+                                      );
+                                    })}
+                                  </Grid>
+                                </>
+                              ))}
+                              <Grid item xs={12}>
+                                <Box
+                                  sx={{
+                                    borderTop: `2px solid rgba(0, 0, 0, 0.50)`,
+                                  }}
+                                >
+                                  <Box
+                                    sx={{
+                                      display: "flex",
+                                      alignItems: "flexStart",
+                                      justifyContent: "space-between",
+                                      width: "100%",
+                                      my: 2,
+                                      padding: "10px 20px 0px 20px",
+                                      gap: "12px",
+                                    }}
+                                  >
+                                    <SubmitButton
+                                      style={{
+                                        padding: "13px 49.27px 13px 48px",
+                                        width: 80,
+                                      }}
+                                      ghost
+                                      onClick={handleClose}
+                                    >
+                                      cancel
+                                    </SubmitButton>
+
+                                    <SubmitButton
+                                      onClick={handleClose}
+                                      style={{
+                                        padding: "13px 49.27px 13px 48px",
+                                        width: 80,
+                                      }}
+                                    >
+                                      confirm
+                                    </SubmitButton>
+                                  </Box>
+                                </Box>
+                              </Grid>
+                            </Grid>
+                          </Box>
+                        </TabPanel>
+                      );
+                    })}
                   </Box>
                 </Dialog>
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   id="startDate"
@@ -500,12 +869,17 @@ export default function ClassSchedule({ next, back }) {
           </Box>
         </Grid>
       </Grid>
-
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={"You have exceeded your class limit"}
+        message={"You have exceeded your schedule limit"}
         isOpen={limit === true}
+      />{" "}
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={"You have exceeded this week class limit"}
+        isOpen={weekLimit === true}
       />
     </Box>
   );

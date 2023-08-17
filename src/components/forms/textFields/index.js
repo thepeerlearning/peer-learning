@@ -3,12 +3,14 @@ import {
   Button,
   Card,
   Checkbox,
+  IconButton,
   Select as MuiSelect,
   Switch,
   styled,
 } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import MuiPhoneNumber from "material-ui-phone-number";
+import flags from "react-phone-number-input/flags";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import React from "react";
@@ -34,6 +36,7 @@ import {
   SearchIconStyle,
   SelectInput,
   TextAreaInput,
+  PhoneNumberTextField,
 } from "./styles";
 
 export const StyledTooltip = styled(({ className, ...props }) => (
@@ -278,21 +281,6 @@ export function BpCheckbox(props) {
   );
 }
 
-const IconStyle = styled("span")(() => ({
-  borderRadius: 2,
-  width: 18,
-  height: 18,
-  boxShadow: "none",
-  color: "#B3B3B3",
-  ".Mui-focusVisible &": {
-    outline: "none",
-    outlineOffset: 0,
-  },
-  "input:hover ~ &": {
-    backgroundColor: "#fff",
-  },
-}));
-
 export function TextField({
   type,
   id,
@@ -346,7 +334,7 @@ export function TextField({
   );
 }
 
-export function PhoneInput({
+export function PhoneNumberInput({
   type,
   id,
   htmlFor,
@@ -356,8 +344,8 @@ export function PhoneInput({
   helper,
   onChange,
   disabled,
+  error,
   register,
-  readonly,
   required,
   ...otherProps
 }) {
@@ -367,28 +355,30 @@ export function PhoneInput({
         {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
       </InputLabel>
       {register ? (
-        <PhoneInputStyle
+        <PhoneNumberTextField
           id={id}
           name={name}
           value={value}
-          variant="outlined"
           onChange={onChange}
-          defaultCountry={"ng"}
+          defaultCountry={"NG"}
+          international={false}
+          error={error}
           disabled={disabled}
-          readOnly={readonly}
+          flags={flags}
           {...otherProps}
           {...register(name)}
         />
       ) : (
-        <PhoneInputStyle
+        <PhoneNumberTextField
           id={id}
           name={name}
           value={value}
-          variant="outlined"
-          defaultCountry={"ng"}
+          defaultCountry={"NG"}
+          international={false}
+          error={error}
           onChange={onChange}
           disabled={disabled}
-          readOnly={readonly}
+          flags={flags}
           {...otherProps}
         />
       )}
@@ -604,13 +594,13 @@ export function PasswordField({
             />
             <PasswordIcon>
               {showPassword ? (
-                <Box onClick={onClick}>
+                <IconButton onClick={onClick}>
                   <Image src={eyeClosed} alt="eye closed" />
-                </Box>
+                </IconButton>
               ) : (
-                <Box onClick={onClick}>
+                <IconButton onClick={onClick}>
                   <Image src={eyeOpened} alt="eye opened" />
-                </Box>
+                </IconButton>
               )}
             </PasswordIcon>
             <FormHelper>{helper}</FormHelper>
@@ -630,41 +620,13 @@ export function PasswordField({
             />
             <PasswordIcon>
               {showPassword ? (
-                <Box
-                  onClick={onClick}
-                  sx={{
-                    position: "relative",
-                    top: 8,
-                    left: 8,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Image
-                    src="/images/svgs/eye-close.svg"
-                    alt="eye closed"
-                    width={16}
-                    height={16}
-                    layout="fixed"
-                  />
-                </Box>
+                <IconButton onClick={onClick}>
+                  <Image src={eyeClosed} alt="eye closed" />
+                </IconButton>
               ) : (
-                <Box
-                  onClick={onClick}
-                  sx={{
-                    position: "relative",
-                    top: 8,
-                    left: 8,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Image
-                    src="/images/svgs/eye-open.svg"
-                    alt="eye closed"
-                    width={18}
-                    height={18}
-                    layout="fixed"
-                  />
-                </Box>
+                <IconButton onClick={onClick}>
+                  <Image src={eyeOpened} alt="eye opened" />
+                </IconButton>
               )}
             </PasswordIcon>
             <FormHelper>{helper}</FormHelper>

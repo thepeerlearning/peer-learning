@@ -1,6 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import YouTube from "react-youtube";
 import learnBoy from "../public/images/learn-boy.jpg.jpg";
 import learnGirl from "../public/images/learn-girl.jpg.jpg";
 import learnMan from "../public/images/learn-man.jpg.jpg";
@@ -22,7 +23,6 @@ import { Fonts } from "../src/components/themes/fonts";
 import MetaData from "../src/utils/meta";
 import FrequentlyAskQuestion from "../src/views/home/frequently-asked-questions";
 import HomeLayout from "../src/views/home/layout";
-import VideoPlayer from "../src/views/home/videoPlayer";
 
 const styledBox = {
   maxWidth: 346.656,
@@ -69,6 +69,15 @@ const styledCard2Box = {
 };
 export default function IndexPage() {
   const router = useRouter();
+  const opts = {
+    width: "100%",
+    height: 506,
+    playerVars: {
+      autoplay: 0,
+      color: Colors.primary,
+      modestbranding: 1,
+    },
+  };
   return (
     <Box component="div">
       <MetaData title="Peer learning" content="Peer learning home page " />
@@ -82,7 +91,7 @@ export default function IndexPage() {
           background:
             "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 55.94%, #FFF 100%), radial-gradient(70.71% 70.71% at 50% 50%, #FFFADD 0%, rgba(255, 252, 236, 0.00) 100%), radial-gradient(70.71% 70.71% at 50% 50%, #E1E6FB 0%, rgba(220, 255, 243, 0.00) 100%), radial-gradient(70.71% 70.71% at 50% 50%, #B0F1FC 0%, rgba(217, 248, 255, 0.00) 100%), radial-gradient(70.71% 70.71% at 50% 50%, #FFD4E6 0%, rgba(255, 212, 230, 0.00) 100%), #FFF",
           p: {
-            xs: "55px 24px",
+            xs: "155px 24px",
             sm: "150px 75px 15px 75px",
             md: "200px 75px 15px 75px",
             xl: "200px 100px 15px 100px",
@@ -107,6 +116,7 @@ export default function IndexPage() {
             component="h1"
             sx={{
               width: "100%",
+              maxWidth: 900,
               margin: 0,
               color: "#0D1825",
               textAlign: "center",
@@ -123,11 +133,14 @@ export default function IndexPage() {
             <Box className="lg-text-color" sx={{ display: "inline-flex" }}>
               coding
             </Box>{" "}
-            and mentorship from{" "}
+            for{" "}
             <Box className="lg-text-color" sx={{ display: "inline-flex" }}>
-              experienced
+              African
             </Box>{" "}
-            instructors
+            kids in{" "}
+            <Box className="lg-text-color" sx={{ display: "inline-flex" }}>
+              diaspora
+            </Box>
           </Box>
           <Box
             component="h2"
@@ -204,7 +217,7 @@ export default function IndexPage() {
           alignItems: "center",
           background: Colors.light,
           p: {
-            xs: "55px 24px",
+            xs: "155px 24px",
             sm: "150px 75px 150px 75px",
             md: "200px 100px 75px 100px",
           },
@@ -387,10 +400,26 @@ export default function IndexPage() {
             }}
           >
             <Box>
-              <VideoPlayer src="/videos/pl-sushi.mp4" />{" "}
+              <YouTube
+                videoId="K7aBfnk0xog"
+                opts={opts}
+                onReady={(event) => event.target.pauseVideo()}
+                style={{ borderRadius: "15px", background: "#001B38" }}
+              />
+              {/* <VideoPlayer src="/videos/pl-sushi.mp4" />{" "} */}
             </Box>
-            <Box sx={{ mt: { xs: 2, sm: 0 } }}>
-              <VideoPlayer src="/videos/Joseph-peer-learning.mp4" />
+            <Box
+              sx={{
+                mt: { xs: 2, sm: 0 },
+              }}
+            >
+              <YouTube
+                videoId="ljuyoX2uVXU"
+                opts={opts}
+                onReady={(event) => event.target.pauseVideo()}
+                style={{ borderRadius: "15px", background: "#001B38" }}
+              />
+              {/* <VideoPlayer src="/videos/Joseph-peer-learning.mp4" /> */}
             </Box>
           </Box>
         </Box>
@@ -424,7 +453,7 @@ export default function IndexPage() {
           flexDirection: "column",
           alignItems: "center",
           p: {
-            xs: "55px 24px",
+            xs: "155px 24px",
             sm: "150px 75px 15px 75px",
             md: "100px 75px 100px 75px",
           },
@@ -589,7 +618,7 @@ export default function IndexPage() {
           alignItems: "center",
           gap: "24px",
           p: {
-            xs: "55px 24px",
+            xs: "155px 24px",
             sm: "150px 75px 15px 75px",
             md: "100px 75px 100px 75px",
           },
@@ -899,61 +928,12 @@ export default function IndexPage() {
         </Box>
       </Box>
       {/* FREQUESTLY ASKED QUESTIONS */}
-      <Box
-        component="div"
-        sx={{
-          width: "100%",
-          background: "rgba(249, 250, 251, 1)",
-          display: "inline-flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "70px",
-          p: {
-            xs: "55px 24px",
-            sm: "150px 75px 15px 75px",
-            md: "100px 75px 100px 75px",
-          },
-        }}
-      >
-        <Box
-          component="h2"
-          sx={{
-            maxWidth: 750,
-            font: {
-              xs: `normal normal 700 18px/26px ${Fonts.secondary}`,
-              sm: `normal normal 700 25px/36px ${Fonts.secondary}`,
-            },
-            textAlign: "center",
-            color: "#0D1825",
-            m: "0 auto",
-          }}
-        >
-          Frequently Asked Questions (FAQs)
-          <Box
-            component="h4"
-            sx={{
-              width: "100%",
-              maxWidth: 466,
-              textAlign: "center",
-              color: "#0D1825",
-              m: "20px auto 0",
-              font: {
-                xs: `normal normal 300 15px/152.023% ${Fonts.secondary}`,
-                sm: `normal normal 300 18px/152.023% ${Fonts.secondary}`,
-              },
-            }}
-          >
-            If others are inquiring, it&apos;s likely that you have similar
-            thoughts. To assist you, here are some useful answers.
-          </Box>
-        </Box>
-        <FrequentlyAskQuestion />
-      </Box>
+
+      <FrequentlyAskQuestion />
     </Box>
   );
 }
 
 IndexPage.getLayout = function getLayout(page) {
-  return <HomeLayout title="My profile">{page}</HomeLayout>;
+  return <HomeLayout>{page}</HomeLayout>;
 };

@@ -1,26 +1,34 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Grid, Link } from "@mui/material";
-import { useRouter } from "next/router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { parsePhoneNumber } from "react-phone-number-input";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SubmitButton } from "../../components/forms/buttons";
 import {
   PasswordField,
-  PhoneInput,
+  PhoneNumberInput,
   TextField,
 } from "../../components/forms/textFields";
-import { Fonts } from "../../components/themes/fonts";
+import PasswordStrength from "../../components/forms/textFields/passwordStrength";
 import { Colors } from "../../components/themes/colors";
+import { Fonts } from "../../components/themes/fonts";
+import { signup } from "../../redux/slices/auth";
+import { Countries } from "../../utils/data";
+import Snackbars from "../../components/snackbar";
 
 export default function SignupForm({ next }) {
-  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-  const handleClickShowConfirmPassword = () =>
-    setShowConfirmPassword(!showConfirmPassword);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  const oneLowerCase = /^(?=.*?[a-z])/;
+  const oneUpperCase = /^(?=.*?[A-Z])/;
+  const isNumberRegex = /\d/;
+  const specialCharacterRegex = /[!@#$%&*()_+\-=\[\]{};':"\\,.<>\/?]/;
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -29,29 +37,75 @@ export default function SignupForm({ next }) {
     email: Yup.string().required("Email is required").email("Email is invalid"),
     phone: Yup.string().required("Phone number is required"),
     password: Yup.string()
-      .min(8, "Must have atleast 8 english characters")
-      .required("Password is required"),
+      .required("Password is required")
+      .min(8, "Password must have atleast 8 english characters")
+      .matches(oneUpperCase, "Password shoud contain uppercase")
+      .matches(oneLowerCase, "Password shoud contain lowercase")
+      .matches(isNumberRegex, "Password shoud contain atleast 1 number")
+      .matches(
+        specialCharacterRegex,
+        "Password shoud contain atleast 1 special character"
+      ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
   });
+
+  const handleCloseSnack = () => setError(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
 
   // get functions to build form with useForm() hook
   const {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+  const password = watch("password");
+
   function onSubmit(data) {
-    const { email, password } = data;
-    console.log("email, password", email, password);
+    const { email, password, phone, fullname, childname } = data;
+    const phoneNumberObj = parsePhoneNumber(phone);
+    const country = Countries.find(
+      (country) => country.code === phoneNumberObj.country
+    );
 
-    next();
+    const inputData = {
+      user: {
+        email,
+        password,
+        phone_number: phone,
+        user_type: "user",
+        role: "admin",
+      },
+      parent: {
+        fullname: fullname,
+        country: country.name,
+      },
+      child: {
+        fullname: childname,
+      },
+    };
+    setLoading(true);
+    dispatch(signup({ inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+        setTimeout(() => {
+          next();
+        }, 3500);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+    return false;
   }
-
   return (
     <Box component="div" sx={{ width: "100%" }}>
       <Grid container spacing={1.2}>
@@ -101,7 +155,7 @@ export default function SignupForm({ next }) {
                   register={register}
                   error={errors.fullname ? true : false}
                   helper={errors.fullname?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -115,7 +169,7 @@ export default function SignupForm({ next }) {
                   register={register}
                   error={errors.childname ? true : false}
                   helper={errors.childname?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -129,7 +183,7 @@ export default function SignupForm({ next }) {
                   register={register}
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -140,7 +194,7 @@ export default function SignupForm({ next }) {
                     field: { name, onBlur, onChange, value },
                     formState,
                   }) => (
-                    <PhoneInput
+                    <PhoneNumberInput
                       id="phone"
                       htmlFor="phone"
                       label="Phone"
@@ -150,12 +204,11 @@ export default function SignupForm({ next }) {
                       onChange={onChange}
                       error={formState.errors.phone ? true : false}
                       helper={formState.errors.phone?.message}
-                      // disabled={disabled}
+                      disabled={loading}
                     />
                   )}
                 />
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <PasswordField
                   id="password"
@@ -170,7 +223,7 @@ export default function SignupForm({ next }) {
                   register={register}
                   error={errors.password ? true : false}
                   helper={errors.password?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -185,13 +238,18 @@ export default function SignupForm({ next }) {
                   register={register}
                   error={errors.confirmPassword ? true : false}
                   helper={errors.confirmPassword?.message}
+                  disabled={loading}
                 />
+              </Grid>{" "}
+              <Grid item xs={12}>
+                {password && <PasswordStrength password={password} />}
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Box sx={{ width: 147, p: "0 16px" }}>
+                <Box sx={{ width: 150 }}>
                   <SubmitButton
-                    style={{ padding: "15px 41.72px 14.59px 40.28px" }}
-                    // disabled={loading} loading={loading}
+                    style={{ padding: "10px 0" }}
+                    disabled={loading}
+                    loading={loading}
                   >
                     Continue
                   </SubmitButton>
@@ -228,6 +286,7 @@ export default function SignupForm({ next }) {
               <Grid item xs={12}>
                 <Box
                   sx={{
+                    textAlign: "center",
                     color: "rgba(0, 27, 56, 0.40)",
                     font: `normal normal 400 12px/20px ${Fonts.secondary}`,
                     mt: 15,
@@ -261,6 +320,13 @@ export default function SignupForm({ next }) {
           </Box>
         </Grid>
       </Grid>
+
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={message}
+        isOpen={error}
+      />
     </Box>
   );
 }
