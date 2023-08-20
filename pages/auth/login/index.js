@@ -25,6 +25,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [routing, setRouting] = useState(false);
   const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
@@ -39,7 +40,14 @@ export default function LoginPage() {
   React.useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
-
+  React.useEffect(() => {
+    message?.email?.map((email) => {
+      return setErrorMessage(email);
+    });
+    message?.password?.map((password) => {
+      return setErrorMessage(password);
+    });
+  }, [message]);
   React.useEffect(() => {
     Router.events.on("routeChangeStart", () => setRouting(true));
     Router.events.on("routeChangeComplete", () => setRouting(false));
@@ -73,7 +81,18 @@ export default function LoginPage() {
       .unwrap()
       .then(() => {
         setLoading(false);
-        if (data) router.push("/students/my-dashboard");
+        const step = localStorage.getItem("step");
+        if (step && step === "completed") {
+          router.push("/students/my-dashboard");
+        } else {
+          setError(true);
+          setErrorMessage(
+            "Registration process still ongoing, redirecting you to complete the process"
+          );
+          setTimeout(() => {
+            router.push("/signup");
+          }, 3200);
+        }
       })
       .catch(() => {
         setError(true);
@@ -81,10 +100,6 @@ export default function LoginPage() {
       });
     return false;
   }
-  React.useEffect(() => {
-    router.prefetch("/students/my-dashboard");
-  }, [router]);
-
   return (
     <Box sx={{ m: { xs: "40px 10px 20px 10px", sm: "20px 20px 20px 20px" } }}>
       <Head>
@@ -225,9 +240,16 @@ export default function LoginPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={message}
+        message={errorMessage}
         isOpen={error}
       />
+
+      {/* <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={message}
+        isOpen={error}
+      /> */}
     </Box>
   );
 }

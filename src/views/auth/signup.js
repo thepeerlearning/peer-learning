@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Grid, Link } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ import Snackbars from "../../components/snackbar";
 export default function SignupForm({ next }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { message } = useSelector((state) => state.message);
@@ -67,7 +68,11 @@ export default function SignupForm({ next }) {
     resolver: yupResolver(validationSchema),
   });
   const password = watch("password");
-
+  useEffect(() => {
+    message?.email?.map((email) => {
+      return setErrorMessage("Email " + email);
+    });
+  }, [message]);
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data;
     const phoneNumberObj = parsePhoneNumber(phone);
@@ -202,7 +207,7 @@ export default function SignupForm({ next }) {
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
-                      error={formState.errors.phone ? true : false}
+                      error={formState.errors?.phone ? true : false}
                       helper={formState.errors.phone?.message}
                       disabled={loading}
                     />
@@ -324,7 +329,7 @@ export default function SignupForm({ next }) {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={message}
+        message={errorMessage}
         isOpen={error}
       />
     </Box>

@@ -2,18 +2,10 @@ import axios from "axios";
 
 function getLocalAccessToken() {
   if (typeof window !== "undefined") {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("token");
     return accessToken;
   }
 }
-
-function getLocalRefreshToken() {
-  if (typeof window !== "undefined") {
-    const refreshToken = localStorage.getItem("refreshToken");
-    return refreshToken;
-  }
-}
-
 export const baseURL = "https://stagingapi.thepeerlearning.com/api/v1";
 export const timeout = 15000;
 const instance = axios.create({

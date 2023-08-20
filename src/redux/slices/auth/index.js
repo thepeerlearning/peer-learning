@@ -9,6 +9,39 @@ export const signup = createAsyncThunk(
       const response = await api.post("/onboarding/register", inputData);
       if (response) {
         let { data } = response.data;
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("step", data.user.registration_step);
+        return response.data;
+      }
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.response.data.errors ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+export const classSchedule = createAsyncThunk(
+  "auth/classSchedule",
+  async ({ inputData }, thunkAPI) => {
+    try {
+      const response = await api.post(
+        "/users/class-schedule-drafts",
+        inputData
+      );
+      if (response) {
+        let { data } = response.data;
         localStorage.setItem("step", data.registration_step);
         return response.data;
       }
@@ -31,7 +64,6 @@ export const signup = createAsyncThunk(
     }
   }
 );
-
 export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
   async ({ token }, thunkAPI) => {
@@ -64,20 +96,19 @@ export const login = createAsyncThunk(
         email,
         password,
       });
-      console.log("response", response);
       if (response) {
-        const { accessToken, refreshToken } = response.data;
-        console.log("accessToken, refreshToken", accessToken, refreshToken);
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        let { data } = response.data;
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("step", data.user.registration_step);
+        localStorage.setItem("user", data.user);
         return response.data;
       }
     } catch (error) {
       let message =
         (error.response &&
           error.response.data &&
-          error.response.data.messages) ||
-        error.response.data.message ||
+          error.response.data.message) ||
+        error.response.data.errors ||
         error.message ||
         error.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {

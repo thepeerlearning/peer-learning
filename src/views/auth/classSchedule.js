@@ -33,6 +33,8 @@ import Snackbars from "../../components/snackbar";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourses } from "../../redux/slices/courses";
+import { classSchedule, signup } from "../../redux/slices/auth";
+import { clearMessage } from "../../redux/slices/message";
 
 const StyledTabs = styled(Tabs)({
   width: 300,
@@ -110,18 +112,21 @@ export default function ClassSchedule({ next, back }) {
   const [availability, setAvailability] = React.useState(
     "Add (8) schedule options"
   );
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const [limit, setLimit] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
   const [weekLimit, setWeekLimit] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [timezones, setTimeZones] = React.useState(null);
+  const [errorMessage, setErrorMessage] = React.useState("");
   const [price, setPrice] = React.useState(null);
-
+  const { data } = useSelector((state) => state.courses);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.courses);
 
   const handleChange = (event, newValue) => setValue(newValue);
   const handleClickOpen = () => setOpen(true);
@@ -159,12 +164,14 @@ export default function ClassSchedule({ next, back }) {
 
   React.useEffect(() => {
     dispatch(getCourses());
+    dispatch(clearMessage());
   }, [dispatch]);
 
   React.useEffect(() => {
     setTimeout(() => {
       setLimit(false);
       setWeekLimit(false);
+      setError(false);
     }, 3500);
   }, [limit]);
 
@@ -184,6 +191,20 @@ export default function ClassSchedule({ next, back }) {
     getTimeZones();
   }, []);
   React.useEffect(() => {
+    message?.other_options?.map((opt) => {
+      return setErrorMessage("other options " + opt);
+    });
+    message?.start_date?.map((start) => {
+      return setErrorMessage("Start date " + start);
+    });
+    message?.timezone?.map((time) => {
+      return setErrorMessage("Time zone " + time);
+    });
+    message?.weeks?.map((wk) => {
+      return setErrorMessage("class schedules " + wk);
+    });
+  }, [message]);
+  React.useEffect(() => {
     if (selected.length !== 0) {
       const renderClasses = (
         <Box
@@ -193,7 +214,7 @@ export default function ClassSchedule({ next, back }) {
         >
           <Grid container spacing={2}>
             {selected.map((opt, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={opt.id}>
+              <Grid item xs={12} sm={6} lg={4} key={"Selected" + index}>
                 <InputElWrapper>
                   <Box
                     component="span"
@@ -253,6 +274,7 @@ export default function ClassSchedule({ next, back }) {
   const handleCloseSnack = () => {
     setLimit(false);
     setWeekLimit(false);
+    setError(false);
   };
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -281,24 +303,53 @@ export default function ClassSchedule({ next, back }) {
   }, [course, data]);
 
   function onSubmit(data) {
-    // const { days, password } = data;
     const selectedItems = selected?.reduce((week, item) => {
       const id = item.weekId;
-      const theWeek = { week: item.week, day: item.name, time: item.time };
+      const time = item.time + ":00";
+      const theWeek = { day: item.name, time };
       if (!week[id]) {
         week[id] = [];
       }
       week[id].push(theWeek);
       return week;
     }, {});
-
-    const schedules = Object.keys(selectedItems).map((id) => ({
-      id,
-      items: selectedItems[id],
-    }));
-
-    console.log(schedules, data);
-    // next();
+    const weeks = Object.keys(selectedItems).map((id, i) => {
+      const week =
+        id === "wk01"
+          ? "one"
+          : id === "wk02"
+          ? "two"
+          : id === "wk03"
+          ? "three"
+          : id === "wk04"
+          ? "four"
+          : null;
+      return {
+        week,
+        schedules: selectedItems[id],
+      };
+    });
+    const inputData = {
+      course_id: data.course,
+      other_options: data.otherOptions,
+      start_date: data.startDate,
+      timezone: data.timezone,
+      weeks,
+    };
+    setLoading(true);
+    dispatch(classSchedule({ inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+        setTimeout(() => {
+          next();
+        }, 3500);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+    return false;
   }
   return (
     <Box component="div" sx={{ width: "100%" }}>
@@ -349,10 +400,10 @@ export default function ClassSchedule({ next, back }) {
                   register={register}
                   error={errors.timezone ? true : false}
                   helper={errors.timezone?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 >
                   {timezones?.map((timezone) => (
-                    <option value={timezone} key={timezone}>
+                    <option value={timezone} key={"time" + timezone}>
                       {timezone}
                     </option>
                   ))}
@@ -368,10 +419,10 @@ export default function ClassSchedule({ next, back }) {
                   register={register}
                   error={errors.course ? true : false}
                   helper={errors.course?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 >
-                  {data?.map((data) => (
-                    <option value={data.id} key={data.id}>
+                  {data?.map((data, i) => (
+                    <option value={data.id} key={"course" + i}>
                       {data.title} | Ages: {data.age_range}
                     </option>
                   ))}
@@ -521,7 +572,7 @@ export default function ClassSchedule({ next, back }) {
 
                     {scheduleArray.map((sch, i) => {
                       return (
-                        <TabPanel value={value} index={i} key={sch.id}>
+                        <TabPanel value={value} index={i} key={"sch.id" + i}>
                           <Box
                             sx={{
                               display: "flex",
@@ -691,10 +742,10 @@ export default function ClassSchedule({ next, back }) {
                                   }}
                                 ></Box>
                               </Grid>
-                              {sch.schedule.map((item) => (
+                              {sch.schedule.map((item, i) => (
                                 <>
-                                  <Grid item xs={2} key={item.id}>
-                                    {item.option.map((opt, i) => {
+                                  <Grid item xs={2} key={"item.id" + i}>
+                                    {item.option.map((opt) => {
                                       const exists = selected.some((obj) => {
                                         return (
                                           obj.weekId === opt.weekId &&
@@ -811,7 +862,7 @@ export default function ClassSchedule({ next, back }) {
                   register={register}
                   error={errors.startDate ? true : false}
                   helper={errors.startDate?.message}
-                  // disabled={loading}
+                  disabled={loading}
                 />
               </Grid>
 
@@ -847,7 +898,8 @@ export default function ClassSchedule({ next, back }) {
                     }}
                     ghost
                     onClick={back}
-                    // disabled={loading} loading={loading}
+                    disabled={loading}
+                    loading={loading}
                   >
                     Back
                   </SubmitButton>
@@ -857,8 +909,8 @@ export default function ClassSchedule({ next, back }) {
                       padding: "15px 41.72px 14.59px 40.28px",
                       width: "50%",
                     }}
-
-                    // disabled={loading} loading={loading}
+                    disabled={loading}
+                    loading={loading}
                   >
                     Continue
                   </SubmitButton>
@@ -874,7 +926,13 @@ export default function ClassSchedule({ next, back }) {
         handleClose={handleCloseSnack}
         message={"You have exceeded your schedule limit"}
         isOpen={limit === true}
-      />{" "}
+      />
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={errorMessage}
+        isOpen={error}
+      />
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
