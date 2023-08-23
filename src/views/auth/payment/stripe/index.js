@@ -3,9 +3,11 @@ import { Box, Dialog, Slide } from "@mui/material";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import { StripeIcon } from "../../../../components/svg/menuIcons";
 import { Colors } from "../../../../components/themes/colors";
 import { Fonts } from "../../../../components/themes/fonts";
+import { initiatePayment } from "../../../../redux/slices/auth";
 import CheckoutForm from "./form";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -16,21 +18,20 @@ const stripePromise = loadStripe(
 );
 export default function StripePayment() {
   const [open, setOpen] = React.useState(false);
-  const [clientSecret, setClientSecret] = React.useState("");
+  const [clientSecret, setClientSecret] = React.useState(null);
+  const [amount, setAmount] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      });
-  }, []);
-
+    const courseId = localStorage.getItem("courseId");
+    dispatch(initiatePayment({ course_id: courseId }))
+      .unwrap()
+      .then((res) => {
+        setClientSecret(res?.data?.metadata.client_secret);
+        setAmount(res?.data?.pretty_amount);
+      })
+      .catch(() => {});
+  }, [dispatch]);
   const options = {
     clientSecret,
   };
@@ -130,7 +131,7 @@ export default function StripePayment() {
         >
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
-              <CheckoutForm />
+              <CheckoutForm amount={amount} />
             </Elements>
           )}
         </Box>

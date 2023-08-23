@@ -101,9 +101,7 @@ export default function SignupForm({ next }) {
       .unwrap()
       .then(() => {
         setLoading(false);
-        setTimeout(() => {
-          next();
-        }, 3500);
+        next();
       })
       .catch(() => {
         setError(true);

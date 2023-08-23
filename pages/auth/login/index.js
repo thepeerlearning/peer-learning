@@ -243,13 +243,6 @@ export default function LoginPage() {
         message={errorMessage}
         isOpen={error}
       />
-
-      {/* <Snackbars
-        variant="error"
-        handleClose={handleCloseSnack}
-        message={message}
-        isOpen={error}
-      /> */}
     </Box>
   );
 }

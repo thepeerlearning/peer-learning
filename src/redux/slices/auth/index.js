@@ -43,10 +43,9 @@ export const classSchedule = createAsyncThunk(
       );
       if (response) {
         let { data } = response.data;
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("children_id", data.user.children?.data[0].id);
-        localStorage.setItem("step", data.user.registration_step);
-        return data;
+        localStorage.setItem("courseId", data.course_id);
+
+        return response.data;
       }
     } catch (error) {
       let message =
@@ -54,6 +53,61 @@ export const classSchedule = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.response.data.errors ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const initiatePayment = createAsyncThunk(
+  "auth/initiatePayment",
+  async ({ course_id }, thunkAPI) => {
+    try {
+      const response = await api.post(
+        `/courses/${course_id}/billings/initiate-payment`,
+        {}
+      );
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.response.data.errors ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+export const validatePayment = createAsyncThunk(
+  "auth/validatePayment",
+  async ({ token }, thunkAPI) => {
+    try {
+      const response = await api.get(
+        `billings/payment-intents/${token}/verify-payment`
+      );
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
         error.message ||
         error.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {

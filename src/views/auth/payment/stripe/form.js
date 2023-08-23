@@ -10,11 +10,9 @@ import { SubmitButton } from "../../../../components/forms/buttons";
 import { Colors } from "../../../../components/themes/colors";
 import { Fonts } from "../../../../components/themes/fonts";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ amount }) {
   const stripe = useStripe();
   const elements = useElements();
-
-  const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -62,16 +60,9 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/email-confirmation",
+        return_url: "https://peerlearning.vercel.app/verify-payment",
       },
     });
-
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
@@ -99,10 +90,6 @@ export default function CheckoutForm() {
     >
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <LinkAuthenticationElement
-            id="link-authentication-element"
-            onChange={(e) => setEmail(e.target.value)}
-          />
           <PaymentElement
             id="payment-element"
             options={paymentElementOptions}
@@ -116,20 +103,10 @@ export default function CheckoutForm() {
               disabled={isLoading || !stripe || !elements}
               loading={isLoading}
             >
-              Pay now
+              Pay now ({amount})
             </SubmitButton>
           </Box>
         </Grid>
-        {/* <button disabled={isLoading || !stripe || !elements} id="submit">
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pay now"
-            )}
-          </span>
-        </button> */}
-        {/* Show any error or success messages */}
         {message && (
           <Box
             id="payment-message"
@@ -148,12 +125,6 @@ export default function CheckoutForm() {
           </Box>
         )}
       </Grid>
-      {/* <Snackbars
-        variant="error"
-        handleClose={handleCloseSnack}
-        message={message}
-        isOpen={}
-      /> */}
     </Box>
   );
 }

@@ -132,7 +132,7 @@ export default function SignupPage() {
           ? handlePaymentNext()
           : step === "completed"
           ? router.push("/signup/email-confirmation")
-          : null;
+          : handleNext();
       }
     }
   }, []);

@@ -278,7 +278,7 @@ export default function ClassSchedule({ next, back }) {
   };
   // form validation rules
   const validationSchema = Yup.object().shape({
-    timezone: Yup.string().required("First name is required"),
+    timezone: Yup.string().required("Timezone is required"),
     course: Yup.string().required("course is required"),
     startDate: Yup.string().required("Preferred start date is required?"),
   });
@@ -291,6 +291,10 @@ export default function ClassSchedule({ next, back }) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      timezone: "Africa/Lagos",
+      course: "Web Development | Ages: 10 - 13",
+    },
   });
 
   const course = watch("course");
@@ -329,7 +333,7 @@ export default function ClassSchedule({ next, back }) {
         schedules: selectedItems[id],
       };
     });
-    let childrenId = localStorage.getItem("children");
+    let childrenId = localStorage.getItem("children_id");
     const inputData = {
       children_id: childrenId,
       course_id: data.course,
@@ -343,9 +347,7 @@ export default function ClassSchedule({ next, back }) {
       .unwrap()
       .then(() => {
         setLoading(false);
-        setTimeout(() => {
-          next();
-        }, 3500);
+        next();
       })
       .catch(() => {
         setError(true);
@@ -398,7 +400,6 @@ export default function ClassSchedule({ next, back }) {
                   htmlFor="timezone"
                   label="Time zone"
                   name="timezone"
-                  placeholder="(GMT+1:00) Lagos"
                   register={register}
                   error={errors.timezone ? true : false}
                   helper={errors.timezone?.message}
@@ -417,7 +418,6 @@ export default function ClassSchedule({ next, back }) {
                   htmlFor="course"
                   name="course"
                   label="Select course"
-                  placeholder="Web Development | Ages: 10 - 13"
                   register={register}
                   error={errors.course ? true : false}
                   helper={errors.course?.message}
@@ -901,7 +901,6 @@ export default function ClassSchedule({ next, back }) {
                     ghost
                     onClick={back}
                     disabled={loading}
-                    loading={loading}
                   >
                     Back
                   </SubmitButton>
