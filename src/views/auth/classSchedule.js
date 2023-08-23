@@ -13,9 +13,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import axios from "axios";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SubmitButton } from "../../components/forms/buttons";
 import {
@@ -25,16 +27,14 @@ import {
   TextField,
 } from "../../components/forms/textFields";
 import { InputElWrapper } from "../../components/forms/textFields/styles";
+import Snackbars from "../../components/snackbar";
 import { CircledAdd } from "../../components/svg/menuIcons";
 import { Colors } from "../../components/themes/colors";
 import { Fonts } from "../../components/themes/fonts";
-import { scheduleArray } from "../../utils/data";
-import Snackbars from "../../components/snackbar";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { classSchedule } from "../../redux/slices/auth";
 import { getCourses } from "../../redux/slices/courses";
-import { classSchedule, signup } from "../../redux/slices/auth";
 import { clearMessage } from "../../redux/slices/message";
+import { scheduleArray } from "../../utils/data";
 
 const StyledTabs = styled(Tabs)({
   width: 300,
@@ -329,7 +329,9 @@ export default function ClassSchedule({ next, back }) {
         schedules: selectedItems[id],
       };
     });
+    let childrenId = localStorage.getItem("children");
     const inputData = {
+      children_id: childrenId,
       course_id: data.course,
       other_options: data.otherOptions,
       start_date: data.startDate,
@@ -745,7 +747,7 @@ export default function ClassSchedule({ next, back }) {
                               {sch.schedule.map((item, i) => (
                                 <>
                                   <Grid item xs={2} key={"item.id" + i}>
-                                    {item.option.map((opt) => {
+                                    {item.option.map((opt, i) => {
                                       const exists = selected.some((obj) => {
                                         return (
                                           obj.weekId === opt.weekId &&
@@ -755,7 +757,7 @@ export default function ClassSchedule({ next, back }) {
                                       });
                                       return (
                                         <Box
-                                          key={opt.time}
+                                          key={"opt" + i}
                                           sx={{
                                             width: 77,
                                             height: 28,

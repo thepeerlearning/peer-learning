@@ -11,6 +11,7 @@ import ClassSchedule from "../../src/views/auth/classSchedule";
 import CoursesPayment from "../../src/views/auth/payment";
 import SignupForm from "../../src/views/auth/signup";
 import { AppLogo } from "../../src/components/svg/logo";
+import { useRouter } from "next/router";
 
 const QontoConnector = styled(StepConnector)(() => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -97,6 +98,7 @@ const steps = [
 ];
 
 export default function SignupPage() {
+  const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () =>

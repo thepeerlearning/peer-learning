@@ -207,7 +207,7 @@ export default function SignupForm({ next }) {
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
-                      error={formState.errors?.phone ? true : false}
+                      error={formState.errors?.phone ? "true" : undefined}
                       helper={formState.errors.phone?.message}
                       disabled={loading}
                     />
