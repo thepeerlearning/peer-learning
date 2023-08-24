@@ -191,18 +191,25 @@ export default function ClassSchedule({ next, back }) {
     getTimeZones();
   }, []);
   React.useEffect(() => {
-    message?.other_options?.map((opt) => {
-      return setErrorMessage("other options " + opt);
-    });
-    message?.start_date?.map((start) => {
-      return setErrorMessage("Start date " + start);
-    });
-    message?.timezone?.map((time) => {
-      return setErrorMessage("Time zone " + time);
-    });
-    message?.weeks?.map((wk) => {
-      return setErrorMessage("class schedules " + wk);
-    });
+    if (message?.other_options) {
+      message?.other_options?.map((opt) => {
+        return setErrorMessage("other options " + opt);
+      });
+    } else if (message?.start_date) {
+      message?.start_date?.map((start) => {
+        return setErrorMessage("Start date " + start);
+      });
+    } else if (message?.timezone) {
+      message?.timezone?.map((time) => {
+        return setErrorMessage("Time zone " + time);
+      });
+    } else if (message?.weeks) {
+      message?.weeks?.map((wk) => {
+        return setErrorMessage("class schedules " + wk);
+      });
+    } else {
+      setErrorMessage(message);
+    }
   }, [message]);
   React.useEffect(() => {
     if (selected.length !== 0) {

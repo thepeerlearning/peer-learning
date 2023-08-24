@@ -69,9 +69,13 @@ export default function SignupForm({ next }) {
   });
   const password = watch("password");
   useEffect(() => {
-    message?.email?.map((email) => {
-      return setErrorMessage("Email " + email);
-    });
+    if (message?.email) {
+      message?.email?.map((email) => {
+        return setErrorMessage("Email " + email);
+      });
+    } else {
+      return setErrorMessage(message);
+    }
   }, [message]);
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data;

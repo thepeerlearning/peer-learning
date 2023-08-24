@@ -156,7 +156,7 @@ export const login = createAsyncThunk(
         let { data } = response.data;
         localStorage.setItem("token", data.token);
         localStorage.setItem("step", data.user.registration_step);
-        localStorage.setItem("user", data.user);
+        localStorage.setItem("children_id", data.user.children.data[0].id);
         return response.data;
       }
     } catch (error) {

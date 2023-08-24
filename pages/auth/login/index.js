@@ -26,6 +26,8 @@ export default function LoginPage() {
   const [routing, setRouting] = useState(false);
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [info, setInfo] = React.useState(false);
+  const [infoMessage, setInfoMessage] = React.useState("");
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
@@ -41,12 +43,17 @@ export default function LoginPage() {
     dispatch(clearMessage());
   }, [dispatch]);
   React.useEffect(() => {
-    message?.email?.map((email) => {
-      return setErrorMessage(email);
-    });
-    message?.password?.map((password) => {
-      return setErrorMessage(password);
-    });
+    if (message?.email) {
+      message?.email?.map((email) => {
+        return setErrorMessage(email);
+      });
+    } else if (message?.password) {
+      message?.password?.map((password) => {
+        return setErrorMessage(password);
+      });
+    } else {
+      return setErrorMessage(message);
+    }
   }, [message]);
   React.useEffect(() => {
     Router.events.on("routeChangeStart", () => setRouting(true));
@@ -85,8 +92,8 @@ export default function LoginPage() {
         if (step && step === "completed") {
           router.push("/students/my-dashboard");
         } else {
-          setError(true);
-          setErrorMessage(
+          setInfo(true);
+          setInfoMessage(
             "Registration process still ongoing, redirecting you to complete the process"
           );
           setTimeout(() => {
@@ -242,6 +249,12 @@ export default function LoginPage() {
         handleClose={handleCloseSnack}
         message={errorMessage}
         isOpen={error}
+      />
+      <Snackbars
+        variant="info"
+        handleClose={handleCloseSnack}
+        message={infoMessage}
+        isOpen={info}
       />
     </Box>
   );
