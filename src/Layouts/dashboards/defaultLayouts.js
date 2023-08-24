@@ -29,6 +29,8 @@ import { Fonts } from "../../components/themes/fonts";
 import Notifications from "./notifications";
 import AppbarProfile from "./profile";
 import { NestedStyledList, SecondStyledList, StyledList } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/slices/auth";
 
 function updateKey(str) {
   if (typeof str !== "string") return "";
@@ -40,11 +42,12 @@ function updateKey(str) {
 const drawerWidth = 220;
 const appHeight = 72;
 function DashboardLayouts({ children, window, title, breadcrumb }) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openNest, setOpenNest] = useState("");
-
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  const router = useRouter();
+  const dispatch = useDispatch();
   useEffect(() => {
     Router.events.on("routeChangeStart", () => setLoading(true));
     Router.events.on("routeChangeComplete", () => setLoading(false));
@@ -55,6 +58,9 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
       Router.events.off("routeChangeError", () => setLoading(false));
     };
   }, []);
+  useEffect(() => {
+    if (!isLoggedIn) return router.push("/auth/login");
+  }, [isLoggedIn, router]);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
@@ -65,6 +71,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
       ? setOpenNest(index)
       : (router.push(item.link), setMobileOpen(false));
   };
+  if (!isLoggedIn) return <Spinner />;
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const menu = [
@@ -312,7 +319,11 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
             }}
           >
             <SecondStyledList component="nav" disablePadding>
-              <ListItemButton disableRipple disableTouchRipple>
+              <ListItemButton
+                disableRipple
+                disableTouchRipple
+                onClick={() => dispatch(logout())}
+              >
                 <ListItemIcon sx={{ color: "inherit" }}>
                   <Logout />
                 </ListItemIcon>

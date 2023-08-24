@@ -316,7 +316,8 @@ export default function ClassSchedule({ next, back }) {
   function onSubmit(data) {
     const selectedItems = selected?.reduce((week, item) => {
       const id = item.weekId;
-      const time = item.time + ":00";
+      const time =
+        Number(item.time) < 10 ? `0${item.time}:00` : `${item.time}:00`;
       const theWeek = { day: item.name, time };
       if (!week[id]) {
         week[id] = [];

@@ -25,7 +25,6 @@ export default async function handler(req, res) {
         access_code: data.data.access_code,
       });
     } catch (error) {
-      console.log("Payment initiation error:", error);
       res.status(500).json({ message: "Payment initiation failed" });
     }
   } else {

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api, { timeout } from "../../../common/axios";
 import { setMessage } from "../message";
+import { HYDRATE } from "next-redux-wrapper";
 
 export const signup = createAsyncThunk(
   "auth/signup",
@@ -278,26 +279,6 @@ export const refreshpage = createAsyncThunk(
     }
   }
 );
-export const logout = createAsyncThunk("auth/logout", async ({}, thunkAPI) => {
-  try {
-    const response = await api.post("user/logout");
-    return response.data;
-  } catch (error) {
-    let message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.response.data.message ||
-      error.message ||
-      error.toString();
-    if (error.message === `timeout of ${timeout}ms exceeded`) {
-      message = "Response timeout, Retry";
-    }
-    if (error.message === "Network Error") {
-      message = "Please check your network connectivity";
-    }
-    thunkAPI.dispatch(setMessage(message));
-    return thunkAPI.rejectWithValue();
-  }
-});
 
 const initialState = {
   isLoggedIn: false,
@@ -307,10 +288,22 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.isLoggedIn = false;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(HYDRATE, (state, action) => {
+      return {
+        ...state,
+        ...action.payload.auth,
+      };
+    });
+    builder.addCase(login.fulfilled, (state, { payload }) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.user = payload.data?.user;
     });
     builder.addCase(validateForgotPasswordEmail.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -319,12 +312,9 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.token = action.payload;
     });
-    builder.addCase(logout.fulfilled, (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    });
   },
 });
 
-const { reducer } = authSlice;
+const { reducer, actions } = authSlice;
+export const { logout } = actions;
 export default reducer;

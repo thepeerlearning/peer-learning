@@ -12,19 +12,22 @@ import "react-phone-number-input/style.css";
 import { Provider } from "react-redux";
 import { Fonts } from "../src/components/themes/fonts";
 import createEmotionCache from "../src/lib/createEmotionCache";
-import { store } from "../src/redux/store";
+import { wrapper } from "../src/redux/store";
 import "../styles/globals.css";
 import theme from "../styles/muiTheme";
+import { PersistGate } from "redux-persist/integration/react";
+import MetaData from "../src/utils/meta";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const clientSideEmotionCache = createEmotionCache();
-function MyApp({
+export default function MyApp({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
 }) {
+  const { store, props } = wrapper.useWrappedStore(pageProps);
   const getLayout = Component.getLayout || ((page) => page);
   const [networkOffline, setNetworkOffline] = useState(false);
   const [networkOnline, setNetworkOnline] = useState(false);
@@ -57,7 +60,12 @@ function MyApp({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Provider store={store}>
-            {getLayout(<Component {...pageProps} />)}
+            <PersistGate
+              persistor={store.__persistor}
+              loading={<div>Loading...</div>}
+            >
+              {getLayout(<Component {...props} />)}
+            </PersistGate>
           </Provider>
         </ThemeProvider>
       </CacheProvider>
@@ -104,4 +112,3 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
-export default MyApp;

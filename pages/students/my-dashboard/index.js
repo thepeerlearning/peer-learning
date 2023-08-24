@@ -13,8 +13,22 @@ import {
 } from "../../../src/components/svg/menuIcons";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { activeCourses } from "../../../src/redux/slices/courses";
+import moment from "moment";
 
 export default function DashboardPage() {
+  const { user } = useSelector((state) => state.auth);
+  const {
+    activeCourse: courses,
+    courseLoading: loading,
+    coursesError: error,
+  } = useSelector((state) => state.courses);
+  const dispatch = useDispatch();
+  const fullname = user?.children?.data[0].fullname;
+  console.log("courses", courses);
+  useEffect(() => dispatch(activeCourses()), [dispatch]);
   return (
     <Box
       component="div"
@@ -50,7 +64,7 @@ export default function DashboardPage() {
                 m: 0,
               }}
             >
-              Hi Katie,{" "}
+              Hi {fullname?.split(" ")[0]},{" "}
               <Box
                 component="span"
                 sx={{
@@ -65,7 +79,7 @@ export default function DashboardPage() {
 
             <CardHeader
               avatar={<CircleProfileIcon style={{ width: 64, height: 64 }} />}
-              title="Katie Pena"
+              title={fullname}
               subheader="Student"
               sx={{
                 "& .MuiCardHeader-title": {
@@ -210,7 +224,7 @@ export default function DashboardPage() {
                       color: "#BBBBBE",
                     }}
                   >
-                    May, 15 2023 14:23 PM
+                    {moment(courses?.start_date).format("LLL")}
                   </Box>
                 </Grid>
 
@@ -240,7 +254,7 @@ export default function DashboardPage() {
                       color: "#BBBBBE",
                     }}
                   >
-                    May, 15 2023 16:23 PM
+                    {moment(courses?.end_date).format("LLL")}
                   </Box>
                 </Grid>
                 {/* MISSED COURSES */}
@@ -277,7 +291,7 @@ export default function DashboardPage() {
                       background: "rgba(85, 119, 255, 0.20)",
                     }}
                   >
-                    none
+                    {courses?.missed_class ? courses?.missed_class : "none"}
                   </Box>
                 </Grid>
 
@@ -315,7 +329,7 @@ export default function DashboardPage() {
                       gap: "10px",
                     }}
                   >
-                    @ Ms. Zoe
+                    @ {courses?.instructor}
                   </Box>
                 </Grid>
                 {/* CLASS TYPE */}
