@@ -135,7 +135,7 @@ export default function SignupPage() {
           : handleNext();
       }
     }
-  }, []);
+  }, [router]);
   return (
     <Box
       component="div"

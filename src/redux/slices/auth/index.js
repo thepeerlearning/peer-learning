@@ -44,7 +44,6 @@ export const classSchedule = createAsyncThunk(
       if (response) {
         let { data } = response.data;
         localStorage.setItem("courseId", data.course_id);
-
         return response.data;
       }
     } catch (error) {
