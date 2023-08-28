@@ -1,156 +1,19 @@
-import {
-  Box,
-  Button,
-  Collapse,
-  Grid,
-  ListItemButton,
-  ListItemIcon,
-} from "@mui/material";
-import { useState } from "react";
-import { NestedStyledList } from "../../Layouts/dashboards/styles";
+import { Box, Button, Grid } from "@mui/material";
+import { isEmpty } from "lodash";
+import moment from "moment";
 import { StyledCard } from "../../components/forms/textFields";
+import NoActivity from "../../components/lottie/restingCat";
 import {
-  AngleBackward,
   CalenderIcon,
   CategoryFilterIcon,
-  CourseOutlineIcon,
   FileIcon,
   StackedTilesIcon,
 } from "../../components/svg/menuIcons";
 import { Colors } from "../../components/themes/colors";
 import { Fonts } from "../../components/themes/fonts";
 
-const courseCards = [
-  {
-    level: "Beginner Level",
-    title: "Introduction to Web developement",
-    description: `What do web developers do? In short, they build and maintain websites. Web developers often work for clients who are trying to get their product or service onto the web. The work is typically very project focused and involves collaborating with a team that helps to coordinate the client’s needs into the end product. The client could be a tech company, an organization, or a government.`,
-    outline: [
-      {
-        name: "Introduction",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "HTML Foundations",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "Introduction",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "Introduction",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-    ],
-  },
-  {
-    level: "Beginner Level",
-    title: "Introduction to Web developement 2",
-    description: `What do web developers do? In short, they build and maintain websites. Web developers often work for clients who are trying to get their product or service onto the web. The work is typically very project focused and involves collaborating with a team that helps to coordinate the client’s needs into the end product. The client could be a tech company, an organization, or a government.`,
-    outline: [
-      {
-        name: "Introduction 2",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "HTML Foundations 2",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "Introduction2",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-      {
-        name: "Introduction 33",
-        content: [
-          "Introduction to HTML",
-          "Elements and Tags",
-          "HTML boilerplate",
-          "Working with text",
-          "List",
-          "Links and images",
-          "Commit messages",
-          "Project",
-        ],
-      },
-    ],
-  },
-];
-export default function OngoingCourses() {
-  const [openNest, setOpenNest] = useState("");
-  const [courseoutline, setCourseoutline] = useState(0);
-
-  const handleClick = (item, index) => {
-    item.outline && openNest === index
-      ? setOpenNest("")
-      : item.outline
-      ? setOpenNest(index)
-      : null;
-  };
+export default function OngoingCourses({ data, level }) {
+  // const [openNest, setOpenNest] = useState("");
 
   return (
     <>
@@ -162,146 +25,161 @@ export default function OngoingCourses() {
           pt: 3,
         }}
       >
-        <Grid container spacing={0}>
-          {courseCards.map((course, index) => (
-            <>
-              <Grid item xs={12} md={8}>
-                <StyledCard
-                  onClick={() => setCourseoutline(index)}
-                  sx={{
-                    maxWidth: 685,
-                    display: "flex",
-                    flexDirection: "column",
-                    flexShriink: 0,
-                    alignItems: "flex-start",
-                    background: Colors.light,
-                    gap: 3,
-                    p: 2,
-                    my: 2,
-                    border: `1px solid rgba(230, 230, 230, 0.50)`,
-                    boxShadow: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Box
-                    component="div"
-                    sx={{ width: "100%", padding: "10px 8px" }}
-                  >
-                    <Box
-                      component="div"
+        {isEmpty(data) ? (
+          <Box
+            sx={{
+              width: { xs: "100%", xl: "50%" },
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 4,
+            }}
+          >
+            <NoActivity />
+          </Box>
+        ) : (
+          <Grid container spacing={0}>
+            {data?.map((course, index) => {
+              return (
+                <>
+                  <Grid item xs={12} md={8}>
+                    <StyledCard
+                      // onClick={() => setCourseoutline(index)}
                       sx={{
-                        width: "100%",
+                        maxWidth: 685,
                         display: "flex",
-                        color: " #A3A3A3",
-                        font: `normal normal 400 12px/25px ${Fonts.Jakarta}`,
+                        flexDirection: "column",
+                        flexShriink: 0,
+                        alignItems: "flex-start",
+                        background: Colors.light,
+                        gap: 3,
+                        p: 2,
+                        my: 2,
+                        border: `1px solid rgba(230, 230, 230, 0.50)`,
+                        boxShadow: "none",
+                        cursor: "pointer",
                       }}
                     >
                       <Box
+                        component="div"
+                        sx={{ width: "100%", padding: "10px 8px" }}
+                      >
+                        <Box
+                          component="div"
+                          sx={{
+                            width: "100%",
+                            display: "flex",
+                            color: " #A3A3A3",
+                            font: `normal normal 400 12px/25px ${Fonts.Jakarta}`,
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              mr: 2,
+                            }}
+                          >
+                            <FileIcon />
+                          </Box>{" "}
+                          {level}
+                        </Box>
+                        <Box
+                          component="div"
+                          sx={{
+                            width: "100%",
+                            display: "flex",
+                            color: "#4F4F4F",
+                            font: `normal normal 600 14px/25px ${Fonts.Jakarta}`,
+                          }}
+                        >
+                          {course.course_outline.title}
+                        </Box>
+                        <Box
+                          component="p"
+                          sx={{
+                            textAlign: "left",
+                            color: "#999",
+                            font: `normal normal 400 13px/137% ${Fonts.Jakarta}`,
+                          }}
+                        >
+                          {course.course_outline.description}
+                        </Box>
+                      </Box>
+                      <Box
                         sx={{
-                          mr: 2,
+                          maxWidth: 600,
+                          display: { xs: "block", md: "inline-flex" },
+                          alignItems: "flex-start",
+                          gap: "8px",
+                          overflow: "auto",
                         }}
                       >
-                        <FileIcon />
-                      </Box>{" "}
-                      {course.level}
-                    </Box>
-                    <Box
-                      component="div"
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        color: "#4F4F4F",
-                        font: `normal normal 600 14px/25px ${Fonts.Jakarta}`,
-                      }}
-                    >
-                      {course.title}
-                    </Box>
-                    <Box
-                      component="p"
-                      sx={{
-                        textAlign: "left",
-                        color: "#999",
-                        font: `normal normal 400 13px/137% ${Fonts.Jakarta}`,
-                      }}
-                    >
-                      {course.description}
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      maxWidth: 600,
-                      display: { xs: "block", md: "inline-flex" },
-                      alignItems: "flex-start",
-                      gap: "8px",
-                      overflow: "auto",
-                    }}
-                  >
-                    <Button
-                      startIcon={<StackedTilesIcon />}
-                      sx={{
-                        background: "#FED4E7",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "3px",
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: "#FD71AF",
-                        padding: "4px 8px",
-                        borderRadius: "5px",
-                        "&:hover": {
-                          background: "#FED4E7",
-                          fontSize: "13.995",
-                          transform: "scale(0.995)",
-                        },
-                      }}
-                    >
-                      Lesson 1/8
-                    </Button>
+                        <Button
+                          startIcon={<StackedTilesIcon />}
+                          sx={{
+                            background: "#FED4E7",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            color: "#FD71AF",
+                            padding: "4px 8px",
+                            borderRadius: "5px",
+                            "&:hover": {
+                              background: "#FED4E7",
+                              fontSize: "13.995",
+                              transform: "scale(0.995)",
+                            },
+                          }}
+                        >
+                          Lesson {index + 1}/{data.length}
+                        </Button>
 
-                    <Button
-                      startIcon={<CalenderIcon />}
-                      sx={{
-                        background: "#5577FF",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "3px",
-                        my: { xs: 1.75, md: 0 },
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: Colors.light,
-                        padding: "4px 8px",
-                        borderRadius: "5px",
-                        "&:hover": {
-                          background: "#5577FF",
-                          fontSize: "13.995",
-                          transform: "scale(0.995)",
-                        },
-                      }}
-                    >
-                      May, 2 2023 13:23 PM
-                    </Button>
-                    <Button
-                      startIcon={<CategoryFilterIcon />}
-                      sx={{
-                        background: "#C7EBE6",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "3px",
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: Colors.buttonSuccess,
-                        padding: "4px 8px",
-                        borderRadius: "5px",
-                        "&:hover": {
-                          background: "#C7EBE6",
-                          fontSize: "13.995",
-                          transform: "scale(0.995)",
-                        },
-                      }}
-                    >
-                      Completed
-                    </Button>
-                  </Box>
-                </StyledCard>
-              </Grid>
-              {courseoutline === index && (
+                        <Button
+                          startIcon={<CalenderIcon />}
+                          sx={{
+                            background: "#5577FF",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            my: { xs: 1.75, md: 0 },
+                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            color: Colors.light,
+                            padding: "4px 8px",
+                            borderRadius: "5px",
+                            "&:hover": {
+                              background: "#5577FF",
+                              fontSize: "13.995",
+                              transform: "scale(0.995)",
+                            },
+                          }}
+                        >
+                          {moment(course.updated_at).format("LLL")}
+                        </Button>
+                        <Button
+                          startIcon={<CategoryFilterIcon />}
+                          sx={{
+                            background: "#C7EBE6",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            color: Colors.buttonSuccess,
+                            padding: "4px 8px",
+                            borderRadius: "5px",
+                            "&:hover": {
+                              background: "#C7EBE6",
+                              fontSize: "13.995",
+                              transform: "scale(0.995)",
+                            },
+                          }}
+                        >
+                          {course.status}
+                        </Button>
+                      </Box>
+                    </StyledCard>
+                  </Grid>
+                  {/* {courseoutline === index && (
                 <Grid item xs={12} md={4}>
                   <Box
                     component="div"
@@ -329,8 +207,8 @@ export default function OngoingCourses() {
                         <CourseOutlineIcon />
                       </Box>{" "}
                       Course content
-                    </Box>
-                    {course.outline.map((outline, index) => (
+                    </Box> */}
+                  {/* {course.outline.map((outline, index) => (
                       <Box
                         component="div"
                         key={index + 1}
@@ -424,13 +302,15 @@ export default function OngoingCourses() {
                           </NestedStyledList>
                         </Collapse>
                       </Box>
-                    ))}
-                  </Box>
+                    ))} */}
+                  {/* </Box>
                 </Grid>
-              )}
-            </>
-          ))}
-        </Grid>
+              )} */}
+                </>
+              );
+            })}
+          </Grid>
+        )}
       </Box>
     </>
   );

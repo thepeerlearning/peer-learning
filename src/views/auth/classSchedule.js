@@ -245,7 +245,7 @@ export default function ClassSchedule({ next, back }) {
                       ? "Week 3 option 2"
                       : index === 6
                       ? "Week 4 option 1"
-                      : "Week 4 option 1"}
+                      : "Week 4 option 2"}
                   </Box>
                   <Box
                     key={opt.id}
@@ -318,7 +318,7 @@ export default function ClassSchedule({ next, back }) {
       const id = item.weekId;
       const time =
         Number(item.time) < 10 ? `0${item.time}:00` : `${item.time}:00`;
-      const theWeek = { day: item.name, time };
+      const theWeek = { day: item.name, time: time.replace(/\s/g, "") };
       if (!week[id]) {
         week[id] = [];
       }

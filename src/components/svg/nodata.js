@@ -1,9 +1,9 @@
-export function Nodata({ props }) {
+export function Nodata() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={props.width ? props.width : "150.133"}
-      height={props.height ? props.height : "130.82"}
+      width={"130.133"}
+      height={"130.82"}
       viewBox="0 0 269.133 308.82"
     >
       <g id="No-Data-2" transform="translate(-965.934 -599)">

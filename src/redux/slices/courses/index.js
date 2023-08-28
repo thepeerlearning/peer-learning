@@ -63,6 +63,12 @@ const initialState = {
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
+  reducers: {
+    refresh: (state) => {
+      state.error = false;
+      state.coursesError = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCourses.pending, (state, action) => {
       state.loading = true;
@@ -96,6 +102,6 @@ const coursesSlice = createSlice({
     });
   },
 });
-
-const { reducer } = coursesSlice;
+const { reducer, actions } = coursesSlice;
+export const { refresh } = actions;
 export default reducer;
