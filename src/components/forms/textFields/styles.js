@@ -302,7 +302,7 @@ export const MultiSelect = styled(Select)`
    & .Select__option{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     text-align: left;
-    font: normal normal normal 16px/20px ${Fonts.secondary};
+    font: normal normal 400 16px/20px ${Fonts.secondary};
     letter-spacing: 0px;
     color: ${Colors.textColor};
     cursor:pointer;
@@ -355,7 +355,7 @@ export const MultiSelect = styled(Select)`
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
     ${(props) => (props.hpadding ? props.hpadding : "10px")};
-  font: normal normal normal 16px/20px ${Fonts.secondary};
+  font: normal normal 400 16px/20px ${Fonts.secondary};
    border-width: 1px;
     border-style: solid;
     border-color: ${(props) =>

@@ -10,13 +10,12 @@ import PropTypes from "prop-types";
 import { forwardRef, useEffect, useState } from "react";
 import "react-phone-number-input/style.css";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { Fonts } from "../src/components/themes/fonts";
 import createEmotionCache from "../src/lib/createEmotionCache";
 import { wrapper } from "../src/redux/store";
 import "../styles/globals.css";
 import theme from "../styles/muiTheme";
-import { PersistGate } from "redux-persist/integration/react";
-import MetaData from "../src/utils/meta";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

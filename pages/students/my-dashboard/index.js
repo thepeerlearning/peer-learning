@@ -291,7 +291,7 @@ export default function DashboardPage() {
                       background: "rgba(85, 119, 255, 0.20)",
                     }}
                   >
-                    {courses?.missed_class ? courses?.missed_class : "none"}
+                    {courses?.is_expired ? "True" : "none"}
                   </Box>
                 </Grid>
 

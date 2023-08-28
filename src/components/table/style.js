@@ -69,19 +69,19 @@ export const StyledTablePagination = styled(TablePagination)(() => ({
     borderRadius: "0px 0px 5px 5px",
     minHeight: 48,
     textAlign: "center",
-    font: `normal normal normal 12px/20px ${Fonts.secondary}`,
+    font: `normal normal 400 12px/20px ${Fonts.secondary}`,
     color: Colors.greyText,
   },
   "& .MuiTablePagination-selectLabel": {
-    font: `normal normal normal 12px/16px ${Fonts.secondary}`,
+    font: `normal normal 400 12px/16px ${Fonts.secondary}`,
     color: Colors.greyText,
   },
   "& .MuiTablePagination-input": {
-    font: `normal normal normal 12px/16px ${Fonts.secondary}`,
+    font: `normal normal 400 12px/16px ${Fonts.secondary}`,
     color: Colors.greyText,
   },
   "& .MuiTablePagination-displayedRows": {
-    font: `normal normal normal 12px/16px ${Fonts.secondary}`,
+    font: `normal normal 400 12px/16px ${Fonts.secondary}`,
     color: Colors.greyText,
   },
   "& .MuiTablePagination-toolbar": {
