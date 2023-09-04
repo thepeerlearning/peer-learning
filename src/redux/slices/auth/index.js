@@ -102,7 +102,10 @@ export const validatePayment = createAsyncThunk(
       const response = await api.get(
         `billings/payment-intents/${token}/verify-payment`
       );
-      return response.data;
+      if (response) {
+        localStorage.removeItem("step");
+        return response.data;
+      }
     } catch (error) {
       let message =
         (error.response &&
@@ -254,6 +257,7 @@ export const resetpassword = createAsyncThunk(
     }
   }
 );
+
 export const refreshpage = createAsyncThunk(
   "auth/refreshpage",
   async ({}, thunkAPI) => {
@@ -279,7 +283,31 @@ export const refreshpage = createAsyncThunk(
     }
   }
 );
-
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async ({ id, inputData }, thunkAPI) => {
+    console.log("id", id);
+    try {
+      const response = await api.post(`/users/${id}`, inputData);
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 const initialState = {
   isLoggedIn: false,
   user: null,

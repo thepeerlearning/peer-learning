@@ -8,7 +8,6 @@ import {
   Select,
   StyledCard,
   TextField,
-  TextFieldBox,
 } from "../../../src/components/forms/textFields";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
@@ -18,22 +17,30 @@ import {
   InputElWrapper,
   InputFileBox,
 } from "../../components/forms/textFields/styles";
+import { updateProfile } from "../../redux/slices/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Personalization() {
   const [photo, setPhoto] = React.useState(undefined);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const [photoName, setPhotoName] = React.useState(undefined);
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const { user } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    childName: Yup.string().required("Child name is required"),
+    childName: Yup.string().required("Child's name is required"),
     dob: Yup.string().required("Date of birth is required"),
     gender: Yup.string().required("Gender is required"),
     country: Yup.string().required("Country is required"),
-    img: Yup.mixed().test("required", "Profile image is required", (value) => {
-      return value && value.length;
-    }),
+    // img: Yup.mixed().test("required", "Profile image is required", (value) => {
+    //   return value && value.length;
+    // }),
   });
-
+  console.log("user", user);
   // get functions to build form with useForm() hook
   const {
     register,
@@ -44,10 +51,9 @@ export default function Personalization() {
     resolver: yupResolver(validationSchema),
     defaultValues: {
       country: "Nigeria",
-      dob: "12/12/2010",
-      gender: "Female",
-      childName: "Jane Doe",
-      //   img: undefined,
+      childName: user?.children?.data[0].fullname,
+      dob: user?.children?.data[0].date_of_birth,
+      gender: user?.children?.data[0].gender,
     },
   });
 
@@ -65,16 +71,49 @@ export default function Personalization() {
       convert2Base64(img[0]);
     }
   }, [img]);
-
+  // React.useEffect(() => {
+  //   if (message?.other_options) {
+  //     message?.other_options?.map((opt) => {
+  //       return setErrorMessage("other options " + opt);
+  //     });
+  //   } else if (message?.start_date) {
+  //     message?.start_date?.map((start) => {
+  //       return setErrorMessage("Start date " + start);
+  //     });
+  //   } else if (message?.timezone) {
+  //     message?.timezone?.map((time) => {
+  //       return setErrorMessage("Time zone " + time);
+  //     });
+  //   } else if (message?.weeks) {
+  //     message?.weeks?.map((wk) => {
+  //       return setErrorMessage("class schedules " + wk);
+  //     });
+  //   } else {
+  //     setErrorMessage(message);
+  //   }
+  // }, [message]);
   function onSubmit(data) {
     const { childName, dob, country, gender } = data;
-    console.log(
-      "childName,dob,country, gender",
-      childName,
-      dob,
-      country,
-      gender
-    );
+    const inputData = {
+      user_profile: {
+        child_name: childName,
+        date_of_birth: dob,
+        gender,
+        country,
+      },
+    };
+    setLoading(true);
+    dispatch(updateProfile({ id: user?.id, inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false);
+        next();
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+    return false;
   }
   return (
     <StyledCard
@@ -118,12 +157,14 @@ export default function Personalization() {
               htmlFor="childName"
               name="childName"
               type="text"
-              label="Child name"
+              label="Frist name"
+              placeholder="Child's first name"
               register={register}
               error={errors.childName ? true : false}
               helper={errors.childName?.message}
+              disabled={loading}
             />
-          </Grid>
+          </Grid>{" "}
           <Grid item xs={12} sm={6}>
             <TextField
               id="dob"
@@ -134,6 +175,7 @@ export default function Personalization() {
               register={register}
               error={errors.dob ? true : false}
               helper={errors.dob?.message}
+              disabled={loading}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -145,6 +187,7 @@ export default function Personalization() {
               register={register}
               error={errors.gender ? true : false}
               helper={errors.gender?.message}
+              disabled={loading}
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -159,6 +202,7 @@ export default function Personalization() {
               register={register}
               error={errors.country ? true : false}
               helper={errors.country?.message}
+              disabled={loading}
             >
               {Countries.map((country) => (
                 <option key={country.name} value={country.name}>
@@ -211,7 +255,9 @@ export default function Personalization() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Box component="div" sx={{ maxWidth: 280 }}>
-              <SubmitButton>Update Personalization</SubmitButton>
+              <SubmitButton disabled={loading} loading={loading}>
+                Update Personalization
+              </SubmitButton>
             </Box>
           </Grid>
         </Grid>

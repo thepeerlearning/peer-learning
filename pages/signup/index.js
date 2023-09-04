@@ -105,7 +105,6 @@ export default function SignupPage() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handlePrev = () =>
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
   const handlePaymentNext = () =>
     setActiveStep((prevActiveStep) => prevActiveStep + 2);
 
@@ -131,11 +130,12 @@ export default function SignupPage() {
           : step === "class_schedule"
           ? handlePaymentNext()
           : step === "completed"
-          ? router.push("/signup/email-confirmation")
-          : handleNext();
+          ? router.push("/auth/login")
+          : null;
       }
     }
   }, [router]);
+
   return (
     <Box
       component="div"

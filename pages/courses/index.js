@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import { StyledCard } from "../../src/components/forms/textFields";
 import { Colors } from "../../src/components/themes/colors";
 import { Fonts } from "../../src/components/themes/fonts";
@@ -101,12 +101,7 @@ export default function CoursesPage() {
         >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={4}>
-              <StyledCard
-                sx={styledCard2Box}
-                onClick={() =>
-                  router.push("/courses/game-design-and-animation")
-                }
-              >
+              <StyledCard sx={styledCard2Box}>
                 <Box
                   sx={{
                     width: "100%",
@@ -168,15 +163,30 @@ export default function CoursesPage() {
                       </Box>
                     </Box>
                   </Box>
-                  <SubmitButton
-                    onClick={() => router.push("/signup")}
-                    style={{
-                      width: 180,
-                      padding: "15px 27.63px 14.59px 26px",
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    Register my child
-                  </SubmitButton>
+                    <SubmitButton
+                      onClick={() => router.push("/signup")}
+                      style={{
+                        width: 180,
+                        padding: "15px 27.63px 14.59px 26px",
+                      }}
+                    >
+                      Register my child
+                    </SubmitButton>
+                    <Link
+                      underline="always"
+                      href="/courses/game-design-and-animation"
+                    >
+                      View detail
+                    </Link>
+                  </Box>
                 </Box>
               </StyledCard>
             </Grid>
