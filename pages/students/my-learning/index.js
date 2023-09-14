@@ -121,7 +121,7 @@ export default function MyLearningPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={message}
+        message={message?.detail}
         isOpen={error}
       />
     </Box>

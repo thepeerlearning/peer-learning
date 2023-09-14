@@ -10,8 +10,11 @@ import { Fonts } from "../../../src/components/themes/fonts";
 import Personalization from "../../../src/views/my-profile/personalization";
 import Security from "../../../src/views/my-profile/security";
 import SubscriptionHistory from "../../../src/views/my-profile/subscription/history";
+import { useSelector } from "react-redux";
 
 export default function MyProfilePage() {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Box
       component="div"
@@ -58,12 +61,12 @@ export default function MyProfilePage() {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextFieldBox label="Email address" disabled>
-              john.doe@gmail.com
+              {user?.email}
             </TextFieldBox>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextFieldBox label="Phone number" disabled>
-              +234 4584 49 232
+              {user?.phone_number}
             </TextFieldBox>
           </Grid>
         </Grid>

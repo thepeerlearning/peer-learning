@@ -35,6 +35,7 @@ export default function DashboardPage() {
 
   useEffect(() => dispatch(activeCourses()), [dispatch]);
   const handleCloseSnack = () => dispatch(refresh());
+  console.log("courses,error,loading", courses, error, loading);
   return (
     <Box
       component="div"
@@ -408,7 +409,7 @@ export default function DashboardPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={message}
+        message={message?.detail}
         isOpen={error}
       />
     </Box>

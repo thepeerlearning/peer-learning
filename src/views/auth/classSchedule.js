@@ -35,13 +35,23 @@ import { classSchedule } from "../../redux/slices/auth";
 import { getCourses } from "../../redux/slices/courses";
 import { clearMessage } from "../../redux/slices/message";
 import { scheduleArray } from "../../utils/data";
+// import TabContext from "@mui/lab/TabContext";
 
 const StyledTabs = styled(Tabs)({
   width: 300,
+  overflow: "auto",
   borderRadius: `0px 0px 0px 3px`,
-  background: `${Colors.light} 0% 0% no-repeat padding-box`,
+  background: `# 0% 0% no-repeat padding-box`,
   borderRight: `2px solid rgba(0, 0, 0, 0.50)`,
   padding: "40px 0",
+  "& .MuiTabs-indicator": {
+    display: "none",
+  },
+});
+const SmallStyledTabs = styled(Tabs)({
+  background: `${Colors.light} 0% 0% no-repeat padding-box`,
+  margin: 0,
+  padding: 0,
   "& .MuiTabs-indicator": {
     display: "none",
   },
@@ -57,14 +67,10 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   color: "#262626",
   padding: "4px 8px",
   margin: "10px 0",
+  background: Colors.light,
   font: `normal normal 400 12px/28px ${Fonts.secondary}`,
-  "&:hover": {
-    color: "#262626",
-  },
   "&.Mui-selected": {
     background: Colors.secondary,
-    p: "4px 8px",
-    cursor: "pointer",
     color: Colors.light,
   },
   "&.Mui-focusVisible": {
@@ -104,6 +110,38 @@ function a11yProps(index) {
     "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
+function SmallTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: "0 24px 0 0" }}>
+          <Box>{children}</Box>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+SmallTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function smallA11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -121,46 +159,12 @@ export default function ClassSchedule({ next, back }) {
   const [value, setValue] = React.useState(0);
   const [timezones, setTimeZones] = React.useState(null);
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [price, setPrice] = React.useState(null);
   const { data } = useSelector((state) => state.courses);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handleChange = (event, newValue) => setValue(newValue);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleReselect = () => {
-    setLimit(false);
-    setOpen(true);
-    setSelected([]);
-    setValue(0);
-  };
-
-  const handleWeekSelect = () => {
-    setSelected([]);
-    setValue(0);
-  };
-
-  const handleTimeClick = (item) => {
-    if (selected.length < 8 && selected.includes(item)) {
-      setSelected(selected.filter((selectedItem) => selectedItem !== item));
-    } else {
-      if (selected.length >= 8) {
-        setLimit(true);
-        setDisabled(true);
-      }
-      const weekLength = selected.filter((obj) => {
-        return obj.weekId === item.weekId;
-      });
-      if (weekLength.length < 2) {
-        setSelected([...selected, item]);
-      } else {
-        setWeekLimit(true);
-      }
-    }
-  };
+  const isLargeScreen = useMediaQuery("(min-width: 960px)");
 
   React.useEffect(() => {
     dispatch(getCourses());
@@ -229,6 +233,7 @@ export default function ClassSchedule({ next, back }) {
                       color: "#425466",
                       font: `normal normal 300 14px/24px ${Fonts.secondary}`,
                       letterSpacing: "0.2px",
+                      textTransform: "capitalize",
                     }}
                   >
                     {index === 0
@@ -258,8 +263,9 @@ export default function ClassSchedule({ next, back }) {
                       borderRadius: "5px",
                       background: "rgba(99, 91, 255, 0.10)",
                       color: "#425466",
-                      font: `normal normal 500 13px/24px Helvetica Neue`,
+                      font: `normal normal 500 13px/24px ${Fonts.secondary}`,
                       letterSpacing: "0.2px",
+                      textTransform: "capitalize",
                     }}
                   >
                     {opt.time >= 9
@@ -283,6 +289,39 @@ export default function ClassSchedule({ next, back }) {
     setWeekLimit(false);
     setError(false);
   };
+  const handleChange = (event, newValue) => setValue(newValue);
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleReselect = () => {
+    setLimit(false);
+    setOpen(true);
+    setSelected([]);
+    setValue(0);
+  };
+  const handleChangeIndex = (index) => setValue(index);
+  const handleWeekSelect = () => {
+    setSelected([]);
+    setValue(0);
+  };
+
+  const handleTimeClick = (item) => {
+    if (selected.length < 8 && selected.includes(item)) {
+      setSelected(selected.filter((selectedItem) => selectedItem !== item));
+    } else {
+      if (selected.length >= 8) {
+        setLimit(true);
+        setDisabled(true);
+      }
+      const weekLength = selected.filter((obj) => {
+        return obj.weekId === item.weekId;
+      });
+      if (weekLength.length < 2) {
+        setSelected([...selected, item]);
+      } else {
+        setWeekLimit(true);
+      }
+    }
+  };
   // form validation rules
   const validationSchema = Yup.object().shape({
     timezone: Yup.string().required("Timezone is required"),
@@ -299,19 +338,10 @@ export default function ClassSchedule({ next, back }) {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      timezone: "Africa/Lagos",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       course: "Web Development | Ages: 10 - 13",
     },
   });
-
-  const course = watch("course");
-
-  React.useEffect(() => {
-    const selectedCourse = data?.find((cou) => cou.id === course);
-    if (selectedCourse) {
-      setPrice(selectedCourse?.pretty_amount);
-    }
-  }, [course, data]);
 
   function onSubmit(data) {
     const selectedItems = selected?.reduce((week, item) => {
@@ -409,6 +439,7 @@ export default function ClassSchedule({ next, back }) {
                   label="Time zone"
                   name="timezone"
                   register={register}
+                  placeholder={Intl.DateTimeFormat().resolvedOptions().timeZone}
                   error={errors.timezone ? true : false}
                   helper={errors.timezone?.message}
                   disabled={loading}
@@ -437,23 +468,6 @@ export default function ClassSchedule({ next, back }) {
                     </option>
                   ))}
                 </Select>
-                {price && (
-                  <Box
-                    component="h4"
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-end",
-                      color: "#001B38",
-                      m: 0,
-                      font: `normal normal 500 18px/28px ${Fonts.secondary}`,
-                      letterSpacing: "-1.2px",
-                    }}
-                  >
-                    {price}
-                  </Box>
-                )}
               </Grid>
 
               <Grid item xs={12}>
@@ -509,6 +523,7 @@ export default function ClassSchedule({ next, back }) {
                     sx: {
                       width: "100%",
                       maxWidth: 750,
+                      background: "#F6F9FC",
                     },
                   }}
                 >
@@ -530,7 +545,10 @@ export default function ClassSchedule({ next, back }) {
                         alignItems: "center",
                         color: "#161616",
                         textAlign: "center",
-                        font: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                        font: {
+                          xs: `normal normal 400 11px/18px ${Fonts.secondary}`,
+                          sm: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                        },
                         padding: 2,
                         m: { xs: "40px 0 0px", sm: 0 },
                       }}
@@ -569,287 +587,566 @@ export default function ClassSchedule({ next, back }) {
                       flexGrow: 1,
                     }}
                   >
-                    <StyledTabs
-                      orientation="vertical"
-                      value={value}
-                      onChange={handleChange}
-                    >
-                      <StyledTab label="Week 1" {...a11yProps(0)} />
-                      <StyledTab label="Week 2" {...a11yProps(1)} />
-                      <StyledTab label="Week 3" {...a11yProps(2)} />
-                      <StyledTab label="Week 4" {...a11yProps(3)} />
-                    </StyledTabs>
+                    {isLargeScreen ? (
+                      <>
+                        <StyledTabs
+                          orientation="vertical"
+                          value={value}
+                          onChange={handleChange}
+                        >
+                          <StyledTab label="Week 1" {...a11yProps(0)} />
+                          <StyledTab label="Week 2" {...a11yProps(1)} />
+                          <StyledTab label="Week 3" {...a11yProps(2)} />
+                          <StyledTab label="Week 4" {...a11yProps(3)} />
+                        </StyledTabs>
 
-                    {scheduleArray.map((sch, i) => {
-                      return (
-                        <TabPanel value={value} index={i} key={"sch.id" + i}>
+                        {scheduleArray.map((sch, i) => {
+                          return (
+                            <TabPanel
+                              value={value}
+                              index={i}
+                              key={"sch.id" + i}
+                            >
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                }}
+                              >
+                                <Grid container spacing={0}>
+                                  <Grid item xs={12}>
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        borderBottom: `2px solid rgba(0, 0, 0, 0.50)`,
+                                      }}
+                                    >
+                                      <Box
+                                        component="h1"
+                                        sx={{
+                                          width: "100%",
+                                          display: "flex",
+                                          justifyContent: "center",
+                                          alignItems: "center",
+                                          color: "#161616",
+                                          textAlign: "center",
+                                          font: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                                        }}
+                                      >
+                                        <Box
+                                          sx={{
+                                            display: "inline-flex",
+                                            fontWeight: 700,
+                                            mr: 0.35,
+                                          }}
+                                        >
+                                          Number of classes selected:
+                                        </Box>{" "}
+                                        {selected.length}
+                                      </Box>
+                                      <Box sx={{ padding: "8px 16px 0 16px" }}>
+                                        <Button onClick={handleWeekSelect}>
+                                          Resect
+                                        </Button>
+                                      </Box>
+                                    </Box>
+                                  </Grid>
+
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Mon
+                                    </Box>
+                                  </Grid>
+
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Tue
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Wed
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Thu
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Fri
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={2}>
+                                    <Box
+                                      sx={{
+                                        width: 75,
+                                        height: 28,
+                                        padding: "8px 11px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        mt: 2,
+                                        mx: 2,
+                                        color: "rgba(0, 0, 0, 0.85)",
+                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      }}
+                                    >
+                                      Sat
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <Box
+                                      className="line"
+                                      sx={{
+                                        borderBottomColor: `2rgba(0, 0, 0, 0.50)`,
+                                      }}
+                                    ></Box>
+                                  </Grid>
+                                  {sch.schedule.map((item, i) => (
+                                    <>
+                                      <Grid item xs={2} key={"item.id" + i}>
+                                        {item.option.map((opt, i) => {
+                                          const exists = selected.some(
+                                            (obj) => {
+                                              return (
+                                                obj.weekId === opt.weekId &&
+                                                obj.name === opt.name &&
+                                                obj.time === opt.time
+                                              );
+                                            }
+                                          );
+                                          return (
+                                            <Box
+                                              key={"opt" + i}
+                                              sx={{
+                                                width: 77,
+                                                height: 28,
+                                                padding: "8px 11px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                borderRadius: "5px",
+                                                background: exists
+                                                  ? Colors.secondary
+                                                  : "transparent",
+                                                mt: 2,
+                                                mx: 2,
+                                                cursor:
+                                                  selected.length >= 8
+                                                    ? "not-allowed"
+                                                    : "pointer",
+                                                color: exists
+                                                  ? Colors.light
+                                                  : Colors.black,
+                                                font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                                "&:hover": {
+                                                  fontSize: 12,
+                                                  textTransform: "scale(0.99)",
+                                                  background:
+                                                    "rgba(247,11,88,0.2)",
+                                                },
+                                              }}
+                                              onClick={() =>
+                                                handleTimeClick(opt)
+                                              }
+                                              disabled={disabled}
+                                            >
+                                              {+opt.time >= 9
+                                                ? `${opt.time}:00 AM`
+                                                : `${opt.time}:00 PM`}
+                                            </Box>
+                                          );
+                                        })}
+                                      </Grid>
+                                    </>
+                                  ))}
+                                  <Grid item xs={12}>
+                                    <Box
+                                      sx={{
+                                        borderTop: `2px solid rgba(0, 0, 0, 0.50)`,
+                                      }}
+                                    >
+                                      <Box
+                                        sx={{
+                                          display: "flex",
+                                          alignItems: "flexStart",
+                                          justifyContent: "space-between",
+                                          width: "100%",
+                                          my: 2,
+                                          padding: "10px 20px 0 20px",
+                                          gap: "12px",
+                                        }}
+                                      >
+                                        <SubmitButton
+                                          style={{
+                                            padding: "13px 49.27px 13px 48px",
+                                            width: 80,
+                                          }}
+                                          ghost
+                                          onClick={handleClose}
+                                        >
+                                          cancel
+                                        </SubmitButton>
+
+                                        <SubmitButton
+                                          onClick={handleClose}
+                                          style={{
+                                            padding: "13px 49.27px 13px 48px",
+                                            width: 80,
+                                          }}
+                                        >
+                                          confirm
+                                        </SubmitButton>
+                                      </Box>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                              </Box>
+                            </TabPanel>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <Box sx={{ width: "100%" }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            borderBottom: `2px solid rgba(0, 0, 0, 0.50)`,
+                          }}
+                        >
                           <Box
+                            component="h1"
                             sx={{
+                              width: "100%",
                               display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              color: "#161616",
+                              textAlign: "center",
+                              font: `normal normal 400 16px/28px ${Fonts.secondary}`,
                             }}
                           >
-                            <Grid container spacing={0}>
-                              <Grid item xs={12}>
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    borderBottom: `2px solid rgba(0, 0, 0, 0.50)`,
-                                  }}
-                                >
+                            <Box
+                              sx={{
+                                display: "inline-flex",
+                                fontWeight: 700,
+                                mr: 0.35,
+                              }}
+                            >
+                              Number of classes selected:
+                            </Box>{" "}
+                            {selected.length}
+                          </Box>
+                          <Box sx={{ padding: "8px 16px 0 16px" }}>
+                            <Button onClick={handleWeekSelect}>Resect</Button>
+                          </Box>
+                        </Box>
+
+                        <SmallStyledTabs
+                          variant="fullWidth"
+                          value={value}
+                          onChange={handleChange}
+                        >
+                          <StyledTab label="Week 1" {...smallA11yProps(0)} />
+                          <StyledTab label="Week 2" {...smallA11yProps(1)} />
+                          <StyledTab label="Week 3" {...smallA11yProps(2)} />
+                          <StyledTab label="Week 4" {...smallA11yProps(3)} />
+                        </SmallStyledTabs>
+
+                        {scheduleArray.map((sch, i) => {
+                          return (
+                            <SmallTabPanel
+                              value={value}
+                              index={i}
+                              key={"sch.id" + i}
+                            >
+                              <Grid container spacing={1}>
+                                <Grid item xs={2}>
                                   <Box
-                                    component="h1"
                                     sx={{
-                                      width: "100%",
+                                      width: 75,
+                                      height: 28,
+                                      mb: -2,
+                                      padding: "8px 11px",
                                       display: "flex",
                                       justifyContent: "center",
                                       alignItems: "center",
-                                      color: "#161616",
-                                      textAlign: "center",
-                                      font: `normal normal 400 16px/28px ${Fonts.secondary}`,
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Mon
+                                  </Box>
+                                </Grid>
+
+                                <Grid item xs={2}>
+                                  <Box
+                                    sx={{
+                                      width: 75,
+                                      height: 28,
+                                      mb: -2,
+                                      padding: "8px 11px",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Tue
+                                  </Box>
+                                </Grid>
+                                <Grid item xs={2}>
+                                  <Box
+                                    sx={{
+                                      width: 75,
+                                      height: 28,
+                                      mb: -2,
+                                      padding: "8px 11px",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Wed
+                                  </Box>
+                                </Grid>
+                                <Grid item xs={2}>
+                                  <Box
+                                    sx={{
+                                      width: 75,
+                                      height: 28,
+                                      padding: "8px 11px",
+                                      mb: -2,
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Thu
+                                  </Box>
+                                </Grid>
+                                <Grid item xs={2}>
+                                  <Box
+                                    sx={{
+                                      width: 75,
+                                      height: 28,
+                                      padding: "8px 11px",
+                                      display: "flex",
+                                      mb: -2,
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Fri
+                                  </Box>
+                                </Grid>
+                                <Grid item xs={2}>
+                                  <Box
+                                    sx={{
+                                      width: 75,
+                                      height: 28,
+                                      mb: -2,
+                                      padding: "8px 11px",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      borderRadius: "5px",
+                                      color: "rgba(0, 0, 0, 0.85)",
+                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                    }}
+                                  >
+                                    Sat
+                                  </Box>
+                                </Grid>
+                                {sch.schedule.map((item, i) => (
+                                  <>
+                                    <Grid item xs={2} key={"item.id" + i}>
+                                      {item.option.map((opt, i) => {
+                                        const exists = selected.some((obj) => {
+                                          return (
+                                            obj.weekId === opt.weekId &&
+                                            obj.name === opt.name &&
+                                            obj.time === opt.time
+                                          );
+                                        });
+                                        return (
+                                          <Box
+                                            key={"opt" + i}
+                                            sx={{
+                                              width: 78,
+                                              height: 28,
+                                              padding: "8px 10px",
+                                              display: "flex",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              borderRadius: "5px",
+                                              my: 3,
+                                              // background: exists
+                                              //   ? Colors.secondary
+                                              //   : "transparent",
+                                              // mt: 2,
+                                              // mx: 2,
+                                              cursor:
+                                                selected.length >= 8
+                                                  ? "not-allowed"
+                                                  : "pointer",
+                                              color: exists
+                                                ? Colors.secondary
+                                                : "rgba(0, 0, 0, 0.85)",
+                                              font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                              "&:hover": {
+                                                fontSize: 12,
+                                                textTransform: "scale(0.99)",
+                                                color: "rgba(247,11,88,0.2)",
+                                              },
+                                            }}
+                                            onClick={() => handleTimeClick(opt)}
+                                            disabled={disabled}
+                                          >
+                                            {+opt.time >= 9
+                                              ? `${opt.time}:00 AM`
+                                              : `${opt.time}:00 PM`}
+                                          </Box>
+                                        );
+                                      })}
+                                    </Grid>
+                                  </>
+                                ))}
+                                <Grid item xs={12}>
+                                  <Box
+                                    sx={{
+                                      borderTop: `2px solid rgba(0, 0, 0, 0.50)`,
                                     }}
                                   >
                                     <Box
                                       sx={{
-                                        display: "inline-flex",
-                                        fontWeight: 700,
-                                        mr: 0.35,
+                                        display: "flex",
+                                        alignItems: "flexStart",
+                                        justifyContent: "space-between",
+                                        width: "100%",
+                                        my: 2,
+                                        padding: "10px 0 0 10px",
+                                        gap: "12px",
                                       }}
                                     >
-                                      Number of classes selected:
-                                    </Box>{" "}
-                                    {selected.length}
-                                  </Box>
-                                  <Box sx={{ padding: "8px 16px 0 16px" }}>
-                                    <Button onClick={handleWeekSelect}>
-                                      Resect
-                                    </Button>
-                                  </Box>
-                                </Box>
-                              </Grid>
+                                      <SubmitButton
+                                        style={{
+                                          padding: "13px 49.27px 13px 48px",
+                                          width: 80,
+                                        }}
+                                        ghost
+                                        onClick={handleClose}
+                                      >
+                                        cancel
+                                      </SubmitButton>
 
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Mon
-                                </Box>
-                              </Grid>
-
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Tue
-                                </Box>
-                              </Grid>
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Wed
-                                </Box>
-                              </Grid>
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Thu
-                                </Box>
-                              </Grid>
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Fri
-                                </Box>
-                              </Grid>
-                              <Grid item xs={2}>
-                                <Box
-                                  sx={{
-                                    width: 75,
-                                    height: 28,
-                                    padding: "8px 11px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    mt: 2,
-                                    mx: 2,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    font: `normal normal 700 11px/28px ${Fonts.secondary}`,
-                                  }}
-                                >
-                                  Sat
-                                </Box>
-                              </Grid>
-                              <Grid item xs={12}>
-                                <Box
-                                  className="line"
-                                  sx={{
-                                    borderBottomColor: `2rgba(0, 0, 0, 0.50)`,
-                                  }}
-                                ></Box>
-                              </Grid>
-                              {sch.schedule.map((item, i) => (
-                                <>
-                                  <Grid item xs={2} key={"item.id" + i}>
-                                    {item.option.map((opt, i) => {
-                                      const exists = selected.some((obj) => {
-                                        return (
-                                          obj.weekId === opt.weekId &&
-                                          obj.name === opt.name &&
-                                          obj.time === opt.time
-                                        );
-                                      });
-                                      return (
-                                        <Box
-                                          key={"opt" + i}
-                                          sx={{
-                                            width: 77,
-                                            height: 28,
-                                            padding: "8px 11px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            borderRadius: "5px",
-                                            background: exists
-                                              ? Colors.secondary
-                                              : "transparent",
-                                            mt: 2,
-                                            mx: 2,
-                                            cursor:
-                                              selected.length >= 8
-                                                ? "not-allowed"
-                                                : "pointer",
-                                            color: exists
-                                              ? Colors.light
-                                              : "rgba(0, 0, 0, 0.85)",
-                                            font: `normal normal 500 10px/28px ${Fonts.secondary}`,
-                                            "&:hover": {
-                                              fontSize: 12,
-                                              textTransform: "scale(0.99)",
-                                              background: "rgba(247,11,88,0.2)",
-                                            },
-                                          }}
-                                          onClick={() => handleTimeClick(opt)}
-                                          disabled={disabled}
-                                        >
-                                          {+opt.time >= 9
-                                            ? `${opt.time}:00 AM`
-                                            : `${opt.time}:00 PM`}
-                                        </Box>
-                                      );
-                                    })}
-                                  </Grid>
-                                </>
-                              ))}
-                              <Grid item xs={12}>
-                                <Box
-                                  sx={{
-                                    borderTop: `2px solid rgba(0, 0, 0, 0.50)`,
-                                  }}
-                                >
-                                  <Box
-                                    sx={{
-                                      display: "flex",
-                                      alignItems: "flexStart",
-                                      justifyContent: "space-between",
-                                      width: "100%",
-                                      my: 2,
-                                      padding: "10px 20px 0px 20px",
-                                      gap: "12px",
-                                    }}
-                                  >
-                                    <SubmitButton
-                                      style={{
-                                        padding: "13px 49.27px 13px 48px",
-                                        width: 80,
-                                      }}
-                                      ghost
-                                      onClick={handleClose}
-                                    >
-                                      cancel
-                                    </SubmitButton>
-
-                                    <SubmitButton
-                                      onClick={handleClose}
-                                      style={{
-                                        padding: "13px 49.27px 13px 48px",
-                                        width: 80,
-                                      }}
-                                    >
-                                      confirm
-                                    </SubmitButton>
+                                      <SubmitButton
+                                        onClick={handleClose}
+                                        style={{
+                                          padding: "13px 49.27px 13px 48px",
+                                          width: 80,
+                                        }}
+                                      >
+                                        confirm
+                                      </SubmitButton>
+                                    </Box>
                                   </Box>
-                                </Box>
+                                </Grid>
                               </Grid>
-                            </Grid>
-                          </Box>
-                        </TabPanel>
-                      );
-                    })}
+                            </SmallTabPanel>
+                          );
+                        })}
+                        {/* </TabContext> */}
+                      </Box>
+                    )}
                   </Box>
                 </Dialog>
               </Grid>
@@ -861,8 +1158,8 @@ export default function ClassSchedule({ next, back }) {
                     <>
                       Preferred Start Date{" "}
                       <Box sx={{ fontWeight: 400, fontSize: 15 }}>
-                        We need at least three working days from today to
-                        prepare everything for you.
+                        We need at least five working days from today to prepare
+                        everything for you.
                       </Box>{" "}
                     </>
                   }

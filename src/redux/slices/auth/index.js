@@ -286,9 +286,8 @@ export const refreshpage = createAsyncThunk(
 export const updateProfile = createAsyncThunk(
   "auth/updateProfile",
   async ({ id, inputData }, thunkAPI) => {
-    console.log("id", id);
     try {
-      const response = await api.post(`/users/${id}`, inputData);
+      const response = await api.put(`/users/${id}`, inputData);
       return response.data;
     } catch (error) {
       let message =

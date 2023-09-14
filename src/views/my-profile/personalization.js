@@ -20,14 +20,14 @@ import {
 import { updateProfile } from "../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Personalization() {
+export default function Personalizatio() {
   const [photo, setPhoto] = React.useState(undefined);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [photoName, setPhotoName] = React.useState(undefined);
   const [errorMessage, setErrorMessage] = React.useState("");
-  const { user } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // form validation rules
@@ -40,18 +40,19 @@ export default function Personalization() {
     //   return value && value.length;
     // }),
   });
-  console.log("user", user);
+
   // get functions to build form with useForm() hook
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       country: "Nigeria",
-      childName: user?.children?.data[0].fullname,
+      childName: user?.children?.data[0]?.fullname,
       dob: user?.children?.data[0].date_of_birth,
       gender: user?.children?.data[0].gender,
     },
@@ -71,43 +72,54 @@ export default function Personalization() {
       convert2Base64(img[0]);
     }
   }, [img]);
-  // React.useEffect(() => {
-  //   if (message?.other_options) {
-  //     message?.other_options?.map((opt) => {
-  //       return setErrorMessage("other options " + opt);
-  //     });
-  //   } else if (message?.start_date) {
-  //     message?.start_date?.map((start) => {
-  //       return setErrorMessage("Start date " + start);
-  //     });
-  //   } else if (message?.timezone) {
-  //     message?.timezone?.map((time) => {
-  //       return setErrorMessage("Time zone " + time);
-  //     });
-  //   } else if (message?.weeks) {
-  //     message?.weeks?.map((wk) => {
-  //       return setErrorMessage("class schedules " + wk);
-  //     });
-  //   } else {
-  //     setErrorMessage(message);
-  //   }
-  // }, [message]);
+  React.useEffect(() => {
+    if (message?.fullname) {
+      message?.fullname?.map((name) => {
+        return setErrorMessage("Child's name " + name);
+      });
+    } else if (message?.gender) {
+      message?.gender?.map((gender) => {
+        return setErrorMessage("Gender " + gender);
+      });
+    } else if (message?.address) {
+      message?.address?.map((address) => {
+        return setErrorMessage("Address" + address);
+      });
+    } else if (message?.state_province_of_origin) {
+      message?.state_province_of_origin?.map((country) => {
+        return setErrorMessage("class schedules " + country);
+      });
+    } else {
+      setErrorMessage(message);
+    }
+  }, [message]);
+
   function onSubmit(data) {
     const { childName, dob, country, gender } = data;
+    const countryInfo = Countries.find((ct) => ct.name === country);
     const inputData = {
       user_profile: {
-        child_name: childName,
+        id: user?.id,
+        fullname: childName,
         date_of_birth: dob,
-        gender,
-        country,
+        gender: gender,
+        address: country,
+        state_province_of_origin: country,
+        country: countryInfo.code,
       },
     };
     setLoading(true);
     dispatch(updateProfile({ id: user?.id, inputData }))
       .unwrap()
       .then(() => {
+        // const countryInfo = Countries.find((ct) => ct.name === data.country);
+        // setValue("childName", data.fullname);
+        // setValue("dob", data.dob);
+        // setValue("country", countryInfo.name);
+        // setValue("gender", data.gender);
+        // setValue("address", data.address);
+        // setValue("state_province_of_origin", data.state_province_of_origin);
         setLoading(false);
-        next();
       })
       .catch(() => {
         setError(true);
@@ -189,8 +201,8 @@ export default function Personalization() {
               helper={errors.gender?.message}
               disabled={loading}
             >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </Select>
           </Grid>{" "}
           <Grid item xs={12} sm={6}>
