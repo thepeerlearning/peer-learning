@@ -280,7 +280,7 @@ export default function SignupForm({ next }) {
                 >
                   Already a student?{" "}
                   <Link
-                    href="/auth/login"
+                    href="/"
                     underline="hover"
                     sx={{
                       color: Colors.primary,
@@ -302,7 +302,7 @@ export default function SignupForm({ next }) {
                 >
                   By clicking continue, you agree to abide by our{" "}
                   <Link
-                    href="/auth/login"
+                    href="/https://thepeerlearning.com/terms"
                     underline="hover"
                     sx={{
                       color: Colors.primary,
@@ -313,7 +313,7 @@ export default function SignupForm({ next }) {
                   </Link>{" "}
                   and{" "}
                   <Link
-                    href="/auth/login"
+                    href="/https://thepeerlearning.com/privacy"
                     underline="hover"
                     sx={{
                       color: Colors.primary,

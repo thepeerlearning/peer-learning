@@ -78,7 +78,7 @@ export default function PaymentSuccessPage() {
                 display: "flex",
                 justifyContent: "flex-end",
               }}
-              href="/auth/login"
+              href="/"
               underline="hover"
             >
               Go back to Login

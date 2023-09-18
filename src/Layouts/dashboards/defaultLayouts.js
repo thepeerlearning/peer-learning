@@ -59,7 +59,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
     };
   }, []);
   useEffect(() => {
-    if (!isLoggedIn) return router.push("/auth/login");
+    if (!isLoggedIn) return router.push("/");
   }, [isLoggedIn, router]);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);

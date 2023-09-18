@@ -130,7 +130,7 @@ export default function SignupPage() {
           : step === "class_schedule"
           ? handlePaymentNext()
           : step === "completed"
-          ? router.push("/auth/login")
+          ? router.push("/")
           : null;
       }
     }

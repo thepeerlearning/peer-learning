@@ -192,7 +192,7 @@ export default function ResetPasswordPage() {
                 >
                   Never mind.{" "}
                   <Link
-                    href="/auth/login"
+                    href="/"
                     underline="hover"
                     sx={{
                       color: Colors.primary,
