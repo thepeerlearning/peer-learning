@@ -6,15 +6,15 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { SubmitButton } from "../../../../src/components/forms/buttons";
-import { PasswordField } from "../../../../src/components/forms/textFields";
-import PasswordStrength from "../../../../src/components/forms/textFields/passwordStrength";
-import Snackbars from "../../../../src/components/snackbar";
-import { Colors } from "../../../../src/components/themes/colors";
-import { Fonts } from "../../../../src/components/themes/fonts";
-import { resetpassword } from "../../../../src/redux/slices/auth";
-import { clearMessage } from "../../../../src/redux/slices/message";
-import AuthLayout from "../../../../src/views/auth/layout";
+import { SubmitButton } from "../../../src/components/forms/buttons";
+import { PasswordField } from "../../../src/components/forms/textFields";
+import PasswordStrength from "../../../src/components/forms/textFields/passwordStrength";
+import Snackbars from "../../../src/components/snackbar";
+import { Colors } from "../../../src/components/themes/colors";
+import { Fonts } from "../../../src/components/themes/fonts";
+import { resetpassword } from "../../../src/redux/slices/auth";
+import { clearMessage } from "../../../src/redux/slices/message";
+import AuthLayout from "../../../src/views/auth/layout";
 
 export default function ResetPasswordPage() {
   const router = useRouter();

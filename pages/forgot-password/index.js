@@ -6,13 +6,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { SubmitButton } from "../../../src/components/forms/buttons";
-import { TextField } from "../../../src/components/forms/textFields";
-import Snackbars from "../../../src/components/snackbar";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
-import { forgotpassword } from "../../../src/redux/slices/auth";
-import AuthLayout from "../../../src/views/auth/layout";
+import { SubmitButton } from "../../src/components/forms/buttons";
+import { TextField } from "../../src/components/forms/textFields";
+import Snackbars from "../../src/components/snackbar";
+import { Colors } from "../../src/components/themes/colors";
+import { Fonts } from "../../src/components/themes/fonts";
+import { forgotpassword } from "../../src/redux/slices/auth";
+import AuthLayout from "../../src/views/auth/layout";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
