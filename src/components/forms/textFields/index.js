@@ -9,14 +9,13 @@ import {
   styled,
 } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import MuiPhoneNumber from "material-ui-phone-number";
-import flags from "react-phone-number-input/flags";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import React from "react";
-import SearchIcon from "../../../../public/images/svgs/search.svg";
+import flags from "react-phone-number-input/flags";
 import eyeClosed from "../../../../public/images/svgs/eye-close.svg";
 import eyeOpened from "../../../../public/images/svgs/eye-open.svg";
+import SearchIcon from "../../../../public/images/svgs/search.svg";
 import { Colors } from "../../themes/colors";
 import { Fonts } from "../../themes/fonts";
 import {
@@ -32,11 +31,11 @@ import {
   InputTextElement,
   MultiSelect,
   PasswordIcon,
+  PhoneNumberTextField,
   Root,
   SearchIconStyle,
   SelectInput,
   TextAreaInput,
-  PhoneNumberTextField,
 } from "./styles";
 
 export const StyledTooltip = styled(({ className, ...props }) => (
@@ -143,49 +142,6 @@ const SwitchStyle = styled((props) => (
     }),
   },
 }));
-const PhoneInputStyle = styled(MuiPhoneNumber)({
-  "& .MuiPhoneNumber-flagButton": {
-    padding: "6px",
-  },
-  "& .MuiOutlinedInput-input": {
-    boxSizing: "border-box",
-  },
-  "& .MuiOutlinedInput-root": {
-    borderRadius: 8,
-    background: "#F3F2F0 0% 0% no-repeat padding-box",
-    color: "#425466",
-    height: 44,
-    padding: "16px 17.5px",
-    gap: 12,
-    width: "100%",
-    margin: "10px 0px",
-    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s",
-    cursor: "pointer",
-    font: `normal normal 400 16px/20px ${Fonts.secondary}`,
-    "& fieldset": {
-      border: `1px solid ${Colors.stroke}`,
-    },
-    "&:hover fieldset": {
-      border: `1px solid ${Colors.stroke}`,
-    },
-    "&.Mui-focused fieldset": {
-      border: `1px solid ${Colors.stroke}`,
-    },
-    "&.Mui-error fieldset": {
-      borderColor: Colors.buttonError,
-    },
-    "&:hover .Mui-error fieldset": {
-      borderColor: Colors.buttonError,
-    },
-    "&.Mui-disabled": {
-      cursor: "not-allowed",
-    },
-    "&.Mui-disabled fieldset": {
-      borderColor: "#e8ebee",
-    },
-  },
-});
-
 export const SelectStyle = styled(MuiSelect)({
   "& .MuiOutlinedInput-input": {
     boxSizing: "border-box",
