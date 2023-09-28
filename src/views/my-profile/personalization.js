@@ -169,7 +169,7 @@ export default function Personalizatio() {
               htmlFor="childName"
               name="childName"
               type="text"
-              label="Frist name"
+              label="First name"
               placeholder="Child's first name"
               register={register}
               error={errors.childName ? true : false}

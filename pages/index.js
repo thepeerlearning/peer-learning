@@ -26,6 +26,8 @@ export default function LoginPage() {
   const [info, setInfo] = React.useState(false);
   const [infoMessage, setInfoMessage] = React.useState("");
   const { message } = useSelector((state) => state.message);
+  const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -84,8 +86,8 @@ export default function LoginPage() {
     dispatch(login({ email: username, password }))
       .unwrap()
       .then(() => {
+        const { registration_step: step } = user;
         setLoading(false);
-        const step = localStorage.getItem("step");
         if (step && step === "completed") {
           router.push("/students/my-dashboard");
         } else {

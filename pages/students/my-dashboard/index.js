@@ -1,4 +1,4 @@
-import { Box, CardHeader, Grid, ListItemIcon } from "@mui/material";
+import { Box, Button, CardHeader, Grid, ListItemIcon } from "@mui/material";
 import Head from "next/head";
 import DashboardLayouts from "../../../src/Layouts/dashboards/defaultLayouts";
 import { SecondStyledList } from "../../../src/Layouts/dashboards/styles";
@@ -14,16 +14,18 @@ import {
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { activeCourses, refresh } from "../../../src/redux/slices/courses";
 import moment from "moment";
 import Spinner from "../../../src/components/spinner/persist-loader";
 import { isEmpty } from "lodash";
 import { Nodata } from "../../../src/components/svg/nodata";
 import Snackbars from "../../../src/components/snackbar";
+import { useRouter } from "next/router";
 
 export default function DashboardPage() {
   const { user } = useSelector((state) => state.auth);
+  const router = useRouter();
   const {
     activeCourse: courses,
     courseLoading: loading,
@@ -32,10 +34,59 @@ export default function DashboardPage() {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const fullname = user?.children?.data[0].fullname;
+  const [currentTime, setCurrentTime] = useState(moment());
+  const [disableButton, setDisableButton] = useState(false);
 
+  // const classStartTime = moment("2023-09-28T15:00:00Z");
+  // Replace with your class start time
   useEffect(() => dispatch(activeCourses()), [dispatch]);
+
   const handleCloseSnack = () => dispatch(refresh());
-  console.log("courses,error,loading", courses, error, loading);
+
+  const activeCourse = courses?.user_course_outlines?.find((course) => {
+    let courseDate = new Date(course.date);
+    let todaysDate = new Date();
+
+    let newdate =
+      courseDate.setHours(0, 0, 0, 0) === todaysDate.setHours(0, 0, 0, 0);
+    return newdate;
+  });
+
+  const classTime = moment(activeCourse?.date);
+  // Function to enable the button if the class time is now or later
+  const enableButtonIfClassTime = () => {
+    setCurrentTime(moment()); // Update current time
+    if (currentTime.isSameOrAfter(classTime)) {
+      setDisableButton(false);
+    }
+  };
+  useEffect(() => {
+    // Check if an hour has passed since the class time
+    if (currentTime.isAfter(classTime.clone().add(1, "hour"))) {
+      setDisableButton(true);
+    } else {
+      // Enable the button if the class time is now or later
+      enableButtonIfClassTime();
+
+      // Set up an interval to check and enable the button every minute
+      const intervalId = setInterval(enableButtonIfClassTime, 60000); // 60000 milliseconds = 1 minute
+
+      // Clean up the interval when the component unmounts
+      return () => clearInterval(intervalId);
+    }
+  }, [classTime, currentTime]);
+
+  // const classEndTime = classStartTime.clone().add(1, "hour"); // Add 1 hour to the start time
+
+  // useEffect(() => {
+  //   const currentTime = moment();
+  //   // Check if it's time for the class
+  //   if (currentTime.isBetween(classStartTime, classEndTime)) {
+  //     setDisableButton(false); // Enable the button
+  //   } else if (currentTime.isAfter(classEndTime)) {
+  //     setDisableButton(true); // Disable the button if an hour has passed
+  //   }
+  // }, [classStartTime, classEndTime]);
   return (
     <Box
       component="div"
@@ -175,12 +226,12 @@ export default function DashboardPage() {
                     color: "#000000",
                   }}
                 >
-                  {moment(courses?.updated_at).format("llll")}
+                  {moment(classTime).format("llll")}
                 </Box>
               </Box>
 
-              <Box
-                onClick={() => console.log("button clicked")}
+              <Button
+                onClick={() => router.push(activeCourse.meeting_url)}
                 sx={{
                   width: 135,
                   display: "flex",
@@ -201,9 +252,10 @@ export default function DashboardPage() {
                     background: "rgba(247,11,88,0.95)",
                   },
                 }}
+                disabled={disableButton}
               >
                 Join class
-              </Box>
+              </Button>
             </StyledCard>
           </Grid>
 
@@ -230,7 +282,7 @@ export default function DashboardPage() {
                 }}
               >
                 <Grid container columnSpacing={2} rowSpacing={1.2}>
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
                         <ClockStartIcon />
@@ -247,12 +299,12 @@ export default function DashboardPage() {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <Box
                       component="span"
                       sx={{
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: "#BBBBBE",
+                        color: Colors.black,
                       }}
                     >
                       {moment(courses?.start_date).format("LLL")}
@@ -261,7 +313,7 @@ export default function DashboardPage() {
 
                   {/* COURSE END */}
 
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
                         <ClockEndIcon />
@@ -277,12 +329,12 @@ export default function DashboardPage() {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <Box
                       component="span"
                       sx={{
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: "#BBBBBE",
+                        color: Colors.black,
                       }}
                     >
                       {moment(courses?.end_date).format("LLL")}
@@ -290,7 +342,7 @@ export default function DashboardPage() {
                   </Grid>
                   {/* MISSED COURSES */}
 
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
                         <MissedClassIcon />
@@ -306,7 +358,7 @@ export default function DashboardPage() {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <Box
                       component="span"
                       sx={{
@@ -322,13 +374,13 @@ export default function DashboardPage() {
                         background: "rgba(85, 119, 255, 0.20)",
                       }}
                     >
-                      {courses?.is_expired ? "True" : "none"}
+                      {courses?.is_expired ? "True" : "None"}
                     </Box>
                   </Grid>
 
                   {/* COURSE INSTRUCTOR */}
 
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
                         <InstructionIcon />
@@ -344,28 +396,28 @@ export default function DashboardPage() {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <Box
                       component="span"
                       sx={{
-                        width: 100,
+                        width: "100%",
                         background: "#E9E8EC",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
                         padding: "6px 8px",
-                        color: "#9D9BA1",
+                        color: Colors.black,
                         mb: 0.5,
                         gap: "10px",
                       }}
                     >
-                      @ {courses?.instructor}
+                      @ {courses?.instructor.user_profile.fullname}
                     </Box>
                   </Grid>
                   {/* CLASS TYPE */}
 
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
                         <StarIcon />
@@ -381,7 +433,7 @@ export default function DashboardPage() {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <Box
                       component="span"
                       sx={{
@@ -392,7 +444,7 @@ export default function DashboardPage() {
                         alignItems: "center",
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
                         padding: "6px 8px",
-                        color: "#9D9BA1",
+                        color: Colors.black,
 
                         gap: "10px",
                       }}

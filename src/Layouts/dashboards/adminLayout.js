@@ -29,6 +29,8 @@ import Notifications from "./notifications";
 import AppbarProfile from "./profile";
 import { NestedStyledList, SecondStyledList, StyledList } from "./styles";
 import { Search } from "../../components/forms/textFields";
+import { logout } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 function updateKey(str) {
   if (typeof str !== "string") return "";
@@ -47,6 +49,7 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openNest, setOpenNest] = useState("");
   const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     Router.events.on("routeChangeStart", () => setLoading(true));
@@ -274,7 +277,11 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
             }}
           >
             <SecondStyledList component="nav" disablePadding>
-              <ListItemButton disableRipple disableTouchRipple>
+              <ListItemButton
+                disableRipple
+                disableTouchRipple
+                onClick={() => dispatch(logout())}
+              >
                 <ListItemIcon sx={{ color: "inherit" }}>
                   <Logout />
                 </ListItemIcon>

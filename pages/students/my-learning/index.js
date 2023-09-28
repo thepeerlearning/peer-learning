@@ -28,7 +28,7 @@ export default function MyLearningPage() {
   } = useSelector((state) => state.courses);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  console.log("courses", courses);
+
   useEffect(() => dispatch(activeCourses()), [dispatch]);
 
   const handleCloseSnack = () => dispatch(refresh());
@@ -42,7 +42,6 @@ export default function MyLearningPage() {
   const upcoming = courses?.user_course_outlines?.filter(
     (course) => course.status === "upcoming"
   );
-  console.log("courses ongoing", ongoing, completed, upcoming);
 
   return (
     <Box
@@ -86,7 +85,6 @@ export default function MyLearningPage() {
             onChange={handleChange}
             variant="scrollable"
             scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
           >
             <StyledTab
               label={`On-going course (${ongoing?.length})`}

@@ -48,6 +48,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
   const { user, isLoggedIn } = useSelector((state) => state.auth);
   const router = useRouter();
   const dispatch = useDispatch();
+
   useEffect(() => {
     Router.events.on("routeChangeStart", () => setLoading(true));
     Router.events.on("routeChangeComplete", () => setLoading(false));
@@ -58,6 +59,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
       Router.events.off("routeChangeError", () => setLoading(false));
     };
   }, []);
+
   useEffect(() => {
     if (!isLoggedIn) return router.push("/");
   }, [isLoggedIn, router]);
@@ -99,6 +101,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
     "Invite friends $ earn",
     "Points",
   ];
+
   const drawer = (
     <div>
       <Toolbar sx={{ minHeight: `50px !important`, padding: `0 !important` }}>
