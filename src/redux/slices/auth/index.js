@@ -301,10 +301,59 @@ export const updateProfile = createAsyncThunk(
     }
   }
 );
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async ({ inputData }, thunkAPI) => {
+    try {
+      const response = await api.post(`/users/change-password`, inputData);
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+export const getProfile = createAsyncThunk(
+  "auth/getProfile",
+  async ({ id }, thunkAPI) => {
+    try {
+      const response = await api.get(`/users/${id}`);
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 const initialState = {
   isLoggedIn: false,
   user: null,
   token: null,
+  profile: null,
 };
 const authSlice = createSlice({
   name: "auth",
@@ -332,6 +381,10 @@ const authSlice = createSlice({
     builder.addCase(refreshpage.fulfilled, (state, action) => {
       state.isLoggedIn = true;
       state.token = action.payload;
+    });
+    builder.addCase(getProfile.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.profile = action.payload.data;
     });
   },
 });

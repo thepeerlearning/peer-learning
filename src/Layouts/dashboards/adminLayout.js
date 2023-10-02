@@ -30,7 +30,7 @@ import AppbarProfile from "./profile";
 import { NestedStyledList, SecondStyledList, StyledList } from "./styles";
 import { Search } from "../../components/forms/textFields";
 import { logout } from "../../redux/slices/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function updateKey(str) {
   if (typeof str !== "string") return "";
@@ -49,6 +49,7 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openNest, setOpenNest] = useState("");
   const [search, setSearch] = useState("");
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,6 +62,11 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
       Router.events.off("routeChangeError", () => setLoading(false));
     };
   }, []);
+  useEffect(() => {
+    if (!isLoggedIn) return router.push("/");
+    if (!(user?.role === "instructor" || user?.role === "admin"))
+      return router.push("/unauthorised");
+  }, [isLoggedIn, router, user]);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
   const handleSearch = (e) => setSearch(e.target.value);

@@ -41,11 +41,12 @@ export default function OngoingCourses({ data, level }) {
               ?.sort((a, b) => a.course_outline.order - b.course_outline.order)
               .map((course, index) => {
                 const currentTime = moment();
-                const targetTime = moment(course.date);
-                const areTimesEqual =
-                  currentTime.isSame(targetTime) &&
-                  moment(course.date).add(1, "hours");
-
+                const startTime = moment(course?.date);
+                const endTime = startTime.clone().add(1, "hour");
+                const isBetweenClassTime = currentTime.isBetween(
+                  startTime,
+                  endTime
+                );
                 return (
                   <Grid item xs={12} key={course.id}>
                     <StyledCard
@@ -85,7 +86,7 @@ export default function OngoingCourses({ data, level }) {
                           >
                             <FileIcon />
                           </Box>{" "}
-                          {level}
+                          {level} level
                         </Box>
                         <Box
                           component="div"
@@ -106,7 +107,7 @@ export default function OngoingCourses({ data, level }) {
                             font: `normal normal 400 14px/160% ${Fonts.secondary}`,
                           }}
                         >
-                          {course.course_outline.description}
+                          {course.course_outline.content}
                         </Box>
                       </Box>
                       <Box
@@ -157,7 +158,7 @@ export default function OngoingCourses({ data, level }) {
                               transform: "scale(0.995)",
                             },
                           }}
-                          disabled={!areTimesEqual}
+                          disabled={isBetweenClassTime === false}
                         >
                           {moment(course.date).format("LLL")}
                         </Button>

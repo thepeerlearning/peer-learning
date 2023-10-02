@@ -62,7 +62,15 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
 
   useEffect(() => {
     if (!isLoggedIn) return router.push("/");
-  }, [isLoggedIn, router]);
+    if (
+      !(
+        user?.role === "instructor" ||
+        user?.role === "admin" ||
+        user?.role === "parent"
+      )
+    )
+      return router.push("/unauthorised");
+  }, [isLoggedIn, router, user]);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 

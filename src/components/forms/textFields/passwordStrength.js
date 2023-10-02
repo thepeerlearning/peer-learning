@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Colors } from "../../themes/colors";
 import { Fonts } from "../../themes/fonts";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { Done } from "@mui/icons-material";
 
 const PasswordStrength = ({ password }) => {
   const [passwordValidity, setPasswordValidity] = useState({
@@ -34,21 +35,33 @@ const PasswordStrength = ({ password }) => {
     return (
       <li
         style={{
-          color: isValid ? "#4CAF50" : "#CCCCCC",
+          color: isValid ? Colors.buttonSuccess : Colors.buttonError,
           display: "flex",
           textIndent: 0,
           font: `normal normal 400 12px/18px ${Fonts.primary}`,
         }}
       >
-        <ErrorOutlineIcon
-          sx={{
-            "&.MuiSvgIcon-root": {
-              color: "currentcolor",
-              fontSize: 18,
-              mr: 1,
-            },
-          }}
-        />{" "}
+        {isValid ? (
+          <Done
+            sx={{
+              "&.MuiSvgIcon-root": {
+                color: "currentcolor",
+                fontSize: 16,
+                mr: 1,
+              },
+            }}
+          />
+        ) : (
+          <ErrorOutlineIcon
+            sx={{
+              "&.MuiSvgIcon-root": {
+                color: "currentcolor",
+                fontSize: 18,
+                mr: 1,
+              },
+            }}
+          />
+        )}{" "}
         {`${text}`}
       </li>
     );

@@ -86,18 +86,22 @@ export default function LoginPage() {
     dispatch(login({ email: username, password }))
       .unwrap()
       .then(() => {
-        const { registration_step: step } = user;
+        const { registration_step: step, role } = user;
         setLoading(false);
-        if (step && step === "completed") {
-          router.push("/students/my-dashboard");
+        if (role === "instructor") {
+          router.push("/admin/dashboard");
         } else {
-          setInfo(true);
-          setInfoMessage(
-            "Registration process still ongoing, redirecting you to complete the process"
-          );
-          setTimeout(() => {
-            router.push("/signup");
-          }, 3200);
+          if (step && step === "completed") {
+            router.push("/students/my-dashboard");
+          } else {
+            setInfo(true);
+            setInfoMessage(
+              "Registration process still ongoing, redirecting you to complete the process"
+            );
+            setTimeout(() => {
+              router.push("/signup");
+            }, 3200);
+          }
         }
       })
       .catch(() => {

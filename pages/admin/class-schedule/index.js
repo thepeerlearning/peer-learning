@@ -1,36 +1,65 @@
-import { Box, Divider, Grid } from "@mui/material";
+import { Box, Button, Divider, Grid } from "@mui/material";
+import moment from "moment";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout";
+import StatusCallOut from "../../../src/components/callout/coloredMenu";
 import { Select, StyledCard } from "../../../src/components/forms/textFields";
+import Spinner from "../../../src/components/spinner";
+import { DoneIcon } from "../../../src/components/svg/menuIcons";
 import { TableContent } from "../../../src/components/table";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
-import { InputElWrapper } from "../../../src/components/forms/textFields/styles";
+import { classSchedules } from "../../../src/redux/slices/courses";
 
 export default function ClassSchedulePage() {
+  const router = useRouter();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filter, setFilter] = React.useState("week");
-  const selected = [
-    { id: 1, name: "Monday", time: "9" },
-    { id: 2, name: "Monday", time: "10" },
-    { id: 3, name: "Tuesday", time: "11" },
-    { id: 4, name: "Tuesday", time: "12" },
-    { id: 5, name: "Thursday", time: " 1" },
-    { id: 6, name: "Thursday", time: "2" },
-    { id: 7, name: "Friday", time: "3" },
-    { id: 8, name: "Saturday", time: "4" },
-  ];
+  const [schedule, setSchedule] = React.useState(null);
+  const [status, setStatus] = React.useState("");
+  const [isClassTime, setIsClassTime] = React.useState(false);
+
+  const {
+    schedules,
+    scheduleLoading: loading,
+    scheduleError: error,
+  } = useSelector((state) => state.courses);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const currentTime = moment();
+    const startTime = moment(schedule?.date);
+    const endTime = startTime.clone().add(1, "hour");
+    // Check if the current time is between the start and end times of the class
+    const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
+    setIsClassTime(isBetweenClassTime);
+  }, [schedule]);
+
+  React.useEffect(
+    () => dispatch(classSchedules({ page: page + 1, limit: rowsPerPage })),
+    [dispatch, page, rowsPerPage]
+  );
+
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
-  const handleChangePage = (event, newPage) => setPage(newPage);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const handleClassStatus = (status) => {
+    setStatus(status);
+    // const data = { status: status };
+    // dispatch(updateClassStatus({ id: router.query.id, status: data }));
+  };
   const columns = [
     {
       id: "name",
@@ -48,117 +77,27 @@ export default function ClassSchedulePage() {
   function createData(name, action) {
     return { name, action };
   }
-
-  const rows = [
-    createData(
-      "Oliver Liam",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Aisha Usman",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Muhammed Garba",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Sam Loko",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Lucy Mangrove",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Musa Malik",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Lucky Samuel",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Favour Pitila",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-    createData(
-      "Rashida Yusuf",
-      <Box
-        sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-          textTransform: "uppercase",
-          color: "#2D3748",
-        }}
-      >
-        View class
-      </Box>
-    ),
-  ];
+  const handleViewClass = (schedule) => {
+    setSchedule(schedule);
+  };
+  const rows =
+    schedules && schedules?.data?.length !== 0
+      ? schedules?.data?.map((schedule) => {
+          return createData(
+            schedule.children.fullname,
+            <Button
+              sx={{
+                font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+                textTransform: "uppercase",
+                color: "#2D3748",
+              }}
+              onClick={() => handleViewClass(schedule)}
+            >
+              View class
+            </Button>
+          );
+        })
+      : [];
   return (
     <Box
       component="div"
@@ -205,7 +144,7 @@ export default function ClassSchedulePage() {
             >
               Students class schedule this week
             </Box>
-            <Box sx={{ width: 160 }}>
+            <Box sx={{ width: 160, px: 1.2 }}>
               <Select
                 id="filter"
                 name="filter"
@@ -220,233 +159,384 @@ export default function ClassSchedulePage() {
           </Box>
         </Box>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <StyledCard
-              sx={{
-                borderRadius: "15px",
-                border: `1px solid rgba(230, 230, 230, 0.50)`,
-                boxShadow:
-                  "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                px: 1.2,
-              }}
-            >
-              <TableContent
-                columns={columns}
-                rows={rows}
-                count={rows.length}
-                page={page}
-                pagesize={rowsPerPage}
-                handleChangePage={handleChangePage}
-                handleChangeRowsPerPage={handleChangeRowsPerPage}
-                rowsPerPageOptions={[3, 5, 10]}
-                paginated
-                sliced
-              />
-            </StyledCard>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <StyledCard
-              sx={{
-                borderRadius: "15px",
-                border: `1px solid rgba(230, 230, 230, 0.50)`,
-                boxShadow:
-                  "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
-                display: "flex",
-                p: { xs: 1.2, sm: "25px 51px" },
-              }}
-            >
+          {loading ? (
+            <Grid item xs={12}>
               <Box
                 sx={{
-                  color: `#2D3748`,
-                  font: `normal normal 700 18px/140% ${Fonts.secondary}`,
-                }}
-              >
-                Student Information
-              </Box>
-
-              <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
-
-              <Box
-                sx={{
-                  color: `#718096`,
-                  font: `normal normal 700 14px/150% ${Fonts.secondary}`,
                   display: "flex",
-                }}
-              >
-                Full Name:{" "}
-                <Box
-                  sx={{
-                    color: `#A0AEC0`,
-                    ml: 0.5,
-                  }}
-                >
-                  Zoe Samuel
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  color: `#718096`,
-                  font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                  display: "flex",
-                }}
-              >
-                Mobile:{" "}
-                <Box
-                  sx={{
-                    color: `#A0AEC0`,
-                    ml: 0.5,
-                  }}
-                >
-                  (44) 123 1234 123
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  color: `#718096`,
-                  font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                  display: "flex",
-                }}
-              >
-                Email:{" "}
-                <Box
-                  sx={{
-                    color: `#A0AEC0`,
-                    ml: 0.5,
-                  }}
-                >
-                  Zoesamuel@gmmail.com
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  color: `#718096`,
-                  font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                  display: "flex",
-                }}
-              >
-                Location:{" "}
-                <Box
-                  sx={{
-                    color: `#A0AEC0`,
-                    ml: 0.5,
-                  }}
-                >
-                  United States
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  color: `#2D3748`,
-                  font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                  justifyContent: "center",
+                  alignItems: "center",
                   mt: 2,
                 }}
               >
-                Class Schedule
+                <Spinner />
               </Box>
-
-              <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
+            </Grid>
+          ) : error ? (
+            <Grid item xs={12}>
               <Box
                 sx={{
                   display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  mt: 2,
                 }}
               >
-                <Grid container rowSpacing={2} columnSpacing={1}>
-                  {selected.map((opt, index) => (
-                    <Grid item xs={12} sm={6} lg={4} key={opt.id}>
-                      <InputElWrapper>
-                        <Box
-                          component="span"
-                          sx={{
-                            color: "#425466",
-                            font: `normal normal 300 14px/24px Helvetica Neue`,
-                            letterSpacing: "0.2px",
-                          }}
-                        >
-                          {index === 0
-                            ? "First option"
-                            : index === 1
-                            ? "Second option"
-                            : index === 2
-                            ? "Third option"
-                            : index === 3
-                            ? "Fourth option"
-                            : index === 4
-                            ? "Fifth option"
-                            : index === 5
-                            ? "sixth option"
-                            : index === 6
-                            ? "Seventh option"
-                            : "Eighth option"}
-                        </Box>
-                        <Box
-                          key={opt.id}
-                          sx={{
-                            width: 153,
-                            padding: "8px 11px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            borderRadius: "5px",
-                            background: "rgba(99, 91, 255, 0.10)",
-                            color: "#425466",
-                            font: `normal normal 500 13px/24px ${Fonts.secondaryNeu}`,
-                            letterSpacing: "0.2px",
-                          }}
-                        >
-                          {opt.time >= 9
-                            ? `${opt.name}, ${opt.time}:00 AM`
-                            : `${opt.name}, ${opt.time}:00 PM`}
-                        </Box>
-                      </InputElWrapper>
-                    </Grid>
-                  ))}
+                {message}
+              </Box>
+            </Grid>
+          ) : (
+            <>
+              <Grid item xs={12} sm={6}>
+                <StyledCard
+                  sx={{
+                    borderRadius: "15px",
+                    border: `1px solid rgba(230, 230, 230, 0.50)`,
+                    boxShadow:
+                      "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    px: 1.2,
+                  }}
+                >
+                  <TableContent
+                    columns={columns}
+                    rows={rows}
+                    count={schedules && schedules?.total_entries}
+                    page={page}
+                    pagesize={rowsPerPage}
+                    handleChangePage={handleChangePage}
+                    handleChangeRowsPerPage={handleChangeRowsPerPage}
+                    rowsPerPageOptions={[3, 5, 10]}
+                    paginated
+                  />
+                </StyledCard>
+              </Grid>
+              {schedule && (
+                <Grid item xs={12} sm={6}>
+                  <StyledCard
+                    sx={{
+                      borderRadius: "15px",
+                      border: `1px solid rgba(230, 230, 230, 0.50)`,
+                      boxShadow:
+                        "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
+                      display: "flex",
+                      p: { xs: 1.2, sm: "25px 51px" },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        color: `#2D3748`,
+                        font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                      }}
+                    >
+                      Student Information
+                    </Box>
+
+                    <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
+
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Full Name:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        {schedule?.children.fullname}
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Mobile:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        (44) 123 1234 123
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Email:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        Zoesamuel@gmmail.com
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Location:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        United States
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#2D3748`,
+                        font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                        mt: 2,
+                      }}
+                    >
+                      Class Schedule
+                    </Box>
+
+                    <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
+                    {/* <Box
+                      sx={{
+                        display: "flex",
+                      }}
+                    >
+                      <Grid container rowSpacing={2} columnSpacing={1}>
+                        {selected.map((opt, index) => (
+                          <Grid item xs={12} sm={6} lg={4} key={opt.id}>
+                            <InputElWrapper>
+                              <Box
+                                component="span"
+                                sx={{
+                                  color: "#425466",
+                                  font: `normal normal 300 14px/24px Helvetica Neue`,
+                                  letterSpacing: "0.2px",
+                                }}
+                              >
+                                {index === 0
+                                  ? "First option"
+                                  : index === 1
+                                  ? "Second option"
+                                  : index === 2
+                                  ? "Third option"
+                                  : index === 3
+                                  ? "Fourth option"
+                                  : index === 4
+                                  ? "Fifth option"
+                                  : index === 5
+                                  ? "sixth option"
+                                  : index === 6
+                                  ? "Seventh option"
+                                  : "Eighth option"}
+                              </Box>
+                              <Box
+                                key={opt.id}
+                                sx={{
+                                  width: 153,
+                                  padding: "8px 11px",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  background: "rgba(99, 91, 255, 0.10)",
+                                  color: "#425466",
+                                  font: `normal normal 500 13px/24px ${Fonts.secondaryNeu}`,
+                                  letterSpacing: "0.2px",
+                                }}
+                              >
+                                {opt.time >= 9
+                                  ? `${opt.name}, ${opt.time}:00 AM`
+                                  : `${opt.name}, ${opt.time}:00 PM`}
+                              </Box>
+                            </InputElWrapper>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Box> */}
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Course:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        {schedule?.course_outline.title}
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Date & time:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        {moment(schedule?.date).format("LT")} |{" "}
+                        {moment(schedule.date).format("ll")}
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        color: `#15BE53`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                        my: 1,
+                      }}
+                    >
+                      Start class:{" "}
+                      <Button
+                        sx={{
+                          background: Colors.secondary,
+                          color: Colors.light,
+                          ml: 0.5,
+                          mt: -0.5,
+                          textTransform: "none",
+                          padding: "1px 8px",
+                          textTransform: "uppercase",
+                          font: `normal normal normal 500 14px/24px ${Fonts.secondary}`,
+                          cursor: "pointer",
+                          transition: "all 0.3ms",
+                          gap: "36px",
+                          borderRadius: "33px",
+                          padding: "5px 16px",
+                          "&:hover": {
+                            background: Colors.secondary,
+                            color: Colors.light,
+                            transform: "scale(0.99)",
+                          },
+                          "&:disabled": {
+                            cursor: "not-allowed",
+                            background: Colors.disabled,
+                            color: Colors.light,
+                          },
+                        }}
+                        disabled={isClassTime === false}
+                        onClick={() => router.push(schedule.meeting_url)}
+                      >
+                        Join class
+                      </Button>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        color: `#F80707`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      End class:{" "}
+                      <StatusCallOut
+                        buttonText={status ? status : schedule?.status}
+                        buttonColor={
+                          status === "completed"
+                            ? Colors.buttonSuccess
+                            : status === "missed"
+                            ? Colors.buttonError
+                            : Colors.primary
+                        }
+                        width="120px"
+                        TopAction={
+                          <Button
+                            onClick={() => handleClassStatus("completed")}
+                            variant="outlined"
+                            disableElevation
+                            endIcon={
+                              status === "completed" ? <DoneIcon /> : null
+                            }
+                            sx={{
+                              textTransform: "none",
+                              font: `normal normal normal 600 14px/20px ${Fonts.secondary}`,
+                              letterSpacing: "0.98",
+                              borderRadius: "12px",
+                              color: Colors.light,
+                              border: `1px solid transparent`,
+                              p: "5px 8px",
+                              mb: 0.8,
+
+                              cursor: "pointer",
+                              "&:hover": {
+                                backgroundColor: Colors.primary,
+                                border: `1px solid ${Colors.primary}`,
+                              },
+                              "&:focus": {
+                                backgroundColor: Colors.primary,
+                                border: `1px solid ${Colors.primary}`,
+                              },
+                            }}
+                          >
+                            Class completed
+                          </Button>
+                        }
+                        BottomAction={
+                          <Button
+                            onClick={() => handleClassStatus("missed")}
+                            variant="outlined"
+                            disableElevation
+                            endIcon={status === "missed" ? <DoneIcon /> : null}
+                            sx={{
+                              width: 130,
+                              textTransform: "none",
+                              font: `normal normal normal 600 14px/20px ${Fonts.secondary}`,
+                              letterSpacing: "0.98",
+                              borderRadius: "12px",
+                              color: Colors.light,
+                              border: `1px solid transparent`,
+                              p: "5px 8px",
+                              mb: 0.8,
+
+                              cursor: "pointer",
+                              "&:hover": {
+                                backgroundColor: Colors.buttonError,
+                                border: `1px solid ${Colors.buttonError}`,
+                              },
+                              "&:focus": {
+                                backgroundColor: Colors.buttonError,
+                                border: `1px solid ${Colors.buttonError}`,
+                              },
+                            }}
+                          >
+                            Class missed
+                          </Button>
+                        }
+                      />
+                    </Box>
+                  </StyledCard>
                 </Grid>
-              </Box>
-              <Box
-                sx={{
-                  color: `#15BE53`,
-                  font: `normal normal 700 18px/140% ${Fonts.secondary}`,
-                  display: "flex",
-                  mt: 3,
-                  px: 1.55,
-                }}
-              >
-                Class Started:{" "}
-                <Box
-                  sx={{
-                    color: `#425466`,
-                    font: `normal normal 400 14px/25px ${Fonts.secondary}`,
-                    ml: 0.5,
-                  }}
-                >
-                  2:00PM GMT | TUES, DEC 19, 2023
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  color: `#F80707`,
-                  font: `normal normal 700 18px/140% ${Fonts.secondary}`,
-                  display: "flex",
-                  mt: 2,
-                  px: 1.55,
-                }}
-              >
-                Class Ends:{" "}
-                <Box
-                  sx={{
-                    color: `#425466`,
-                    font: `normal normal 400 14px/25px ${Fonts.secondary}`,
-                    ml: 0.5,
-                  }}
-                >
-                  2:00PM GMT | TUES, DEC 19, 2023
-                </Box>
-              </Box>
-            </StyledCard>
-          </Grid>
+              )}
+            </>
+          )}
         </Grid>
       </Box>
     </Box>

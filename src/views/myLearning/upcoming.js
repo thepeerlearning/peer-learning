@@ -22,7 +22,6 @@ export default function UpcomingCourses({ data, level }) {
         sx={{
           width: "100%",
           display: "flex",
-          flexDirection: "column",
           pt: 3,
         }}
       >
@@ -40,13 +39,20 @@ export default function UpcomingCourses({ data, level }) {
           </Box>
         ) : (
           <Grid container spacing={0}>
-            {data?.map((course, index) => {
-              return (
-                <>
-                  <Grid item xs={12} md={8}>
+            {data
+              ?.sort((a, b) => a.course_outline.order - b.course_outline.order)
+              .map((course, index) => {
+                const currentTime = moment();
+                const startTime = moment(course?.date);
+                const endTime = startTime.clone().add(1, "hour");
+                const isBetweenClassTime = currentTime.isBetween(
+                  startTime,
+                  endTime
+                );
+
+                return (
+                  <Grid item xs={12} key={course.id}>
                     <StyledCard
-                      key={course.id}
-                      // onClick={() => setCourseoutline(index)}
                       sx={{
                         maxWidth: 685,
                         display: "flex",
@@ -71,7 +77,7 @@ export default function UpcomingCourses({ data, level }) {
                           sx={{
                             width: "100%",
                             display: "flex",
-                            color: " #A3A3A3",
+                            color: "#999",
                             font: `normal normal 400 12px/25px ${Fonts.Jakarta}`,
                             textTransform: "capitalize",
                           }}
@@ -83,14 +89,14 @@ export default function UpcomingCourses({ data, level }) {
                           >
                             <FileIcon />
                           </Box>{" "}
-                          {level}
+                          {level} level
                         </Box>
                         <Box
                           component="div"
                           sx={{
                             width: "100%",
                             display: "flex",
-                            color: "#4F4F4F",
+                            color: Colors.black,
                             font: `normal normal 600 14px/25px ${Fonts.Jakarta}`,
                           }}
                         >
@@ -100,11 +106,11 @@ export default function UpcomingCourses({ data, level }) {
                           component="p"
                           sx={{
                             textAlign: "left",
-                            color: "#999",
-                            font: `normal normal 400 13px/137% ${Fonts.Jakarta}`,
+                            color: Colors.black,
+                            font: `normal normal 400 14px/160% ${Fonts.secondary}`,
                           }}
                         >
-                          {course.course_outline.description}
+                          {course.course_outline.content}
                         </Box>
                       </Box>
                       <Box
@@ -155,9 +161,11 @@ export default function UpcomingCourses({ data, level }) {
                               transform: "scale(0.995)",
                             },
                           }}
+                          disabled={isBetweenClassTime === false}
                         >
-                          {moment(course.updated_at).format("LLL")}
+                          {moment(course.date).format("LLL")}
                         </Button>
+
                         <Button
                           startIcon={<CategoryFilterIcon />}
                           sx={{
@@ -181,136 +189,8 @@ export default function UpcomingCourses({ data, level }) {
                       </Box>
                     </StyledCard>
                   </Grid>
-                  {/* {courseoutline === index && (
-                <Grid item xs={12} md={4}>
-                  <Box
-                    component="div"
-                    sx={{
-                      maxWidth: 350,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Box
-                      component="div"
-                      sx={{
-                        width: 274,
-                        display: "flex",
-                        color: "#0A2540",
-                        font: `normal normal 500 16px/25px ${Fonts.Jakarta}`,
-                        textDecorationLine: "underline",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          mr: 2,
-                        }}
-                      >
-                        <CourseOutlineIcon />
-                      </Box>{" "}
-                      Course content
-                    </Box> */}
-                  {/* {course.outline.map((outline, index) => (
-                      <Box
-                        component="div"
-                        key={index + 1}
-                        onClick={() => handleClick(course, index)}
-                        sx={{
-                          font: `normal normal 400 16px/20px ${Fonts.primary}`,
-                          backgroundColor: `${Colors.light}`,
-                          color: Colors.greyDarkest,
-                          p: "16px 0px",
-                          mt: 1,
-                          borderBottom: `1px solid ${Colors.stroke}`,
-                          "&:hover": {
-                            backgroundColor: `${Colors.light} !important`,
-                          },
-                        }}
-                      >
-                        <ListItemButton
-                          disableRipple
-                          disableTouchRipple
-                          key={index}
-                          sx={{
-                            backgroundColor: `${Colors.light}`,
-
-                            "&:hover": {
-                              backgroundColor: `${Colors.light}`,
-                            },
-                          }}
-                        >
-                          <Box
-                            component="span"
-                            sx={{
-                              font: `normal normal 400 14px/24px ${Fonts.Jakarta}`,
-                              color: Colors.primary,
-                            }}
-                          >
-                            {outline.name}
-                          </Box>
-                          <AngleBackward
-                            style={{
-                              cursor: "pointer",
-                              position: "absolute",
-                              left: "auto",
-                              right: 16,
-                              top: 10,
-                              color: Colors.primary,
-                              ...(openNest === index && {
-                                transform: `rotate(-90deg)`,
-                              }),
-                            }}
-                          />
-                        </ListItemButton>
-                        <Collapse
-                          in={openNest === index}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <NestedStyledList
-                            component="div"
-                            disablePadding
-                            sx={{
-                              "& .MuiListItemButton-root": {
-                                font: `normal normal 400 16px/20px ${Fonts.primary}`,
-                                backgroundColor: `${Colors.light} !important`,
-                                color: Colors.greyDarkest,
-                                padding: "10px 0px 6px 18px",
-                              },
-                            }}
-                          >
-                            {outline.content.map((cont) => (
-                              <ListItemButton
-                                disableRipple
-                                disableTouchRipple
-                                key={index}
-                              >
-                                <ListItemIcon sx={{ color: "inherit" }}>
-                                  <Box component="span" sx={{ fontSize: 30 }}>
-                                    &#8226;
-                                  </Box>
-                                </ListItemIcon>
-                                <Box
-                                  component="span"
-                                  sx={{
-                                    font: `normal normal 400 14px/20px ${Fonts.Jakarta}`,
-                                    color: Colors.greyDarkest,
-                                  }}
-                                >
-                                  {cont}
-                                </Box>
-                              </ListItemButton>
-                            ))}
-                          </NestedStyledList>
-                        </Collapse>
-                      </Box>
-                    ))} */}
-                  {/* </Box>
-                </Grid>
-              )} */}
-                </>
-              );
-            })}
+                );
+              })}
           </Grid>
         )}
       </Box>

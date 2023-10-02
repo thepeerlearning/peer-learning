@@ -41,9 +41,9 @@ export const Button = styled.button`
       ? `rgba(13,24,37,0.22) 0% 0% no-repeat padding-box`
       : props.ghost
       ? "transparent"
-      : `#0D1825`};
+      : Colors.primary};
   border-radius: 9999px;
-  font: normal normal 400 16px/25.6px ${Fonts.secondary};
+  font: normal normal normal 400 16px/25.6px ${Fonts.secondary};
   border: ${(props) =>
     props.disabled
       ? `1px solid rgba(13,24,37,0.22)`
@@ -97,7 +97,7 @@ export const Button = styled.button`
     props.small & props.delete &&
     css`
       border: 1px solid ${Colors.buttonError};
-      font: normal normal 700 14px/19px ${Fonts.secondary};
+      font: normal normal normal 700 14px/19px ${Fonts.secondary};
       background: ${Colors.buttonError} 0% 0% no-repeat padding-box;
       text-transform: none;
       color: ${Colors.light};
@@ -107,7 +107,7 @@ export const Button = styled.button`
     props.small & props.cancel &&
     css`
       border: 1px solid ${Colors.primary};
-      font: normal normal 700 14px/19px ${Fonts.secondary};
+      font: normal normal normal 700 14px/19px ${Fonts.secondary};
       background: ${Colors.primary} 0% 0% no-repeat padding-box;
       color: ${Colors.secondary};
       text-transform: none;
@@ -144,7 +144,7 @@ export const FabStyle = styled(Button)`
 export const DialogFormTitle = styled.h2`
   text-align: ${(props) => props.align || "left"};
   text-transform: uppercase;
-  font: normal normal 600 14px/17px ${Fonts.primary};
+  font: normal normal normal 600 14px/17px ${Fonts.primary};
   letter-spacing: 0.1em;
   color: ${(props) => props.color || Colors.secondary};
   margin-top: 0;

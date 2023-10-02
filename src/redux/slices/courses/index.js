@@ -52,6 +52,34 @@ export const activeCourses = createAsyncThunk(
     }
   }
 );
+
+export const classSchedules = createAsyncThunk(
+  "courses/classSchedules",
+  async ({ page, limit }, thunkAPI) => {
+    try {
+      const response = await api.get(
+        `admin/courses-subscriptions/course-outlines?page=${page}&limit=${limit}`
+      );
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.response.data.errors ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 const initialState = {
   loading: false,
   data: null,
@@ -59,6 +87,9 @@ const initialState = {
   activeCourse: null,
   courseLoading: false,
   coursesError: false,
+  schedules: null,
+  scheduleLoading: false,
+  scheduleError: false,
 };
 const coursesSlice = createSlice({
   name: "courses",
@@ -99,6 +130,22 @@ const coursesSlice = createSlice({
       state.courseLoading = false;
       state.activeCourse = null;
       state.coursesError = true;
+    });
+
+    builder.addCase(classSchedules.pending, (state) => {
+      state.scheduleLoading = true;
+      state.schedules = null;
+      state.scheduleError = false;
+    });
+    builder.addCase(classSchedules.fulfilled, (state, { payload }) => {
+      state.scheduleLoading = false;
+      state.schedules = payload;
+      state.scheduleError = false;
+    });
+    builder.addCase(classSchedules.rejected, (state) => {
+      state.scheduleLoading = false;
+      state.schedules = null;
+      state.scheduleError = true;
     });
   },
 });

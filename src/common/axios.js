@@ -6,8 +6,8 @@ function getLocalAccessToken() {
     return accessToken;
   }
 }
-export const baseURL = "https://stagingapi.thepeerlearning.com/api/v1";
 export const timeout = 15000;
+export const baseURL = "https://stagingapi.thepeerlearning.com/api/v1";
 const instance = axios.create({
   baseURL,
   timeout,

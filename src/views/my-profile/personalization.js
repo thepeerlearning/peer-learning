@@ -17,17 +17,20 @@ import {
   InputElWrapper,
   InputFileBox,
 } from "../../components/forms/textFields/styles";
-import { updateProfile } from "../../redux/slices/auth";
+import { updateProfile, getProfile } from "../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
+import Snackbars from "../../components/snackbar";
+import moment from "moment";
 
 export default function Personalizatio() {
   const [photo, setPhoto] = React.useState(undefined);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
   const [photoName, setPhotoName] = React.useState(undefined);
   const [errorMessage, setErrorMessage] = React.useState("");
   const { message } = useSelector((state) => state.message);
-  const { user } = useSelector((state) => state.auth);
+  const { user, profile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // form validation rules
@@ -41,6 +44,11 @@ export default function Personalizatio() {
     // }),
   });
 
+  React.useEffect(
+    () => dispatch(getProfile({ id: user?.id })),
+    [dispatch, user]
+  );
+
   // get functions to build form with useForm() hook
   const {
     register,
@@ -50,15 +58,21 @@ export default function Personalizatio() {
     setValue,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      country: "Nigeria",
-      childName: user?.children?.data[0]?.fullname,
-      dob: user?.children?.data[0].date_of_birth,
-      gender: user?.children?.data[0].gender,
-    },
   });
 
+  React.useEffect(() => {
+    const country = Countries.find(
+      (item) => item.code === profile?.user_profile.country
+    );
+    setValue("childName", profile?.user_profile.fullname);
+    setValue("dob", moment(profile?.user_profile.dob).format("YYYY-MM-DD"));
+    setValue("gender", profile?.user_profile.gender);
+    setValue("country", country?.name);
+    setValue("stateOfOrigin", profile?.user_profile.state_province_of_origin);
+  }, [setValue, profile]);
+
   const img = watch("img");
+
   const convert2Base64 = (file) => {
     setPhotoName(file.name);
     const reader = new FileReader();
@@ -67,11 +81,13 @@ export default function Personalizatio() {
     };
     reader.readAsDataURL(file);
   };
+
   React.useEffect(() => {
     if (img?.length > 0) {
       convert2Base64(img[0]);
     }
   }, [img]);
+
   React.useEffect(() => {
     if (message?.fullname) {
       message?.fullname?.map((name) => {
@@ -85,41 +101,48 @@ export default function Personalizatio() {
       message?.address?.map((address) => {
         return setErrorMessage("Address" + address);
       });
+    } else if (message?.dob) {
+      message?.dob?.map((dob) => {
+        return setErrorMessage("Date of birth" + dob);
+      });
     } else if (message?.state_province_of_origin) {
-      message?.state_province_of_origin?.map((country) => {
-        return setErrorMessage("class schedules " + country);
+      message?.state_province_of_origin?.map((state) => {
+        return setErrorMessage("State of provice origin " + state);
+      });
+    } else if (message?.state_province_of_origin) {
+      message?.state_province_of_origin?.map((state) => {
+        return setErrorMessage("State of provice origin " + state);
       });
     } else {
       setErrorMessage(message);
     }
   }, [message]);
 
+  const handleCloseSnack = () => {
+    setError(false);
+    setSuccess(false);
+  };
   function onSubmit(data) {
-    const { childName, dob, country, gender } = data;
+    const { childName, dob, country, gender, stateOfOrigin } = data;
     const countryInfo = Countries.find((ct) => ct.name === country);
     const inputData = {
       user_profile: {
         id: user?.id,
         fullname: childName,
-        date_of_birth: dob,
+        dob: moment(dob),
         gender: gender,
         address: country,
-        state_province_of_origin: country,
         country: countryInfo.code,
+        state_province_of_origin: stateOfOrigin,
       },
     };
     setLoading(true);
     dispatch(updateProfile({ id: user?.id, inputData }))
       .unwrap()
       .then(() => {
-        // const countryInfo = Countries.find((ct) => ct.name === data.country);
-        // setValue("childName", data.fullname);
-        // setValue("dob", data.dob);
-        // setValue("country", countryInfo.name);
-        // setValue("gender", data.gender);
-        // setValue("address", data.address);
-        // setValue("state_province_of_origin", data.state_province_of_origin);
         setLoading(false);
+        setSuccess(true);
+        dispatch(getProfile({ id: user?.id }));
       })
       .catch(() => {
         setError(true);
@@ -222,6 +245,18 @@ export default function Personalizatio() {
                 </option>
               ))}
             </Select>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="stateOfOrigin"
+              htmlFor="stateOfOrigin"
+              name="stateOfOrigin"
+              type="text"
+              label="state province of origin"
+              register={register}
+              placeholder="Lagos"
+              disabled={loading}
+            />
           </Grid>{" "}
           <Grid item xs={12}>
             <Card sx={{ maxWidth: 320, boxShadow: "none" }}>
@@ -274,6 +309,19 @@ export default function Personalizatio() {
           </Grid>
         </Grid>
       </Box>
+
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={errorMessage}
+        isOpen={error}
+      />
+      <Snackbars
+        variant="success"
+        handleClose={handleCloseSnack}
+        message={"Profile updated successfully"}
+        isOpen={success}
+      />
     </StyledCard>
   );
 }

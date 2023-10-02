@@ -34,59 +34,20 @@ export default function DashboardPage() {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const fullname = user?.children?.data[0].fullname;
-  const [currentTime, setCurrentTime] = useState(moment());
-  const [disableButton, setDisableButton] = useState(false);
+  const activeCourse = courses?.user_course_outlines[0];
+  const [isClassTime, setIsClassTime] = useState(false);
 
-  // const classStartTime = moment("2023-09-28T15:00:00Z");
-  // Replace with your class start time
+  useEffect(() => {
+    const currentTime = moment();
+    const startTime = moment(courses?.user_course_outlines[0]?.date);
+    const endTime = startTime.clone().add(1, "hour");
+    const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
+    setIsClassTime(isBetweenClassTime);
+  }, [courses]);
+
   useEffect(() => dispatch(activeCourses()), [dispatch]);
 
   const handleCloseSnack = () => dispatch(refresh());
-
-  const activeCourse = courses?.user_course_outlines?.find((course) => {
-    let courseDate = new Date(course.date);
-    let todaysDate = new Date();
-
-    let newdate =
-      courseDate.setHours(0, 0, 0, 0) === todaysDate.setHours(0, 0, 0, 0);
-    return newdate;
-  });
-
-  const classTime = moment(activeCourse?.date);
-  // Function to enable the button if the class time is now or later
-  const enableButtonIfClassTime = () => {
-    setCurrentTime(moment()); // Update current time
-    if (currentTime.isSameOrAfter(classTime)) {
-      setDisableButton(false);
-    }
-  };
-  useEffect(() => {
-    // Check if an hour has passed since the class time
-    if (currentTime.isAfter(classTime.clone().add(1, "hour"))) {
-      setDisableButton(true);
-    } else {
-      // Enable the button if the class time is now or later
-      enableButtonIfClassTime();
-
-      // Set up an interval to check and enable the button every minute
-      const intervalId = setInterval(enableButtonIfClassTime, 60000); // 60000 milliseconds = 1 minute
-
-      // Clean up the interval when the component unmounts
-      return () => clearInterval(intervalId);
-    }
-  }, [classTime, currentTime]);
-
-  // const classEndTime = classStartTime.clone().add(1, "hour"); // Add 1 hour to the start time
-
-  // useEffect(() => {
-  //   const currentTime = moment();
-  //   // Check if it's time for the class
-  //   if (currentTime.isBetween(classStartTime, classEndTime)) {
-  //     setDisableButton(false); // Enable the button
-  //   } else if (currentTime.isAfter(classEndTime)) {
-  //     setDisableButton(true); // Disable the button if an hour has passed
-  //   }
-  // }, [classStartTime, classEndTime]);
   return (
     <Box
       component="div"
@@ -98,7 +59,10 @@ export default function DashboardPage() {
     >
       <Head>
         <title>Dashboard - Peer learning</title>
-        <meta name="description" content="Peer learning dashboard page" />
+        <meta
+          name="description"
+          content="Peer learning student dashboard page"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {loading ? (
@@ -226,7 +190,9 @@ export default function DashboardPage() {
                     color: "#000000",
                   }}
                 >
-                  {moment(classTime).format("llll")}
+                  {moment(courses?.user_course_outlines[0]?.date).format(
+                    "llll"
+                  )}
                 </Box>
               </Box>
 
@@ -252,7 +218,7 @@ export default function DashboardPage() {
                     background: "rgba(247,11,88,0.95)",
                   },
                 }}
-                disabled={disableButton}
+                disabled={isClassTime === false}
               >
                 Join class
               </Button>
