@@ -13,7 +13,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import axios from "axios";
+import moment from "moment-timezone";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -35,7 +35,6 @@ import { classSchedule } from "../../redux/slices/auth";
 import { getCourses } from "../../redux/slices/courses";
 import { clearMessage } from "../../redux/slices/message";
 import { scheduleArray } from "../../utils/data";
-// import TabContext from "@mui/lab/TabContext";
 
 const StyledTabs = styled(Tabs)({
   width: 300,
@@ -157,7 +156,6 @@ export default function ClassSchedule({ next, back }) {
   const [weekLimit, setWeekLimit] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
-  const [timezones, setTimeZones] = React.useState(null);
   const [errorMessage, setErrorMessage] = React.useState("");
   const { data } = useSelector((state) => state.courses);
   const { message } = useSelector((state) => state.message);
@@ -165,6 +163,8 @@ export default function ClassSchedule({ next, back }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLargeScreen = useMediaQuery("(min-width: 960px)");
+  const timezone = moment.tz.names();
+  const currentZone = moment.tz.guess();
 
   React.useEffect(() => {
     dispatch(getCourses());
@@ -185,15 +185,7 @@ export default function ClassSchedule({ next, back }) {
       setWeekLimit(false);
     }, 3500);
   }, [limit]);
-  React.useEffect(() => {
-    async function getTimeZones() {
-      const res = await axios.get("https://worldtimeapi.org/api/timezone");
-      const data = await res.data;
 
-      setTimeZones(data);
-    }
-    getTimeZones();
-  }, []);
   React.useEffect(() => {
     if (message?.other_options) {
       message?.other_options?.map((opt) => {
@@ -338,8 +330,7 @@ export default function ClassSchedule({ next, back }) {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      course: "Web Development | Ages: 10 - 13",
+      timezone: currentZone,
     },
   });
 
@@ -439,14 +430,14 @@ export default function ClassSchedule({ next, back }) {
                   label="Time zone"
                   name="timezone"
                   register={register}
-                  placeholder={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                  placeholder={currentZone}
                   error={errors.timezone ? true : false}
                   helper={errors.timezone?.message}
                   disabled={loading}
                 >
-                  {timezones?.map((timezone) => (
+                  {timezone?.map((timezone) => (
                     <option value={timezone} key={"time" + timezone}>
-                      {timezone}
+                      {`${timezone} (GMT ${moment().tz(timezone).format("Z")})`}
                     </option>
                   ))}
                 </Select>
@@ -458,6 +449,7 @@ export default function ClassSchedule({ next, back }) {
                   name="course"
                   label="Select course"
                   register={register}
+                  placeholder="Select course"
                   error={errors.course ? true : false}
                   helper={errors.course?.message}
                   disabled={loading}

@@ -35,42 +35,17 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
-
-    if (err.response) {
-      // Access Token was expired
+    if (originalConfig.url !== `/login` && err.response) {
       if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
-
         try {
-          const rs = await axios.get(`${baseURL}/user/token/refresh`, {
-            refresh: true,
-          });
-
-          if (rs.status === 200) {
-            const { accessToken, refreshToken } = res.data;
-            localStorage.setItem("accessToken", accessToken);
-            localStorage.setItem("refreshToken", refreshToken);
-            instance.defaults.headers.common[
-              "Authorization"
-            ] = `Bearer ${accessToken}`;
-            return instance(originalRequest);
-          }
+          window.location.href = "/";
+          return instance(originalConfig);
         } catch (_error) {
-          if (_error.response && _error.response.data) {
-            return Promise.reject(_error.response.data);
-          }
-
           return Promise.reject(_error);
         }
       }
-
-      if (err.response.status === 403 && err.response.data) {
-        return Promise.reject(err.response.data);
-      }
     }
-
     return Promise.reject(err);
   }
 );
-
 export default instance;

@@ -1,5 +1,7 @@
 import { Box, Button, CardHeader, Grid, ListItemIcon } from "@mui/material";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardLayouts from "../../../src/Layouts/dashboards/defaultLayouts";
 import { SecondStyledList } from "../../../src/Layouts/dashboards/styles";
 import { StyledCard } from "../../../src/components/forms/textFields";
@@ -13,15 +15,14 @@ import {
 } from "../../../src/components/svg/menuIcons";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { activeCourses, refresh } from "../../../src/redux/slices/courses";
-import moment from "moment";
-import Spinner from "../../../src/components/spinner/persist-loader";
+// import moment from "moment";
 import { isEmpty } from "lodash";
-import { Nodata } from "../../../src/components/svg/nodata";
-import Snackbars from "../../../src/components/snackbar";
+import moment from "moment-timezone";
 import { useRouter } from "next/router";
+import Snackbars from "../../../src/components/snackbar";
+import Spinner from "../../../src/components/spinner/persist-loader";
+import { Nodata } from "../../../src/components/svg/nodata";
 
 export default function DashboardPage() {
   const { user } = useSelector((state) => state.auth);
@@ -36,6 +37,8 @@ export default function DashboardPage() {
   const fullname = user?.children?.data[0].fullname;
   const activeCourse = courses?.user_course_outlines[0];
   const [isClassTime, setIsClassTime] = useState(false);
+  // const currentZone = moment.tz.guess();
+  // | (GMT ${moment().tz(timezone).format("Z")})
 
   useEffect(() => {
     const currentTime = moment();
@@ -48,6 +51,10 @@ export default function DashboardPage() {
   useEffect(() => dispatch(activeCourses()), [dispatch]);
 
   const handleCloseSnack = () => dispatch(refresh());
+  console.log(
+    "moment",
+    moment(courses?.user_course_outlines[0]?.date).format("Z")
+  );
   return (
     <Box
       component="div"
@@ -190,9 +197,11 @@ export default function DashboardPage() {
                     color: "#000000",
                   }}
                 >
-                  {moment(courses?.user_course_outlines[0]?.date).format(
+                  {`${moment(courses?.user_course_outlines[0]?.date).format(
                     "llll"
-                  )}
+                  )} (GMT ${moment(
+                    courses?.user_course_outlines[0]?.date
+                  ).format("Z")}) `}
                 </Box>
               </Box>
 

@@ -12,6 +12,7 @@ import CoursesPayment from "../../src/views/auth/payment";
 import SignupForm from "../../src/views/auth/signup";
 import { AppLogo } from "../../src/components/svg/logo";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const QontoConnector = styled(StepConnector)(() => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -100,7 +101,8 @@ const steps = [
 export default function SignupPage() {
   const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const { user } = useSelector((state) => state.auth);
+  console.log("user", user);
   const handleNext = () =>
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handlePrev = () =>
@@ -123,7 +125,10 @@ export default function SignupPage() {
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const step = localStorage.getItem("step");
+      const step = localStorage.getItem("step")
+        ? localStorage.getItem("step")
+        : user && user.registration_step;
+
       if (step) {
         return step === "account_created"
           ? handleNext()
@@ -134,7 +139,7 @@ export default function SignupPage() {
           : null;
       }
     }
-  }, [router]);
+  }, [router, user]);
 
   return (
     <Box

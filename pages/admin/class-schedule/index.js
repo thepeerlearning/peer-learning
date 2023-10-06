@@ -403,8 +403,11 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        {moment(schedule?.date).format("LT")} |{" "}
-                        {moment(schedule.date).format("ll")}
+                        {`${moment(schedule?.date).format("LT")} (GMT ${moment(
+                          schedule?.date
+                        ).format("Z")})  | ${moment(schedule.date).format(
+                          "ll"
+                        )}`}
                       </Box>
                     </Box>
                     <Box

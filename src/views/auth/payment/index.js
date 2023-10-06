@@ -13,24 +13,24 @@ import StripePayment from "./stripe";
 
 export default function CoursesPayment({ back }) {
   // const router = useRouter();
-  const initializePayment = () => {
-    const paymentData = {
-      email: "aisha.abdulkadir505@gmail.com",
-      amount: 20000 * 100, // Paystack amount is in kobo (smallest currency unit)
-      currency: "NGN",
-    };
+  // const initializePayment = () => {
+  //   const paymentData = {
+  //     email: "aisha.abdulkadir505@gmail.com",
+  //     amount: 20000 * 100, // Paystack amount is in kobo (smallest currency unit)
+  //     currency: "NGN",
+  //   };
 
-    axios
-      .post("/api/paystack/initiate-payment", paymentData)
-      .then((response) => {
-        const { authorization_url, access_code } = response.data;
-        // Redirect user to Paystack payment page
-        window.location = authorization_url;
-      })
-      .catch((error) => {
-        console.log("Payment initialization error:", error);
-      });
-  };
+  //   axios
+  //     .post("/api/paystack/initiate-payment", paymentData)
+  //     .then((response) => {
+  //       const { authorization_url, access_code } = response.data;
+  //       // Redirect user to Paystack payment page
+  //       window.location = authorization_url;
+  //     })
+  //     .catch((error) => {
+  //       console.log("Payment initialization error:", error);
+  //     });
+  // };
 
   return (
     <Box component="div" sx={{ width: "100%" }}>
@@ -73,7 +73,7 @@ export default function CoursesPayment({ back }) {
               <Grid item xs={12}>
                 <StripePayment />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Box
                   component="div"
                   onClick={initializePayment}
@@ -110,7 +110,7 @@ export default function CoursesPayment({ back }) {
                     Choose paystack to pay in NGN
                   </Box>
                 </Box>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Box
                   sx={{

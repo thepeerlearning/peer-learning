@@ -156,7 +156,12 @@ export const login = createAsyncThunk(
         email,
         password,
       });
-      return response?.data;
+
+      if (response) {
+        let { data } = response.data;
+        localStorage.setItem("token", data.token);
+        return response.data;
+      }
     } catch (error) {
       let message =
         (error.response &&

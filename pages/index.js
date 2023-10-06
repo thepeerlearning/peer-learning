@@ -26,7 +26,6 @@ export default function LoginPage() {
   const [info, setInfo] = React.useState(false);
   const [infoMessage, setInfoMessage] = React.useState("");
   const { message } = useSelector((state) => state.message);
-  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -85,26 +84,25 @@ export default function LoginPage() {
     setLoading(true);
     dispatch(login({ email: username, password }))
       .unwrap()
-      .then(() => {
-        const { registration_step: step, role } = user;
+      .then(({ data }) => {
+        const { user } = data;
         setLoading(false);
-        if (role === "instructor") {
+        if (user && user?.role === "instructor") {
           router.push("/admin/dashboard");
+        } else if (user && user?.registration_step === "completed") {
+          router.push("/students/my-dashboard");
         } else {
-          if (step && step === "completed") {
-            router.push("/students/my-dashboard");
-          } else {
-            setInfo(true);
-            setInfoMessage(
-              "Registration process still ongoing, redirecting you to complete the process"
-            );
-            setTimeout(() => {
-              router.push("/signup");
-            }, 3200);
-          }
+          setInfo(true);
+          setInfoMessage(
+            "Registration process still ongoing, redirecting you to complete the process"
+          );
+          setTimeout(() => {
+            router.push("/signup");
+          }, 3200);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log("err", err);
         setError(true);
         setLoading(false);
       });
