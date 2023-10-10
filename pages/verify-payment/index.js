@@ -7,6 +7,7 @@ import { VerifiedIcon } from "../../src/components/svg/menuIcons";
 import { Colors } from "../../src/components/themes/colors";
 import { validatePayment } from "../../src/redux/slices/auth";
 import MetaData from "../../src/utils/meta";
+import { isEmpty } from "lodash";
 
 export default function VerifyPayment() {
   const router = useRouter();

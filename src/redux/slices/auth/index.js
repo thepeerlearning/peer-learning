@@ -131,11 +131,9 @@ export const validateEmail = createAsyncThunk(
       const response = await api.post("/onboarding/verify-user", inputData);
       if (response) {
         localStorage.removeItem("step");
-        console.log("response.data", response.data);
         return response.data;
       }
     } catch (error) {
-      console.log("error", error);
       let message =
         (error.response &&
           error.response.data &&
@@ -148,6 +146,7 @@ export const validateEmail = createAsyncThunk(
       if (error.message === "Network Error") {
         message = "Please check your network connectivity";
       }
+      localStorage.removeItem("step");
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
