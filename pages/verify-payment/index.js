@@ -42,7 +42,7 @@ export default function VerifyPayment() {
       />
       {loading ? (
         <Spinner />
-      ) : error && isEmpty(data) ? (
+      ) : error ? (
         <Box
           component="div"
           sx={{

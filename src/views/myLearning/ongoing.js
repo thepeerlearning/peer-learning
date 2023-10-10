@@ -11,8 +11,10 @@ import {
 } from "../../components/svg/menuIcons";
 import { Colors } from "../../components/themes/colors";
 import { Fonts } from "../../components/themes/fonts";
+import { useRouter } from "next/router";
 
 export default function OngoingCourses({ data, level }) {
+  const router = useRouter();
   return (
     <>
       <Box
@@ -47,6 +49,7 @@ export default function OngoingCourses({ data, level }) {
                   startTime,
                   endTime
                 );
+                console.log("course.url", course.meeting_url);
                 return (
                   <Grid item xs={12} key={course.id}>
                     <StyledCard
@@ -158,6 +161,7 @@ export default function OngoingCourses({ data, level }) {
                               transform: "scale(0.995)",
                             },
                           }}
+                          onClick={() => router.push(course.meeting_url)}
                           disabled={isBetweenClassTime === false}
                         >
                           {moment(course.date).format("LLL")}
