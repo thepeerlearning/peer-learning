@@ -250,7 +250,25 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        {schedule?.children.fullname}
+                        {schedule?.children?.fullname}
+                      </Box>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        color: `#718096`,
+                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        display: "flex",
+                      }}
+                    >
+                      Parent Name:{" "}
+                      <Box
+                        sx={{
+                          color: `#A0AEC0`,
+                          ml: 0.5,
+                        }}
+                      >
+                        {schedule?.parent?.user_profile?.fullname}
                       </Box>
                     </Box>
                     <Box
@@ -267,7 +285,7 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        (44) 123 1234 123
+                        {schedule?.parent?.phone_number}
                       </Box>
                     </Box>
                     <Box
@@ -284,7 +302,7 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        Zoesamuel@gmmail.com
+                        {schedule?.parent?.email}
                       </Box>
                     </Box>
                     <Box
@@ -301,7 +319,7 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        United States
+                        {schedule?.parent?.user_profile?.address}
                       </Box>
                     </Box>
                     <Box
@@ -315,63 +333,7 @@ export default function ClassSchedulePage() {
                     </Box>
 
                     <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
-                    {/* <Box
-                      sx={{
-                        display: "flex",
-                      }}
-                    >
-                      <Grid container rowSpacing={2} columnSpacing={1}>
-                        {selected.map((opt, index) => (
-                          <Grid item xs={12} sm={6} lg={4} key={opt.id}>
-                            <InputElWrapper>
-                              <Box
-                                component="span"
-                                sx={{
-                                  color: "#425466",
-                                  font: `normal normal 300 14px/24px Helvetica Neue`,
-                                  letterSpacing: "0.2px",
-                                }}
-                              >
-                                {index === 0
-                                  ? "First option"
-                                  : index === 1
-                                  ? "Second option"
-                                  : index === 2
-                                  ? "Third option"
-                                  : index === 3
-                                  ? "Fourth option"
-                                  : index === 4
-                                  ? "Fifth option"
-                                  : index === 5
-                                  ? "sixth option"
-                                  : index === 6
-                                  ? "Seventh option"
-                                  : "Eighth option"}
-                              </Box>
-                              <Box
-                                key={opt.id}
-                                sx={{
-                                  width: 153,
-                                  padding: "8px 11px",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  background: "rgba(99, 91, 255, 0.10)",
-                                  color: "#425466",
-                                  font: `normal normal 500 13px/24px ${Fonts.secondaryNeu}`,
-                                  letterSpacing: "0.2px",
-                                }}
-                              >
-                                {opt.time >= 9
-                                  ? `${opt.name}, ${opt.time}:00 AM`
-                                  : `${opt.name}, ${opt.time}:00 PM`}
-                              </Box>
-                            </InputElWrapper>
-                          </Grid>
-                        ))}
-                      </Grid>
-                    </Box> */}
+
                     <Box
                       sx={{
                         color: `#718096`,

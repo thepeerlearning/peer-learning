@@ -49,7 +49,6 @@ export default function OngoingCourses({ data, level }) {
                   startTime,
                   endTime
                 );
-                console.log("course.url", course.meeting_url);
                 return (
                   <Grid item xs={12} key={course.id}>
                     <StyledCard
