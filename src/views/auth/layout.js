@@ -35,7 +35,7 @@ export default function AuthLayout({ children }) {
                 width: "100%",
               }}
             >
-              <Link underline="none" href="/">
+              <Link underline="none" href="https://thepeerlearning.com">
                 <AppLogo />
               </Link>
             </Box>

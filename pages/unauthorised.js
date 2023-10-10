@@ -38,7 +38,7 @@ export default function PageNotFound() {
           mx: { xs: 3, xl: 0 },
         }}
       >
-        <Link underline="none" href="/">
+        <Link underline="none" href="/https://thepeerlearning.com">
           <AppLogo style={{ width: 80, height: 80 }} />
         </Link>
 

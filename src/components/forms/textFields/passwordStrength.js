@@ -80,31 +80,31 @@ const PasswordStrength = ({ password }) => {
         <Grid item xs={12}>
           <PasswordMeterIndicatorItem
             isValid={passwordValidity?.minLength}
-            text="atleast 8 charcters"
+            text="Atleast 8 charcters"
           />
         </Grid>
         <Grid item xs={12}>
           <PasswordMeterIndicatorItem
             isValid={passwordValidity?.minNumber}
-            text="atleast 1 number"
+            text="Atleast 1 number"
           />{" "}
         </Grid>
         <Grid item xs={12}>
           <PasswordMeterIndicatorItem
             isValid={passwordValidity?.minLowerCase}
-            text="atleast 1 lowercase english character"
+            text="Atleast 1 lowercase english character"
           />
         </Grid>
         <Grid item xs={12}>
           <PasswordMeterIndicatorItem
             isValid={passwordValidity?.minUpperCase}
-            text="atleast 1  uppercase english character"
+            text="Atleast 1  uppercase english character"
           />
         </Grid>
         <Grid item xs={12}>
           <PasswordMeterIndicatorItem
             isValid={passwordValidity?.minSpecSymbol}
-            text="atleast 1 special symbol"
+            text="Atleast 1 special symbol"
           />
         </Grid>
       </Grid>

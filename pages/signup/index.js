@@ -107,8 +107,8 @@ export default function SignupPage() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handlePrev = () =>
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  const handlePaymentNext = () =>
-    setActiveStep((prevActiveStep) => prevActiveStep + 2);
+  const handleClassScheduleNext = () =>
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
   const getStepContent = (step) => {
     switch (step) {
@@ -133,7 +133,7 @@ export default function SignupPage() {
         return step === "account_created"
           ? handleNext()
           : step === "class_schedule"
-          ? handlePaymentNext()
+          ? handleClassScheduleNext()
           : step === "completed"
           ? router.push("/")
           : null;
@@ -170,7 +170,7 @@ export default function SignupPage() {
             width: "100%",
           }}
         >
-          <Link underline="none" href="/">
+          <Link underline="none" href="https://thepeerlearning.com">
             <AppLogo />
           </Link>
         </Box>

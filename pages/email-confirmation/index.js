@@ -38,7 +38,7 @@ export default function EmailConfirmationPage() {
           >
             Check your mail
             <Box
-              component="h6"
+              component="span"
               sx={{
                 textAlign: "left",
                 maxWidth: 375,

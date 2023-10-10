@@ -198,7 +198,7 @@ export default function LoginPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    href="/auth/forgot-password"
+                    href="/forgot-password"
                     underline="hover"
                     sx={{
                       width: "100%",

@@ -1,14 +1,15 @@
-import { Box, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Spinner from "../../src/components/spinner/persist-loader";
-import { VerifiedIcon } from "../../src/components/svg/menuIcons";
-import { Colors } from "../../src/components/themes/colors";
-import { validatePayment } from "../../src/redux/slices/auth";
-import MetaData from "../../src/utils/meta";
+import { validateEmail } from "../../../../src/redux/slices/auth";
+import MetaData from "../../../../src/utils/meta";
+import { Box, Grid } from "@mui/material";
+import { VerifiedIcon } from "../../../../src/components/svg/menuIcons";
+import Spinner from "../../../../src/components/spinner/persist-loader";
+import { Colors } from "../../../../src/components/themes/colors";
+import { isEmpty } from "lodash";
 
-export default function VerifyPayment() {
+export default function VerifyAccount() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -17,22 +18,31 @@ export default function VerifyPayment() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const inputData = {
+      token: router.query.token,
+      email: router.query.email,
+    };
     setLoading(true);
-    dispatch(validatePayment({ token: router.query.payment_intent }))
+    dispatch(validateEmail({ inputData }))
       .unwrap()
       .then((res) => {
         setLoading(false);
         setData(res.data);
-        setTimeout(() => {
-          router.push("/email-confirmation");
-        }, 3200);
       })
-      .catch(() => {
+      .catch((err) => {
         setLoading(false);
         setError(true);
       });
   }, [dispatch, router]);
 
+  useEffect(() => {
+    if (data) {
+      setTimeout(() => {
+        router.push("/students/my-dashboard");
+      }, 3200);
+    }
+  }, [data, router]);
+  console.log("data", data);
   return (
     <div>
       <MetaData
@@ -52,15 +62,30 @@ export default function VerifyPayment() {
           }}
         >
           <Box
+            component="div"
             sx={{
-              textAlign: "center",
-              color: Colors.buttonError,
-              font: `normal normal 400 20px/31px "Helvetica Neue"`,
-              mt: { xs: 0, sm: 1.5 },
-              mb: { xs: 3, sm: 4 },
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            {message}
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Box
+                  component="h1"
+                  sx={{
+                    color: Colors.buttonError,
+                    font: {
+                      xs: `normal normal 700 25px/30px Helvetica`,
+                      sm: `normal normal 700 28px/30px Helvetica`,
+                    },
+                    letterSpacing: "-1.2px",
+                    m: { xs: "40px 0 0px", sm: 0 },
+                  }}
+                >
+                  {message}
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       ) : (
@@ -97,7 +122,7 @@ export default function VerifyPayment() {
                     m: { xs: "40px 0 0px", sm: 0 },
                   }}
                 >
-                  Your payment is successful
+                  Your account has been verified
                   <Box
                     sx={{
                       textAlign: "center",

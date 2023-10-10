@@ -126,11 +126,16 @@ export const validatePayment = createAsyncThunk(
 );
 export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
-  async ({ token }, thunkAPI) => {
+  async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/verify-user", token);
-      return response.data;
+      const response = await api.post("/onboarding/verify-user", inputData);
+      if (response) {
+        localStorage.removeItem("step");
+        console.log("response.data", response.data);
+        return response.data;
+      }
     } catch (error) {
+      console.log("error", error);
       let message =
         (error.response &&
           error.response.data &&
@@ -231,12 +236,9 @@ export const validateForgotPasswordEmail = createAsyncThunk(
 );
 export const resetpassword = createAsyncThunk(
   "auth/resetpassword",
-  async ({ id, password }, thunkAPI) => {
+  async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/reset-password", {
-        id,
-        password,
-      });
+      const response = await api.post("/onboarding/reset-password", inputData);
       return response.data;
     } catch (error) {
       let message =

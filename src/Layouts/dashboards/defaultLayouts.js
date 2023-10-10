@@ -113,7 +113,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
   const drawer = (
     <div>
       <Toolbar sx={{ minHeight: `50px !important`, padding: `0 !important` }}>
-        <Link underline="none" href="/">
+        <Link underline="none" href="https://thepeerlearning.com">
           <AppLogo
             style={{
               width: 150,
