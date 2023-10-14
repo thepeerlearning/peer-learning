@@ -60,7 +60,7 @@ export default function CheckoutForm({ amount }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://app.thepeerlearning.com/verify-payment",
+        return_url: "http://app.thepeerlearning.com/verify-payment",
       },
     });
     if (error.type === "card_error" || error.type === "validation_error") {
