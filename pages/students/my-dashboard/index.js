@@ -51,10 +51,7 @@ export default function DashboardPage() {
   useEffect(() => dispatch(activeCourses()), [dispatch]);
 
   const handleCloseSnack = () => dispatch(refresh());
-  console.log(
-    "moment",
-    moment(courses?.user_course_outlines[0]?.date).format("Z")
-  );
+
   return (
     <Box
       component="div"

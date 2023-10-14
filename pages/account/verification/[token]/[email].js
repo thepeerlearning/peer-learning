@@ -42,7 +42,6 @@ export default function VerifyAccount() {
       }, 3200);
     }
   }, [data, router]);
-  console.log("data", data);
   return (
     <div>
       <MetaData

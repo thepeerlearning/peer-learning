@@ -154,6 +154,8 @@ export default function ClassSchedule({ next, back }) {
   const [limit, setLimit] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
   const [weekLimit, setWeekLimit] = React.useState(false);
+  const [mintime, setMinTime] = React.useState(false);
+
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -176,13 +178,7 @@ export default function ClassSchedule({ next, back }) {
       setLimit(false);
       setWeekLimit(false);
       setError(false);
-    }, 3500);
-  }, [limit]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLimit(false);
-      setWeekLimit(false);
+      setMinTime(false);
     }, 3500);
   }, [limit]);
 
@@ -280,6 +276,7 @@ export default function ClassSchedule({ next, back }) {
     setLimit(false);
     setWeekLimit(false);
     setError(false);
+    setMinTime(false);
   };
   const handleChange = (event, newValue) => setValue(newValue);
   const handleClickOpen = () => setOpen(true);
@@ -290,7 +287,6 @@ export default function ClassSchedule({ next, back }) {
     setSelected([]);
     setValue(0);
   };
-  const handleChangeIndex = (index) => setValue(index);
   const handleWeekSelect = () => {
     setSelected([]);
     setValue(0);
@@ -325,7 +321,6 @@ export default function ClassSchedule({ next, back }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -335,54 +330,58 @@ export default function ClassSchedule({ next, back }) {
   });
 
   function onSubmit(data) {
-    const selectedItems = selected?.reduce((week, item) => {
-      const id = item.weekId;
-      const time =
-        Number(item.time) < 10 ? `0${item.time}:00` : `${item.time}:00`;
-      const theWeek = { day: item.name, time: time.replace(/\s/g, "") };
-      if (!week[id]) {
-        week[id] = [];
-      }
-      week[id].push(theWeek);
-      return week;
-    }, {});
-    const weeks = Object.keys(selectedItems).map((id, i) => {
-      const week =
-        id === "wk01"
-          ? "one"
-          : id === "wk02"
-          ? "two"
-          : id === "wk03"
-          ? "three"
-          : id === "wk04"
-          ? "four"
-          : null;
-      return {
-        week,
-        schedules: selectedItems[id],
-      };
-    });
-    let childrenId = localStorage.getItem("children_id");
-    const inputData = {
-      children_id: childrenId,
-      course_id: data.course,
-      other_options: data.otherOptions,
-      start_date: data.startDate,
-      timezone: data.timezone,
-      weeks,
-    };
-    setLoading(true);
-    dispatch(classSchedule({ inputData }))
-      .unwrap()
-      .then(() => {
-        setLoading(false);
-        next();
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
+    if (selected.length < 8) {
+      setMinTime(true);
+    } else {
+      const selectedItems = selected?.reduce((week, item) => {
+        const id = item.weekId;
+        const time =
+          Number(item.time) < 10 ? `0${item.time}:00` : `${item.time}:00`;
+        const theWeek = { day: item.name, time: time.replace(/\s/g, "") };
+        if (!week[id]) {
+          week[id] = [];
+        }
+        week[id].push(theWeek);
+        return week;
+      }, {});
+      const weeks = Object.keys(selectedItems).map((id, i) => {
+        const week =
+          id === "wk01"
+            ? "one"
+            : id === "wk02"
+            ? "two"
+            : id === "wk03"
+            ? "three"
+            : id === "wk04"
+            ? "four"
+            : null;
+        return {
+          week,
+          schedules: selectedItems[id],
+        };
       });
-    return false;
+      let childrenId = localStorage.getItem("children_id");
+      const inputData = {
+        children_id: childrenId,
+        course_id: data.course,
+        other_options: data.otherOptions,
+        start_date: data.startDate,
+        timezone: data.timezone,
+        weeks,
+      };
+      setLoading(true);
+      dispatch(classSchedule({ inputData }))
+        .unwrap()
+        .then(() => {
+          setLoading(false);
+          next();
+        })
+        .catch(() => {
+          setError(true);
+          setLoading(false);
+        });
+      return false;
+    }
   }
   return (
     <Box component="div" sx={{ width: "100%" }}>
@@ -769,62 +768,56 @@ export default function ClassSchedule({ next, back }) {
                                     ></Box>
                                   </Grid>
                                   {sch.schedule.map((item, i) => (
-                                    <>
-                                      <Grid item xs={2} key={"item.id" + i}>
-                                        {item.option.map((opt, i) => {
-                                          const exists = selected.some(
-                                            (obj) => {
-                                              return (
-                                                obj.weekId === opt.weekId &&
-                                                obj.name === opt.name &&
-                                                obj.time === opt.time
-                                              );
-                                            }
-                                          );
+                                    <Grid item xs={2} key={"item.id" + i}>
+                                      {item.option.map((opt, i) => {
+                                        const exists = selected.some((obj) => {
                                           return (
-                                            <Box
-                                              key={"opt" + i}
-                                              sx={{
-                                                width: 77,
-                                                height: 28,
-                                                padding: "8px 11px",
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                borderRadius: "5px",
-                                                background: exists
-                                                  ? Colors.secondary
-                                                  : "transparent",
-                                                mt: 2,
-                                                mx: 2,
-                                                cursor:
-                                                  selected.length >= 8
-                                                    ? "not-allowed"
-                                                    : "pointer",
-                                                color: exists
-                                                  ? Colors.light
-                                                  : Colors.black,
-                                                font: `normal normal 500 12px/28px ${Fonts.secondary}`,
-                                                "&:hover": {
-                                                  fontSize: 12,
-                                                  textTransform: "scale(0.99)",
-                                                  background:
-                                                    "rgba(247,11,88,0.2)",
-                                                },
-                                              }}
-                                              onClick={() =>
-                                                handleTimeClick(opt)
-                                              }
-                                              disabled={disabled}
-                                            >
-                                              {+opt.time >= 9
-                                                ? `${opt.time}:00 AM`
-                                                : `${opt.time}:00 PM`}
-                                            </Box>
+                                            obj.weekId === opt.weekId &&
+                                            obj.name === opt.name &&
+                                            obj.time === opt.time
                                           );
-                                        })}
-                                      </Grid>
-                                    </>
+                                        });
+                                        return (
+                                          <Box
+                                            key={"opt" + i}
+                                            sx={{
+                                              width: 77,
+                                              height: 28,
+                                              padding: "8px 11px",
+                                              display: "flex",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              borderRadius: "5px",
+                                              background: exists
+                                                ? Colors.secondary
+                                                : "transparent",
+                                              mt: 2,
+                                              mx: 2,
+                                              cursor:
+                                                selected.length >= 8
+                                                  ? "not-allowed"
+                                                  : "pointer",
+                                              color: exists
+                                                ? Colors.light
+                                                : Colors.black,
+                                              font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                              "&:hover": {
+                                                fontSize: 12,
+                                                textTransform: "scale(0.99)",
+                                                background:
+                                                  "rgba(247,11,88,0.2)",
+                                              },
+                                            }}
+                                            onClick={() => handleTimeClick(opt)}
+                                            disabled={disabled}
+                                          >
+                                            {+opt.time >= 9
+                                              ? `${opt.time}:00 AM`
+                                              : `${opt.time}:00 PM`}
+                                          </Box>
+                                        );
+                                      })}
+                                    </Grid>
                                   ))}
                                   <Grid item xs={12}>
                                     <Box
@@ -1039,58 +1032,56 @@ export default function ClassSchedule({ next, back }) {
                                   </Box>
                                 </Grid>
                                 {sch.schedule.map((item, i) => (
-                                  <>
-                                    <Grid item xs={2} key={"item.id" + i}>
-                                      {item.option.map((opt, i) => {
-                                        const exists = selected.some((obj) => {
-                                          return (
-                                            obj.weekId === opt.weekId &&
-                                            obj.name === opt.name &&
-                                            obj.time === opt.time
-                                          );
-                                        });
+                                  <Grid item xs={2} key={"item.id" + i}>
+                                    {item.option.map((opt, i) => {
+                                      const exists = selected.some((obj) => {
                                         return (
-                                          <Box
-                                            key={"opt" + i}
-                                            sx={{
-                                              width: 78,
-                                              height: 28,
-                                              padding: "8px 10px",
-                                              display: "flex",
-                                              justifyContent: "center",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              my: 3,
-                                              // background: exists
-                                              //   ? Colors.secondary
-                                              //   : "transparent",
-                                              // mt: 2,
-                                              // mx: 2,
-                                              cursor:
-                                                selected.length >= 8
-                                                  ? "not-allowed"
-                                                  : "pointer",
-                                              color: exists
-                                                ? Colors.secondary
-                                                : "rgba(0, 0, 0, 0.85)",
-                                              font: `normal normal 500 12px/28px ${Fonts.secondary}`,
-                                              "&:hover": {
-                                                fontSize: 12,
-                                                textTransform: "scale(0.99)",
-                                                color: "rgba(247,11,88,0.2)",
-                                              },
-                                            }}
-                                            onClick={() => handleTimeClick(opt)}
-                                            disabled={disabled}
-                                          >
-                                            {+opt.time >= 9
-                                              ? `${opt.time}:00 AM`
-                                              : `${opt.time}:00 PM`}
-                                          </Box>
+                                          obj.weekId === opt.weekId &&
+                                          obj.name === opt.name &&
+                                          obj.time === opt.time
                                         );
-                                      })}
-                                    </Grid>
-                                  </>
+                                      });
+                                      return (
+                                        <Box
+                                          key={"opt" + i}
+                                          sx={{
+                                            width: 78,
+                                            height: 28,
+                                            padding: "8px 10px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            borderRadius: "5px",
+                                            my: 3,
+                                            // background: exists
+                                            //   ? Colors.secondary
+                                            //   : "transparent",
+                                            // mt: 2,
+                                            // mx: 2,
+                                            cursor:
+                                              selected.length >= 8
+                                                ? "not-allowed"
+                                                : "pointer",
+                                            color: exists
+                                              ? Colors.secondary
+                                              : "rgba(0, 0, 0, 0.85)",
+                                            font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                            "&:hover": {
+                                              fontSize: 12,
+                                              textTransform: "scale(0.99)",
+                                              color: "rgba(247,11,88,0.2)",
+                                            },
+                                          }}
+                                          onClick={() => handleTimeClick(opt)}
+                                          disabled={disabled}
+                                        >
+                                          {+opt.time >= 9
+                                            ? `${opt.time}:00 AM`
+                                            : `${opt.time}:00 PM`}
+                                        </Box>
+                                      );
+                                    })}
+                                  </Grid>
                                 ))}
                                 <Grid item xs={12}>
                                   <Box
@@ -1224,6 +1215,12 @@ export default function ClassSchedule({ next, back }) {
         handleClose={handleCloseSnack}
         message={"You have exceeded your schedule limit"}
         isOpen={limit === true}
+      />
+      <Snackbars
+        variant="error"
+        handleClose={handleCloseSnack}
+        message={"You have to select a minimum of 8 class schedule"}
+        isOpen={mintime === true}
       />
       <Snackbars
         variant="error"

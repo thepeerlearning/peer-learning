@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,25 +8,25 @@ import { Colors } from "../../src/components/themes/colors";
 import { validatePayment } from "../../src/redux/slices/auth";
 import MetaData from "../../src/utils/meta";
 import { isEmpty } from "lodash";
+import { ButtonsRow } from "../../src/components/forms/buttons/styles";
+import Image from "next/image";
+import AuthLayout from "../../src/views/auth/layout";
+import { Fonts } from "../../src/components/themes/fonts";
 
 export default function VerifyPayment() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [data, setData] = useState(null);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
+    if (!router.isReady) return;
     dispatch(validatePayment({ token: router.query.payment_intent }))
       .unwrap()
-      .then((res) => {
+      .then(() => {
         setLoading(false);
-        setData(res.data);
-        setTimeout(() => {
-          router.push("/email-confirmation");
-        }, 3200);
       })
       .catch(() => {
         setLoading(false);
@@ -42,7 +42,7 @@ export default function VerifyPayment() {
       />
       {loading ? (
         <Spinner />
-      ) : error ? (
+      ) : error === true ? (
         <Box
           component="div"
           sx={{
@@ -56,7 +56,7 @@ export default function VerifyPayment() {
             sx={{
               textAlign: "center",
               color: Colors.buttonError,
-              font: `normal normal 400 20px/31px "Helvetica Neue"`,
+              font: `normal normal 400 20px/31px ${Fonts.secondaryNeu}`,
               mt: { xs: 0, sm: 1.5 },
               mb: { xs: 3, sm: 4 },
             }}
@@ -65,58 +65,121 @@ export default function VerifyPayment() {
           </Box>
         </Box>
       ) : (
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            textAlign: "center",
-            flexDirection: "column",
-            padding: { xs: "150px 24px", sm: "150px 0px 150px 0" },
-          }}
-        >
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <VerifiedIcon />
-              </Grid>
-              <Grid item xs={12}>
-                <Box
-                  component="h1"
-                  sx={{
-                    color: "#001B38",
-                    font: {
-                      xs: `normal normal 700 25px/30px Helvetica`,
-                      sm: `normal normal 700 28px/30px Helvetica`,
-                    },
-                    letterSpacing: "-1.2px",
-                    m: { xs: "40px 0 0px", sm: 0 },
-                  }}
-                >
-                  Your payment is successful
+        <Grid container spacing={0}>
+          <Grid item xs={12}>
+            <Box
+              component="h1"
+              sx={{
+                width: "100%",
+                display: "flex",
+                textAlign: "left",
+                flexDirection: "column",
+                color: Colors.black,
+                font: {
+                  xs: `normal normal 500 30px/38px ${Fonts.secondary}`,
+                  sm: `normal normal 500 40px/48px ${Fonts.secondary}`,
+                },
+                letterSpacing: "-1.2px",
+                m: { xs: "40px 0 0px", sm: 0 },
+              }}
+            >
+              Check your mail
+              <Box
+                component="span"
+                sx={{
+                  textAlign: "left",
+                  maxWidth: 375,
+                  color: Colors.textColor,
+                  font: `normal normal 500 16px/135.8% ${Fonts.secondary}`,
+                  mt: { xs: 0, sm: 1.5 },
+                }}
+              >
+                A message has been sent to your email. Please check the inbox to
+                confirm.
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Box
+              component="div"
+              sx={{
+                borderTop: `1px solid #F3F4F7`,
+                borderBottom: `1px solid #F3F4F7`,
+                px: { xs: 0, sm: 3 },
+                py: { xs: 4, sm: 5 },
+                mt: { xs: 0, sm: 2 },
+              }}
+            >
+              <Grid container rowSpacing={0}>
+                <Grid item xs={6}>
                   <Box
+                    component="p"
                     sx={{
-                      textAlign: "center",
-                      color: "#6F6C90",
-                      font: `normal normal 400 20px/31px "Helvetica Neue"`,
+                      textAlign: "left",
+                      maxWidth: 375,
+                      color: Colors.textColor,
+                      font: `normal normal 500 16px/135.8% ${Fonts.secondary}`,
                       mt: { xs: 0, sm: 1.5 },
-                      mb: { xs: 3, sm: 4 },
                     }}
                   >
-                    Thank you for registering. We are redirecting you to
-                    dashboard
+                    Open Mailbox:
                   </Box>
-                </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <ButtonsRow>
+                    <Link
+                      target="_blank"
+                      href="https://accounts.google.com/signin"
+                      rel="noopener noreferrer"
+                      sx={{ mr: 2 }}
+                    >
+                      <Image
+                        src="/images/svgs/gmail.svg"
+                        alt="gmail"
+                        width={25}
+                        height={25}
+                      />
+                    </Link>
+                    <Link
+                      target="_blank"
+                      href="https://login.live.com/login.srf"
+                      rel="noopener noreferrer"
+                    >
+                      <Image
+                        src="/images/svgs/outlook.svg"
+                        alt="outlook"
+                        width={25}
+                        height={25}
+                      />
+                    </Link>
+                  </ButtonsRow>
+                </Grid>
+                <Grid item xs={12}>
+                  <Link
+                    sx={{
+                      textAlign: "center",
+                      color: Colors.textColor,
+                      color: Colors.primary,
+                      font: `normal normal 500 14px/19px ${Fonts.secondary}`,
+                      my: "16px",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                    href="/"
+                    underline="hover"
+                  >
+                    Go back to Login
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        </Box>
+            </Box>
+          </Grid>
+        </Grid>
       )}
     </div>
   );
 }
+VerifyPayment.getLayout = function getLayout(page) {
+  return <AuthLayout>{page}</AuthLayout>;
+};

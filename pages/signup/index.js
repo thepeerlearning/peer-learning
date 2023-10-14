@@ -102,7 +102,7 @@ export default function SignupPage() {
   const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
   const { user } = useSelector((state) => state.auth);
-  console.log("user", user);
+
   const handleNext = () =>
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handlePrev = () =>
