@@ -80,6 +80,34 @@ export const classSchedules = createAsyncThunk(
     }
   }
 );
+export const updateClassStatus = createAsyncThunk(
+  "courses/updateClassStatus",
+  async ({ id, inputData }, thunkAPI) => {
+    try {
+      const response = await api.patch(
+        `users/courses-subscriptions/course-outlines/${id}/instructor/change-status`,
+        inputData
+      );
+      return response.data;
+    } catch (error) {
+      let message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.response.data.errors ||
+        error.message ||
+        error.toString();
+      if (error.message === `timeout of ${timeout}ms exceeded`) {
+        message = "Response timeout, Retry";
+      }
+      if (error.message === "Network Error") {
+        message = "Please check your network connectivity";
+      }
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 const initialState = {
   loading: false,
   data: null,

@@ -16,7 +16,6 @@ import {
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
 import { activeCourses, refresh } from "../../../src/redux/slices/courses";
-// import moment from "moment";
 import { isEmpty } from "lodash";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
@@ -35,14 +34,12 @@ export default function DashboardPage() {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const fullname = user?.children?.data[0].fullname;
-  const activeCourse = courses?.user_course_outlines[0];
+  const activeCourse = courses?.next_class;
   const [isClassTime, setIsClassTime] = useState(false);
-  // const currentZone = moment.tz.guess();
-  // | (GMT ${moment().tz(timezone).format("Z")})
 
   useEffect(() => {
     const currentTime = moment();
-    const startTime = moment(courses?.user_course_outlines[0]?.date);
+    const startTime = moment(courses?.next_class?.date);
     const endTime = startTime.clone().add(1, "hour");
     const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
     setIsClassTime(isBetweenClassTime);
@@ -194,11 +191,9 @@ export default function DashboardPage() {
                     color: "#000000",
                   }}
                 >
-                  {`${moment(courses?.user_course_outlines[0]?.date).format(
+                  {`${moment(courses?.next_class?.date).format(
                     "llll"
-                  )} (GMT ${moment(
-                    courses?.user_course_outlines[0]?.date
-                  ).format("Z")}) `}
+                  )} (GMT ${moment(courses?.next_class?.date).format("Z")}) `}
                 </Box>
               </Box>
 
@@ -309,7 +304,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment(courses?.end_date).format("LLL")}
+                      {moment(courses?.last_class.date).format("LLL")}
                     </Box>
                   </Grid>
                   {/* MISSED COURSES */}

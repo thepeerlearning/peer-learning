@@ -199,6 +199,8 @@ export default function ClassSchedule({ next, back }) {
       message?.weeks?.map((wk) => {
         return setErrorMessage("class schedules " + wk);
       });
+    } else if (message?.detail) {
+      return setErrorMessage("Detail " + message.detail);
     } else {
       setErrorMessage(message);
     }
@@ -1226,7 +1228,7 @@ export default function ClassSchedule({ next, back }) {
         variant="error"
         handleClose={handleCloseSnack}
         message={errorMessage}
-        isOpen={error}
+        isOpen={error === true}
       />
       <Snackbars
         variant="error"

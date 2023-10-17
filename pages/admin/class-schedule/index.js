@@ -1,3 +1,4 @@
+import { KeyboardArrowDownRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Grid } from "@mui/material";
 import moment from "moment";
 import Head from "next/head";
@@ -5,14 +6,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout";
-import StatusCallOut from "../../../src/components/callout/coloredMenu";
 import { Select, StyledCard } from "../../../src/components/forms/textFields";
 import Spinner from "../../../src/components/spinner";
-import { DoneIcon } from "../../../src/components/svg/menuIcons";
 import { TableContent } from "../../../src/components/table";
 import { Colors } from "../../../src/components/themes/colors";
 import { Fonts } from "../../../src/components/themes/fonts";
 import { classSchedules } from "../../../src/redux/slices/courses";
+import InstructorFeedbackDialog from "../../../src/views/admin/dashboard/feedback";
 
 export default function ClassSchedulePage() {
   const router = useRouter();
@@ -20,9 +20,7 @@ export default function ClassSchedulePage() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filter, setFilter] = React.useState("week");
   const [schedule, setSchedule] = React.useState(null);
-  const [status, setStatus] = React.useState("");
   const [isClassTime, setIsClassTime] = React.useState(false);
-
   const {
     schedules,
     scheduleLoading: loading,
@@ -55,11 +53,7 @@ export default function ClassSchedulePage() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const handleClassStatus = (status) => {
-    setStatus(status);
-    // const data = { status: status };
-    // dispatch(updateClassStatus({ id: router.query.id, status: data }));
-  };
+
   const columns = [
     {
       id: "name",
@@ -385,7 +379,7 @@ export default function ClassSchedulePage() {
                         sx={{
                           background: Colors.secondary,
                           color: Colors.light,
-                          ml: 0.5,
+                          ml: 1,
                           mt: -0.5,
                           textTransform: "none",
                           padding: "1px 8px",
@@ -422,80 +416,64 @@ export default function ClassSchedulePage() {
                       }}
                     >
                       End class:{" "}
-                      <StatusCallOut
-                        buttonText={status ? status : schedule?.status}
-                        buttonColor={
-                          status === "completed"
-                            ? Colors.buttonSuccess
-                            : status === "missed"
-                            ? Colors.buttonError
-                            : Colors.primary
-                        }
-                        width="120px"
-                        TopAction={
-                          <Button
-                            onClick={() => handleClassStatus("completed")}
-                            variant="outlined"
-                            disableElevation
-                            endIcon={
-                              status === "completed" ? <DoneIcon /> : null
-                            }
-                            sx={{
-                              textTransform: "none",
-                              font: `normal normal normal 600 14px/20px ${Fonts.secondary}`,
-                              letterSpacing: "0.98",
-                              borderRadius: "12px",
+                      <Box sx={{ display: "flex", gap: 2 }}>
+                        <Button
+                          variant="outlined"
+                          disableElevation
+                          sx={{
+                            background:
+                              schedule?.status === "completed"
+                                ? Colors.buttonSuccess
+                                : schedule.status === "missed"
+                                ? Colors.buttonError
+                                : Colors.primary,
+                            border:
+                              schedule?.status === "completed"
+                                ? Colors.buttonSuccess
+                                : schedule?.status === "missed"
+                                ? Colors.buttonError
+                                : Colors.primary,
+                            color: Colors.light,
+                            ml: 1,
+                            textTransform: "none",
+                            padding: "1px 8px",
+                            textTransform: "uppercase",
+                            font: `normal normal normal 500 14px/24px ${Fonts.secondary}`,
+                            cursor: "pointer",
+                            transition: "all 0.3ms",
+                            gap: "36px",
+                            borderRadius: "33px",
+                            padding: "5px 16px",
+                            "&:hover": {
+                              background:
+                                schedule?.status === "completed"
+                                  ? Colors.buttonSuccess
+                                  : schedule?.status === "missed"
+                                  ? Colors.buttonError
+                                  : Colors.primary,
+                              border:
+                                schedule?.status === "completed"
+                                  ? Colors.buttonSuccess
+                                  : schedule?.status === "missed"
+                                  ? Colors.buttonError
+                                  : Colors.primary,
                               color: Colors.light,
-                              border: `1px solid transparent`,
-                              p: "5px 8px",
-                              mb: 0.8,
-
-                              cursor: "pointer",
-                              "&:hover": {
-                                backgroundColor: Colors.primary,
-                                border: `1px solid ${Colors.primary}`,
-                              },
-                              "&:focus": {
-                                backgroundColor: Colors.primary,
-                                border: `1px solid ${Colors.primary}`,
-                              },
-                            }}
-                          >
-                            Class completed
-                          </Button>
-                        }
-                        BottomAction={
-                          <Button
-                            onClick={() => handleClassStatus("missed")}
-                            variant="outlined"
-                            disableElevation
-                            endIcon={status === "missed" ? <DoneIcon /> : null}
-                            sx={{
-                              width: 130,
-                              textTransform: "none",
-                              font: `normal normal normal 600 14px/20px ${Fonts.secondary}`,
-                              letterSpacing: "0.98",
-                              borderRadius: "12px",
+                              transform: "scale(0.99)",
+                            },
+                            "&:disabled": {
+                              cursor: "not-allowed",
+                              background: Colors.disabled,
                               color: Colors.light,
-                              border: `1px solid transparent`,
-                              p: "5px 8px",
-                              mb: 0.8,
-
-                              cursor: "pointer",
-                              "&:hover": {
-                                backgroundColor: Colors.buttonError,
-                                border: `1px solid ${Colors.buttonError}`,
-                              },
-                              "&:focus": {
-                                backgroundColor: Colors.buttonError,
-                                border: `1px solid ${Colors.buttonError}`,
-                              },
-                            }}
-                          >
-                            Class missed
-                          </Button>
-                        }
-                      />
+                            },
+                          }}
+                        >
+                          {schedule.status}
+                        </Button>
+                        <InstructorFeedbackDialog
+                          id={schedule?.id}
+                          scheduleStatus={schedule?.status}
+                        />
+                      </Box>
                     </Box>
                   </StyledCard>
                 </Grid>

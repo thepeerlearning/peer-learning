@@ -108,8 +108,8 @@ export const Button = styled.button`
     css`
       border: 1px solid ${Colors.primary};
       font: normal normal normal 700 14px/19px ${Fonts.secondary};
-      background: ${Colors.primary} 0% 0% no-repeat padding-box;
-      color: ${Colors.secondary};
+      background: transparent 0% 0% no-repeat padding-box;
+      color: ${Colors.primary};
       text-transform: none;
       padding: 10px 12px;
     `};
