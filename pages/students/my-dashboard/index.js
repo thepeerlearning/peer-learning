@@ -274,12 +274,10 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment(courses?.start_date).format("LLL")}
+                      {moment(courses?.start_date).format("LL")}
                     </Box>
                   </Grid>
-
                   {/* COURSE END */}
-
                   <Grid item xs={5}>
                     <Box component="div" sx={{ display: "flex" }}>
                       <ListItemIcon>
@@ -304,7 +302,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment(courses?.last_class.date).format("LLL")}
+                      {moment(courses?.last_class.date).format("LL")}
                     </Box>
                   </Grid>
                   {/* MISSED COURSES */}

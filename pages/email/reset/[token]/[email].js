@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { SubmitButton } from "../../../../src/components/forms/buttons";
 import { PasswordField } from "../../../../src/components/forms/textFields";
-import PasswordStrength from "../../../../src/components/forms/textFields/passwordStrength";
 import Snackbars from "../../../../src/components/snackbar";
 import { Colors } from "../../../../src/components/themes/colors";
 import { Fonts } from "../../../../src/components/themes/fonts";
@@ -24,27 +23,10 @@ export default function ResetPasswordPage() {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  const oneLowerCase = /^(?=.*?[a-z])/;
-  const oneUpperCase = /^(?=.*?[A-Z])/;
-  const isNumberRegex = /\d/;
-  const specialCharacterRegex = /[!@#$%&*()_+\-=\[\]{};':"\\,.<>\/?]/;
 
-  const handleCloseSnack = () => setError(false);
-  const handleClickShowConfirmPassword = () =>
-    setShowConfirmPassword(!showConfirmPassword);
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
   // form validation rules
   const validationSchema = Yup.object().shape({
-    password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must have atleast 8 english characters")
-      .matches(oneUpperCase, "Password shoud contain uppercase")
-      .matches(oneLowerCase, "Password shoud contain lowercase")
-      .matches(isNumberRegex, "Password shoud contain atleast 1 number")
-      .matches(
-        specialCharacterRegex,
-        "Password shoud contain atleast 1 special character"
-      ),
+    password: Yup.string().required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -63,6 +45,11 @@ export default function ResetPasswordPage() {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+
+  const handleCloseSnack = () => setError(false);
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   function onSubmit(data) {
     const { password } = data;
     const inputData = {
@@ -169,9 +156,7 @@ export default function ResetPasswordPage() {
               helper={errors.confirmPassword?.message}
             />
           </Grid>
-          <Grid item xs={12}>
-            {password && <PasswordStrength password={password} />}
-          </Grid>
+
           <Grid item xs={12}>
             <Box
               sx={{

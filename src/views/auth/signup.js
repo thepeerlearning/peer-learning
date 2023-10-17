@@ -11,12 +11,11 @@ import {
   PhoneNumberInput,
   TextField,
 } from "../../components/forms/textFields";
-import PasswordStrength from "../../components/forms/textFields/passwordStrength";
+import Snackbars from "../../components/snackbar";
 import { Colors } from "../../components/themes/colors";
 import { Fonts } from "../../components/themes/fonts";
 import { signup } from "../../redux/slices/auth";
 import { Countries } from "../../utils/data";
-import Snackbars from "../../components/snackbar";
 
 export default function SignupForm({ next }) {
   const [loading, setLoading] = React.useState(false);
@@ -26,10 +25,6 @@ export default function SignupForm({ next }) {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  const oneLowerCase = /^(?=.*?[a-z])/;
-  const oneUpperCase = /^(?=.*?[A-Z])/;
-  const isNumberRegex = /\d/;
-  const specialCharacterRegex = /[!@#$%&*()_+\-=\[\]{};':"\\,.<>\/?]/;
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -37,16 +32,7 @@ export default function SignupForm({ next }) {
     childname: Yup.string().required("Child's name is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     phone: Yup.string().required("Phone number is required"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must have atleast 8 english characters")
-      .matches(oneUpperCase, "Password shoud contain uppercase")
-      .matches(oneLowerCase, "Password shoud contain lowercase")
-      .matches(isNumberRegex, "Password shoud contain atleast 1 number")
-      .matches(
-        specialCharacterRegex,
-        "Password shoud contain atleast 1 special character"
-      ),
+    password: Yup.string().required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -247,9 +233,6 @@ export default function SignupForm({ next }) {
                   helper={errors.confirmPassword?.message}
                   disabled={loading}
                 />
-              </Grid>{" "}
-              <Grid item xs={12}>
-                {password && <PasswordStrength password={password} />}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Box sx={{ width: 150 }}>
