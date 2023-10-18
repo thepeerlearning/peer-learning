@@ -48,21 +48,25 @@ export default function SignupForm({ next }) {
     register,
     handleSubmit,
     control,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-  const password = watch("password");
   useEffect(() => {
     if (message?.email) {
       message?.email?.map((email) => {
         return setErrorMessage("Email " + email);
       });
+    } else if (message?.user?.password) {
+      message?.user?.password?.map((password) => {
+        return setErrorMessage("Password " + password);
+      });
     } else {
       return setErrorMessage(message);
     }
   }, [message]);
+
+  console.log("errormessage", errorMessage);
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data;
     const phoneNumberObj = parsePhoneNumber(phone);
