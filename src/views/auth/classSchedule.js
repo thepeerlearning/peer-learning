@@ -167,6 +167,7 @@ export default function ClassSchedule({ next, back }) {
   const isLargeScreen = useMediaQuery("(min-width: 960px)");
   const timezone = moment.tz.names();
   const currentZone = moment.tz.guess();
+  const today = new Date().toISOString().split("T")[0];
 
   React.useEffect(() => {
     dispatch(getCourses());
@@ -1155,6 +1156,7 @@ export default function ClassSchedule({ next, back }) {
                   error={errors.startDate ? true : false}
                   helper={errors.startDate?.message}
                   disabled={loading}
+                  min={today}
                 />
               </Grid>
 
