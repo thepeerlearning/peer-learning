@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid } from "@mui/material";
-import moment from "moment";
+import moment from "moment-timezone";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
@@ -29,8 +29,8 @@ export default function ClassSchedulePage() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const currentTime = moment();
-    const startTime = moment(schedule?.date);
+    const currentTime = moment.utc();
+    const startTime = moment.utc(schedule?.date);
     const endTime = startTime.clone().add(1, "hour");
     // Check if the current time is between the start and end times of the class
     const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
@@ -91,6 +91,11 @@ export default function ClassSchedulePage() {
           );
         })
       : [];
+  console.log(
+    "schedule?.timezone",
+    schedule?.course_subscription?.timezone,
+    schedule
+  );
   return (
     <Box
       component="div"
@@ -358,11 +363,14 @@ export default function ClassSchedulePage() {
                           ml: 0.5,
                         }}
                       >
-                        {`${moment(schedule?.date).format("LT")} (GMT ${moment(
-                          schedule?.date
-                        ).format("Z")})  | ${moment(schedule.date).format(
-                          "ll"
-                        )}`}
+                        {`${moment.utc(schedule?.date).format("LT")} (${
+                          schedule?.course_subscription?.timezone
+                        } - GMT ${moment
+                          .utc()
+                          .tz(schedule?.course_subscription?.timezone)
+                          .format("Z")}) | ${moment
+                          .utc(schedule.date)
+                          .format("ll")}`}
                       </Box>
                     </Box>
                     <Box

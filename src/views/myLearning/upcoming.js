@@ -42,8 +42,8 @@ export default function UpcomingCourses({ data, level }) {
             {data
               ?.sort((a, b) => a.course_outline.order - b.course_outline.order)
               .map((course, index) => {
-                const currentTime = moment();
-                const startTime = moment(course?.date);
+                const currentTime = moment.utc();
+                const startTime = moment.utc(course?.date);
                 const endTime = startTime.clone().add(1, "hour");
                 const isBetweenClassTime = currentTime.isBetween(
                   startTime,
@@ -163,7 +163,7 @@ export default function UpcomingCourses({ data, level }) {
                           }}
                           disabled={isBetweenClassTime === false}
                         >
-                          {moment(course.date).format("LLL")}
+                          {moment.utc(course.date).format("LLL")}
                         </Button>
 
                         <Button

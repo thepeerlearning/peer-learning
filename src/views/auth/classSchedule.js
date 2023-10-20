@@ -437,11 +437,16 @@ export default function ClassSchedule({ next, back }) {
                   helper={errors.timezone?.message}
                   disabled={loading}
                 >
-                  {timezone?.map((timezone) => (
-                    <option value={timezone} key={"time" + timezone}>
-                      {`${timezone} (GMT ${moment().tz(timezone).format("Z")})`}
-                    </option>
-                  ))}
+                  {timezone?.map((timezone) => {
+                    return (
+                      <option value={timezone} key={"time" + timezone}>
+                        {`${timezone} (GMT ${moment
+                          .utc()
+                          .tz(timezone)
+                          .format("Z")})`}
+                      </option>
+                    );
+                  })}
                 </Select>
               </Grid>
               <Grid item xs={12}>

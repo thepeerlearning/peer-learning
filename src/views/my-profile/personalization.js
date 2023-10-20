@@ -65,7 +65,7 @@ export default function Personalizatio() {
       (item) => item.code === profile?.user_profile.country
     );
     setValue("childName", profile?.user_profile.fullname);
-    setValue("dob", moment(profile?.user_profile.dob).format("YYYY-MM-DD"));
+    setValue("dob", moment.utc(profile?.user_profile.dob).format("YYYY-MM-DD"));
     setValue("gender", profile?.user_profile.gender);
     setValue("country", country?.name);
     setValue("stateOfOrigin", profile?.user_profile.state_province_of_origin);
@@ -129,7 +129,7 @@ export default function Personalizatio() {
       user_profile: {
         id: user?.id,
         fullname: childName,
-        dob: moment(dob),
+        dob: moment.utc(dob),
         gender: gender,
         address: country,
         country: countryInfo.code,

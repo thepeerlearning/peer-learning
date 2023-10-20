@@ -36,10 +36,10 @@ export default function DashboardPage() {
   const fullname = user?.children?.data[0].fullname;
   const activeCourse = courses?.next_class;
   const [isClassTime, setIsClassTime] = useState(false);
-
+  console.log("TIME ZONE");
   useEffect(() => {
-    const currentTime = moment();
-    const startTime = moment(courses?.next_class?.date);
+    const currentTime = moment.utc();
+    const startTime = moment.utc(courses?.next_class?.date);
     const endTime = startTime.clone().add(1, "hour");
     const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
     setIsClassTime(isBetweenClassTime);
@@ -191,9 +191,10 @@ export default function DashboardPage() {
                     color: "#000000",
                   }}
                 >
-                  {`${moment(courses?.next_class?.date).format(
-                    "llll"
-                  )} (GMT ${moment(courses?.next_class?.date).format("Z")}) `}
+                  {`${moment.utc(courses?.next_class?.date).format("llll")} (${
+                    courses?.timezone
+                  } - GMT ${moment.utc().tz(courses?.timezone).format("Z")})
+                   `}
                 </Box>
               </Box>
 
@@ -274,7 +275,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment(courses?.start_date).format("LL")}
+                      {moment.utc(courses?.start_date).format("LLL")}
                     </Box>
                   </Grid>
                   {/* COURSE END */}
@@ -302,7 +303,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment(courses?.last_class.date).format("LL")}
+                      {moment.utc(courses?.last_class.date).format("LLL")}
                     </Box>
                   </Grid>
                   {/* MISSED COURSES */}
@@ -368,8 +369,8 @@ export default function DashboardPage() {
                         width: "100%",
                         background: "#E9E8EC",
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
                         padding: "6px 8px",
                         color: Colors.black,
@@ -405,8 +406,8 @@ export default function DashboardPage() {
                         width: 100,
                         background: "#E9E8EC",
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
                         font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
                         padding: "6px 8px",
                         color: Colors.black,
