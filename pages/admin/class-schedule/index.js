@@ -91,11 +91,6 @@ export default function ClassSchedulePage() {
           );
         })
       : [];
-  console.log(
-    "schedule?.timezone",
-    schedule?.course_subscription?.timezone,
-    schedule
-  );
   return (
     <Box
       component="div"

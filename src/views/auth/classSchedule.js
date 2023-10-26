@@ -155,7 +155,6 @@ export default function ClassSchedule({ next, back }) {
   const [disabled, setDisabled] = React.useState(false);
   const [weekLimit, setWeekLimit] = React.useState(false);
   const [mintime, setMinTime] = React.useState(false);
-
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -379,7 +378,8 @@ export default function ClassSchedule({ next, back }) {
           setLoading(false);
           next();
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log("err", err);
           setError(true);
           setLoading(false);
         });
@@ -437,16 +437,14 @@ export default function ClassSchedule({ next, back }) {
                   helper={errors.timezone?.message}
                   disabled={loading}
                 >
-                  {timezone?.map((timezone) => {
-                    return (
-                      <option value={timezone} key={"time" + timezone}>
-                        {`${timezone} (GMT ${moment
-                          .utc()
-                          .tz(timezone)
-                          .format("Z")})`}
-                      </option>
-                    );
-                  })}
+                  {timezone?.map((timezone) => (
+                    <option value={timezone} key={"time" + timezone}>
+                      {`${timezone} (GMT ${moment
+                        .utc()
+                        .tz(timezone)
+                        .format("Z")})`}
+                    </option>
+                  ))}
                 </Select>
               </Grid>
               <Grid item xs={12}>
@@ -521,7 +519,7 @@ export default function ClassSchedule({ next, back }) {
                   PaperProps={{
                     sx: {
                       width: "100%",
-                      maxWidth: 750,
+                      maxWidth: 960,
                       background: "#F6F9FC",
                     },
                   }}
@@ -665,7 +663,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Mon
@@ -685,7 +683,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Tue
@@ -704,7 +702,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Wed
@@ -723,7 +721,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Thu
@@ -742,7 +740,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Fri
@@ -761,7 +759,7 @@ export default function ClassSchedule({ next, back }) {
                                         mt: 2,
                                         mx: 2,
                                         color: "rgba(0, 0, 0, 0.85)",
-                                        font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                        font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                       }}
                                     >
                                       Sat
@@ -789,7 +787,7 @@ export default function ClassSchedule({ next, back }) {
                                           <Box
                                             key={"opt" + i}
                                             sx={{
-                                              width: 77,
+                                              width: 90,
                                               height: 28,
                                               padding: "8px 11px",
                                               display: "flex",
@@ -799,8 +797,7 @@ export default function ClassSchedule({ next, back }) {
                                               background: exists
                                                 ? Colors.secondary
                                                 : "transparent",
-                                              mt: 2,
-                                              mx: 2,
+                                              m: 2,
                                               cursor:
                                                 selected.length >= 8
                                                   ? "not-allowed"
@@ -808,9 +805,8 @@ export default function ClassSchedule({ next, back }) {
                                               color: exists
                                                 ? Colors.light
                                                 : Colors.black,
-                                              font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                              font: `normal normal 500 normal 14px/28px ${Fonts.secondary}`,
                                               "&:hover": {
-                                                fontSize: 12,
                                                 textTransform: "scale(0.99)",
                                                 background:
                                                   "rgba(247,11,88,0.2)",
@@ -942,7 +938,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Mon
@@ -961,7 +957,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Tue
@@ -979,7 +975,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Wed
@@ -997,7 +993,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Thu
@@ -1015,7 +1011,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Fri
@@ -1033,7 +1029,7 @@ export default function ClassSchedule({ next, back }) {
                                       alignItems: "center",
                                       borderRadius: "5px",
                                       color: "rgba(0, 0, 0, 0.85)",
-                                      font: `normal normal 700 11px/28px ${Fonts.secondary}`,
+                                      font: `normal normal 700 normal 12px/28px ${Fonts.secondary}`,
                                     }}
                                   >
                                     Sat
@@ -1054,18 +1050,13 @@ export default function ClassSchedule({ next, back }) {
                                           key={"opt" + i}
                                           sx={{
                                             width: 78,
-                                            height: 28,
+                                            height: 908,
                                             padding: "8px 10px",
                                             display: "flex",
                                             justifyContent: "center",
                                             alignItems: "center",
                                             borderRadius: "5px",
                                             my: 3,
-                                            // background: exists
-                                            //   ? Colors.secondary
-                                            //   : "transparent",
-                                            // mt: 2,
-                                            // mx: 2,
                                             cursor:
                                               selected.length >= 8
                                                 ? "not-allowed"
@@ -1073,9 +1064,8 @@ export default function ClassSchedule({ next, back }) {
                                             color: exists
                                               ? Colors.secondary
                                               : "rgba(0, 0, 0, 0.85)",
-                                            font: `normal normal 500 12px/28px ${Fonts.secondary}`,
+                                            font: `normal normal 500 normal 14px/28px ${Fonts.secondary}`,
                                             "&:hover": {
-                                              fontSize: 12,
                                               textTransform: "scale(0.99)",
                                               color: "rgba(247,11,88,0.2)",
                                             },
@@ -1135,7 +1125,6 @@ export default function ClassSchedule({ next, back }) {
                             </SmallTabPanel>
                           );
                         })}
-                        {/* </TabContext> */}
                       </Box>
                     )}
                   </Box>
@@ -1149,8 +1138,8 @@ export default function ClassSchedule({ next, back }) {
                     <>
                       Preferred Start Date{" "}
                       <Box sx={{ fontWeight: 400, fontSize: 15 }}>
-                        We need at least five working days from today to prepare
-                        everything for you.
+                        Class starts on the first available day of the week
+                        following your preferred starting day.
                       </Box>{" "}
                     </>
                   }

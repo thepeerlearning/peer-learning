@@ -36,7 +36,7 @@ export default function DashboardPage() {
   const fullname = user?.children?.data[0].fullname;
   const activeCourse = courses?.next_class;
   const [isClassTime, setIsClassTime] = useState(false);
-  console.log("TIME ZONE");
+
   useEffect(() => {
     const currentTime = moment.utc();
     const startTime = moment.utc(courses?.next_class?.date);
@@ -275,7 +275,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment.utc(courses?.start_date).format("LLL")}
+                      {moment.utc(courses?.start_date).format("LL")}
                     </Box>
                   </Grid>
                   {/* COURSE END */}
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                         color: Colors.black,
                       }}
                     >
-                      {moment.utc(courses?.last_class.date).format("LLL")}
+                      {moment.utc(courses?.last_class.date).format("LL")}
                     </Box>
                   </Grid>
                   {/* MISSED COURSES */}
