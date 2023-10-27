@@ -258,7 +258,7 @@ export default function ClassSchedule({ next, back }) {
                       textTransform: "capitalize",
                     }}
                   >
-                    {opt.time >= 9
+                    {+opt.time >= 9 && +opt.time < 12
                       ? `${opt.name}, ${opt.time}:00 AM`
                       : `${opt.name}, ${opt.time}:00 PM`}
                   </Box>
@@ -473,7 +473,7 @@ export default function ClassSchedule({ next, back }) {
                   htmlFor="availability"
                   label="What days are you available for class?"
                   name="availability"
-                  placeholder="12:00 AM"
+                  placeholder="12:00 PM"
                   onClick={handleClickOpen}
                   icon={selected.length > 0 ? null : <CircledAdd />}
                 >
@@ -815,7 +815,7 @@ export default function ClassSchedule({ next, back }) {
                                             onClick={() => handleTimeClick(opt)}
                                             disabled={disabled}
                                           >
-                                            {+opt.time >= 9
+                                            {+opt.time >= 9 && +opt.time < 12
                                               ? `${opt.time}:00 AM`
                                               : `${opt.time}:00 PM`}
                                           </Box>
@@ -1073,7 +1073,7 @@ export default function ClassSchedule({ next, back }) {
                                           onClick={() => handleTimeClick(opt)}
                                           disabled={disabled}
                                         >
-                                          {+opt.time >= 9
+                                          {+opt.time >= 9 && +opt.time < 12
                                             ? `${opt.time}:00 AM`
                                             : `${opt.time}:00 PM`}
                                         </Box>
