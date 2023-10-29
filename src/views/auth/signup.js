@@ -65,6 +65,7 @@ export default function SignupForm({ next }) {
       return setErrorMessage(message);
     }
   }, [message]);
+
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data;
     const phoneNumberObj = parsePhoneNumber(phone);
