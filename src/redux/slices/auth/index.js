@@ -17,12 +17,11 @@ export const signup = createAsyncThunk(
       }
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
+      console.log("error", message);
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -49,12 +48,10 @@ export const classSchedule = createAsyncThunk(
       }
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -78,12 +75,10 @@ export const initiatePayment = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -108,11 +103,10 @@ export const validatePayment = createAsyncThunk(
       }
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -135,11 +129,10 @@ export const validateEmail = createAsyncThunk(
       }
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -168,12 +161,10 @@ export const login = createAsyncThunk(
       }
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -193,11 +184,11 @@ export const forgotpassword = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
+      error.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -217,11 +208,10 @@ export const validateForgotPasswordEmail = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -241,11 +231,10 @@ export const resetpassword = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -266,12 +255,10 @@ export const refreshpage = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.message ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -291,11 +278,10 @@ export const updateProfile = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -315,11 +301,10 @@ export const changePassword = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -339,11 +324,10 @@ export const getProfile = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }

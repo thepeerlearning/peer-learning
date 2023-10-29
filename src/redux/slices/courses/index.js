@@ -10,12 +10,10 @@ export const getCourses = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -35,12 +33,10 @@ export const activeCourses = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -63,12 +59,10 @@ export const classSchedules = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }
@@ -91,12 +85,10 @@ export const updateClassStatus = createAsyncThunk(
       return response.data;
     } catch (error) {
       let message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.errors ||
-        error.message ||
-        error.toString();
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        error?.toString();
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry";
       }

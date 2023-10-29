@@ -53,11 +53,11 @@ export default function SignupForm({ next }) {
     resolver: yupResolver(validationSchema),
   });
   useEffect(() => {
-    if (message?.email) {
+    if (message && message?.email) {
       message?.email?.map((email) => {
         return setErrorMessage("Email " + email);
       });
-    } else if (message?.user?.password) {
+    } else if (message && message?.user?.password) {
       message?.user?.password?.map((password) => {
         return setErrorMessage("Password " + password);
       });
@@ -65,7 +65,6 @@ export default function SignupForm({ next }) {
       return setErrorMessage(message);
     }
   }, [message]);
-  console.log("message", message);
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data;
     const phoneNumberObj = parsePhoneNumber(phone);
@@ -318,7 +317,7 @@ export default function SignupForm({ next }) {
         variant="error"
         handleClose={handleCloseSnack}
         message={errorMessage}
-        isOpen={error}
+        isOpen={error === true}
       />
     </Box>
   );
