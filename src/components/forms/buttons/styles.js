@@ -1,8 +1,8 @@
 // Import dependencies
-import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import { Colors } from "../../themes/colors";
-import { Fonts } from "../../themes/fonts";
+import styled from "@emotion/styled"
+import { css } from "@emotion/react"
+import { Colors } from "../../themes/colors"
+import { Fonts } from "../../themes/fonts"
 
 export const ButtonsRow = styled.div`
   display: flex;
@@ -17,24 +17,22 @@ export const ButtonsRow = styled.div`
   & + & {
     margin-top: 12px;
   }
-`;
+`
 
 export const ButtonVariant = styled.div`
   width: 16.6666667%;
   &:nth-of-type(n + 2) {
     text-align: center;
   }
-`;
+`
 export const Button = styled.button`
   width: ${(props) => (props.width ? props.width : "100%")};
   display: flex;
-  flex-shrink: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  padding: 17px 0px;
-  gap: 7.817px;
+  padding: 10px 16px;
+  gap: 6px;
   color: ${(props) => (props.ghost ? Colors.primary : Colors.light)};
   background: ${(props) =>
     props.disabled
@@ -42,8 +40,9 @@ export const Button = styled.button`
       : props.ghost
       ? "transparent"
       : Colors.primary};
-  border-radius: 9999px;
-  font: normal normal normal 400 16px/25.6px ${Fonts.secondary};
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  font: normal normal 600 normal 16px/24px ${Fonts.primary};
   border: ${(props) =>
     props.disabled
       ? `1px solid rgba(13,24,37,0.22)`
@@ -122,7 +121,7 @@ export const Button = styled.button`
         font-size: 12px;
       }
     `};
-`;
+`
 
 export const FabStyle = styled(Button)`
   display: flex;
@@ -140,7 +139,7 @@ export const FabStyle = styled(Button)`
     background: ${Colors.primary};
     color: ${Colors.light};
   }
-`;
+`
 export const DialogFormTitle = styled.h2`
   text-align: ${(props) => props.align || "left"};
   text-transform: uppercase;
@@ -148,4 +147,4 @@ export const DialogFormTitle = styled.h2`
   letter-spacing: 0.1em;
   color: ${(props) => props.color || Colors.secondary};
   margin-top: 0;
-`;
+`

@@ -1,16 +1,30 @@
-import React from "react";
-import { Colors } from "../../../components/themes/colors";
-import { Fonts } from "../../../components/themes/fonts";
-import { TableContent } from "../../../components/table";
-import { StyledCard } from "../../../components/forms/textFields";
-import { Box } from "@mui/material";
+//SUBSCRIPTION
+import { Box, Stack } from "@mui/material"
+import React from "react"
+import { DownloadIcon } from "../../../components/svg"
+import { TableContent } from "../../../components/table"
+import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
+import { DoneIcon } from "../../../components/svg/menuIcons"
 
 const columns = [
   {
     id: "sn",
     label: " ",
     align: "left",
-    minWidth: 80,
+    minWidth: 20,
+    align: "left",
+  },
+  {
+    id: "course",
+    label: "Course",
+    minWidth: 500,
+    align: "left",
+  },
+  {
+    id: "amount",
+    label: "Amount",
+    minWidth: 100,
     align: "left",
   },
   {
@@ -19,71 +33,243 @@ const columns = [
     minWidth: 100,
     align: "left",
   },
-
   {
-    id: "amount",
-    label: "Amount",
+    id: "status",
+    label: "Status",
     minWidth: 100,
     align: "left",
   },
   {
-    id: "plan",
-    label: "Plan",
+    id: "action",
+    label: " ",
     minWidth: 100,
-    align: "left",
+    align: "right",
   },
-];
+]
 
-function createData(sn, date, amount, plan) {
+function createData(sn, course, amount, date, status, action) {
   return {
     sn,
-    date,
+    course,
     amount,
-    plan,
-  };
+    date,
+    status,
+    action,
+  }
 }
+const data = [
+  {
+    sn: 1,
+    course: "Web development",
+    date: "Dec 1, 2023",
+    amount: 100,
+    status: "paid",
+    action: <DownloadIcon />,
+  },
+  {
+    sn: 2,
+    course: "Python",
+    date: "Nov 1, 2023",
+    amount: 100,
+    status: "paid",
+    action: <DownloadIcon />,
+  },
+  {
+    sn: 1,
+    course: "UI/UX Design",
+    date: "Oct 1, 2023",
+    amount: 300,
+    status: "failed",
+    action: <DownloadIcon />,
+  },
+]
 export default function SubscriptionHistory() {
-  const rows = [
-    createData(
-      1,
-      "20/06/2023",
-      `₦ ${parseFloat(3000).toLocaleString("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })}`,
-      "Monthly"
-    ),
-  ];
+  const rows =
+    data && data.length !== 0
+      ? data?.map((row, i) =>
+          createData(
+            i + 1,
+            <Box
+              sx={{
+                fontWeight: 500,
+              }}
+            >
+              {row.course}
+            </Box>,
+            `USD $${Number(row.amount).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`,
+            row.date,
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: 60,
+                display: "flex",
+                padding: "2px 6px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 0.5,
+                font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
+                borderRadius: "1000px",
+                border:
+                  row.status === "paid"
+                    ? `1.5px solid ${Colors.buttonSuccess}`
+                    : `1.5px solid ${Colors.buttonError}`,
+                color:
+                  row.status === "paid"
+                    ? Colors.buttonSuccess
+                    : Colors.buttonError,
+                textTransform: "capitalize",
+              }}
+            >
+              {row.status === "paid" ? <DoneIcon /> : ""}
+              {row.status}
+            </Box>,
+            row.action
+          )
+        )
+      : []
   return (
-    <StyledCard
-      sx={{
-        display: "inline-flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        background: Colors.light,
-        gap: "18px",
-        p: { xs: "24px 16px 43px 16px", md: "24px 139px 43px 32px" },
-        my: 2,
-        border: `1px solid #E5E7EB`,
-        boxShadow: "none",
-        cursor: "pointer",
-      }}
+    <Box
+      sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 3 }}
     >
       <Box
-        component="div"
         sx={{
           width: "100%",
           display: "flex",
-          color: "#111827",
-          font: {
-            xs: `normal normal 600 22px/26px ${Fonts.Jakarta}`,
-            sm: `normal normal 600 24px/36px ${Fonts.Jakarta}`,
-          },
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}
       >
-        Subscription
+        <Box
+          component="div"
+          sx={{
+            display: "flex",
+            color: Colors.dark,
+            font: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+          }}
+        >
+          Billing history
+        </Box>
+        <Box
+          component="div"
+          sx={{
+            width: 143,
+            height: 40,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "10px 14px",
+            gap: "4px",
+            color: Colors.secondary,
+            font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+            border: `1px solid #D0D5DD`,
+            borderRadius: 1,
+            cursor: "pointer",
+          }}
+        >
+          <DownloadIcon />
+          Download all
+        </Box>
       </Box>
       <TableContent columns={columns} rows={rows} />
-    </StyledCard>
-  );
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+          position: "relative",
+        }}
+      >
+        <Box
+          component="div"
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexDirection: "column",
+            color: Colors.dark,
+            font: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+          }}
+        >
+          Active Subscription
+          <Stack
+            direction="row"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+            sx={{ width: "100%", maxWidth: 400, pb: 2 }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 0.52,
+                color: Colors.textColor,
+                font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+              }}
+            >
+              Next Bill Date{" "}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  color: Colors.textColor,
+                  font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                }}
+              >
+                March 06, 2024
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                color: Colors.textColor,
+                gap: 0.52,
+                font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+              }}
+            >
+              Monthly price{" "}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  color: Colors.textColor,
+                  font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                }}
+              >
+                $100/month
+              </Box>
+            </Box>
+          </Stack>
+        </Box>
+        <Box
+          sx={{
+            width: { xs: "100%", sm: 170 },
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Box
+            component="div"
+            sx={{
+              width: 170,
+              height: 40,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "8px 14px",
+              gap: "4px",
+              color: Colors.secondary,
+              font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+              border: `1px solid #D0D5DD`,
+              borderRadius: 1,
+            }}
+          >
+            Cancel subscription
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  )
 }

@@ -1,42 +1,40 @@
-import { Close } from "@mui/icons-material";
-import { Box, Dialog, Slide } from "@mui/material";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import * as React from "react";
-import { useDispatch } from "react-redux";
-import { StripeIcon } from "../../../../components/svg/menuIcons";
-import { Colors } from "../../../../components/themes/colors";
-import { Fonts } from "../../../../components/themes/fonts";
-import { initiatePayment } from "../../../../redux/slices/auth";
-import CheckoutForm from "./form";
+import { Close } from "@mui/icons-material"
+import { Box, Dialog, Slide } from "@mui/material"
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import * as React from "react"
+import { useDispatch } from "react-redux"
+import { StripeIcon } from "../../../../components/svg/menuIcons"
+import { Colors } from "../../../../components/themes/colors"
+import { Fonts } from "../../../../components/themes/fonts"
+import { initiatePayment } from "../../../../redux/slices/auth"
+import CheckoutForm from "./form"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-const stripePromise = loadStripe(
-  "pk_test_51NLPMPIzACUV2cT0rIjurlArq0RyHYwEMVIGIN9zKLdoeE8AhPpQX34h5XXI0ZsBT9B5KGGjLMfB6vb6VASwsdZr00I9MMuO4c"
-);
+  return <Slide direction="up" ref={ref} {...props} />
+})
+const stripePromise = loadStripe("")
 export default function StripePayment() {
-  const [open, setOpen] = React.useState(false);
-  const [clientSecret, setClientSecret] = React.useState(null);
-  const [amount, setAmount] = React.useState(null);
-  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false)
+  const [clientSecret, setClientSecret] = React.useState(null)
+  const [amount, setAmount] = React.useState(null)
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const courseId = localStorage.getItem("courseId");
+    const courseId = localStorage.getItem("courseId")
     dispatch(initiatePayment({ course_id: courseId }))
       .unwrap()
       .then((res) => {
-        setClientSecret(res?.data?.metadata.client_secret);
-        setAmount(res?.data?.pretty_amount);
+        setClientSecret(res?.data?.metadata.client_secret)
+        setAmount(res?.data?.pretty_amount)
       })
-      .catch(() => {});
-  }, [dispatch]);
+      .catch(() => {})
+  }, [dispatch])
   const options = {
     clientSecret,
-  };
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  }
+  const handleClickOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   return (
     <div>
       <Box
@@ -137,5 +135,5 @@ export default function StripePayment() {
         </Box>
       </Dialog>
     </div>
-  );
+  )
 }

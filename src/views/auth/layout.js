@@ -6,30 +6,52 @@ import {
   CardHeader,
   CssBaseline,
   Grid,
-  IconButton,
   Link,
   Toolbar,
-  Typography,
+  useMediaQuery,
 } from "@mui/material"
 import MuiAppBar from "@mui/material/AppBar"
-// import { AppLogo } from "../../components/svg/logo"
-import AppLogo from "../../../public/images/logo.svg"
-import { ExplorerKidIcon } from "../../components/svg/explorerKid"
+import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
-import MenuIcon from "@mui/icons-material/Menu"
-import Image from "next/image"
 import SwipeableViews from "react-swipeable-views"
 import { autoPlay } from "react-swipeable-views-utils"
+import { useTheme } from "@mui/material/styles"
+import MobileStepper from "@mui/material/MobileStepper"
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const testimonies = [
   {
     text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
     author: "Mrs. Ndubuisi",
     location: "Alabama, United States",
+    imgPath: "/images/testimony1.png",
+  },
+  {
+    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
+    author: "Mrs. Samuel",
+    location: "Bali, Indonesia",
+    imgPath:
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
+  },
+  {
+    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
+    author: "Mr. Choc",
+    location: "Goč, Serbia",
+    imgPath:
+      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
   },
 ]
 export default function AuthLayout({ children }) {
+  const matches = useMediaQuery("(max-width:599px)")
+  const theme = useTheme()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const maxSteps = testimonies.length
+
+  const handleStepChange = (step) => {
+    setActiveStep(step)
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -42,7 +64,7 @@ export default function AuthLayout({ children }) {
           alignItems: "center",
           backgroundColor: Colors.black,
           height: 58,
-          px: { xs: 3, sm: 12.5 },
+          px: { xs: 1, sm: 3, lg: 12.5 },
         }}
       >
         <Toolbar
@@ -54,14 +76,14 @@ export default function AuthLayout({ children }) {
           }}
         >
           <Box sx={{ flexGrow: 1 }}>
-            <Link underline="none" href="https://thepeerlearning.com">
-              {/* <AppLogo /> */}
-              <Image src={AppLogo} alt="app logo" />
+            <Link underline="none" href="/">
+              <AppLogo />
             </Link>
           </Box>
           <Box
             component="h4"
             sx={{
+              display: { xs: "none", sm: "flex" },
               font: `normal normal 600 normal 14px/24px ${Fonts.primary}`,
               color: Colors.light,
             }}
@@ -74,107 +96,167 @@ export default function AuthLayout({ children }) {
         component="main"
         sx={{
           flexGrow: 1,
-          height: { sm: `calc(100% - 58px)` },
           width: "100%",
         }}
       >
-        <Toolbar />
+        {matches && <Toolbar />}
+        <Box
+          sx={{
+            width: "100%",
+            display: { xs: "flex", sm: "none" },
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            component="h4"
+            sx={{
+              font: `normal normal 600 normal 14px/24px ${Fonts.primary}`,
+              color: Colors.primary,
+            }}
+          >
+            Support: +234 8169924908 (WhatsApp 24/7)
+          </Box>
+        </Box>
         <Grid container>
-          <Grid item xs={12} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            xl={4}
+            sx={{ display: { xs: "none", sm: "flex" } }}
+          >
             <Box
               sx={{
                 position: "relative",
-                px: "53.4px",
+                width: "100%",
+                height: "100vh",
                 maxWidth: 600,
-                height: "93.4vh",
                 borderRadius: 0,
                 background:
                   "radial-gradient(139.01% 123.43% at 100% 101.85%, #D1AAD7 0%, rgba(255, 255, 255, 0.00) 100%), radial-gradient(235.86% 193.22% at 1.69% 266.34%, #C88BC4 0%, rgba(255, 255, 255, 0.00) 100%), radial-gradient(122.51% 98.9% at 41.68% 122.6%, #7B8FDD 0%, rgba(255, 255, 255, 0.00) 0%)",
+                flexShrink: 0,
+                transform: "rotate(179.886deg)",
               }}
             >
               <Box
                 sx={{
-                  position: "fixed",
-                  bottom: 70,
+                  px: { sm: 2, lg: "53.4px" },
                 }}
               >
                 <Box
                   sx={{
-                    width: 500,
-                    display: "flex",
-                    padding: "24px",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: 2,
-                    borderRadius: "20px",
-                    background: "rgba(177, 164, 164, 0.40)",
+                    width: "100%",
+                    position: "fixed",
+                    top: 70,
                   }}
                 >
                   <Card
                     sx={{
-                      maxWidth: 448,
-                      background: "transparent",
+                      width: 492,
+                      padding: "24px",
+                      borderRadius: "20px",
+                      background: "rgba(177, 164, 164, 0.40)",
+                      transform: "rotate(180deg)",
                       boxShadow: "none",
-                      borderRadius: 0,
                     }}
                   >
-                    <Box
-                      sx={{
-                        width: "100%",
-                        font: `normal normal 400 normal 16px/145% ${Fonts.primary}`,
-                        fontFeatureSettings: `'cv04' on, 'cv03' on, 'cv01' on`,
-                      }}
+                    <AutoPlaySwipeableViews
+                      axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                      index={activeStep}
+                      onChangeIndex={handleStepChange}
+                      enableMouseEvents
                     >
-                      As a tech entrepreneur, I see the immense potential of
-                      coding skills for our kids&apos;s future. Peer Learning is
-                      making it possible for more African kids to join the tech
-                      revolution. I&apos;m proud to support their mission to
-                      bridge the digital divide.{" "}
-                    </Box>
-                    <CardHeader
-                      avatar={
-                        <Avatar
-                          src="/images/testimony1.png"
-                          sx={{ bgcolor: "#FFE7CC" }}
-                          aria-label="recipe"
-                        >
-                          A
-                        </Avatar>
-                      }
-                      title={
-                        <Box
-                          sx={{
-                            font: `normal normal 400 normal 16px/145% ${Fonts.primary}`,
-                            fontFeatureSettings: `cv04' on, 'cv03' on, 'cv01' on;`,
-                            color: Colors.light,
-                          }}
-                        >
-                          Mrs. Ndubuisi
-                        </Box>
-                      }
-                      subheader={
-                        <Box
-                          sx={{
-                            font: `normal normal 400 normal 13px/145% ${Fonts.primary}`,
-                            fontFeatureSettings: `'cv04' on, 'cv03' on, 'cv01' on`,
-                          }}
-                        >
-                          Alabama, United States
-                        </Box>
-                      }
+                      {testimonies.map((step, index) => (
+                        <div key={step.label}>
+                          {Math.abs(activeStep - index) <= 2 ? (
+                            <Box
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                                gap: 2,
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  font: `normal normal 400 normal 16px/145% ${Fonts.primary}`,
+                                  fontFeatureSettings: `'cv04' on, 'cv03' on, 'cv01' on`,
+                                  m: 0,
+                                }}
+                              >
+                                {step.text}
+                              </Box>
+                              <CardHeader
+                                sx={{ p: 0 }}
+                                avatar={
+                                  <Avatar
+                                    src={step.imgPath}
+                                    sx={{ bgcolor: "#FFE7CC", pl: 0 }}
+                                    aria-label="recipe"
+                                  >
+                                    A
+                                  </Avatar>
+                                }
+                                title={
+                                  <Box
+                                    sx={{
+                                      font: `normal normal 400 normal 16px/145% ${Fonts.primary}`,
+                                      fontFeatureSettings: `cv04' on, 'cv03' on, 'cv01' on;`,
+                                      color: Colors.light,
+                                    }}
+                                  >
+                                    {step.author}
+                                  </Box>
+                                }
+                                subheader={
+                                  <Box
+                                    sx={{
+                                      font: `normal normal 400 normal 13px/145% ${Fonts.primary}`,
+                                      fontFeatureSettings: `'cv04' on, 'cv03' on, 'cv01' on`,
+                                    }}
+                                  >
+                                    {step.location}
+                                  </Box>
+                                }
+                              />
+                            </Box>
+                          ) : null}
+                        </div>
+                      ))}
+                    </AutoPlaySwipeableViews>
+                    <MobileStepper
+                      steps={maxSteps}
+                      position="static"
+                      activeStep={activeStep}
+                      sx={{
+                        maxWidth: 400,
+                        flexGrow: 1,
+                        mt: 2,
+                        background: "transparent",
+                        "& .MuiMobileStepper-dot": {
+                          backgroundColor: Colors.offWhite,
+                        },
+                        "& .MuiMobileStepper-dotActive": {
+                          backgroundColor: Colors.primary,
+                        },
+                      }}
                     />
                   </Card>
                 </Box>
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} sm={6} xl={8}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 height: "100%",
+                width: "100%",
               }}
             >
               {children}

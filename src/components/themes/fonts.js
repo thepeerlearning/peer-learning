@@ -1,5 +1,5 @@
 export const Fonts = {
   primary: "'Inter',sans-serif",
-  secondary: "Helvetica,sans",
+  secondary: "Roboto,sans-serif",
   secondaryNeu: "'Helvetica Neue', sans",
-};
+}

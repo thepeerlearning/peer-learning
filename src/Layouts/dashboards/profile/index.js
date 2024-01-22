@@ -1,9 +1,11 @@
-import { Box, Button } from "@mui/material";
-import { StyledTooltip } from "../../../components/forms/textFields";
+import { Avatar, Box, Button } from "@mui/material"
+import { StyledTooltip } from "../../../components/forms/textFields"
 import {
   AngleDownWard,
   CircleProfileIcon,
-} from "../../../components/svg/menuIcons";
+  Logout,
+} from "../../../components/svg/menuIcons"
+import { logout } from "../../../redux/slices/auth"
 
 export default function AppbarProfile() {
   return (
@@ -26,7 +28,7 @@ export default function AppbarProfile() {
           </>
         }
       >
-        <Box
+        {/* <Box
           component="div"
           sx={{
             width: 65,
@@ -36,11 +38,24 @@ export default function AppbarProfile() {
             alignItems: "center",
             cursor: "pointer",
           }}
+        > */}
+        <Button
+          startIcon={
+            <Avatar src="" alt="profile picture">
+              <CircleProfileIcon style={{ width: 35, height: 35 }} />
+            </Avatar>
+          }
+          endIcon={
+            <Box onClick={() => dispatch(logout())}>
+              <Logout style={{ color: "#C3CAD9" }} />
+            </Box>
+          }
         >
-          <CircleProfileIcon style={{ width: 35, height: 35 }} />
-          <AngleDownWard style={{ color: "#C3CAD9" }} />
-        </Box>
+          Sam Rhye
+        </Button>
+
+        {/* </Box> */}
       </StyledTooltip>
     </div>
-  );
+  )
 }

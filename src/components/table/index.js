@@ -5,15 +5,15 @@ import {
   TableBody,
   TableRow,
   TableHead,
-} from "@mui/material";
-import Spinner from "../spinner";
-import { Nodata } from "../svg/nodata";
+} from "@mui/material"
+import Spinner from "../spinner"
+import { Nodata } from "../svg/nodata"
 import {
   StyledTableCell,
   StyledTableContainer,
   StyledTablePagination,
-} from "./style";
-import { Colors } from "../themes/colors";
+} from "./style"
+import { Colors } from "../themes/colors"
 
 export function TableContent({
   loading,
@@ -55,11 +55,7 @@ export function TableContent({
         </Box>
       ) : (
         <>
-          <StyledTableContainer
-            component={Paper}
-            data-aos="zoom-in-up"
-            data-aos-once="true"
-          >
+          <StyledTableContainer component={Paper}>
             <Table stickyHeader>
               <TableHead>
                 <TableRow>
@@ -77,7 +73,7 @@ export function TableContent({
                       >
                         {column.label}
                       </StyledTableCell>
-                    );
+                    )
                   })}
                 </TableRow>
               </TableHead>
@@ -101,7 +97,7 @@ export function TableContent({
                             }}
                           >
                             {columns.map((column) => {
-                              const value = row[column.id];
+                              const value = row[column.id]
                               return (
                                 <StyledTableCell
                                   key={column.id}
@@ -122,10 +118,10 @@ export function TableContent({
                                 >
                                   {value}
                                 </StyledTableCell>
-                              );
+                              )
                             })}
                           </TableRow>
-                        );
+                        )
                       })
                   : rows.map((row, index) => {
                       return (
@@ -136,7 +132,7 @@ export function TableContent({
                           }
                         >
                           {columns.map((column) => {
-                            const value = row[column.id];
+                            const value = row[column.id]
                             return (
                               <StyledTableCell
                                 key={column.id}
@@ -155,10 +151,10 @@ export function TableContent({
                               >
                                 {value}
                               </StyledTableCell>
-                            );
+                            )
                           })}
                         </TableRow>
-                      );
+                      )
                     })}
               </TableBody>
             </Table>
@@ -191,5 +187,5 @@ export function TableContent({
         </>
       )}
     </>
-  );
+  )
 }

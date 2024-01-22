@@ -1,15 +1,15 @@
-import { Box, Link } from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React from "react";
-import AccessDenied from "../src/components/lottie/access-denied";
-import { SubmitButton } from "../src/components/forms/buttons";
-import { AppLogo } from "../src/components/svg/logo";
-import { Colors } from "../src/components/themes/colors";
-import { Fonts } from "../src/components/themes/fonts";
+import { Box, Link } from "@mui/material"
+import Image from "next/image"
+import { useRouter } from "next/router"
+import React from "react"
+import AccessDenied from "../src/components/lottie/access-denied"
+import { SubmitButton } from "../src/components/forms/buttons"
+import { AppLogo } from "../src/components/svg/logo-light-bg"
+import { Colors } from "../src/components/themes/colors"
+import { Fonts } from "../src/components/themes/fonts"
 
 export default function PageNotFound() {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <Box
       sx={{
@@ -38,7 +38,7 @@ export default function PageNotFound() {
           mx: { xs: 3, xl: 0 },
         }}
       >
-        <Link underline="none" href="/https://thepeerlearning.com">
+        <Link underline="none" href="/auth/login">
           <AppLogo style={{ width: 80, height: 80 }} />
         </Link>
 
@@ -65,5 +65,5 @@ export default function PageNotFound() {
         </Box>
       </Box>
     </Box>
-  );
+  )
 }

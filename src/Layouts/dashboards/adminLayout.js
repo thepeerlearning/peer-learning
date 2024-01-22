@@ -1,5 +1,9 @@
+import MenuIcon from "@mui/icons-material/Menu"
 import {
+  Avatar,
   Box,
+  Card,
+  CardHeader,
   Collapse,
   CssBaseline,
   Drawer,
@@ -8,105 +12,95 @@ import {
   ListItemButton,
   ListItemIcon,
   Toolbar,
-} from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Router, { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import Spinner from "../../components/spinner/persist-loader";
-import { AppLogo } from "../../components/svg/logo";
-import {
-  AngleBackward,
-  DashboardIcon,
-  Logout,
-  PersonIcon,
-  ScheduleIcon,
-  SettingIcon,
-} from "../../components/svg/menuIcons";
-import { Colors } from "../../components/themes/colors";
-import { Fonts } from "../../components/themes/fonts";
-import Notifications from "./notifications";
-import AppbarProfile from "./profile";
-import { NestedStyledList, SecondStyledList, StyledList } from "./styles";
-import { Search } from "../../components/forms/textFields";
-import { logout } from "../../redux/slices/auth";
-import { useDispatch, useSelector } from "react-redux";
+} from "@mui/material"
+import AppBar from "@mui/material/AppBar"
+import Router, { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { AiOutlineClose } from "react-icons/ai"
+import { useDispatch, useSelector } from "react-redux"
+import Spinner from "../../components/spinner/persist-loader"
+import { PeopleIcon } from "../../components/svg"
+import { AppLogo } from "../../components/svg/logo-dark-bg"
+import { AngleBackward, Logout } from "../../components/svg/menuIcons"
+import { Colors } from "../../components/themes/colors"
+import { Fonts } from "../../components/themes/fonts"
+import { logout } from "../../redux/slices/auth"
+import { NestedStyledList, StyledList } from "./styles"
 
 function updateKey(str) {
-  if (typeof str !== "string") return "";
-  const regex = / /g;
-  const newStr = str.toLowerCase();
-  const update = newStr.replace(regex, "-");
-  return update;
+  if (typeof str !== "string") return ""
+  const regex = / /g
+  const newStr = str.toLowerCase()
+  const update = newStr.replace(regex, "-")
+  return update
 }
+const drawerWidth = 280
+const appHeight = 72
 
-const drawerWidth = 220;
-const appHeight = 72;
-
-export default function DashboardLayouts({ children, window, breadcrumb }) {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [openNest, setOpenNest] = useState("");
-  const [search, setSearch] = useState("");
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+function AdminDashboardLayouts({ children, window }) {
+  const [loading, setLoading] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openNest, setOpenNest] = useState("")
+  const { user, isLoggedIn } = useSelector((state) => state.auth)
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", () => setLoading(true));
-    Router.events.on("routeChangeComplete", () => setLoading(false));
-    Router.events.on("routeChangeError", () => setLoading(false));
+    Router.events.on("routeChangeStart", () => setLoading(true))
+    Router.events.on("routeChangeComplete", () => setLoading(false))
+    Router.events.on("routeChangeError", () => setLoading(false))
     return () => {
-      Router.events.off("routeChangeStart", () => setLoading(true));
-      Router.events.off("routeChangeComplete", () => setLoading(false));
-      Router.events.off("routeChangeError", () => setLoading(false));
-    };
-  }, []);
-  useEffect(() => {
-    if (!isLoggedIn) return router.push("/");
-    if (!(user?.role === "instructor" || user?.role === "admin"))
-      return router.push("/unauthorised");
-  }, [isLoggedIn, router, user]);
+      Router.events.off("routeChangeStart", () => setLoading(true))
+      Router.events.off("routeChangeComplete", () => setLoading(false))
+      Router.events.off("routeChangeError", () => setLoading(false))
+    }
+  }, [])
 
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-  const handleSearch = (e) => setSearch(e.target.value);
+  // useEffect(() => {
+  //   if (!isLoggedIn) return router.push("/");
+  //   if (
+  // !(
+  //       user?.role === "instructor" ||
+  //       user?.role === "admin"
+  //     )
+  //   )
+  //     return router.push("/unauthorised");
+  // }, [isLoggedIn, router, user]);
+
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
 
   const handleClick = (item, index) => {
     item.children && openNest === index
       ? setOpenNest("")
       : item.children
       ? setOpenNest(index)
-      : (router.push(item.link), setMobileOpen(false));
-  };
+      : (router.push(item.link), setMobileOpen(false))
+  }
+  // if (!isLoggedIn) return <Spinner />
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window().document.body : undefined
   const menu = [
     {
-      name: "Dashboard",
-      icon: <DashboardIcon />,
-      link: "/admin/dashboard",
-    },
-    {
-      name: "User profile",
-      icon: <PersonIcon />,
-      link: "/admin/user-profile",
-    },
-    {
-      name: "Class schedule",
-      icon: <ScheduleIcon />,
+      name: "Class Schedule",
+      icon: <PeopleIcon />,
       link: "/admin/class-schedule",
     },
-  ];
-  const settingMenu = {
-    name: "Settings",
-    icon: <SettingIcon />,
-    link: "/admin/settings",
-  };
+  ]
+
+  const featuresMenu = [
+    "My projects",
+    "My quiz",
+    "My certificates",
+    "Invite friends $ earn",
+    "Points",
+  ]
 
   const drawer = (
-    <div>
-      <Toolbar sx={{ minHeight: `50px !important`, padding: `0 !important` }}>
-        <Link underline="none" href="https://thepeerlearning.com">
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Toolbar
+        sx={{ minHeight: `50px !important`, padding: `16px !important` }}
+      >
+        <Link underline="none" href="/auth/login">
           <AppLogo
             style={{
               width: 150,
@@ -117,7 +111,7 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
         </Link>
         <Box
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             position: "fixed",
             top: 10,
             right: 10,
@@ -152,6 +146,7 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
             height: "45vh",
             overflowX: "hidden",
             overflowY: "auto",
+            px: 2,
             "&::-webkit-scrollbar": {
               width: "0.1px !important",
               height: "0.1px !important",
@@ -169,15 +164,16 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
           <StyledList component="nav" disablePadding>
             {menu &&
               menu.map((item, index) => {
-                let itemName = updateKey(item.name.toLowerCase());
+                let itemName = updateKey(item.name.toLowerCase())
                 return (
                   <Box component="div" key={index + 1}>
                     <ListItemButton
                       disableRipple
                       disableTouchRipple
+                      key={index}
                       onClick={() => handleClick(item, index)}
                       selected={router.pathname.startsWith(
-                        `/admin/${itemName}`
+                        `/students/${itemName}`
                       )}
                     >
                       <ListItemIcon sx={{ color: "inherit" }}>
@@ -239,135 +235,122 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
                                   <Box component="span">{child.name}</Box>
                                 )}
                               </ListItemButton>
-                            );
+                            )
                           })}
                       </NestedStyledList>
                     </Collapse>
                   </Box>
-                );
+                )
               })}
           </StyledList>
         </Box>
+
         {/* SECOND LIST */}
         <Box
           component="div"
           sx={{ position: "absolute", bottom: 0, width: "100%" }}
         >
-          <SecondStyledList component="nav" disablePadding>
-            {settingMenu && (
-              <Box component="div">
-                <ListItemButton
-                  disableRipple
-                  disableTouchRipple
-                  onClick={() => handleClick(settingMenu, menu.length)}
-                  selected={router.pathname.startsWith(`${settingMenu.link}`)}
-                >
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    {settingMenu.icon}
-                  </ListItemIcon>
-                  <Box component="span">{settingMenu.name}</Box>
-                </ListItemButton>
-              </Box>
-            )}
-          </SecondStyledList>
-          <div className="line" style={{ marginTop: 20 }} />
-          <Box
-            component="div"
-            sx={{
-              width: "100%",
-              p: "0px 0px 10px",
-              display: "inline-flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}
+          <div className="line" style={{ margin: "20px 0" }} />
+          <Card
+            sx={{ maxWidth: 248, boxShadow: "none", cursor: "pointer" }}
+            onClick={() => dispatch(logout())}
           >
-            <SecondStyledList component="nav" disablePadding>
-              <ListItemButton
-                disableRipple
-                disableTouchRipple
-                onClick={() => dispatch(logout())}
-              >
-                <ListItemIcon sx={{ color: "inherit" }}>
+            <CardHeader
+              avatar={
+                <Avatar
+                  src="/images/boy-profile.png"
+                  alt="passport"
+                  sx={{ bgcolor: Colors.greyText, color: Colors.greyText }}
+                  aria-label="profile"
+                >
+                  S
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="Logout">
                   <Logout />
-                </ListItemIcon>
+                </IconButton>
+              }
+              title={
                 <Box
                   component="span"
                   sx={{
-                    color: "#F80707",
-                    font: `normal normal 400 16px/140% ${Fonts.secondary}`,
+                    maxWidth: 200,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
                   }}
                 >
-                  Logout
+                  Sam Rhye
                 </Box>
-              </ListItemButton>
-            </SecondStyledList>
-          </Box>
+              }
+              subheader={
+                <Box
+                  sx={{
+                    maxWidth: 200,
+                    font: `normal normal 400 normal 12px/16px ${Fonts.primary}`,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    color: Colors.textColor,
+                  }}
+                >
+                  samrhye@gmail.com
+                </Box>
+              }
+            />
+          </Card>
         </Box>
       </Box>
     </div>
-  );
+  )
   return (
     <Box sx={{ width: "100%" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          boxShadow: "none",
+          width: "100%",
+          ml: { md: `${drawerWidth}px` },
+          display: { md: "none" },
           color: Colors.textColor,
-          background: `#F8F9FA 0% 0% no-repeat padding-box`,
+          background: `${Colors.light} 0% 0% no-repeat padding-box`,
           transition: `all .3s,width 0s`,
           padding: "0px 16px",
           height: appHeight,
-          justifyContent: "center",
-          //   borderBottom: `1px solid rgba(0, 0, 0, 0.10)`,
+          boxShadow: "none",
+          alignItems: "center",
         }}
       >
-        <Toolbar
-          sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* SMALL SCREEN */}
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Link underline="none" href="/auth/login">
+            <AppLogo
+              style={{
+                width: 150,
+                height: 50,
+                flexShrink: 0,
+              }}
+            />
+          </Link>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <AiOutlineMenu />
-          </IconButton>{" "}
-          {/* /** LARGE SCREENS */}
-          <Box
             sx={{
-              display: { md: "flex", xs: "none" },
-              color: "#1C1C1C",
-              font: `normal normal 500 18px/20px ${Fonts.secondary}`,
-              m: 0,
+              display: { md: "none" },
+              background: Colors.primary,
+              color: Colors.light,
             }}
           >
-            <Search
-              id="search"
-              name="search"
-              value={search}
-              placeholder="Search here..."
-              onChange={handleSearch}
-            />
-            {/* {title} */}
-          </Box>
-          <Box sx={{ display: "flex" }}>
-            <Notifications />
-            <AppbarProfile />
-          </Box>
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
         <Drawer
           container={container}
@@ -378,12 +361,13 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              padding: "20px 16px",
-              width: "100%",
-              background: "#F8F9FA",
+
+              // padding: "16px",
+
+              width: drawerWidth,
               "&::-webkit-scrollbar": {
                 width: "0.1px !important",
                 height: "0.1px !important",
@@ -404,13 +388,15 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "flex" },
             "& .MuiDrawer-paper": {
+              position: "fixed",
               background: `${Colors.light} 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
               width: drawerWidth,
-              padding: "20px 16px",
-              borderRight: `1px solid ${Colors.light}`,
+              // padding: "16px",
+              gap: "203px",
+              borderRight: `1px solid rgba(0, 0, 0, 0.10)`,
               "&::-webkit-scrollbar": {
                 width: "0.1px !important",
                 height: "0.1px !important",
@@ -434,25 +420,23 @@ export default function DashboardLayouts({ children, window, breadcrumb }) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: { xs: 2, sm: 3, xl: 6 },
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          p: { xs: 2, md: "32px" },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
           height: "100vh",
-          background: "#F8F9FA",
         }}
       >
-        <Toolbar />
         {loading ? (
           <Spinner />
         ) : (
           <>
-            <Box component="div" sx={{ display: "block" }}>
-              {breadcrumb}
-              {children}
-            </Box>
+            {/* <Box component="div" sx={{ display: "block" }}> */}
+            {children}
+            {/* </Box> */}
           </>
         )}
       </Box>
     </Box>
-  );
+  )
 }
+export default AdminDashboardLayouts

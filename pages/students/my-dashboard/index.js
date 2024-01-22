@@ -1,10 +1,17 @@
-import { Box, Button, CardHeader, Grid, ListItemIcon } from "@mui/material";
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import DashboardLayouts from "../../../src/Layouts/dashboards/defaultLayouts";
-import { SecondStyledList } from "../../../src/Layouts/dashboards/styles";
-import { StyledCard } from "../../../src/components/forms/textFields";
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Grid,
+  ListItemIcon,
+} from "@mui/material"
+import Head from "next/head"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import DashboardLayouts from "../../../src/Layouts/dashboards/defaultLayouts"
+import { SecondStyledList } from "../../../src/Layouts/dashboards/styles"
+import { StyledCard } from "../../../src/components/forms/textFields"
 import {
   CircleProfileIcon,
   ClockEndIcon,
@@ -12,42 +19,69 @@ import {
   InstructionIcon,
   MissedClassIcon,
   StarIcon,
-} from "../../../src/components/svg/menuIcons";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
-import { activeCourses, refresh } from "../../../src/redux/slices/courses";
-import { isEmpty } from "lodash";
-import moment from "moment-timezone";
-import { useRouter } from "next/router";
-import Snackbars from "../../../src/components/snackbar";
-import Spinner from "../../../src/components/spinner/persist-loader";
-import { Nodata } from "../../../src/components/svg/nodata";
+} from "../../../src/components/svg/menuIcons"
+import { Colors } from "../../../src/components/themes/colors"
+import { Fonts } from "../../../src/components/themes/fonts"
+import { activeCourses, refresh } from "../../../src/redux/slices/courses"
+import { isEmpty } from "lodash"
+import moment from "moment-timezone"
+import { useRouter } from "next/router"
+import Snackbars from "../../../src/components/snackbar"
+import Spinner from "../../../src/components/spinner/persist-loader"
+import { Nodata } from "../../../src/components/svg/nodata"
+import { SubmitButton } from "../../../src/components/forms/buttons"
 
+const courses = {
+  name: "Sam Rhye",
+  next_class: "Lesson: Intro to web development ",
+  time: "1:00 EST, Fri January 23, 2024",
+  started: "Jan 23, 2024  |  04:00pm EST",
+  ends: "Feb 23, 2024  |  04:00pm EST",
+  missed: "none",
+}
+const title = (
+  <Box
+    sx={{
+      font: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+      color: Colors.dark,
+    }}
+  >
+    Welcome to class, Sam{" "}
+    <Box
+      sx={{
+        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+        color: Colors.textColor,
+      }}
+    >
+      Measure your
+    </Box>
+  </Box>
+)
 export default function DashboardPage() {
-  const { user } = useSelector((state) => state.auth);
-  const router = useRouter();
+  const { user } = useSelector((state) => state.auth)
+  const router = useRouter()
   const {
-    activeCourse: courses,
-    courseLoading: loading,
+    // activeCourse: courses,
+    // courseLoading: loading,
     coursesError: error,
-  } = useSelector((state) => state.courses);
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
-  const fullname = user?.children?.data[0].fullname;
-  const activeCourse = courses?.next_class;
-  const [isClassTime, setIsClassTime] = useState(false);
+  } = useSelector((state) => state.courses)
+  const { message } = useSelector((state) => state.message)
+  const dispatch = useDispatch()
+  const fullname = user?.children?.data[0].fullname
+  const activeCourse = courses?.next_class
+  const [isClassTime, setIsClassTime] = useState(false)
 
-  useEffect(() => {
-    const currentTime = moment.utc();
-    const startTime = moment.utc(courses?.next_class?.date);
-    const endTime = startTime.clone().add(1, "hour");
-    const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
-    setIsClassTime(isBetweenClassTime);
-  }, [courses]);
+  // useEffect(() => {
+  //   const currentTime = moment.utc();
+  //   const startTime = moment.utc(courses?.next_class?.date);
+  //   const endTime = startTime.clone().add(1, "hour");
+  //   const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
+  //   setIsClassTime(isBetweenClassTime);
+  // }, [courses]);
 
-  useEffect(() => dispatch(activeCourses()), [dispatch]);
+  // useEffect(() => dispatch(activeCourses()), [dispatch]);
 
-  const handleCloseSnack = () => dispatch(refresh());
+  const handleCloseSnack = () => dispatch(refresh())
 
   return (
     <Box
@@ -56,6 +90,7 @@ export default function DashboardPage() {
         maxWidth: "100%",
         display: "flex",
         flexDirection: "column",
+        gap: 3,
       }}
     >
       <Head>
@@ -66,7 +101,35 @@ export default function DashboardPage() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {loading ? (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          paddingBottom: "20px",
+          alignSelf: "stretch",
+          borderBottom: `1px solid #EAECF0`,
+        }}
+      >
+        <Box
+          sx={{
+            font: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+            color: Colors.dark,
+          }}
+        >
+          Welcome to class, Sam{" "}
+          <Box
+            sx={{
+              font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+              color: Colors.textColor,
+            }}
+          >
+            Measure your
+          </Box>
+        </Box>
+      </Box>
+
+      {/* {loading ? (
         <Box
           sx={{
             width: "100%",
@@ -88,342 +151,183 @@ export default function DashboardPage() {
         >
           <Nodata />
         </Box>
-      ) : (
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
-            <StyledCard
+      ) : ( */}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            minWidth: 312,
+            minHeight: 218,
+            padding: 3,
+            gap: 3,
+            borderRadius: "12px",
+            border: `1px solid #EAECF0`,
+            background: Colors.light,
+            boxShadow: `0px 1px 2px 0px rgba(16, 24, 40, 0.05)`,
+          }}
+        >
+          <Box
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 4,
+              padding: "10px 8px",
+              borderRadius: "1000px",
+              border: `1px solid #ABEFC6`,
+              background: "#ECFDF3",
+              color: Colors.buttonSuccess,
+              font: `normal normal 500 normal 14px/10px ${Fonts.primary}`,
+            }}
+          >
+            Upcoming lesson
+          </Box>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 0.5,
+              font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+              color: Colors.dark,
+            }}
+          >
+            Lesson: Intro to web development
+            <Box
               sx={{
-                background: "rgba(230, 230, 230, 0.50)",
-                px: 2,
-                py: 1.75,
-                border: `1px solid rgba(230, 230, 230, 0.50)`,
-                boxShadow: "none",
+                font: `normal normal 500 normal 16px/44px #{Fonts.primary}`,
+                color: Colors.textColor,
+                letterSpacing: -0.32,
               }}
             >
-              <Box
-                component="div"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 600 35px/42px ${Fonts.secondary}`,
-                  color: "#202020",
-                  display: "flex",
-                  flexDirection: "column",
-                  m: 0,
-                }}
-              >
-                Hi {fullname?.split(" ")[0]},{" "}
-                <Box
-                  component="span"
-                  sx={{
-                    width: "100%",
-                    font: `normal normal 600 15px/24px ${Fonts.secondary}`,
-                    color: "#898989",
-                  }}
-                >
-                  Welcome to class
-                </Box>
-              </Box>
-
-              <CardHeader
-                avatar={<CircleProfileIcon style={{ width: 64, height: 64 }} />}
-                title={fullname}
-                subheader="Student"
-                sx={{
-                  "& .MuiCardHeader-title": {
-                    width: "100%",
-                    font: `normal normal 500 16px/25px ${Fonts.secondary}`,
-                    color: "#202020",
-                  },
-                  "& .MuiCardHeader-subheader": {
-                    width: "100%",
-                    font: `normal normal 400 12px/24px ${Fonts.secondary}`,
-                    color: "#898989",
-                  },
-                }}
-              />
-            </StyledCard>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <StyledCard
+              1:00 EST, Fri January 23, 2024
+            </Box>
+          </Box>
+          <Box sx={{ width: 156 }}>
+            <SubmitButton>Join class</SubmitButton>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            minWidth: 312,
+            // padding: "10px 32px",
+            justifyContent: "flex-end",
+            flexDirection: "column",
+            gap: "10px",
+            alignItems: "center",
+            alignSelf: "stretch",
+          }}
+        >
+          {/* COURSE START */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-start",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "10px 32px",
+              borderRadius: "12px",
+              border: `1px solid #EAECF0`,
+              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+            }}
+          >
+            <Box
               sx={{
-                background: Colors.light,
-                px: 2,
-                py: 1.75,
-                display: "flex",
-                flexDirection: "column",
-                flexShrink: 0,
-                alignItems: "flex-start",
-                border: `1px solid #E6E4F0`,
-                gap: "10px",
-                borderRadius: "10px",
-                boxShadow: "none",
-                boxShadow: "0px 4px 8px 0px rgba(6, 3, 21, 0.08)",
+                font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+                background: `linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)`,
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
               }}
             >
-              <Box
-                component="div"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 600 16px/42px ${Fonts.secondary}`,
-                  color: "#4F4F4F",
-                  display: "flex",
-                  flexDirection: "column",
-                  m: 0,
-                }}
-              >
-                Lesson
-              </Box>
-              <Box
-                component="div"
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  font: `normal normal 500 14px/24px ${Fonts.secondary}`,
-                  color: "#474747",
-                  mb: "16px",
-                }}
-              >
-                {courses?.course.title}
-                <Box
-                  component="span"
-                  sx={{
-                    color: "#000000",
-                  }}
-                >
-                  {`${moment.utc(courses?.next_class?.date).format("llll")} (${
-                    courses?.timezone
-                  } - GMT ${moment.utc().tz(courses?.timezone).format("Z")})
-                   `}
-                </Box>
-              </Box>
-
-              <Button
-                onClick={() => router.push(activeCourse.meeting_url)}
-                sx={{
-                  width: 135,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "flex-end",
-                  gap: "36px",
-                  borderRadius: "33px",
-                  padding: "10px 16px",
-                  background: Colors.secondary,
-                  color: Colors.light,
-                  textTransform: "uppercase",
-                  font: `normal normal 500 16px/24px ${Fonts.secondary}`,
-                  cursor: "pointer",
-                  transition: "all 0.3ms",
-                  "&:hover": {
-                    transform: "scale(0.99)",
-                    fontSize: "15.992px",
-                    background: "rgba(247,11,88,0.95)",
-                  },
-                }}
-                disabled={isClassTime === false}
-              >
-                Join class
-              </Button>
-            </StyledCard>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <StyledCard
+              Course started
+            </Box>
+            <Box
               sx={{
-                display: "flex",
-                background: Colors.light,
-                px: 3,
-                py: 1.5,
-                maxWidth: 401,
-                borderRadius: 0,
-                boxShadow: "none",
+                font: `normal normal 500 normal 16px/20px #{Fonts.primary}`,
+                color: Colors.textColor,
               }}
             >
-              <SecondStyledList
-                component="nav"
-                disablePadding
-                sx={{
-                  "& .MuiListItemIcon-root": {
-                    minWidth: 0,
-                    marginRight: "7px",
-                  },
-                }}
-              >
-                <Grid container columnSpacing={2} rowSpacing={1.2}>
-                  <Grid item xs={5}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                      <ListItemIcon>
-                        <ClockStartIcon />
-                      </ListItemIcon>
-                      <Box
-                        component="span"
-                        sx={{
-                          width: "100%",
-                          font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                          color: "#82808F",
-                        }}
-                      >
-                        Course started
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Box
-                      component="span"
-                      sx={{
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: Colors.black,
-                      }}
-                    >
-                      {moment.utc(courses?.start_date).format("LL")}
-                    </Box>
-                  </Grid>
-                  {/* COURSE END */}
-                  <Grid item xs={5}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                      <ListItemIcon>
-                        <ClockEndIcon />
-                      </ListItemIcon>
-                      <Box
-                        component="span"
-                        sx={{
-                          font: `normal normal 500 14px/24px ${Fonts.Jakarta}`,
-                          color: "#82808F",
-                        }}
-                      >
-                        Course ends
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Box
-                      component="span"
-                      sx={{
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        color: Colors.black,
-                      }}
-                    >
-                      {moment.utc(courses?.last_class.date).format("LL")}
-                    </Box>
-                  </Grid>
-                  {/* MISSED COURSES */}
+              Jan 23, 2024 | 04:00pm EST
+            </Box>
+          </Box>
+          {/* COURSE END */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-start",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "10px 32px",
+              borderRadius: "12px",
+              border: `1px solid #EAECF0`,
+              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+            }}
+          >
+            <Box
+              sx={{
+                font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+                color: `#5D72E9`,
+              }}
+            >
+              Course ends
+            </Box>
+            <Box
+              sx={{
+                font: `normal normal 500 normal 16px/20px #{Fonts.primary}`,
+                color: Colors.textColor,
+              }}
+            >
+              Feb 23, 2024 | 04:00pm EST
+            </Box>
+          </Box>
+          {/* MISSED */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-start",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "10px 32px",
+              borderRadius: "12px",
+              border: `1px solid #EAECF0`,
+              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+            }}
+          >
+            <Box
+              sx={{
+                font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+                background: `linear-gradient(232deg, #FF3A44 15.45%, #C31162 169.28%)`,
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Missed
+            </Box>
+            <Box
+              sx={{
+                font: `normal normal 500 normal 16px/20px #{Fonts.primary}`,
+                color: Colors.textColor,
+              }}
+            >
+              None
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-                  <Grid item xs={5}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                      <ListItemIcon>
-                        <MissedClassIcon />
-                      </ListItemIcon>
-                      <Box
-                        component="span"
-                        sx={{
-                          font: `normal normal 500 14px/24px ${Fonts.Jakarta}`,
-                          color: "#82808F",
-                        }}
-                      >
-                        Missed class
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Box
-                      component="span"
-                      sx={{
-                        width: 52,
-                        font: `normal normal 600 12px/18px ${Fonts.Jakarta}`,
-                        padding: "6px 8px",
-                        color: "#5577FF",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: "33px",
-                        gap: "10px",
-                        background: "rgba(85, 119, 255, 0.20)",
-                      }}
-                    >
-                      {courses?.is_expired ? "True" : "None"}
-                    </Box>
-                  </Grid>
-
-                  {/* COURSE INSTRUCTOR */}
-
-                  <Grid item xs={5}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                      <ListItemIcon>
-                        <InstructionIcon />
-                      </ListItemIcon>
-                      <Box
-                        component="span"
-                        sx={{
-                          font: `normal normal 500 14px/24px ${Fonts.Jakarta}`,
-                          color: "#82808F",
-                        }}
-                      >
-                        Instructor
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Box
-                      component="span"
-                      sx={{
-                        width: "100%",
-                        background: "#E9E8EC",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "flex-start",
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        padding: "6px 8px",
-                        color: Colors.black,
-                        mb: 0.5,
-                        gap: "10px",
-                      }}
-                    >
-                      @ {courses?.instructor.user_profile.fullname}
-                    </Box>
-                  </Grid>
-                  {/* CLASS TYPE */}
-
-                  <Grid item xs={5}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                      <ListItemIcon>
-                        <StarIcon />
-                      </ListItemIcon>
-                      <Box
-                        component="span"
-                        sx={{
-                          font: `normal normal 500 14px/24px ${Fonts.Jakarta}`,
-                          color: "#82808F",
-                        }}
-                      >
-                        Class type
-                      </Box>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7}>
-                    <Box
-                      component="span"
-                      sx={{
-                        width: 100,
-                        background: "#E9E8EC",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "flex-start",
-                        font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
-                        padding: "6px 8px",
-                        color: Colors.black,
-
-                        gap: "10px",
-                      }}
-                    >
-                      1:1 Private
-                    </Box>
-                  </Grid>
-                </Grid>
-              </SecondStyledList>
-            </StyledCard>
-          </Grid>
-        </Grid>
-      )}
+      {/* )} */}
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
@@ -431,8 +335,8 @@ export default function DashboardPage() {
         isOpen={error}
       />
     </Box>
-  );
+  )
 }
 DashboardPage.getLayout = function getLayout(page) {
-  return <DashboardLayouts title="My dashboard">{page}</DashboardLayouts>;
-};
+  return <DashboardLayouts title={title}>{page}</DashboardLayouts>
+}

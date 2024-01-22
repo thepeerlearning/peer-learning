@@ -1,19 +1,19 @@
-import { Box, Divider, Grid } from "@mui/material";
-import Head from "next/head";
-import { useState } from "react";
-import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout";
-import { Select, StyledCard } from "../../../src/components/forms/textFields";
-import { PersonIcon } from "../../../src/components/svg/menuIcons";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
-import ClassSchedule from "../../../src/views/admin/dashboard/class-schedule";
-import Geography from "../../../src/views/admin/dashboard/geography";
+import { Box, Divider, Grid } from "@mui/material"
+import Head from "next/head"
+import { useState } from "react"
+import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout"
+import { Select, StyledCard } from "../../../src/components/forms/textFields"
+import { PersonIcon } from "../../../src/components/svg/menuIcons"
+import { Colors } from "../../../src/components/themes/colors"
+import { Fonts } from "../../../src/components/themes/fonts"
+import ClassSchedule from "../../../src/views/admin/dashboard/class-schedule"
+import Geography from "../../../src/views/admin/dashboard/geography"
 
 export default function DashboardPage() {
-  const [filter, setFilter] = useState("week");
+  const [filter, setFilter] = useState("week")
   const handleFilterChange = (e) => {
-    setFilter(e.target.value);
-  };
+    setFilter(e.target.value)
+  }
   return (
     <Box
       component="div"
@@ -369,8 +369,8 @@ export default function DashboardPage() {
         </Grid>
       </Grid>
     </Box>
-  );
+  )
 }
 DashboardPage.getLayout = function getLayout(page) {
-  return <DashboardLayouts>{page}</DashboardLayouts>;
-};
+  return <DashboardLayouts>{page}</DashboardLayouts>
+}

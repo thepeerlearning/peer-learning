@@ -7,17 +7,17 @@ import {
   Select as MuiSelect,
   Switch,
   styled,
-} from "@mui/material";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import Image from "next/image";
-import PropTypes from "prop-types";
-import React from "react";
-import flags from "react-phone-number-input/flags";
-import eyeClosed from "../../../../public/images/svgs/eye-close.svg";
-import eyeOpened from "../../../../public/images/svgs/eye-open.svg";
-import SearchIcon from "../../../../public/images/svgs/search.svg";
-import { Colors } from "../../themes/colors";
-import { Fonts } from "../../themes/fonts";
+} from "@mui/material"
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip"
+import Image from "next/image"
+import PropTypes from "prop-types"
+import React from "react"
+import flags from "react-phone-number-input/flags"
+import eyeClosed from "../../../../public/images/svgs/eye-close.svg"
+import eyeOpened from "../../../../public/images/svgs/eye-open.svg"
+import SearchIcon from "../../../../public/images/svgs/search.svg"
+import { Colors } from "../../themes/colors"
+import { Fonts } from "../../themes/fonts"
 import {
   FormHelper,
   InputElWrapper,
@@ -29,14 +29,20 @@ import {
   InputRadioElCustom,
   InputSearchElement,
   InputTextElement,
+  InputPasswordElement,
   MultiSelect,
   PasswordIcon,
+  PasswordNolabelIcon,
   PhoneNumberTextField,
+  InputDateElement,
   Root,
   SearchIconStyle,
+  TextIconStyle,
+  TextNoLabelIconStyle,
+  SelectNoLabelIconStyle,
   SelectInput,
   TextAreaInput,
-} from "./styles";
+} from "./styles"
 
 export const StyledTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} arrow />
@@ -52,7 +58,7 @@ export const StyledTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.arrow}`]: {
     color: "#FFFFFF",
   },
-}));
+}))
 export const StyledDarkTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} arrow />
 ))(() => ({
@@ -67,7 +73,7 @@ export const StyledDarkTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.arrow}`]: {
     color: "#262B34",
   },
-}));
+}))
 export const StyledCard = styled(Card)({
   width: "100%",
   minHeight: 124,
@@ -78,19 +84,19 @@ export const StyledCard = styled(Card)({
   padding: "16px 4px",
   borderRadius: 12,
   gap: 8,
-});
+})
 export const StyledCardBox = styled(Box)({
   background: "#FFFFFF 0% 0% no-repeat padding-box",
   border: `1px solid ${Colors.stroke}`,
   borderRadius: 12,
   width: "100%",
-});
+})
 export const StyledButton = styled(Button)({
   background: "#FFFFFF 0% 0% no-repeat padding-box",
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.12)",
   borderRadius: 12,
   width: "100%",
-});
+})
 
 const SwitchStyle = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -141,7 +147,7 @@ const SwitchStyle = styled((props) => (
       duration: 500,
     }),
   },
-}));
+}))
 export const SelectStyle = styled(MuiSelect)({
   "& .MuiOutlinedInput-input": {
     boxSizing: "border-box",
@@ -180,7 +186,7 @@ export const SelectStyle = styled(MuiSelect)({
       borderColor: "#e8ebee",
     },
   },
-});
+})
 
 const BpIcon = styled("span")(() => ({
   borderRadius: 2,
@@ -197,7 +203,7 @@ const BpIcon = styled("span")(() => ({
   "input:hover ~ &": {
     backgroundColor: "#fff",
   },
-}));
+}))
 
 const BpCheckedIcon = styled(BpIcon)({
   background: "transparent",
@@ -219,7 +225,7 @@ const BpCheckedIcon = styled(BpIcon)({
   "input:hover ~ &": {
     backgroundColor: "transparent",
   },
-});
+})
 
 export function BpCheckbox(props) {
   return (
@@ -234,7 +240,7 @@ export function BpCheckbox(props) {
       inputProps={{ "aria-label": "Checkbox demo" }}
       {...props}
     />
-  );
+  )
 }
 
 export function TextField({
@@ -251,6 +257,8 @@ export function TextField({
   register,
   readonly,
   required,
+  nolabel,
+  icon,
   ...otherProps
 }) {
   return (
@@ -258,6 +266,19 @@ export function TextField({
       <InputLabel htmlFor={htmlFor}>
         {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
       </InputLabel>
+      {nolabel ? (
+        <TextNoLabelIconStyle>
+          <span>
+            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
+          </span>
+        </TextNoLabelIconStyle>
+      ) : (
+        <TextIconStyle>
+          <span>
+            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
+          </span>
+        </TextIconStyle>
+      )}
       {register ? (
         <InputTextElement
           id={id}
@@ -287,7 +308,61 @@ export function TextField({
       )}
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
+}
+
+export function DateInputField({
+  type,
+  id,
+  htmlFor,
+  name,
+  value,
+  label,
+  helper,
+  error,
+  onChange,
+  disabled,
+  register,
+  readonly,
+  required,
+  icon,
+  ...otherProps
+}) {
+  return (
+    <InputElWrapper>
+      <InputLabel htmlFor={htmlFor}>
+        {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
+      </InputLabel>
+      {register ? (
+        <InputDateElement
+          id={id}
+          name={name}
+          value={value}
+          label={label}
+          type="date"
+          error={error}
+          onChange={onChange}
+          disabled={disabled}
+          readOnly={readonly}
+          {...otherProps}
+          {...register(name)}
+        />
+      ) : (
+        <InputDateElement
+          id={id}
+          name={name}
+          value={value}
+          label={label}
+          type="date"
+          onChange={onChange}
+          disabled={disabled}
+          readOnly={readonly}
+          {...otherProps}
+        />
+      )}
+      <FormHelper>{helper}</FormHelper>
+    </InputElWrapper>
+  )
 }
 
 export function PhoneNumberInput({
@@ -340,7 +415,7 @@ export function PhoneNumberInput({
       )}
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 export function TextArea({
   type,
@@ -393,7 +468,7 @@ export function TextArea({
       )}
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 
 export function Select({
@@ -408,6 +483,8 @@ export function Select({
   register,
   readonly,
   helper,
+  nolabel,
+  icon,
   required,
   placeholder,
   ...otherProps
@@ -417,6 +494,19 @@ export function Select({
       <InputLabel htmlFor={htmlFor}>
         {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
       </InputLabel>
+      {nolabel ? (
+        <SelectNoLabelIconStyle>
+          <span>
+            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
+          </span>
+        </SelectNoLabelIconStyle>
+      ) : (
+        <TextIconStyle>
+          <span>
+            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
+          </span>
+        </TextIconStyle>
+      )}
       {register ? (
         <SelectInput
           id={id}
@@ -453,7 +543,7 @@ export function Select({
       )}
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 export const MultipleSelectField = (props) => {
   const {
@@ -468,7 +558,7 @@ export const MultipleSelectField = (props) => {
     disabled,
     register,
     ...otherProps
-  } = props;
+  } = props
   return (
     <InputElWrapper>
       <InputLabel htmlFor={htmlFor}>{label}</InputLabel>
@@ -505,8 +595,8 @@ export const MultipleSelectField = (props) => {
         />
       )}
     </InputElWrapper>
-  );
-};
+  )
+}
 
 export function PasswordField({
   iconColor,
@@ -521,6 +611,7 @@ export function PasswordField({
   onChange,
   value,
   showPassword,
+  nolabel,
   onClick,
   disabled,
   autoComplete,
@@ -536,7 +627,7 @@ export function PasswordField({
         </InputLabel>
         {register ? (
           <>
-            <InputTextElement
+            <InputPasswordElement
               id={id}
               name={name}
               label={label}
@@ -548,22 +639,36 @@ export function PasswordField({
               {...otherProps}
               {...register(name)}
             />
-            <PasswordIcon>
-              {showPassword ? (
-                <IconButton onClick={onClick}>
-                  <Image src={eyeClosed} alt="eye closed" />
-                </IconButton>
-              ) : (
-                <IconButton onClick={onClick}>
-                  <Image src={eyeOpened} alt="eye opened" />
-                </IconButton>
-              )}
-            </PasswordIcon>
+            {nolabel ? (
+              <PasswordNolabelIcon>
+                {showPassword ? (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeClosed} alt="eye closed" />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeOpened} alt="eye opened" />
+                  </IconButton>
+                )}
+              </PasswordNolabelIcon>
+            ) : (
+              <PasswordIcon>
+                {showPassword ? (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeClosed} alt="eye closed" />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeOpened} alt="eye opened" />
+                  </IconButton>
+                )}
+              </PasswordIcon>
+            )}
             <FormHelper>{helper}</FormHelper>
           </>
         ) : (
           <>
-            <InputTextElement
+            <InputPasswordElement
               id={id}
               name={name}
               label={label}
@@ -574,28 +679,42 @@ export function PasswordField({
               autoComplete={autoComplete}
               {...otherProps}
             />
-            <PasswordIcon>
-              {showPassword ? (
-                <IconButton onClick={onClick}>
-                  <Image src={eyeClosed} alt="eye closed" />
-                </IconButton>
-              ) : (
-                <IconButton onClick={onClick}>
-                  <Image src={eyeOpened} alt="eye opened" />
-                </IconButton>
-              )}
-            </PasswordIcon>
+            {nolabel ? (
+              <PasswordNolabelIcon>
+                {showPassword ? (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeClosed} alt="eye closed" />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeOpened} alt="eye opened" />
+                  </IconButton>
+                )}
+              </PasswordNolabelIcon>
+            ) : (
+              <PasswordIcon>
+                {showPassword ? (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeClosed} alt="eye closed" />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={onClick}>
+                    <Image src={eyeOpened} alt="eye opened" />
+                  </IconButton>
+                )}
+              </PasswordIcon>
+            )}
             <FormHelper>{helper}</FormHelper>
           </>
         )}
       </InputElWrapper>
     </Root>
-  );
+  )
 }
 
 PasswordField.propTypes = {
   name: PropTypes.string,
-};
+}
 export function CheckBox({
   id,
   htmlFor,
@@ -643,7 +762,7 @@ export function CheckBox({
       </InputLabel>
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 
 export function SwitchField({
@@ -683,7 +802,7 @@ export function SwitchField({
       )}
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 
 export function Radio({
@@ -733,7 +852,7 @@ export function Radio({
       </InputLabel>
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }
 export function TextFieldBox({ label, children, ...otherProps }) {
   return (
@@ -741,7 +860,7 @@ export function TextFieldBox({ label, children, ...otherProps }) {
       <InputLabel>{label}</InputLabel>
       <InputFileBox {...otherProps}>{children}</InputFileBox>
     </InputElWrapper>
-  );
+  )
 }
 
 export function Search({
@@ -774,7 +893,7 @@ export function Search({
         {...otherProps}
       />
     </InputElWrapper>
-  );
+  )
 }
 
 // A component that looks like this [_val_ *icon*], where _val_ is the value of the input and *icon* is an icon and it could be used as date picker, time picker or option picker
@@ -807,10 +926,10 @@ export function InputWithIcon({
       >
         {children}
       </InputFileBox>
-      <PasswordIcon style={{ top: 35 }}>
+      <PasswordIcon style={{ top: 37, right: 3 }}>
         <span onClick={onClick}>{icon}</span>
       </PasswordIcon>
       <FormHelper>{helper}</FormHelper>
     </InputElWrapper>
-  );
+  )
 }

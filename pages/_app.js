@@ -1,54 +1,54 @@
-import { CacheProvider } from "@emotion/react";
-import MuiAlert from "@mui/material/Alert";
-import CssBaseline from "@mui/material/CssBaseline";
-import Snackbar from "@mui/material/Snackbar";
-import { ThemeProvider } from "@mui/material/styles";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import Head from "next/head";
-import PropTypes from "prop-types";
-import { forwardRef, useEffect, useState } from "react";
-import "react-phone-number-input/style.css";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { Fonts } from "../src/components/themes/fonts";
-import createEmotionCache from "../src/lib/createEmotionCache";
-import { wrapper } from "../src/redux/store";
-import "../styles/globals.css";
-import theme from "../styles/muiTheme";
+import { CacheProvider } from "@emotion/react"
+import MuiAlert from "@mui/material/Alert"
+import CssBaseline from "@mui/material/CssBaseline"
+import Snackbar from "@mui/material/Snackbar"
+import { ThemeProvider } from "@mui/material/styles"
+import AOS from "aos"
+import "aos/dist/aos.css"
+import Head from "next/head"
+import PropTypes from "prop-types"
+import { forwardRef, useEffect, useState } from "react"
+import "react-phone-number-input/style.css"
+import { Provider } from "react-redux"
+import { PersistGate } from "redux-persist/integration/react"
+import { Fonts } from "../src/components/themes/fonts"
+import createEmotionCache from "../src/lib/createEmotionCache"
+import { wrapper } from "../src/redux/store"
+import "../styles/globals.css"
+import theme from "../styles/muiTheme"
 
 const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-const clientSideEmotionCache = createEmotionCache();
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+})
+const clientSideEmotionCache = createEmotionCache()
 export default function MyApp({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
 }) {
-  const { store, props } = wrapper.useWrappedStore(pageProps);
-  const getLayout = Component.getLayout || ((page) => page);
-  const [networkOffline, setNetworkOffline] = useState(false);
-  const [networkOnline, setNetworkOnline] = useState(false);
+  const { store, props } = wrapper.useWrappedStore(pageProps)
+  const getLayout = Component.getLayout || ((page) => page)
+  const [networkOffline, setNetworkOffline] = useState(false)
+  const [networkOnline, setNetworkOnline] = useState(false)
 
-  const handleOnlineClose = () => setNetworkOnline(false);
+  const handleOnlineClose = () => setNetworkOnline(false)
   useEffect(() => {
     window.addEventListener("offline", function (e) {
-      setNetworkOnline(false);
-      setNetworkOffline(true);
-    });
+      setNetworkOnline(false)
+      setNetworkOffline(true)
+    })
 
     window.addEventListener("online", function (e) {
-      setNetworkOffline(false);
-      setNetworkOnline(true);
-    });
-  }, []);
+      setNetworkOffline(false)
+      setNetworkOnline(true)
+    })
+  }, [])
 
   useEffect(() => {
     AOS.init({
       duration: 500,
-    });
-  }, []);
+    })
+  }, [])
   return (
     <>
       <Head>
@@ -104,10 +104,10 @@ export default function MyApp({
         </Alert>
       </Snackbar>
     </>
-  );
+  )
 }
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
-};
+}

@@ -1,31 +1,34 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Grid, Link } from "@mui/material";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
-import { SubmitButton } from "../../src/components/forms/buttons";
-import { TextField } from "../../src/components/forms/textFields";
-import Snackbars from "../../src/components/snackbar";
-import { Colors } from "../../src/components/themes/colors";
-import { Fonts } from "../../src/components/themes/fonts";
-import { forgotpassword } from "../../src/redux/slices/auth";
-import AuthLayout from "../../src/views/auth/layout";
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Box, Grid, Link } from "@mui/material"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import React from "react"
+import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
+import { SubmitButton } from "../../src/components/forms/buttons"
+import { TextField } from "../../src/components/forms/textFields"
+import Snackbars from "../../src/components/snackbar"
+import { Colors } from "../../src/components/themes/colors"
+import { Fonts } from "../../src/components/themes/fonts"
+import { forgotpassword } from "../../src/redux/slices/auth"
+import AuthLayout from "../../src/views/auth/layout"
+import { PasswordIcon } from "../../src/components/svg/menuIcons"
+import { EmailIcon } from "../../src/components/svg"
+import { ArrowBack } from "@mui/icons-material"
 
 export default function ForgotPasswordPage() {
-  const router = useRouter();
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const [success, setSuccess] = React.useState(false)
+  const { message } = useSelector((state) => state.message)
+  const dispatch = useDispatch()
 
   // form validation rules
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
-  });
+  })
 
   // get functions to build form with useForm() hook
   const {
@@ -34,24 +37,24 @@ export default function ForgotPasswordPage() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
-  });
+  })
   function onSubmit(data) {
-    const { email } = data;
-    setLoading(true);
+    const { email } = data
+    setLoading(true)
     dispatch(forgotpassword({ email }))
       .unwrap()
       .then(() => {
-        setLoading(false);
-        router.push("/email-confirmation");
+        setLoading(false)
+        router.push(`/email-confirmation/${email}`)
       })
       .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-    return false;
+        setError(true)
+        setLoading(false)
+      })
+    return false
   }
-  const handleCloseSnack = () => setError(false);
-  const handleCloseSuccessSnack = () => setSuccess(false);
+  const handleCloseSnack = () => setError(false)
+  const handleCloseSuccessSnack = () => setSuccess(false)
 
   return (
     <Box>
@@ -60,108 +63,130 @@ export default function ForgotPasswordPage() {
         <meta name="description" content="Peer-learning forgot password page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid container spacing={1.2}>
-        <Grid item xs={12}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 768,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: "24px",
+            background: {
+              xs: `url('/images/smGridBg.png')`,
+              lg: `url('/images/lgGridBg.png')`,
+            },
+            backgroundPosition: "top",
+            gap: 3,
+          }}
+        >
           <Box
-            component="h1"
             sx={{
               width: "100%",
+              maxWidth: 360,
               display: "flex",
-              textAlign: "left",
               flexDirection: "column",
-              color: Colors.black,
-              font: {
-                xs: `normal normal 500 30px/38px ${Fonts.secondary}`,
-                sm: `normal normal 500 40px/48px ${Fonts.secondary}`,
-              },
-              letterSpacing: "-1.2px",
-              m: { xs: "40px 0 0px", sm: 0 },
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 4,
+              pt: { xs: "52px", lg: "100px" },
             }}
           >
-            Reset your password
+            <PasswordIcon />
             <Box
-              component="h6"
+              component="h1"
               sx={{
-                textAlign: "left",
-                maxWidth: 375,
-                color: Colors.textColor,
-                font: `normal normal 500 16px/135.8% ${Fonts.secondary}`,
-                mt: { xs: 0, sm: 1.5 },
+                width: "100%",
+                display: "flex",
+                textAlign: "center",
+                flexDirection: "column",
+                color: Colors.black,
+                m: 0,
+                font: {
+                  xs: `normal normal 600 normal 24px/32px ${Fonts.primary}`,
+                  sm: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+                },
               }}
             >
-              Forgot your password? No problem! Enter your email address and
-              we&apos;ll send you a link to reset it.
+              Forgot password?
+              <Box
+                component="h6"
+                sx={{
+                  textAlign: "center",
+                  color: "#667085",
+                  m: 0,
+                  font: {
+                    xs: `ormal normal 400 normal 16px/24px ${Fonts.primary}`,
+                    lg: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                  },
+                }}
+              >
+                No worries, we&apos;ll send you reset instructions.
+              </Box>
             </Box>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Box
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{
-              borderTop: `1px solid #F3F4F7`,
-              borderBottom: `1px solid #F3F4F7`,
-              px: { xs: 0, sm: 3 },
-              py: { xs: 4, sm: 5 },
-              mt: { xs: 0, sm: 2 },
-            }}
-          >
-            <Grid container rowSpacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  id="email"
-                  htmlFor="email"
-                  label="Email address"
-                  name="email"
-                  placeholder="john.doe@gmail.com"
-                  type="email"
-                  register={register}
-                  error={errors.email ? true : false}
-                  helper={errors.email?.message}
-                  disabled={loading}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    mt: "27px",
-                  }}
-                >
+            <Box
+              component="form"
+              onSubmit={handleSubmit(onSubmit)}
+              sx={{
+                width: "100%",
+              }}
+            >
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <TextField
+                    id="email"
+                    htmlFor="email"
+                    label="Email address"
+                    name="email"
+                    placeholder="john.doe@gmail.com"
+                    type="email"
+                    register={register}
+                    error={errors.email ? true : false}
+                    helper={errors.email?.message}
+                    disabled={loading}
+                    icon={<EmailIcon />}
+                  />
+                </Grid>
+                <Grid item xs={12}>
                   <SubmitButton disabled={loading} loading={loading}>
                     Send link
                   </SubmitButton>
-                </Box>
-              </Grid>
-              <Grid item xs={12}>
-                <Box
-                  sx={{
-                    textAlign: "center",
-                    color: Colors.textColor,
-                    font: `normal normal 500 14px/19px ${Fonts.secondary}`,
-                    my: "16px",
-                  }}
-                >
-                  Never mind.{" "}
+                </Grid>
+                <Grid item xs={12}>
                   <Link
+                    sx={{
+                      textAlign: "center",
+                      color: Colors.textColor,
+                      color: Colors.primary,
+                      font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                      my: "16px",
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: 1,
+                    }}
                     href="/"
                     underline="hover"
-                    sx={{
-                      color: Colors.primary,
-                    }}
                   >
-                    Go back to Login
+                    <ArrowBack /> Back to home page
                   </Link>
-                </Box>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={message}
+        message={message?.detail}
         isOpen={error}
       />{" "}
       <Snackbars
@@ -171,8 +196,8 @@ export default function ForgotPasswordPage() {
         isOpen={success}
       />
     </Box>
-  );
+  )
 }
-ForgotPasswordPage.getLayout = function getLayout(page) {
-  return <AuthLayout>{page}</AuthLayout>;
-};
+// ForgotPasswordPage.getLayout = function getLayout(page) {
+//   return <AuthLayout>{page}</AuthLayout>;
+// };

@@ -1,102 +1,275 @@
-import { Box, Button, Divider, Grid } from "@mui/material";
-import moment from "moment-timezone";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout";
-import { Select, StyledCard } from "../../../src/components/forms/textFields";
-import Spinner from "../../../src/components/spinner";
-import { TableContent } from "../../../src/components/table";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
-import { classSchedules } from "../../../src/redux/slices/courses";
-import InstructorFeedbackDialog from "../../../src/views/admin/dashboard/feedback";
-
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Divider,
+  Grid,
+} from "@mui/material"
+import moment from "moment-timezone"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout"
+import {
+  Search,
+  Select,
+  StyledCard,
+} from "../../../src/components/forms/textFields"
+import Spinner from "../../../src/components/spinner"
+import { TableContent } from "../../../src/components/table"
+import { Colors } from "../../../src/components/themes/colors"
+import { Fonts } from "../../../src/components/themes/fonts"
+// import { classSchedules } from "../../../src/redux/slices/courses";
+import InstructorFeedbackDialog from "../../../src/views/admin/dashboard/feedback"
+import { CalendarIcon } from "../../../src/components/svg"
+const students = [
+  {
+    id: "00001",
+    name: "John creg",
+    email: "johncreg@gmail.com",
+    photo: "/images/boy-profile.png",
+    contact: {
+      name: "John creg",
+      email: "johncreg@gmail.com",
+      phone: "+1 4385 3535 532",
+      country: "United states",
+    },
+    schedules: [
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 2,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 3,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+    ],
+  },
+  {
+    id: "00003",
+    name: "John creg",
+    email: "johncreg@gmail.com",
+    photo: "/images/boy-profile.png",
+    contact: {
+      name: "John creg",
+      email: "johncreg@gmail.com",
+      phone: "+1 4385 3535 532",
+      country: "United states",
+    },
+    schedules: [
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 2,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 3,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+    ],
+  },
+  {
+    id: "00002",
+    name: "Phoenix Baker",
+    email: "phoenix@gmail.com",
+    photo: "",
+    contact: {
+      name: "JPhoenix Baker",
+      email: "phoenix@gmail.com",
+      phone: "+1 4385 3535 000",
+      country: "United states",
+    },
+    schedules: [
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 2,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 3,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+    ],
+  },
+  {
+    id: "00004",
+    name: "Lana Steiner",
+    email: "johncreg@gmail.com",
+    photo: "/images/boy-profile.png",
+    contact: {
+      name: "Lana Steiner",
+      email: "johncreg@gmail.com",
+      phone: "+1 4385 3535 532",
+      country: "United states",
+    },
+    schedules: [
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 2,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 3,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+    ],
+  },
+  {
+    id: "00005",
+    name: "John creg",
+    email: "johncreg@gmail.com",
+    photo: "/images/boy-profile.png",
+    contact: {
+      name: "John creg",
+      email: "johncreg@gmail.com",
+      phone: "+1 4385 3535 532",
+      country: "United states",
+    },
+    schedules: [
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 2,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 3,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+      {
+        week: 1,
+        first_class: "Monday 24/02/2024 | 12:00am UTC−08:00",
+        second_class: "Saturday 24/02/2024 | 12:00am UTC−08:00",
+      },
+    ],
+  },
+]
 export default function ClassSchedulePage() {
-  const router = useRouter();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [filter, setFilter] = React.useState("week");
-  const [schedule, setSchedule] = React.useState(null);
-  const [isClassTime, setIsClassTime] = React.useState(false);
+  const router = useRouter()
+  const [page, setPage] = React.useState(0)
+  const [pagesize, setPagesize] = React.useState(3)
+  const [filter, setFilter] = React.useState("week")
+  const [schedule, setSchedule] = React.useState(null)
+  const [isClassTime, setIsClassTime] = React.useState(false)
+  const [search, setSearch] = React.useState("")
   const {
     schedules,
     scheduleLoading: loading,
     scheduleError: error,
-  } = useSelector((state) => state.courses);
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  } = useSelector((state) => state.courses)
+  const { message } = useSelector((state) => state.message)
+  const count = students?.length
+  const dispatch = useDispatch()
+  const totalPageNumbers = Math.ceil(count / pagesize)
+  const getPageStart = (pageSize, pageNr) => pageSize * pageNr
+  const pageStart = Math.max(getPageStart(pagesize, page), 0)
+  const pageEnd = Math.min(getPageStart(pagesize, page + 1), count)
 
-  React.useEffect(() => {
-    const currentTime = moment.utc();
-    const startTime = moment.utc(schedule?.date);
-    const endTime = startTime.clone().add(1, "hour");
-    // Check if the current time is between the start and end times of the class
-    const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
-    setIsClassTime(isBetweenClassTime);
-  }, [schedule]);
+  // React.useEffect(() => {
+  //   const currentTime = moment.utc();
+  //   const startTime = moment.utc(schedule?.date);
+  //   const endTime = startTime.clone().add(1, "hour");
+  //   // Check if the current time is between the start and end times of the class
+  //   const isBetweenClassTime = currentTime.isBetween(startTime, endTime);
+  //   setIsClassTime(isBetweenClassTime);
+  // }, [schedule]);
 
-  React.useEffect(
-    () => dispatch(classSchedules({ page: page + 1, limit: rowsPerPage })),
-    [dispatch, page, rowsPerPage]
-  );
+  // React.useEffect(
+  //   () => dispatch(classSchedules({ page: page + 1, limit: pagesize })),
+  //   [dispatch, page, pagesize]
+  // );
 
   const handleFilterChange = (e) => {
-    setFilter(e.target.value);
-  };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  const columns = [
-    {
-      id: "name",
-      label: "Name",
-      align: "left",
-      minWidth: 150,
-    },
-    {
-      id: "action",
-      label: "",
-      align: "right",
-      minWidth: 100,
-    },
-  ];
-  function createData(name, action) {
-    return { name, action };
+    setFilter(e.target.value)
   }
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+  const handleChangePagesize = (event) => {
+    setPagesize(+event.target.value)
+    setPage(0)
+  }
+  const handlePageNavigation = (direction) => {
+    if (direction === "next") {
+      console.log("page", page, totalPageNumbers)
+      page < totalPageNumbers ? setPage(page + 1) : setPage(totalPageNumbers)
+    } else {
+      page > 1 ? setPage(page - 1) : setPage(0)
+    }
+  }
+  const handleSearch = (e) => setSearch(e.target.value)
+  function createData(name, action) {
+    return { name, action }
+  }
+  console.log(
+    "totalPageNumbers",
+    totalPageNumbers,
+    page + 1 === totalPageNumbers || count === 0
+  )
   const handleViewClass = (schedule) => {
-    setSchedule(schedule);
-  };
-  const rows =
-    schedules && schedules?.data?.length !== 0
-      ? schedules?.data?.map((schedule) => {
-          return createData(
-            schedule.children.fullname,
-            <Button
-              sx={{
-                font: `normal normal 700 13px/150% ${Fonts.secondary}`,
-                textTransform: "uppercase",
-                color: "#2D3748",
-              }}
-              onClick={() => handleViewClass(schedule)}
-            >
-              View class
-            </Button>
-          );
-        })
-      : [];
+    setSchedule(schedule)
+  }
   return (
     <Box
       component="div"
       sx={{
         maxWidth: "100%",
         display: "flex",
+        flexDirection: "column",
+        gap: 4,
       }}
     >
       <Head>
@@ -105,388 +278,526 @@ export default function ClassSchedulePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box
-        component="div"
         sx={{
-          width: "100%",
           display: "flex",
           flexDirection: "column",
-          mt: { xs: 2, sm: 3 },
+          alignItems: "flex-start",
+          paddingBottom: "20px",
+          alignSelf: "stretch",
         }}
       >
         <Box
           sx={{
-            color: Colors.primary,
-            font: `normal normal 800 22px/24px ${Fonts.secondary}`,
-            mt: 3,
+            font: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+            color: Colors.dark,
           }}
         >
           Class Schedule
           <Box
             sx={{
-              width: { xs: "100%", sm: "50%" },
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+              color: Colors.textColor,
             }}
           >
-            <Box
-              sx={{
-                color: Colors.black,
-                font: `normal normal 400 15px/16px ${Fonts.secondary}`,
-              }}
-            >
-              Students class schedule this week
-            </Box>
-            <Box sx={{ width: 160, px: 1.2 }}>
-              <Select
-                id="filter"
-                name="filter"
-                value={filter}
-                onChange={handleFilterChange}
-              >
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-                <option value="overall">Overall</option>
-              </Select>
-            </Box>
+            View your team’s trades and transactions.
           </Box>
         </Box>
-        <Grid container spacing={2}>
-          {loading ? (
-            <Grid item xs={12}>
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+        }}
+      >
+        <Box>
+          {" "}
+          <Search
+            id="search"
+            name="search"
+            value={search}
+            placeholder="Search here..."
+            onChange={handleSearch}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            component="div"
+            sx={{
+              width: 240,
+              height: 40,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "10px 14px",
+              gap: "4px",
+              color: Colors.secondary,
+              font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+              border: `1px solid #D0D5DD`,
+              borderRadius: 1,
+              cursor: "pointer",
+            }}
+          >
+            <CalendarIcon />
+            Jan 6, 2024 – Jan 13, 2024
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        component="div"
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          padding: { xs: 1, md: "12px 0 48px 0" },
+          alignSelf: "stretch",
+          flexShrink: 0,
+          borderRadius: "12px",
+          border: "1px solid #EAECF0",
+          boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+          position: "relative",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            padding: "20px 24px",
+            display: "flex",
+            gap: 1,
+            borderBottom: "1px solid #EAECF0",
+            color: Colors.dark,
+            font: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+          }}
+        >
+          All Students{" "}
+          <Box
+            sx={{
+              width: 25,
+              height: 20,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "2px",
+              mt: 0.4,
+              borderRadius: "6px",
+              border: "1px solid #EAECF0",
+              color: Colors.secondary,
+              font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
+            }}
+          >
+            {count}
+          </Box>
+        </Box>
+        <Box
+          component="div"
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: { xs: "column", lg: "row" },
+            gap: { xs: 1, sm: 4, md: 6, xl: 16 },
+          }}
+        >
+          <Card
+            sx={{
+              maxWidth: { xs: "100%", lg: 360 },
+              maxHeight: 345,
+              width: "100%",
+              display: "flex",
+              border: "1px solid #EAECF0",
+              boxShadow: "none",
+            }}
+          >
+            <Box sx={{ width: "100%" }}>
+              <CardHeader
+                title={
+                  <Box
+                    sx={{
+                      font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
+                      color: Colors.textColor,
+                    }}
+                  >
+                    Student Name
+                  </Box>
+                }
+                sx={{
+                  padding: "10px 24px",
+                  background: "#F9FAFB",
+                  borderBottom: "1px solid #EAECF0",
+                }}
+              />
+              {students
+                ?.slice(page * pagesize, page * pagesize + pagesize)
+                .map((student) => {
+                  return (
+                    <CardHeader
+                      key={student.id}
+                      avatar={
+                        <Avatar
+                          src="/images/boy-profile.png"
+                          alt="passport"
+                          sx={{
+                            bgcolor: Colors.greyText,
+                            width: 32,
+                            height: 32,
+                          }}
+                          aria-label="passport"
+                        >
+                          {student.name.charAt(0)}
+                        </Avatar>
+                      }
+                      action={
+                        <Box
+                          onClick={() => setSchedule(student)}
+                          sx={{
+                            width: 100,
+                            height: 40,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            padding: "2px 6px",
+                            borderRadius: "6px",
+                            border: "1px solid #EAECF0",
+                            color: Colors.secondary,
+                            font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
+                            cursor: "pointer",
+                          }}
+                        >
+                          View class
+                        </Box>
+                      }
+                      title={
+                        <Box
+                          sx={{
+                            color: Colors.dark,
+                            font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                          }}
+                        >
+                          {student.name}
+                        </Box>
+                      }
+                      subheader={
+                        <Box
+                          sx={{
+                            color: Colors.textColor,
+                            font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                          }}
+                        >
+                          {student.email}
+                        </Box>
+                      }
+                      sx={{
+                        padding: "10px 24px",
+                        background: "#FFF",
+                        borderBottom: "1px solid #EAECF0",
+                      }}
+                    />
+                  )
+                })}
+            </Box>
+          </Card>
+          {schedule && (
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                flexDirection: "column",
+                gap: 4,
+                boxShadow: "none",
+              }}
+            >
               <Box
                 sx={{
+                  width: "100%",
+                  height: 188,
+                  padding: "24px",
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  mt: 2,
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: 1,
+                  background: "#F9FAFB",
+                  borderRadius: "12px",
                 }}
               >
-                <Spinner />
-              </Box>
-            </Grid>
-          ) : error ? (
-            <Grid item xs={12}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  mt: 2,
-                }}
-              >
-                {message}
-              </Box>
-            </Grid>
-          ) : (
-            <>
-              <Grid item xs={12} sm={6}>
-                <StyledCard
+                <Box
                   sx={{
-                    borderRadius: "15px",
-                    border: `1px solid rgba(230, 230, 230, 0.50)`,
-                    boxShadow:
-                      "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
+                    width: "100%",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    px: 1.2,
+                    color: Colors.primary,
+                    font: `normal normal 500 normal 18px/28px ${Fonts.primary}`,
                   }}
                 >
-                  <TableContent
-                    columns={columns}
-                    rows={rows}
-                    count={schedules && schedules?.total_entries}
-                    page={page}
-                    pagesize={rowsPerPage}
-                    handleChangePage={handleChangePage}
-                    handleChangeRowsPerPage={handleChangeRowsPerPage}
-                    rowsPerPageOptions={[3, 5, 10]}
-                    paginated
-                  />
-                </StyledCard>
-              </Grid>
-              {schedule && (
-                <Grid item xs={12} sm={6}>
-                  <StyledCard
+                  Student information
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignSelf: "stretch",
+                    color: Colors.black,
+                    gap: 0.4,
+                    font: `normal normal 500 normal 16px/20px ${Fonts.primary}`,
+                  }}
+                >
+                  Full name:{" "}
+                  <Box
                     sx={{
-                      borderRadius: "15px",
-                      border: `1px solid rgba(230, 230, 230, 0.50)`,
-                      boxShadow:
-                        "0px 3.499999761581421px 5.5px 0px rgba(0, 0, 0, 0.02)",
+                      color: Colors.textColor,
+                      font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                    }}
+                  >
+                    {schedule?.contact?.name}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignSelf: "stretch",
+                    color: Colors.black,
+                    gap: 0.4,
+                    font: `normal normal 500 normal 16px/20px ${Fonts.primary}`,
+                  }}
+                >
+                  Mobile no:{" "}
+                  <Box
+                    sx={{
+                      color: Colors.textColor,
+                      font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                    }}
+                  >
+                    {schedule?.contact?.phone}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignSelf: "stretch",
+                    color: Colors.black,
+                    gap: 0.4,
+                    font: `normal normal 500 normal 16px/20px ${Fonts.primary}`,
+                  }}
+                >
+                  Email address:{" "}
+                  <Box
+                    sx={{
+                      color: Colors.textColor,
+                      font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                    }}
+                  >
+                    {schedule?.contact?.email}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignSelf: "stretch",
+                    color: Colors.black,
+                    gap: 0.4,
+                    font: `normal normal 500 normal 16px/20px ${Fonts.primary}`,
+                  }}
+                >
+                  Country:{" "}
+                  <Box
+                    sx={{
+                      color: Colors.textColor,
+                      font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                    }}
+                  >
+                    {schedule?.contact?.country}
+                  </Box>
+                </Box>
+              </Box>
+              {/* CLASS SCHEDULES */}
+              <Box
+                sx={{
+                  width: "100%",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: 2,
+                  background: "#F9FAFB",
+                  borderRadius: "12px",
+                }}
+              >
+                {schedule?.schedules?.map((sch, i) => (
+                  <Box
+                    key={sch.week + i}
+                    sx={{
+                      width: "100%",
                       display: "flex",
-                      p: { xs: 1.2, sm: "25px 51px" },
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      gap: 1,
                     }}
                   >
                     <Box
                       sx={{
-                        color: `#2D3748`,
-                        font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                        width: "100%",
+                        display: "flex",
+                        color: Colors.primary,
+                        font: `normal normal 500 normal 18px/28px ${Fonts.primary}`,
                       }}
                     >
-                      Student Information
+                      Week: {sch.week}
                     </Box>
-
-                    <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
-
                     <Box
                       sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
                         display: "flex",
+                        alignSelf: "stretch",
+                        background: Colors.light,
+                        border: "1px solid #D0D5DD",
+                        borderRadius: "8px",
+                        padding: "10px 31px",
+                        boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
                       }}
                     >
-                      Full Name:{" "}
                       <Box
                         sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
+                          width: "100%",
+                          maxWidth: 500,
+                          color: "1A1A1A",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis",
+                          color: "1A1A1A",
+                          font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
                         }}
                       >
-                        {schedule?.children?.fullname}
+                        {sch.first_class}
                       </Box>
                     </Box>
-
                     <Box
                       sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
                         display: "flex",
+                        alignSelf: "stretch",
+                        background: Colors.light,
+                        border: "1px solid #D0D5DD",
+                        borderRadius: "8px",
+                        padding: "10px 31px",
+                        boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
                       }}
                     >
-                      Parent Name:{" "}
                       <Box
                         sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
+                          width: "100%",
+                          maxWidth: 500,
+                          color: "1A1A1A",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis",
+                          font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
                         }}
                       >
-                        {schedule?.parent?.user_profile?.fullname}
+                        {sch.second_class}
                       </Box>
                     </Box>
-                    <Box
-                      sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      Mobile:{" "}
-                      <Box
-                        sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
-                        }}
-                      >
-                        {schedule?.parent?.phone_number}
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      Email:{" "}
-                      <Box
-                        sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
-                        }}
-                      >
-                        {schedule?.parent?.email}
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      Location:{" "}
-                      <Box
-                        sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
-                        }}
-                      >
-                        {schedule?.parent?.user_profile?.address}
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        color: `#2D3748`,
-                        font: `normal normal 700 18px/140% ${Fonts.secondary}`,
-                        mt: 2,
-                      }}
-                    >
-                      Class Schedule
-                    </Box>
-
-                    <Divider sx={{ color: "rgba(0, 0, 0, 0.20)", mt: 1.2 }} />
-
-                    <Box
-                      sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      Course:{" "}
-                      <Box
-                        sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
-                        }}
-                      >
-                        {schedule?.course_outline.title}
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      Date & time:{" "}
-                      <Box
-                        sx={{
-                          color: `#A0AEC0`,
-                          ml: 0.5,
-                        }}
-                      >
-                        {`${moment.utc(schedule?.date).format("LT")} (${
-                          schedule?.course_subscription?.timezone
-                        } - GMT ${moment
-                          .utc()
-                          .tz(schedule?.course_subscription?.timezone)
-                          .format("Z")}) | ${moment
-                          .utc(schedule.date)
-                          .format("ll")}`}
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        color: `#15BE53`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                        my: 1,
-                      }}
-                    >
-                      Start class:{" "}
-                      <Button
-                        sx={{
-                          background: Colors.secondary,
-                          color: Colors.light,
-                          ml: 1,
-                          mt: -0.5,
-                          textTransform: "none",
-                          padding: "1px 8px",
-                          textTransform: "uppercase",
-                          font: `normal normal normal 500 14px/24px ${Fonts.secondary}`,
-                          cursor: "pointer",
-                          transition: "all 0.3ms",
-                          gap: "36px",
-                          borderRadius: "33px",
-                          padding: "5px 16px",
-                          "&:hover": {
-                            background: Colors.secondary,
-                            color: Colors.light,
-                            transform: "scale(0.99)",
-                          },
-                          "&:disabled": {
-                            cursor: "not-allowed",
-                            background: Colors.disabled,
-                            color: Colors.light,
-                          },
-                        }}
-                        disabled={isClassTime === false}
-                        onClick={() => router.push(schedule.meeting_url)}
-                      >
-                        Join class
-                      </Button>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        color: `#F80707`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
-                        display: "flex",
-                      }}
-                    >
-                      End class:{" "}
-                      <Box sx={{ display: "flex", gap: 2 }}>
-                        <Button
-                          variant="outlined"
-                          disableElevation
-                          sx={{
-                            background:
-                              schedule?.status === "completed"
-                                ? Colors.buttonSuccess
-                                : schedule.status === "missed"
-                                ? Colors.buttonError
-                                : Colors.primary,
-                            border:
-                              schedule?.status === "completed"
-                                ? Colors.buttonSuccess
-                                : schedule?.status === "missed"
-                                ? Colors.buttonError
-                                : Colors.primary,
-                            color: Colors.light,
-                            ml: 1,
-                            textTransform: "none",
-                            padding: "1px 8px",
-                            textTransform: "uppercase",
-                            font: `normal normal normal 500 14px/24px ${Fonts.secondary}`,
-                            cursor: "pointer",
-                            transition: "all 0.3ms",
-                            gap: "36px",
-                            borderRadius: "33px",
-                            padding: "5px 16px",
-                            "&:hover": {
-                              background:
-                                schedule?.status === "completed"
-                                  ? Colors.buttonSuccess
-                                  : schedule?.status === "missed"
-                                  ? Colors.buttonError
-                                  : Colors.primary,
-                              border:
-                                schedule?.status === "completed"
-                                  ? Colors.buttonSuccess
-                                  : schedule?.status === "missed"
-                                  ? Colors.buttonError
-                                  : Colors.primary,
-                              color: Colors.light,
-                              transform: "scale(0.99)",
-                            },
-                            "&:disabled": {
-                              cursor: "not-allowed",
-                              background: Colors.disabled,
-                              color: Colors.light,
-                            },
-                          }}
-                        >
-                          {schedule.status}
-                        </Button>
-                        <InstructorFeedbackDialog
-                          id={schedule?.id}
-                          scheduleStatus={schedule?.status}
-                        />
-                      </Box>
-                    </Box>
-                  </StyledCard>
-                </Grid>
-              )}
-            </>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
           )}
-        </Grid>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: "space-between",
+            padding: "20px 24px 0",
+            mt: { xs: 2, sm: 3, lg: 4 },
+          }}
+        >
+          <Box
+            id="select-pagesize-label"
+            sx={{
+              font: `normal normal normal 400 16px/30px ${Fonts.primary}`,
+              mt: 1,
+              mr: 1,
+              color: Colors.secondary,
+            }}
+          >
+            {`Page: ${page + 1} of
+          ${totalPageNumbers}`}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+            }}
+          >
+            <Button
+              component="div"
+              sx={{
+                width: 87,
+                height: 36,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "8px 12px",
+                gap: "4px",
+                color: Colors.secondary,
+                font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                border: `1px solid #D0D5DD`,
+                borderRadius: 1,
+                boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                cursor: page === 0 ? "not-allowed" : "pointer",
+                background: page === 0 ? Colors.greyLightest : Colors.light,
+                textTransform: "capitalize",
+              }}
+              onClick={() => handlePageNavigation("previous")}
+              disabled={page === 0}
+            >
+              Previous
+            </Button>
+            <Button
+              component="div"
+              sx={{
+                width: 60,
+                height: 36,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "8px 12px",
+                gap: "4px",
+                color: Colors.secondary,
+                font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                border: `1px solid #D0D5DD`,
+                borderRadius: 1,
+                boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                cursor:
+                  page + 1 === totalPageNumbers || count === 0
+                    ? "not-allowed"
+                    : "pointer",
+                background:
+                  page + 1 === totalPageNumbers || count === 0
+                    ? Colors.greyLightest
+                    : Colors.light,
+                textTransform: "capitalize",
+              }}
+              onClick={() => handlePageNavigation("next")}
+              disabled={page + 1 === totalPageNumbers || count === 0}
+            >
+              Next
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Box>
-  );
+  )
 }
 ClassSchedulePage.getLayout = function getLayout(page) {
-  return <DashboardLayouts>{page}</DashboardLayouts>;
-};
+  return <DashboardLayouts>{page}</DashboardLayouts>
+}

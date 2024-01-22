@@ -1,80 +1,80 @@
-import React from "react";
+import React from "react"
 import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
   useElements,
-} from "@stripe/react-stripe-js";
-import { Grid, Box } from "@mui/material";
-import { SubmitButton } from "../../../../components/forms/buttons";
-import { Colors } from "../../../../components/themes/colors";
-import { Fonts } from "../../../../components/themes/fonts";
+} from "@stripe/react-stripe-js"
+import { Grid, Box } from "@mui/material"
+import { SubmitButton } from "../../../../components/forms/buttons"
+import { Colors } from "../../../../components/themes/colors"
+import { Fonts } from "../../../../components/themes/fonts"
 
 export default function CheckoutForm({ amount }) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [message, setMessage] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const stripe = useStripe()
+  const elements = useElements()
+  const [message, setMessage] = React.useState(null)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   React.useEffect(() => {
     if (!stripe) {
-      return;
+      return
     }
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
-    );
+    )
 
     if (!clientSecret) {
-      return;
+      return
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
+          setMessage("Payment succeeded!")
+          break
         case "processing":
-          setMessage("Your payment is processing.");
-          break;
+          setMessage("Your payment is processing.")
+          break
         case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
+          setMessage("Your payment was not successful, please try again.")
+          break
         default:
-          setMessage("Something went wrong.");
-          break;
+          setMessage("Something went wrong.")
+          break
       }
-    });
-  }, [stripe]);
+    })
+  }, [stripe])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
-      return;
+      return
     }
 
-    setIsLoading(true);
+    setIsLoading(true)
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: "http://app.thepeerlearning.com/verify-payment",
       },
-    });
+    })
     if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+      setMessage(error.message)
     } else {
-      setMessage("An unexpected error occurred.");
+      setMessage("An unexpected error occurred.")
     }
 
-    setIsLoading(false);
-  };
+    setIsLoading(false)
+  }
 
   const paymentElementOptions = {
     layout: "tabs",
-  };
+  }
 
   return (
     <Box
@@ -97,7 +97,24 @@ export default function CheckoutForm({ amount }) {
         </Grid>
 
         <Grid item xs={12}>
-          <Box sx={{ mx: 2, mt: 4 }}>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 2,
+              mx: 2,
+              mt: 4,
+            }}
+          >
+            <SubmitButton
+              type="submit"
+              ghost
+              disabled={isLoading || !stripe || !elements}
+              loading={isLoading}
+            >
+              Cancel
+            </SubmitButton>
             <SubmitButton
               type="submit"
               disabled={isLoading || !stripe || !elements}
@@ -126,5 +143,5 @@ export default function CheckoutForm({ amount }) {
         )}
       </Grid>
     </Box>
-  );
+  )
 }

@@ -1,69 +1,245 @@
-import { Box, Link } from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React from "react";
-import NotFoundLogo from "../public/images/notfound.jpg";
-import { SubmitButton } from "../src/components/forms/buttons";
-import { AppLogo } from "../src/components/svg/logo";
-import { Colors } from "../src/components/themes/colors";
-import { Fonts } from "../src/components/themes/fonts";
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Box, Card, CardHeader, Grid, Link, Typography } from "@mui/material"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import React from "react"
+import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
+import { TextField } from "../src/components/forms/textFields"
+import Snackbars from "../src/components/snackbar"
+import { Colors } from "../src/components/themes/colors"
+import { Fonts } from "../src/components/themes/fonts"
+import { forgotpassword } from "../src/redux/slices/auth"
+import AuthLayout from "../src/views/auth/layout"
+import { PasswordIcon } from "../src/components/svg/menuIcons"
+import { CommentIcon, EmailIcon, MessageChatIcon } from "../src/components/svg"
+import { ArrowBack } from "@mui/icons-material"
+import { SubmitButton } from "../src/components/forms/buttons"
+import HomePageLayout from "../src/views/home/layout"
 
 export default function PageNotFound() {
-  const router = useRouter();
+  const router = useRouter()
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#F6F9FC",
-      }}
-    >
+    <Box>
+      <Head>
+        <title>Page not found | Peer learning</title>
+        <meta name="description" content="Peer-learning forgot password page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Box
         sx={{
           width: "100%",
-          maxWidth: 1500,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          my: { xs: 6, sm: 10 },
-          gap: 4,
-          border: `1px solid ${Colors.stroke}`,
-          borderRadius: 2,
-          py: 5,
-          px: { xs: 3, xl: 0 },
-          mx: { xs: 3, xl: 0 },
+          py: { xs: 4, md: "96px" },
         }}
       >
-        <Link underline="none" href="https://thepeerlearning.com">
-          <AppLogo style={{ width: 80, height: 80 }} />
-        </Link>
-
-        <Image src={NotFoundLogo} alt="not found" priority />
         <Box
           component="div"
           sx={{
-            maxWidth: "100%",
-            textAlign: "center",
-            font: {
-              xs: `normal normal 700 38px/50px ${Fonts.primaryBold}`,
-              sm: `normal normal 700 45px/65px ${Fonts.primaryBold}`,
+            width: "100%",
+            maxWidth: 768,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            background: {
+              xs: `url('/images/smGridBg.png')`,
+              lg: `url('/images/lgGridBg.png')`,
             },
-            fontFeatureSettings: "salt' on, 'liga' off",
-            color: Colors.black,
+            backgroundPosition: "top",
+            gap: 3,
           }}
         >
-          Opss...Page not found
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
+            <Box
+              sx={{
+                width: 134,
+                height: 48,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "12px 18px",
+                borderRadius: 1,
+                border: `1px solid #D0D5DD`,
+                background: Colors.light,
+                color: Colors.secondary,
+                boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                cursor: "pointer",
+                font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 0.5,
+                }}
+              >
+                <Box
+                  component="span"
+                  sx={{
+                    color: Colors.primary,
+                    fontSize: 48,
+                    mt: -2,
+                  }}
+                >
+                  .
+                </Box>{" "}
+                404 error
+              </Box>
+            </Box>
+            <Typography
+              variant="h1"
+              sx={{
+                width: "100%",
+                display: "flex",
+                textAlign: "center",
+                flexDirection: "column",
+                color: Colors.black,
+                m: 0,
+                font: {
+                  xs: `normal normal 600 normal 24px/32px ${Fonts.primary}`,
+                  sm: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+                },
+              }}
+            >
+              We lost this page
+              <Typography
+                variant="h6"
+                sx={{
+                  textAlign: "center",
+                  color: "#667085",
+                  m: 0,
+                  font: {
+                    xs: `ormal normal 400 normal 16px/24px ${Fonts.primary}`,
+                    lg: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                  },
+                }}
+              >
+                No worries, we&apos;ll send you reset instructions.
+              </Typography>
+            </Typography>
+
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: 2,
+                justifyContent: "center",
+                alignItems: "center",
+                mt: "32px",
+              }}
+            >
+              <Box
+                sx={{
+                  width: { xs: "100%", sm: 140 },
+                  height: 48,
+                  display: "flex",
+                  gap: 0.5,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "12px 18px",
+                  borderRadius: 1,
+                  border: `1px solid #D0D5DD`,
+                  background: Colors.light,
+                  color: Colors.secondary,
+                  boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                  cursor: "pointer",
+                  font: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+                }}
+              >
+                <ArrowBack />
+                Go back
+              </Box>
+              <Box
+                sx={{
+                  width: { xs: "100%", sm: 128 },
+                  height: 48,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "12px 18px",
+                  borderRadius: 1,
+                  border: `1px solid #D0D5DD`,
+                  background: Colors.primary,
+                  color: Colors.light,
+                  boxShadow: " 0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                  cursor: "pointer",
+                  font: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+                }}
+              >
+                Go home
+              </Box>
+            </Box>
+          </Box>
         </Box>
-        <Box sx={{ width: 200 }}>
-          <SubmitButton onClick={() => router.push("/")}>
-            Go to home page
-          </SubmitButton>
-        </Box>
+        <Card
+          onClick={() => router.push("/company/contact")}
+          sx={{
+            display: "flex",
+            width: "100%",
+            maxWidth: 500,
+            cursor: "pointer",
+            font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+            display: "flex",
+            gap: 1,
+            boxShadow: "none",
+            borderTop: "1px solid #EAECF0",
+            borderBottom: "1px solid #EAECF0",
+            mt: "116px",
+          }}
+        >
+          <CardHeader
+            avatar={<MessageChatIcon />}
+            title={
+              <Typography
+                variant="h1"
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  textAlign: "left",
+                  flexDirection: "column",
+                  color: Colors.black,
+                  m: 0,
+                  font: `normal normal 600 normal 20px/30px ${Fonts.primary}`,
+                }}
+              >
+                Chat to us
+              </Typography>
+            }
+            subheader={
+              <Typography
+                variant="h6"
+                sx={{
+                  textAlign: "left",
+                  color: "#667085",
+                  m: 0,
+                  font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                }}
+              >
+                Can’t find what you’re looking for?
+              </Typography>
+            }
+          />
+        </Card>
       </Box>
     </Box>
-  );
+  )
+}
+PageNotFound.getLayout = function getLayout(page) {
+  return <HomePageLayout>{page}</HomePageLayout>
 }

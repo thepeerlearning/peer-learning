@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { Box, FormHelperText } from "@mui/material";
-import { Colors } from "../../themes/colors";
-import { Fonts } from "../../themes/fonts";
-import Select from "react-select";
-import PhoneInput from "react-phone-number-input";
+import { css } from "@emotion/react"
+import styled from "@emotion/styled"
+import { Box, FormHelperText } from "@mui/material"
+import { Colors } from "../../themes/colors"
+import { Fonts } from "../../themes/fonts"
+import Select from "react-select"
+import PhoneInput from "react-phone-number-input"
 
 export const FormsRow = styled.div`
   display: flex;
@@ -18,17 +18,17 @@ export const FormsRow = styled.div`
   & + & {
     margin-top: 12px;
   }
-`;
+`
 export const Root = styled.div`
   position: relative;
   width: 100%;
-`;
+`
 export const SearchIconStyle = styled.span`
   position: absolute;
   top: 20px;
   right: auto;
   z-index: 100;
-  left: 25px;
+  left: 18px;
   height: 20px;
   transition: all 150ms linear;
   display: flex;
@@ -40,7 +40,61 @@ export const SearchIconStyle = styled.span`
     margin: auto;
     color: inherit;
   }
-`;
+`
+export const TextIconStyle = styled.span`
+  position: absolute;
+  top: 43px;
+  right: auto;
+  z-index: 100;
+  left: 18px;
+  height: 20px;
+  transition: all 150ms linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff 0% 0% no-repeat padding-box;
+  color: inherit;
+  svg {
+    margin: auto;
+    color: inherit;
+  }
+`
+export const TextNoLabelIconStyle = styled.span`
+  position: absolute;
+  top: 25px;
+  right: auto;
+  z-index: 100;
+  left: 18px;
+  height: 20px;
+  transition: all 150ms linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff 0% 0% no-repeat padding-box;
+  color: inherit;
+  svg {
+    margin: auto;
+    color: inherit;
+  }
+`
+export const SelectNoLabelIconStyle = styled.span`
+  position: absolute;
+  top: 24px;
+  right: auto;
+  z-index: 100;
+  left: 18px;
+  height: 20px;
+  transition: all 150ms linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff 0% 0% no-repeat padding-box;
+  color: inherit;
+  svg {
+    margin: auto;
+    color: inherit;
+  }
+`
 export const PasswordIcon = styled.span`
   display: flex;
   justify-content: center;
@@ -59,50 +113,66 @@ export const PasswordIcon = styled.span`
   svg {
     margin: auto;
   }
-`;
+`
+export const PasswordNolabelIcon = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  width: 56px;
+  height: 44px;
+  padding: 12px 18px;
+  border-radius: 0px 6px 6px 0px;
+  transition: all 150ms linear;
+  transform-origin: center;
+  display: flex;
+  cursor: pointer;
+  svg {
+    margin: auto;
+  }
+`
 // Input label
 export const InputLabel = styled.label`
   width: ${(props) => (props.width ? props.width : "100%")};
   text-align: left;
-  font: normal normal 700 15px/19px ${Fonts.secondary};
-  letter-spacing: 0px;
-  color: #001b38;
+  font: normal normal 500 normal 16px/20px ${Fonts.primary};
+  color: #101828;
   text-transform: capitalize;
   margin-left: 5px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
-`;
+`
 
 export const FormHelper = styled(FormHelperText)`
   color: ${Colors.buttonError};
   margin-top: -10px;
-  font: normal normal 400 0.6rem/18px ${Fonts.primary};
-`;
+  font: normal normal 400 normal 0.6rem/18px ${Fonts.primary};
+`
 // Text input
 export const InputTextElement = styled.input`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: ${(props) => (props.height ? props.height : "44px")};
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
-  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
-    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
-  font: normal normal 400 16px/20px ${Fonts.secondary};
+  padding: 10.5px 10px 10.5px 45px;
+  font: normal normal 400 normal 16px/20px ${Fonts.primary};
   border: ${(props) =>
-    props.disabled
+    props?.disabled
       ? `1px solid ${Colors.greyLightest}`
       : props.error
       ? `1px solid ${Colors.buttonError}`
-      : `1px solid #E6EBEC`};
+      : `1px solid #d0d5dd`};
   box-sizing: border-box;
   border-radius: 8px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  gap: 8px;
   background: ${(props) =>
     props.disabled
       ? Colors.greyLightest
-      : `#F3F2F0 0% 0% no-repeat padding-box`};
+      : `${Colors.light} 0% 0% no-repeat padding-box`};
   color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
-  gap: 12px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  position: relative;
   &:hover {
     border: ${(props) =>
       props.disabled
@@ -128,15 +198,30 @@ export const InputTextElement = styled.input`
     display: flex;
     padding: 0px 10px 0px 0px;
     align-items: flex-start;
-    color: ${Colors.placeholder};
+    color: ${Colors.textColor};
     font: normal normal 400 14px/20px ${Fonts.primary};
   }
   & + & {
     margin-top: 2px;
   }
-`;
+`
+//PASSWORD FIELD
 
-//PHONE MUBER
+export const InputPasswordElement = styled(InputTextElement)`
+  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+`
+//PASSWORD FIELD
+
+export const InputDateElement = styled(InputTextElement)`
+  background: ${Colors.light};
+  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  height: 44px;
+`
+//PHONE NUMUBER
 export const PhoneNumberTextField = styled(PhoneInput)`
   &.PhoneInput {
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -153,13 +238,14 @@ export const PhoneNumberTextField = styled(PhoneInput)`
         : `1px solid #E6EBEC`};
     box-sizing: border-box;
     border-radius: 8px;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
     background: ${(props) =>
       props.disabled
         ? Colors.greyLightest
-        : `#F3F2F0 0% 0% no-repeat padding-box`};
+        : `${Colors.light} 0% 0% no-repeat padding-box`};
     color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
     cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
-    gap: 12px;
+    gap: 8px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     position: relative;
   }
@@ -170,7 +256,7 @@ export const PhoneNumberTextField = styled(PhoneInput)`
     height: ${(props) => (props.height ? props.height : "44px")};
     margin: 0;
     padding: 0;
-    font: normal normal 400 16px/20px ${Fonts.secondary};
+    font: normal normal 400 normal 16px/20px ${Fonts.primary};
     &:hover {
       border: none;
       outline: none;
@@ -186,33 +272,34 @@ export const PhoneNumberTextField = styled(PhoneInput)`
       display: flex;
       padding: 0px 10px 0px 0px;
       align-items: flex-start;
-      color: ${Colors.placeholder};
+      color: ${Colors.textColor};
       font: normal normal 400 14px/20px ${Fonts.primary};
     }
     & + & {
       margin-top: 2px;
     }
-    // height: 100%;
-    // weight: 100%;
   }
-`;
+`
+
 //SEARCH FIELD
 
 export const InputSearchElement = styled(InputTextElement)`
   background: ${Colors.light};
-  padding: 10.5px 10px 10.5px 35px;
-  border: 0.5px solid #e6ebec;
-  border-radius: 15px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
   height: 40px;
-`;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+`
 //TextArea
 export const TextAreaInput = styled(InputTextElement)`
   min-height: ${(props) => props.height || "89px"};
+  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
   resize: none;
-  font: normal normal 400 16px/20px ${Fonts.primary};
+  font: normal normal 400 normal 16px/20px ${Fonts.primary};
   display: flex;
   align-items: flex-start;
-`;
+`
 //Select input
 export const SelectInput = styled.select`
   width: ${(props) => (props.width ? props.width : "100%")};
@@ -220,10 +307,11 @@ export const SelectInput = styled.select`
   display: flex;
   white-space: pre;
   min-height: 20px;
-  padding: 10.5px 10px 10.5px 17.5px;
+  padding: 10.5px 10px 10.5px 45px;
+  // padding: 10.5px 10px 10.5px 18px;
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
-  font: normal normal 400 16px/20px ${Fonts.secondary};
+  font: normal normal 400 normal 16px/20px ${Fonts.primary};
   border: ${(props) =>
     props.disabled
       ? `1px solid ${Colors.greyLightest}`
@@ -236,7 +324,8 @@ export const SelectInput = styled.select`
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   position: relative;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  background: url("/images/svgs/angle-down.svg") no-repeat right #f3f2f0;
+  background: url("/images/svgs/calender-alt.svg") no-repeat right
+    ${Colors.light};
   -webkit-appearance: none;
   background-position: right 18px top 50%;
   &:hover {
@@ -268,15 +357,14 @@ export const SelectInput = styled.select`
   }
   ::placeholder {
     display: flex;
-    // padding: 0px 10px 0px 0px;
     align-items: flex-start;
-    color: ${Colors.placeholder};
-    font: normal normal 400 16px/20px ${Fonts.primary};
+    color: ${Colors.textColor};
+    font: normal normal 400 normal 16px/20px ${Fonts.primary};
   }
   & + & {
     margin-top: 2px;
   }
-`;
+`
 // MultiSelect
 export const MultiSelect = styled(Select)`
 & .Select__menu{
@@ -302,7 +390,7 @@ export const MultiSelect = styled(Select)`
    & .Select__option{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     text-align: left;
-    font: normal normal 400 16px/20px ${Fonts.secondary};
+    font: normal normal 400 normal 16px/20px ${Fonts.primary};
     letter-spacing: 0px;
     color: ${Colors.textColor};
     cursor:pointer;
@@ -355,7 +443,7 @@ export const MultiSelect = styled(Select)`
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
     ${(props) => (props.hpadding ? props.hpadding : "10px")};
-  font: normal normal 400 16px/20px ${Fonts.secondary};
+  font: normal normal 400 normal 16px/20px ${Fonts.primary};
    border-width: 1px;
     border-style: solid;
     border-color: ${(props) =>
@@ -400,17 +488,18 @@ export const MultiSelect = styled(Select)`
     display: flex;
     padding: 0px 10px 0px 0px;
     align-items: flex-start;
-    color: ${Colors.placeholder};
-    font: normal normal 400 14px/20px ${Fonts.primary};
+    color: ${Colors.textColor};
+    font: normal normal 400 normal 14px/20px ${Fonts.primary};
   }
   & + & {
     margin-top: 2px;
   }
-`;
+`
 // Checkbox input
 export const InputOriginalEl = styled.input`
   display: none;
   &:checked ~ div {
+    font: normal normal 500 normal 16px/20px ${Fonts.primary};
     background-color: ${(props) => (props.disabled ? "#e8ebee" : Colors.light)};
     border-color: ${(props) => (props.disabled ? "#e8ebee" : Colors.primary)};
     cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
@@ -418,19 +507,19 @@ export const InputOriginalEl = styled.input`
       transform: rotate(45deg) scale(1);
     }
   }
-`;
+`
 export const InputOriginalElCustom = styled.div`
   position: absolute;
-  top: 4px;
-  left: 4px;
-  height: 18px;
-  width: 18px;
+  top: 2px;
+  left: 0px;
+  height: 16px;
+  width: 16px;
   background: ${Colors.light};
-  color: #43425d;
-  font-family: ${Fonts.primary};
-  font-size: 12px;
-  border: 2px solid #2e319233;
-  border-radius: 2px;
+  align-self: stretch;
+  color: #344054;
+  font: normal normal 500 normal 16px/20px ${Fonts.primary};
+  border: 1px solid #d0d5dd;
+  border-radius: 4px;
   transition: all 0.25s ease-in-out;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   &:hover {
@@ -444,21 +533,21 @@ export const InputOriginalElCustom = styled.div`
     top: 2px;
     width: 5px;
     height: 8px;
-    border: solid ${Colors.secondary};
+    border: solid ${Colors.primary};
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
     transition: transform 0.25s ease-in-out;
   }
-`;
+`
 
 export const InputLabelLabel = styled.span`
-  margin-left: 30px;
+  margin-left: 20px;
   position: relative;
   top: 0px;
-  font: normal normal 400 14px/25px ${Fonts.primary};
-  letter-spacing: 0px;
-  color: ${(props) => (props.disabled ? "#777" : "#425466")};
-`;
+  text-transform: none;
+  font: normal normal 500 normal 14px/20px ${Fonts.primary};
+  color: ${(props) => (props.disabled ? "#777" : "#344054")};
+`
 
 // Radio input
 export const InputRadioElCustom = styled(InputOriginalElCustom)`
@@ -471,14 +560,14 @@ export const InputRadioElCustom = styled(InputOriginalElCustom)`
     top: 3px;
     width: 8px;
     height: 8px;
-    background-color: ${Colors.secondary};
+    background-color: ${Colors.primary};
     cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-    color: ${Colors.greyText};
-    font: normal normal 400 12px/25px ${Fonts.primary};
+    color: #344054;
+    font: normal normal 400 normal 12px/25px ${Fonts.primary};
     transform: scale(0);
     transition: transform 0.25s ease-in-out;
   }
-`;
+`
 // General Input wrapper
 export const InputElWrapper = styled.fieldset`
   position: relative;
@@ -532,7 +621,7 @@ export const InputElWrapper = styled.fieldset`
     css`
       position: relative;
     `}
-`;
+`
 
 export const FormTitle = styled.h2`
   text-align: ${(props) => props.align || "left"};
@@ -548,15 +637,15 @@ export const FormTitle = styled.h2`
     font: normal normal 600 20px/25px ${Fonts.primary};
     margin: 10px 0;
   }
-`;
+`
 
 export const TabTitle = styled.h2`
   text-align: left;
-  font: normal normal bold 25px/10px ${Fonts.secondary};
+  font: normal normal bold 25px/10px ${Fonts.primary};
   letter-spacing: 0px;
   color: ${Colors.greyText};
   margin: 0;
-`;
+`
 
 // Text input
 export const InputFileBox = styled(Box)`
@@ -564,23 +653,24 @@ export const InputFileBox = styled(Box)`
   min-height: ${(props) => (props.height ? props.height : "10px")};
   margin: 10px 0;
   padding: 16px 17.5px;
-  font: normal normal 400 16px/20px ${Fonts.secondary};
+  font: normal normal 400 normal 16px/20px ${Fonts.primary};
   border: ${(props) =>
     props.disabled
       ? `1px solid ${Colors.greyLightest}`
       : props.error
       ? `1px solid ${Colors.buttonError}`
-      : `1px solid #E6EBEC`};
+      : `1px solid #d0d5dd`};
   box-sizing: border-box;
   border-radius: 8px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  gap: 8px;
   background: ${(props) =>
     props.disabled
       ? Colors.greyLightest
-      : `#F3F2F0 0% 0% no-repeat padding-box`};
+      : `${Colors.light} 0% 0% no-repeat padding-box`};
   color: ${(props) => (props.disabled ? "rgba(0, 0, 0, 0.38)" : "#425466")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   text-align: left;
-  gap: 12px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   position: relative;
-`;
+`
