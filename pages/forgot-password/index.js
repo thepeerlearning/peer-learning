@@ -172,7 +172,7 @@ export default function ForgotPasswordPage() {
                       justifyContent: "center",
                       gap: 1,
                     }}
-                    href="/"
+                    href="/auth/login"
                     underline="hover"
                   >
                     <ArrowBack /> Back to home page
