@@ -1,6 +1,5 @@
 import { Box, Button, Grid } from "@mui/material"
 import MuiAccordion from "@mui/material/Accordion"
-import MuiAccordionDetails from "@mui/material/AccordionDetails"
 import MuiAccordionSummary from "@mui/material/AccordionSummary"
 import Typography from "@mui/material/Typography"
 import { styled } from "@mui/material/styles"
@@ -8,6 +7,7 @@ import { useState } from "react"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
 import { LessonsIcon } from "../../../components/svg/menuIcons"
+import { useRouter } from "next/router"
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -23,55 +23,30 @@ const Accordion = styled((props) => (
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
     expandIcon={
-      props.expanded ? (
-        <Button
-          sx={{
-            display: "flex",
-            color: Colors.primary,
-            padding: "5px 9.37px 5px 9.57px",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            alignSelf: "stretch",
-            cursor: "pointer",
-            font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
-            letterSpacing: 0.1,
-            borderRadius: "6px",
-            border: `1px solid #FFF`,
-            textTransform: "capitalize",
+      <Button
+        sx={{
+          display: "flex",
+          color: Colors.primary,
+          padding: "5px 9.37px 5px 9.57px",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          alignSelf: "stretch",
+          cursor: "pointer",
+          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+          letterSpacing: 0.1,
+          borderRadius: "6px",
+          border: `1px solid #FFF`,
+          textTransform: "capitalize",
+          background: "#FFF",
+          "&:hover": {
             background: "#FFF",
-            "&:hover": {
-              background: "#FFF",
-            },
-          }}
-        >
-          Hide
-        </Button>
-      ) : (
-        <Button
-          sx={{
-            display: "flex",
-            color: Colors.primary,
-            padding: "5px 9.37px 5px 9.57px",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            alignSelf: "stretch",
-            cursor: "pointer",
-            font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
-            letterSpacing: 0.1,
-            borderRadius: "6px",
-            border: `1px solid #FFF`,
-            textTransform: "capitalize",
-            background: "#FFF",
-            "&:hover": {
-              background: "#FFF",
-            },
-          }}
-        >
-          View
-        </Button>
-      )
+          },
+        }}
+        onClick={props.onClick}
+      >
+        View
+      </Button>
     }
     {...props}
   />
@@ -92,17 +67,8 @@ const AccordionSummary = styled((props) => (
     alignItems: "center",
   },
 }))
-
-const AccordionDetails = styled(MuiAccordionDetails)(() => ({
-  padding: 16,
-  background: "#FCFCFD",
-  border: `1px solid #EDEDED`,
-  boxSizing: "border-box",
-  boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
-  borderRadius: 0,
-}))
-
 export default function DesignCourseOutlinePage() {
+  const router = useRouter()
   const [expanded, setExpanded] = useState("")
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -141,6 +107,7 @@ export default function DesignCourseOutlinePage() {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
                 expanded={expanded === "panel1"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -178,29 +145,13 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Box
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Box>
-              </AccordionDetails>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-            >
+            <Accordion onChange={handleChange("panel2")}>
               <AccordionSummary
                 aria-controls="panel2d-content"
                 id="panel2d-header"
                 expanded={expanded === "panel2"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -239,30 +190,13 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
+            <Accordion onChange={handleChange("panel3")}>
               <AccordionSummary
                 aria-controls="panel3d-content"
                 id="panel3d-header"
                 expanded={expanded === "panel3"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -297,30 +231,13 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
+            <Accordion onChange={handleChange("panel4")}>
               <AccordionSummary
                 aria-controls="panel4d-content"
                 id="panel4d-header"
                 expanded={expanded === "panel4"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -357,21 +274,6 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
           </Box>
         </Grid>
@@ -398,6 +300,7 @@ export default function DesignCourseOutlinePage() {
                 aria-controls="panel5d-content"
                 id="panel5d-header"
                 expanded={expanded === "panel5"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -435,30 +338,14 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Box
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Box>
-              </AccordionDetails>
             </Accordion>
 
-            <Accordion
-              expanded={expanded === "panel7"}
-              onChange={handleChange("panel7")}
-            >
+            <Accordion onChange={handleChange("panel7")}>
               <AccordionSummary
                 aria-controls="panel7d-content"
                 id="panel7d-header"
                 expanded={expanded === "panel7"}
+                onClick={() => router.push("/auth/login")}
               >
                 <Box
                   sx={{
@@ -495,26 +382,8 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel8"}
-              onChange={handleChange("panel8")}
-            >
+            <Accordion onChange={handleChange("panel8")}>
               <AccordionSummary
                 aria-controls="panel8d-content"
                 id="panel8d-header"
@@ -557,20 +426,6 @@ export default function DesignCourseOutlinePage() {
                   </Typography>
                 </Box>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    font: `normal normal 400 normal 16px/20px ${Fonts.secondary}`,
-                    color: "#333",
-                  }}
-                >
-                  Get introduced to the Python library Tkinter to create GUI
-                  applications that perform the required task without showing
-                  the backend code like an application. At the end of this
-                  module, you will develop an application.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
           </Box>
         </Grid>
