@@ -257,6 +257,68 @@ export default function HomePageLayout({ window, children }) {
                 )
               })}
           </StyledList>
+          <StyledList
+            component="nav"
+            disablePadding
+            sx={{ mt: 10, position: "absolute", bottom: 30 }}
+          >
+            <Box
+              component="div"
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+              }}
+            >
+              <Button
+                onClick={() => router.push("/auth/login")}
+                sx={{
+                  width: "100%",
+                  height: 36,
+                  padding: "10px 16px",
+                  display: "flex",
+                  font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                  color: Colors.primary,
+                  textTransform: "none",
+                  letterSpacing: 0.25,
+                  border: `1px solid ${Colors.primary}`,
+                  borderRadius: "8px",
+                  background: "transparent",
+                  boxShadow:
+                    "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #FFF",
+                  "&:hover": {
+                    background: "transparent",
+                  },
+                }}
+              >
+                Log into class
+              </Button>
+              <Button
+                onClick={() => router.push("/signup")}
+                sx={{
+                  width: "100%",
+                  height: 36,
+                  padding: "10px 16px",
+                  display: "flex",
+                  font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                  color: Colors.light,
+                  textTransform: "none",
+                  letterSpacing: 0.25,
+                  border: `1px solid ${Colors.primary}`,
+                  borderRadius: "8px",
+                  background: Colors.primary,
+                  boxShadow:
+                    "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                  "&:hover": {
+                    background: Colors.primary,
+                  },
+                }}
+              >
+                Register my child
+              </Button>
+            </Box>
+          </StyledList>
         </Box>
       </Box>
     </div>
@@ -383,10 +445,6 @@ export default function HomePageLayout({ window, children }) {
                               subheader={
                                 <Box
                                   sx={{
-                                    // maxWidth: 200,
-                                    overflow: "hidden",
-                                    // whiteSpace: "nowrap",
-                                    // textOverflow: "ellipsis",
                                     font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
                                     color: Colors.textColor,
                                   }}
@@ -395,8 +453,6 @@ export default function HomePageLayout({ window, children }) {
                                 </Box>
                               }
                             />
-
-                            // </ListItemButton>
                           )
                         })}
                       </Card>

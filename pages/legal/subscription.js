@@ -85,7 +85,7 @@ function a11yProps(index) {
   }
 }
 
-export default function PrivacyPolicyPage() {
+export default function SubscriptionPage() {
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event, newValue) => {
@@ -203,7 +203,7 @@ export default function PrivacyPolicyPage() {
                     <StyledTab label="Simple version" {...a11yProps(1)} />
                   </StyledTabs>
                 </Box>
-                <Box component="div" sx={{ width: "100%", display: "block" }}>
+                <Box component="div" sx={{ display: "block" }}>
                   <TabPanel value={value} index={0}>
                     <LegalVersion />
                   </TabPanel>
@@ -221,6 +221,6 @@ export default function PrivacyPolicyPage() {
   )
 }
 
-PrivacyPolicyPage.getLayout = function getLayout(page) {
+SubscriptionPage.getLayout = function getLayout(page) {
   return <HomePageLayout>{page}</HomePageLayout>
 }

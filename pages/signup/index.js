@@ -115,6 +115,7 @@ export default function SignupPage() {
             width: "100%",
             maxWidth: 478,
             px: { xs: 2, lg: 0 },
+            py: 3,
           }}
         >
           {activeStep === steps.length ? null : (

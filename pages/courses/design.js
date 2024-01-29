@@ -1,16 +1,15 @@
-import React from "react"
-import HomePageLayout from "../../src/views/home/layout"
 import { Box, Button, CssBaseline, Grid, Link, Typography } from "@mui/material"
+import React from "react"
 import {
   BlueStarIcon,
   ClockIcon,
   PeopleIcon,
   StarIcon,
 } from "../../src/components/svg"
-import { Fonts } from "../../src/components/themes/fonts"
 import { Colors } from "../../src/components/themes/colors"
-import PythonCourseOutlinePage from "../../src/views/home/courseOutlines/python"
+import { Fonts } from "../../src/components/themes/fonts"
 import DesignCourseOutlinePage from "../../src/views/home/courseOutlines/design"
+import HomePageLayout from "../../src/views/home/layout"
 
 export default function DesignPage() {
   return (
@@ -68,6 +67,7 @@ export default function DesignPage() {
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
+                mt: { xs: 4, sm: 0 },
               }}
             >
               Focus on
@@ -77,11 +77,8 @@ export default function DesignPage() {
               sx={{
                 maxWidth: 820,
                 color: Colors.light,
-                font: {
-                  xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                  sm: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
-                },
-                letterSpacing: { xs: -0.64, sm: 0.25 },
+                font: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
+                letterSpacing: { xs: 0.3, sm: 0.25 },
                 textAlign: "left",
               }}
             >
@@ -94,7 +91,7 @@ export default function DesignPage() {
                 <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
                   <PeopleIcon />{" "}
                   <Typography
-                    variant="subtitle1"
+                    variant="span"
                     sx={{
                       font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
                       color: Colors.light,
@@ -109,14 +106,26 @@ export default function DesignPage() {
                 <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
                   <ClockIcon />{" "}
                   <Typography
-                    variant="subtitle1"
+                    variant="span"
                     sx={{
                       font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
                       color: Colors.light,
                       letterSpacing: 0.1,
+                      display: { xs: "none", sm: "flex" },
                     }}
                   >
                     Course Duration: 6 months
+                  </Typography>
+                  <Typography
+                    variant="span"
+                    sx={{
+                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                      color: Colors.light,
+                      letterSpacing: 0.1,
+                      display: { xs: "flex", sm: "none" },
+                    }}
+                  >
+                    6 months
                   </Typography>
                 </Box>
               </Grid>{" "}
@@ -124,7 +133,7 @@ export default function DesignPage() {
                 <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
                   <StarIcon />{" "}
                   <Typography
-                    variant="subtitle1"
+                    variant="span"
                     sx={{
                       font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
                       color: Colors.light,
@@ -141,7 +150,6 @@ export default function DesignPage() {
             component="span"
             sx={{
               maxWidth: 560,
-              height: { xs: 142, sm: 81 },
               display: "block",
               color: Colors.light,
               font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
@@ -160,7 +168,6 @@ export default function DesignPage() {
             sx={{
               width: 165.2,
               height: 36,
-              my: "58px",
               padding: "10px 16px",
               font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
               color: Colors.light,
@@ -214,10 +221,9 @@ export default function DesignPage() {
           >
             What is UI/UX Design?
             <Typography
-              variant="subtitle1"
+              variant="span"
               sx={{
                 maxWidth: 560,
-                height: { xs: 230, sm: 108 },
                 display: "block",
                 color: "#020203",
                 font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
@@ -232,30 +238,30 @@ export default function DesignPage() {
               myriad of processes and principles to craft seamless and engaging
               experiences for users across various digital platforms.
             </Typography>
+            <Link
+              href="/signup"
+              underline="hover"
+              sx={{
+                width: 165.2,
+                height: 36,
+                display: "flex",
+                my: "18px",
+                alignItems: "left",
+                font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                color: Colors.primary,
+                textTransform: "none",
+                letterSpacing: 0.25,
+                "&:hover": {
+                  background: "transparent",
+                },
+              }}
+            >
+              Show more
+            </Link>
           </Typography>
-          <Link
-            href="/signup"
-            underline="hover"
-            sx={{
-              width: 165.2,
-              height: 36,
-              display: "flex",
-              my: "48px",
-              alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
-              color: Colors.primary,
-              textTransform: "none",
-              letterSpacing: 0.25,
-              "&:hover": {
-                background: "transparent",
-              },
-            }}
-          >
-            Show more
-          </Link>
         </Box>
         <Box
-          id="python-section"
+          id="ux-section"
           component="div"
           sx={{
             width: "100%",
@@ -271,7 +277,6 @@ export default function DesignPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
-              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
             }}
           >
             <Box
@@ -288,12 +293,12 @@ export default function DesignPage() {
                   color: "#020204",
                   textAlign: "left",
                   font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
-                  m: 0,
+                  px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
                 }}
               >
                 What your child will learn in this lesson
                 <Typography
-                  variant="subtitle1"
+                  variant="span"
                   sx={{
                     maxWidth: 560,
                     height: { xs: 142, sm: 70 },
@@ -307,8 +312,8 @@ export default function DesignPage() {
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
                 </Typography>
               </Typography>
+              <DesignCourseOutlinePage />
             </Box>
-            <DesignCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -317,6 +322,7 @@ export default function DesignPage() {
                 justifyContent: "center",
                 alignItems: "center",
                 mt: 5,
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Box
@@ -357,6 +363,7 @@ export default function DesignPage() {
                 width: "100%",
                 display: "flex",
                 mt: 11.875,
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Grid container spacing={3}>
@@ -397,7 +404,7 @@ export default function DesignPage() {
                         }}
                       />{" "}
                       <Typography
-                        variant="subtitle1"
+                        variant="span"
                         sx={{
                           maxWidth: 560,
                           display: "flex",
@@ -451,7 +458,7 @@ export default function DesignPage() {
                         }}
                       />{" "}
                       <Typography
-                        variant="subtitle1"
+                        variant="span"
                         sx={{
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,

@@ -136,7 +136,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
-                    textAlign: "justify",
+                    // textAlign: "justify",
                   }}
                 >
                   We believe in the boundless potential of all children,
@@ -156,7 +156,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
-                    textAlign: "justify",
+                    // textAlign: "justify",
                     my: 2,
                   }}
                 >
@@ -169,7 +169,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
-                    textAlign: "justify",
+                    // textAlign: "justify",
                     mb: 2,
                   }}
                 >
@@ -231,8 +231,8 @@ export default function AboutUsPage() {
                 background: `url('/images/linear-gred.svg')`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
-                py: { xs: 2, sm: 3, lg: 5, xl: 6 },
+                px: { xs: 3, lg: 12.5, xl: 16 },
+                py: { xs: 8, xl: 10 },
               }}
             >
               <Typography
@@ -250,7 +250,7 @@ export default function AboutUsPage() {
                 component="h2"
                 sx={{
                   maxWidth: 820,
-                  height: { xs: 175, sm: 127 },
+                  height: { xs: 187, sm: 127 },
                   color: "#091135",
                   font: {
                     xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
@@ -265,7 +265,7 @@ export default function AboutUsPage() {
                   component="span"
                   sx={{
                     maxWidth: 560,
-                    height: 48,
+                    // height: 148,
                     display: "block",
                     color: "#091135",
                     font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
@@ -282,9 +282,9 @@ export default function AboutUsPage() {
               <Box
                 id="gallery-section"
                 sx={{
-                  maxWidth: 1512,
+                  width: "100%",
                   display: "flex",
-                  alignItems: "center",
+                  mt: 5,
                 }}
               >
                 <Grid container spacing={0}>
@@ -309,6 +309,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 1.8,
                       }}
                     >
                       <Image
@@ -324,6 +325,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 1.8,
                       }}
                     >
                       <Image src={minna} alt="FUT Minna" priority />
@@ -357,6 +359,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 2,
                       }}
                     >
                       <Image
@@ -387,6 +390,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 2,
                       }}
                     >
                       <Image src={ourpass} alt="illinois university" priority />
@@ -398,6 +402,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 2,
                       }}
                     >
                       <Image src={ideal} alt="illinois university" priority />
@@ -409,6 +414,7 @@ export default function AboutUsPage() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        mt: 2,
                       }}
                     >
                       <Image src={rooah} alt="Rooah university" priority />

@@ -1,81 +1,13 @@
-import { Box, Button, Grid } from "@mui/material"
-import MuiAccordion from "@mui/material/Accordion"
-import MuiAccordionSummary from "@mui/material/AccordionSummary"
+import { Box, Button, Card, CardHeader, Grid } from "@mui/material"
 import Typography from "@mui/material/Typography"
-import { styled } from "@mui/material/styles"
 import { useRouter } from "next/router"
-import { useState } from "react"
 import { LessonsIcon } from "../../../components/svg/menuIcons"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(() => ({
-  "&:not(:last-child)": {
-    borderBottom: 0,
-  },
-  "&::before": {
-    display: "none",
-  },
-}))
-
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={
-      <Button
-        sx={{
-          display: "flex",
-          color: Colors.primary,
-          padding: "5px 9.37px 5px 9.57px",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          alignSelf: "stretch",
-          cursor: "pointer",
-          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
-          letterSpacing: 0.1,
-          borderRadius: "6px",
-          border: `1px solid #FFF`,
-          textTransform: "capitalize",
-          background: "#FFF",
-          "&:hover": {
-            background: "#FFF",
-          },
-        }}
-        onClick={props.onClick}
-      >
-        View
-      </Button>
-    }
-    {...props}
-  />
-))(() => ({
-  width: "100%",
-
-  borderRadius: 6,
-  border: `1px solid #EDEDED`,
-  background: `#5750CC`,
-  boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
-  padding: "8px 16px",
-  alignSelf: "stretch",
-  gap: 10,
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-    transform: "none",
-  },
-  "& .MuiAccordionSummary-content": {
-    display: "flex",
-    alignItems: "center",
-  },
-}))
-
 export default function ScratchCourseOutlinePage() {
   const router = useRouter()
-  const [expanded, setExpanded] = useState("")
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false)
-  }
   return (
     <Box
       component="div"
@@ -83,6 +15,9 @@ export default function ScratchCourseOutlinePage() {
         width: "100%",
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        px: { xs: 1, sm: 6, md: 10, lg: 12.5, xl: 16 },
       }}
     >
       <Grid container spacing={3}>
@@ -93,7 +28,8 @@ export default function ScratchCourseOutlinePage() {
               display: "flex",
               flexDirection: "column",
               gap: 2,
-              padding: "42px 29px",
+              padding: { xs: 1, sm: "25px" },
+              height: { xs: "auto", md: 880, lg: 750, xl: 692 },
               alignItems: "flex-start",
               borderRadius: 1,
               border: `1px solid #EDEDED`,
@@ -101,42 +37,95 @@ export default function ScratchCourseOutlinePage() {
               boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
             }}
           >
-            <Accordion
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
-                    gap: 1.2,
+                    flexDirection: "column",
+                    gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -10, width: 45, height: 45 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: -1, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 1 | Introduction to Python
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 1 | Introduction to Python
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Get started with the fundamentals of Python. Begin with
@@ -144,46 +133,133 @@ export default function ScratchCourseOutlinePage() {
                       operators, and conditional statements through hands-on
                       exercises.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        mt: 1,
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
+              </Box>
+            </Card>
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel2d-content"
-                id="panel2d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -20, width: 70, height: 70 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: 1.5, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 2 | Loops
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 2 | Loops
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn how computers decide things with &quot;conditional
@@ -193,101 +269,312 @@ export default function ScratchCourseOutlinePage() {
                       Lastly, have some fun by drawing with Python&apos;s Turtle
                       tool.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        mt: 1,
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
+              </Box>
+            </Card>
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel3d-content"
-                id="panel3d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon style={{ width: 30, height: 30 }} />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 3 | Python Functions
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: 1.5, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 3 | Python Functions
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
+                  />
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn about the power of functions in Python, from simple
                       ones to those with parameters and return values.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          mt: 1,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
+              </Box>
+            </Card>
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel4d-content"
-                id="panel4d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -8, width: 40, height: 40 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: 1.5, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 4 | Game Building with Pygame
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 4 | Game Building with Pygame
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn the essential components like handling user input,
                       creating game entities, and implementing basic game
                       mechanics to build a functional game step by step.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          mt: 1,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                        onClick={() => router.push("/auth/login")}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
+              </Box>
+            </Card>
           </Box>
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <Box
             sx={{
@@ -295,7 +582,8 @@ export default function ScratchCourseOutlinePage() {
               display: "flex",
               flexDirection: "column",
               gap: 2,
-              padding: "42px 29px",
+              padding: { xs: 1, sm: "25px" },
+              height: { xs: "auto", md: 880, lg: 750, xl: 692 },
               alignItems: "flex-start",
               borderRadius: 1,
               border: `1px solid #EDEDED`,
@@ -303,135 +591,356 @@ export default function ScratchCourseOutlinePage() {
               boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
             }}
           >
-            <Accordion
-              expanded={expanded === "panel5"}
-              onChange={handleChange("panel5")}
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel5d-content"
-                id="panel5d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -5, width: 35, height: 35 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: -1, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 5 | Object Oriented Programming
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          mt: 1,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 5 | Object Oriented Programming
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn the practical implementation of OOP in Python,
                       including creating classes, leveraging inheritance, to
                       optimize code structure and facilitate code reuse.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
-
-            <Accordion
-              expanded={expanded === "panel7"}
-              onChange={handleChange("panel7")}
+              </Box>
+            </Card>
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel7d-content"
-                id="panel7d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -5, width: 35, height: 35 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: 1.5, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 6 | Data Structures in Python
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          mt: 1,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 6 | Data Structures in Python
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn the concept of functions within Python programming:
                       functions and exceptions! function creation, parameter
-                      passing, and return values.
+                      passing, and return values.{" "}
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel8"}
-              onChange={handleChange("panel8")}
+              </Box>
+            </Card>
+            <Card
+              sx={{
+                width: "100%",
+                borderRadius: "6px",
+                border: `1px solid #EDEDED`,
+                background: `#5750CC`,
+                boxShadow: `0px 4px 12px 0px rgba(30, 74, 126, 0.15)`,
+                alignSelf: "stretch",
+                gap: "10px",
+                boxShadow: "none",
+              }}
             >
-              <AccordionSummary
-                aria-controls="panel8d-content"
-                id="panel8d-header"
-                onClick={() => router.push("/auth/login")}
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 1.2,
+                  position: "relative",
+                }}
               >
                 <Box
                   sx={{
                     width: "100%",
                     display: "flex",
-                    flex: "1 0 0",
+                    flexDirection: "column",
                     gap: 2,
+                    padding: "16px 16px",
                   }}
                 >
-                  <LessonsIcon
-                    style={{ marginTop: -10, width: 45, height: 45 }}
+                  <CardHeader
+                    avatar={
+                      <Box sx={{ mt: { xs: 1.5, sm: 1 } }}>
+                        <LessonsIcon />
+                      </Box>
+                    }
+                    title={
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          color: Colors.light,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                        }}
+                      >
+                        Module 7 | GUI using Python Tkinter
+                      </Typography>
+                    }
+                    action={
+                      <Button
+                        sx={{
+                          display: { xs: "none", sm: "flex" },
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    }
+                    sx={{ py: 0, px: 0 }}
                   />
-                  <Typography
-                    sx={{
-                      color: Colors.light,
-                      font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Module 7 | GUI using Python Tkinter
+                  <Box sx={{ width: "100%" }}>
                     <Typography
-                      variant="subtitle"
+                      variant="span"
                       sx={{
+                        width: "100%",
                         display: "block",
                         color: Colors.light,
                         font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
                         letterSpacing: 0.1,
-                        mt: 1,
+                        textAlign: "left",
+                        pl: 5,
+                        mt: -0.5,
                       }}
                     >
                       Learn the fundamental concepts of Tkinter to design GUI
@@ -439,10 +948,43 @@ export default function ScratchCourseOutlinePage() {
                       the intricacies of the backend code, culminating in the
                       development of a complete application.
                     </Typography>
-                  </Typography>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: Colors.primary,
+                          padding: "5px 9.37px 5px 9.57px",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          alignSelf: "stretch",
+                          cursor: "pointer",
+                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          letterSpacing: 0.1,
+                          borderRadius: "6px",
+                          border: `1px solid #FFF`,
+                          textTransform: "capitalize",
+                          background: "#FFF",
+                          ml: 2,
+                          mt: 1,
+                          "&:hover": {
+                            background: "#FFF",
+                          },
+                        }}
+                      >
+                        View
+                      </Button>
+                    </Box>
+                  </Box>
                 </Box>
-              </AccordionSummary>
-            </Accordion>
+              </Box>
+            </Card>
           </Box>
         </Grid>
       </Grid>

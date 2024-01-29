@@ -545,7 +545,7 @@ export const InputLabelLabel = styled.span`
   position: relative;
   top: 0px;
   text-transform: none;
-  font: normal normal 500 normal 14px/20px ${Fonts.primary};
+  font: normal normal 500 normal 13px/20px ${Fonts.primary};
   color: ${(props) => (props.disabled ? "#777" : "#344054")};
 `
 

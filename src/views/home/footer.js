@@ -376,7 +376,10 @@ export default function FooterPage() {
           sx={{
             textAlign: "left",
             color: "#8A8F98",
-            font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+            font: {
+              xs: `normal normal 400 normal 14px/24px ${Fonts.primary}`,
+              sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+            },
           }}
         >
           © {year} Peer Learning, Inc. Delaware, US

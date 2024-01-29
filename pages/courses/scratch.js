@@ -147,7 +147,6 @@ export default function ScratchPage() {
             component="span"
             sx={{
               maxWidth: 560,
-              height: { xs: 142, sm: 81 },
               display: "block",
               color: Colors.light,
               font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
@@ -166,7 +165,6 @@ export default function ScratchPage() {
             sx={{
               width: 165.2,
               height: 36,
-              my: "58px",
               padding: "10px 16px",
               font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
               color: Colors.light,
@@ -223,7 +221,6 @@ export default function ScratchPage() {
               variant="subtitle1"
               sx={{
                 maxWidth: 560,
-                height: { xs: 230, sm: 108 },
                 display: "block",
                 color: "#020203",
                 font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
@@ -247,7 +244,7 @@ export default function ScratchPage() {
               width: 165.2,
               height: 36,
               display: "flex",
-              my: "48px",
+              my: "18px",
               alignItems: "left",
               font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
               color: Colors.primary,

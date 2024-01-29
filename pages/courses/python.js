@@ -67,6 +67,7 @@ export default function PythonPage() {
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
+                mt: { xs: 4, sm: 0 },
               }}
             >
               Focus on
@@ -76,11 +77,8 @@ export default function PythonPage() {
               sx={{
                 maxWidth: 820,
                 color: Colors.light,
-                font: {
-                  xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                  sm: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
-                },
-                letterSpacing: { xs: -0.64, sm: 0.25 },
+                font: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
+                letterSpacing: { xs: 0.3, sm: 0.25 },
                 textAlign: "left",
               }}
             >
@@ -105,19 +103,28 @@ export default function PythonPage() {
                 </Box>
               </Grid>
               <Grid item xs={7} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <ClockIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Course Duration: 6 months
-                  </Typography>
-                </Box>
+                <Typography
+                  variant="span"
+                  sx={{
+                    font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    display: { xs: "none", sm: "flex" },
+                  }}
+                >
+                  Course Duration: 6 months
+                </Typography>
+                <Typography
+                  variant="span"
+                  sx={{
+                    font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    display: { xs: "flex", sm: "none" },
+                  }}
+                >
+                  6 months
+                </Typography>
               </Grid>{" "}
               <Grid item xs={12} sm={4.5}>
                 <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
@@ -140,7 +147,6 @@ export default function PythonPage() {
             component="span"
             sx={{
               maxWidth: 560,
-              height: { xs: 142, sm: 81 },
               display: "block",
               color: Colors.light,
               font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
@@ -158,7 +164,6 @@ export default function PythonPage() {
             sx={{
               width: 165.2,
               height: 36,
-              my: "58px",
               padding: "10px 16px",
               font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
               color: Colors.light,
@@ -215,7 +220,6 @@ export default function PythonPage() {
               variant="subtitle1"
               sx={{
                 maxWidth: 560,
-                height: { xs: 230, sm: 108 },
                 display: "block",
                 color: "#020203",
                 font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
@@ -238,7 +242,7 @@ export default function PythonPage() {
               width: 165.2,
               height: 36,
               display: "flex",
-              my: "48px",
+              my: "18px",
               alignItems: "left",
               font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
               color: Colors.primary,
@@ -269,7 +273,6 @@ export default function PythonPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
-              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
             }}
           >
             <Box
@@ -285,8 +288,11 @@ export default function PythonPage() {
                   gap: "19.22",
                   color: "#020204",
                   textAlign: "left",
-                  font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
-                  m: 0,
+                  font: {
+                    xs: `normal normal 700 normal 28px/32px ${Fonts.primary}`,
+                    sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+                  },
+                  px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
                 }}
               >
                 What your child will learn in this lesson
@@ -305,8 +311,8 @@ export default function PythonPage() {
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
                 </Typography>
               </Typography>
+              <PythonCourseOutlinePage />
             </Box>
-            <PythonCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -315,6 +321,7 @@ export default function PythonPage() {
                 justifyContent: "center",
                 alignItems: "center",
                 mt: 5,
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Box
@@ -355,6 +362,7 @@ export default function PythonPage() {
                 width: "100%",
                 display: "flex",
                 mt: 11.875,
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Grid container spacing={3}>

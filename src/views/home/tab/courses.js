@@ -47,7 +47,6 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -173,6 +172,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -182,6 +182,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
                   }}
                 >
                   8 private live classes month
@@ -194,6 +196,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -203,6 +206,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   Receive progress reports and feedback after every class.
@@ -216,6 +221,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   mt: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -225,32 +231,37 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   A structured, project-based curriculum taught by experts.
                 </Box>
               </Box>
-            </Box>
-            {/*  ITEM 5 */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 24,
-                display: "flex",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              <MarkIcon />
+              {/*  ITEM 5 */}
               <Box
                 sx={{
-                  font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.1,
+                  width: "100%",
+                  height: 24,
+                  display: "flex",
+                  gap: 2,
+                  mt: 2,
+                  position: "relative",
                 }}
               >
-                Certificates of Completion
+                <MarkIcon />
+                <Box
+                  sx={{
+                    font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                    textAlign: "left",
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
+                  }}
+                >
+                  Certificates of Completion
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -260,7 +271,6 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -400,6 +410,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -409,6 +420,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
                   }}
                 >
                   8 private live classes month
@@ -421,6 +434,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -430,6 +444,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   Receive progress reports and feedback after every class.
@@ -443,6 +459,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   mt: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -452,32 +469,37 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   A structured, project-based curriculum taught by experts.
                 </Box>
               </Box>
-            </Box>
-            {/*  ITEM 5 */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 24,
-                display: "flex",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              <MarkIcon />
+              {/*  ITEM 5 */}
               <Box
                 sx={{
-                  font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.1,
+                  width: "100%",
+                  height: 24,
+                  display: "flex",
+                  gap: 2,
+                  mt: 2,
+                  position: "relative",
                 }}
               >
-                Certificates of Completion
+                <MarkIcon />
+                <Box
+                  sx={{
+                    font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                    textAlign: "left",
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
+                  }}
+                >
+                  Certificates of Completion
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -487,7 +509,6 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -613,6 +634,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -622,6 +644,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
                   }}
                 >
                   8 private live classes month
@@ -634,6 +658,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -643,6 +668,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   Receive progress reports and feedback after every class.
@@ -656,6 +683,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   mt: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -665,32 +693,37 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   A structured, project-based curriculum taught by experts.
                 </Box>
               </Box>
-            </Box>
-            {/*  ITEM 5 */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 24,
-                display: "flex",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              <MarkIcon />
+              {/*  ITEM 5 */}
               <Box
                 sx={{
-                  font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.1,
+                  width: "100%",
+                  height: 24,
+                  display: "flex",
+                  gap: 2,
+                  mt: 2,
+                  position: "relative",
                 }}
               >
-                Certificates of Completion
+                <MarkIcon />
+                <Box
+                  sx={{
+                    font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                    textAlign: "left",
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
+                  }}
+                >
+                  Certificates of Completion
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -711,7 +744,6 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -837,6 +869,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -846,6 +879,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
                   }}
                 >
                   8 private live classes month
@@ -858,6 +893,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -867,6 +903,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   Receive progress reports and feedback after every class.
@@ -880,6 +918,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   mt: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -889,32 +928,37 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   A structured, project-based curriculum taught by experts.
                 </Box>
               </Box>
-            </Box>
-            {/*  ITEM 5 */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 24,
-                display: "flex",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              <MarkIcon />
+              {/*  ITEM 5 */}
               <Box
                 sx={{
-                  font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.1,
+                  width: "100%",
+                  height: 24,
+                  display: "flex",
+                  gap: 2,
+                  mt: 2,
+                  position: "relative",
                 }}
               >
-                Certificates of Completion
+                <MarkIcon />
+                <Box
+                  sx={{
+                    font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                    textAlign: "left",
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
+                  }}
+                >
+                  Certificates of Completion
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -924,7 +968,6 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -1050,6 +1093,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -1059,6 +1103,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
                   }}
                 >
                   8 private live classes month
@@ -1071,6 +1117,7 @@ export default function Courses() {
                   height: 24,
                   display: "flex",
                   gap: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -1080,6 +1127,8 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   Receive progress reports and feedback after every class.
@@ -1093,6 +1142,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   mt: 2,
+                  position: "relative",
                 }}
               >
                 <MarkIcon />
@@ -1102,32 +1152,37 @@ export default function Courses() {
                     textAlign: "left",
                     color: Colors.light,
                     letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 31,
                   }}
                 >
                   A structured, project-based curriculum taught by experts.
                 </Box>
               </Box>
-            </Box>
-            {/*  ITEM 5 */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 24,
-                display: "flex",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              <MarkIcon />
+              {/*  ITEM 5 */}
               <Box
                 sx={{
-                  font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.1,
+                  width: "100%",
+                  height: 24,
+                  display: "flex",
+                  gap: 2,
+                  mt: 2,
+                  position: "relative",
                 }}
               >
-                Certificates of Completion
+                <MarkIcon />
+                <Box
+                  sx={{
+                    font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                    textAlign: "left",
+                    color: Colors.light,
+                    letterSpacing: 0.1,
+                    position: "absolute",
+                    left: 30,
+                  }}
+                >
+                  Certificates of Completion
+                </Box>
               </Box>
             </Box>
           </Box>
