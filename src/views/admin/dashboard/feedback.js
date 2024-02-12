@@ -1,45 +1,45 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Grid, IconButton } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import * as React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Box, Grid, IconButton } from "@mui/material"
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogContent from "@mui/material/DialogContent"
+import DialogTitle from "@mui/material/DialogTitle"
+import * as React from "react"
+import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
 import {
   Select,
   StyledDarkTooltip,
   TextArea,
-} from "../../../components/forms/textFields";
-import { Colors } from "../../../components/themes/colors";
-import { Fonts } from "../../../components/themes/fonts";
+} from "../../../components/forms/textFields"
+import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
 import {
   classSchedules,
   updateClassStatus,
-} from "../../../redux/slices/courses";
-import { CancelButton, SubmitButton } from "../../../components/forms/buttons";
-import Snackbars from "../../../components/snackbar";
-import { ButtonsRow } from "../../../components/forms/buttons/styles";
-import { useRouter } from "next/router";
-import { EditIcon } from "../../../components/svg/menuIcons";
+} from "../../../redux/slices/courses"
+import { CancelButton, SubmitButton } from "../../../components/forms/buttons"
+import Snackbars from "../../../components/snackbar"
+import { ButtonsRow } from "../../../components/forms/buttons/styles"
+import { useRouter } from "next/router"
+import { EditIcon } from "../../../components/svg/menuIcons"
 
 export default function InstructorFeedbackDialog({ id, scheduleStatus }) {
-  const router = useRouter();
-  const [open, setOpen] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const [open, setOpen] = React.useState(false)
+  const [success, setSuccess] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const [errorMessage, setErrorMessage] = React.useState("")
+  const { message } = useSelector((state) => state.message)
+  const dispatch = useDispatch()
 
   // form validation rules
   const validationSchema = Yup.object().shape({
     feedback: Yup.string().required("Please provide a feedback"),
     status: Yup.string().required("Status is required"),
-  });
+  })
   const {
     register,
     handleSubmit,
@@ -48,52 +48,52 @@ export default function InstructorFeedbackDialog({ id, scheduleStatus }) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
-  });
-  const status = watch("status");
+  })
+  const status = watch("status")
 
   React.useEffect(() => {
     if (message?.instructor_status) {
       message?.instructor_status?.map((stat) => {
-        return setErrorMessage("Status " + stat);
-      });
+        return setErrorMessage("Status " + stat)
+      })
     } else if (message?.instructor_feedback) {
       message?.instructor_feedback?.map((feed) => {
-        return setErrorMessage("Feedback " + feed);
-      });
+        return setErrorMessage("Feedback " + feed)
+      })
     } else if (message?.detail) {
-      return setErrorMessage("Detail " + message?.detail);
+      return setErrorMessage("Detail " + message?.detail)
     } else {
-      return setErrorMessage(message);
+      return setErrorMessage(message)
     }
-  }, [message]);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleCloseSnack = () => setError(false);
-  const handleCloseSuccessSnack = () => setSuccess(false);
+  }, [message])
+  const handleClickOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const handleCloseSnack = () => setError(false)
+  const handleCloseSuccessSnack = () => setSuccess(false)
 
   function onSubmit(data) {
     const inputData = {
       instructor_feedback: data.feedback,
       instructor_status: status,
-    };
-    setLoading(true);
+    }
+    setLoading(true)
     dispatch(updateClassStatus({ id, inputData }))
       .unwrap()
       .then(() => {
-        setLoading(false);
-        setSuccess(true);
-        reset();
+        setLoading(false)
+        setSuccess(true)
+        reset()
         setTimeout(() => {
-          setOpen(false);
-          router.reload(router.pathname);
-          dispatch(classSchedules({ page: 1, limit: 10 }));
-        }, 3200);
+          setOpen(false)
+          router.reload(router.pathname)
+          dispatch(classSchedules({ page: 1, limit: 10 }))
+        }, 3200)
       })
       .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-    return false;
+        setError(true)
+        setLoading(false)
+      })
+    return false
   }
   return (
     <div>
@@ -104,7 +104,9 @@ export default function InstructorFeedbackDialog({ id, scheduleStatus }) {
       </StyledDarkTooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle
-          sx={{ font: `normal normal normal 800 20px/24px ${Fonts.secondary}` }}
+          sx={{
+            font: `normal normal normal 800 20px/24px ${Fonts.primaryBold}`,
+          }}
         >
           Class Feedback
         </DialogTitle>
@@ -185,5 +187,5 @@ export default function InstructorFeedbackDialog({ id, scheduleStatus }) {
         />
       </Dialog>
     </div>
-  );
+  )
 }

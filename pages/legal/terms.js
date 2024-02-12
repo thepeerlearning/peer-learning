@@ -176,7 +176,7 @@ export default function TermsOfServicePage() {
                     height: { xs: 112, sm: 48 },
                     display: "block",
                     color: "#091135",
-                    font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                     letterSpacing: 0.25,
                     textAlign: "center",
                     mt: 1,

@@ -1,9 +1,9 @@
-import { Box, Button, Menu } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useState } from "react";
-import { AngleDown } from "../svg/menuIcons";
-import { Colors } from "../themes/colors";
-import { Fonts } from "../themes/fonts";
+import { Box, Button, Menu } from "@mui/material"
+import { styled } from "@mui/material/styles"
+import { useState } from "react"
+import { AngleDown } from "../svg/menuIcons"
+import { Colors } from "../themes/colors"
+import { Fonts } from "../themes/fonts"
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -30,7 +30,7 @@ const StyledMenu = styled((props) => (
       padding: "8px 6px",
     },
   },
-}));
+}))
 
 export default function StatusCallOut({
   TopAction,
@@ -39,11 +39,11 @@ export default function StatusCallOut({
   buttonText,
   buttonColor,
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
 
-  const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleClick = (event) => setAnchorEl(event.currentTarget)
+  const handleClose = () => setAnchorEl(null)
 
   return (
     <div>
@@ -64,7 +64,7 @@ export default function StatusCallOut({
           textTransform: "none",
           padding: "1px 8px",
           textTransform: "uppercase",
-          font: `normal normal normal 500 14px/24px ${Fonts.secondary}`,
+          font: `normal normal normal 500 14px/24px ${Fonts.primary}`,
           cursor: "pointer",
           transition: "all 0.3ms",
           gap: "36px",
@@ -84,5 +84,5 @@ export default function StatusCallOut({
         {ThirdAction && <Box>{ThirdAction}</Box>}
       </StyledMenu>
     </div>
-  );
+  )
 }

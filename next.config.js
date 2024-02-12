@@ -4,4 +4,7 @@ module.exports = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  env: {
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
+  },
 }

@@ -1,15 +1,15 @@
-import { Box, Button, Grid } from "@mui/material";
-import { isEmpty } from "lodash";
-import { StyledCard } from "../../components/forms/textFields";
-import NoActivity from "../../components/lottie/restingCat";
+import { Box, Button, Grid } from "@mui/material"
+import { isEmpty } from "lodash"
+import { StyledCard } from "../../components/forms/textFields"
+import NoActivity from "../../components/lottie/restingCat"
 import {
   CalenderIcon,
   CategoryFilterIcon,
   FileIcon,
   StackedTilesIcon,
-} from "../../components/svg/menuIcons";
-import { Colors } from "../../components/themes/colors";
-import { Fonts } from "../../components/themes/fonts";
+} from "../../components/svg/menuIcons"
+import { Colors } from "../../components/themes/colors"
+import { Fonts } from "../../components/themes/fonts"
 
 export default function CompletedCourses({ data, level }) {
   // const [openNest, setOpenNest] = useState("");
@@ -41,13 +41,13 @@ export default function CompletedCourses({ data, level }) {
             {data
               ?.sort((a, b) => a.course_outline.order - b.course_outline.order)
               .map((course, index) => {
-                const currentTime = moment.utc();
-                const startTime = moment.utc(course?.date);
-                const endTime = startTime.clone().add(1, "hour");
+                const currentTime = moment.utc()
+                const startTime = moment.utc(course?.date)
+                const endTime = startTime.clone().add(1, "hour")
                 const isBetweenClassTime = currentTime.isBetween(
                   startTime,
                   endTime
-                );
+                )
                 return (
                   <Grid item xs={12} key={course.id}>
                     <StyledCard
@@ -76,7 +76,7 @@ export default function CompletedCourses({ data, level }) {
                             width: "100%",
                             display: "flex",
                             color: "#999",
-                            font: `normal normal 400 12px/25px ${Fonts.Jakarta}`,
+                            font: `normal normal 400 12px/25px ${Fonts.primary}`,
                             textTransform: "capitalize",
                           }}
                         >
@@ -95,7 +95,7 @@ export default function CompletedCourses({ data, level }) {
                             width: "100%",
                             display: "flex",
                             color: Colors.black,
-                            font: `normal normal 600 14px/25px ${Fonts.Jakarta}`,
+                            font: `normal normal 600 14px/25px ${Fonts.primary}`,
                           }}
                         >
                           {course.course_outline.title}
@@ -105,7 +105,7 @@ export default function CompletedCourses({ data, level }) {
                           sx={{
                             textAlign: "left",
                             color: Colors.black,
-                            font: `normal normal 400 14px/160% ${Fonts.secondary}`,
+                            font: `normal normal 400 normal 14px/160% ${Fonts.primary}`,
                           }}
                         >
                           {course.course_outline.content}
@@ -127,7 +127,7 @@ export default function CompletedCourses({ data, level }) {
                             display: "flex",
                             alignItems: "center",
                             gap: "3px",
-                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            font: `normal normal 500 14px/18px ${Fonts.primary}`,
                             color: "#FD71AF",
                             padding: "4px 8px",
                             borderRadius: "5px",
@@ -149,7 +149,7 @@ export default function CompletedCourses({ data, level }) {
                             alignItems: "center",
                             gap: "3px",
                             my: { xs: 1.75, md: 0 },
-                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            font: `normal normal 500 14px/18px ${Fonts.primary}`,
                             color: Colors.light,
                             padding: "4px 8px",
                             borderRadius: "5px",
@@ -171,7 +171,7 @@ export default function CompletedCourses({ data, level }) {
                             display: "flex",
                             alignItems: "center",
                             gap: "3px",
-                            font: `normal normal 500 14px/18px ${Fonts.Jakarta}`,
+                            font: `normal normal 500 14px/18px ${Fonts.primary}`,
                             color: Colors.buttonSuccess,
                             padding: "4px 8px",
                             borderRadius: "5px",
@@ -187,11 +187,11 @@ export default function CompletedCourses({ data, level }) {
                       </Box>
                     </StyledCard>
                   </Grid>
-                );
+                )
               })}
           </Grid>
         )}
       </Box>
     </>
-  );
+  )
 }

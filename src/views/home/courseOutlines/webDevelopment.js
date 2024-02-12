@@ -83,7 +83,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         sx={{
                           width: "100%",
                           color: Colors.light,
-                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                         }}
                       >
@@ -101,7 +101,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -126,7 +126,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         width: "100%",
                         display: "block",
                         color: Colors.light,
-                        font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
                         letterSpacing: 0.1,
                         textAlign: "left",
                         pl: 5,
@@ -157,7 +157,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -218,7 +218,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         sx={{
                           width: "100%",
                           color: Colors.light,
-                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                         }}
                       >
@@ -236,7 +236,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -261,7 +261,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         width: "100%",
                         display: "block",
                         color: Colors.light,
-                        font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
                         letterSpacing: 0.1,
                         textAlign: "left",
                         pl: 5,
@@ -291,7 +291,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -371,7 +371,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         sx={{
                           width: "100%",
                           color: Colors.light,
-                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                         }}
                       >
@@ -389,7 +389,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -414,7 +414,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         width: "100%",
                         display: "block",
                         color: Colors.light,
-                        font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
                         letterSpacing: 0.1,
                         textAlign: "left",
                         pl: 5,
@@ -443,7 +443,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -505,7 +505,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         sx={{
                           width: "100%",
                           color: Colors.light,
-                          font: `normal normal 500 normal 18px/24px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                         }}
                       >
@@ -524,7 +524,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -549,7 +549,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         width: "100%",
                         display: "block",
                         color: Colors.light,
-                        font: `normal normal 400 normal 15.875px/20px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
                         letterSpacing: 0.1,
                         textAlign: "left",
                         pl: 5,
@@ -577,7 +577,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,

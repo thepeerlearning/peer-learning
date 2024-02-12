@@ -1,8 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Avatar, Box, Card, CardHeader, Grid, Stack } from "@mui/material"
-import React from "react"
+import React, { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-// import { updateProfile, getProfile } from "../../redux/slices/auth"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
@@ -17,6 +16,7 @@ import { Fonts } from "../../../components/themes/fonts"
 import { CheckBox } from "../../../components/forms/textFields"
 import SubscriptionHistory from "./history"
 import StripeSubscriptionPayment from "./payment/stripe"
+import { updateProfile, getProfile } from "../../../redux/slices/auth"
 
 const cardinfo = [
   {
@@ -28,7 +28,7 @@ const cardinfo = [
     expires: "12/12/2026",
   },
   {
-    id: 1,
+    id: 2,
     name: "visa",
     icon: <VisaIcon />,
     type: "visacard",
@@ -47,7 +47,8 @@ export default function SubscriptionPage() {
   const [errorMessage, setErrorMessage] = React.useState("")
   const { message } = useSelector((state) => state.message)
   const { user, profile } = useSelector((state) => state.auth)
-
+  const [currentCard, setCurrentCard] = useState("")
+  const [cardId, setCardId] = useState()
   // form validation rules
   const validationSchema = Yup.object().shape({
     // current: Yup.bool(),
@@ -67,34 +68,36 @@ export default function SubscriptionPage() {
       current: "",
     },
   })
-  const currentcard = watch("current")
+  const current = watch("current")
   function onSubmit(data) {
     const { lastname, dob, country, gender, stateOfOrigin, tz } = data
-    // const inputData = {
-    //   user_profile: {
-    //     id: user?.id,
-    //     fullname: lastname,
-    //     dob: moment.utc(dob),
-    //     gender: gender, timezone: tz,
-    //     address: country,
-    //     country: countryInfo.code,
-    //     state_province_of_origin: stateOfOrigin,
-    //   },
-    // }
-    // setLoading(true)
-    // dispatch(updateProfile({ id: user?.id, inputData }))
-    //   .unwrap()
-    //   .then(() => {
-    //     setLoading(false)
-    //     setSuccess(true)
-    //     dispatch(getProfile({ id: user?.id }))
-    //   })
-    //   .catch(() => {
-    //     setError(true)
-    //     setLoading(false)
-    //   })
-    // return false
+    const inputData = {
+      user_profile: {
+        id: user?.id,
+        fullname: lastname,
+        dob: moment.utc(dob),
+        gender: gender,
+        timezone: tz,
+        address: country,
+        country: countryInfo.code,
+        state_province_of_origin: stateOfOrigin,
+      },
+    }
+    setLoading(true)
+    dispatch(updateProfile({ id: user?.id, inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false)
+        setSuccess(true)
+        dispatch(getProfile({ id: user?.id }))
+      })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
+    return false
   }
+  console.log("currentCard", currentCard)
   return (
     <Box
       sx={{
@@ -202,8 +205,10 @@ export default function SubscriptionPage() {
                         border: `2px solid ${Colors.primary}`,
                         background: Colors.light,
                         borderRadius: "12px",
+                        cursor: "pointer",
                         mt: { xs: i === 0 ? 3 : 0, sm: 0 },
                       }}
+                      onClick={() => setCurrentCard(card.id)}
                     >
                       <CardHeader
                         avatar={card.icon}
@@ -255,19 +260,13 @@ export default function SubscriptionPage() {
                           </>
                         }
                         action={
-                          <Controller
-                            name={"current"}
-                            control={control}
-                            defaultValue=""
-                            render={({ field }) => (
-                              <CheckBox
-                                type="checkbox"
-                                {...field}
-                                value={card.id}
-                                onChange={() => setValue("current", card.id)}
-                                checked={currentcard === card.id}
-                              />
-                            )}
+                          <CheckBox
+                            type="checkbox"
+                            id="cardId"
+                            value={cardId}
+                            name="cardId"
+                            onChange={() => setCardId(card.id)}
+                            checked={currentCard === card.id}
                           />
                         }
                       />

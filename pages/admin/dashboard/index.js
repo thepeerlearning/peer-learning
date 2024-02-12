@@ -32,7 +32,7 @@ export default function DashboardPage() {
           <Box
             sx={{
               color: Colors.primary,
-              font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+              font: `normal normal 800 22px/24px ${Fonts.primaryBold}`,
               mt: 3,
             }}
           >
@@ -72,7 +72,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 18px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -80,7 +80,7 @@ export default function DashboardPage() {
               <Box
                 sx={{
                   color: "#A0AEC0",
-                  font: `normal normal 700 16px/150% ${Fonts.secondary}`,
+                  font: `normal normal 700 16px/150% ${Fonts.primaryBold}`,
                 }}
               >
                 Today
@@ -90,7 +90,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 30px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 30px/140% ${Fonts.primary}`,
                 color: "#2D3748",
               }}
             >
@@ -131,7 +131,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 18px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -139,7 +139,7 @@ export default function DashboardPage() {
               <Box
                 sx={{
                   color: "#A0AEC0",
-                  font: `normal normal 700 16px/150% ${Fonts.secondary}`,
+                  font: `normal normal 700 16px/150% ${Fonts.primaryBold}`,
                 }}
               >
                 This week
@@ -149,7 +149,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 30px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 30px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -189,7 +189,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 18px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -197,7 +197,7 @@ export default function DashboardPage() {
               <Box
                 sx={{
                   color: "#A0AEC0",
-                  font: `normal normal 700 16px/150% ${Fonts.secondary}`,
+                  font: `normal normal 700 16px/150% ${Fonts.primaryBold}`,
                 }}
               >
                 This month
@@ -207,7 +207,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 30px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 30px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -247,7 +247,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 18px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -255,7 +255,7 @@ export default function DashboardPage() {
               <Box
                 sx={{
                   color: "#A0AEC0",
-                  font: `normal normal 700 16px/150% ${Fonts.secondary}`,
+                  font: `normal normal 700 16px/150% ${Fonts.primaryBold}`,
                 }}
               >
                 Overall
@@ -265,7 +265,7 @@ export default function DashboardPage() {
             <Box
               sx={{
                 textAlign: "center",
-                font: `normal normal 700 30px/140% ${Fonts.secondary}`,
+                font: `normal normal 700 30px/140% ${Fonts.primaryBold}`,
                 color: "#2D3748",
               }}
             >
@@ -284,7 +284,7 @@ export default function DashboardPage() {
                 <Box
                   sx={{
                     color: Colors.primary,
-                    font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+                    font: `normal normal 800 22px/24px ${Fonts.primaryBold}`,
                     mt: 3,
                     // maxWidth: 471,
                   }}
@@ -301,7 +301,7 @@ export default function DashboardPage() {
                     <Box
                       sx={{
                         color: Colors.black,
-                        font: `normal normal 400 15px/16px ${Fonts.secondary}`,
+                        font: `normal normal 400 15px/16px ${Fonts.primary}`,
                       }}
                     >
                       Registered students this week by country
@@ -326,7 +326,7 @@ export default function DashboardPage() {
                 <Box
                   sx={{
                     color: Colors.primary,
-                    font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+                    font: `normal normal 800 22px/24px ${Fonts.primaryBold}`,
                     mt: 3,
                     // maxWidth: 471,
                   }}
@@ -343,7 +343,7 @@ export default function DashboardPage() {
                     <Box
                       sx={{
                         color: Colors.black,
-                        font: `normal normal 400 15px/16px ${Fonts.secondary}`,
+                        font: `normal normal 400 15px/16px ${Fonts.primary}`,
                       }}
                     >
                       Students class schedule this week

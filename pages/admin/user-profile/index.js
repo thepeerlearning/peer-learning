@@ -1,13 +1,13 @@
-import { Box, Divider, Grid, ListItemButton, Stack } from "@mui/material";
-import Head from "next/head";
-import React, { useEffect } from "react";
-import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout";
-import { NavList } from "../../../src/Layouts/dashboards/styles";
-import { StyledCard } from "../../../src/components/forms/textFields";
-import CustomPagination from "../../../src/components/table/pagination";
-import usePagination from "../../../src/components/table/usePagination";
-import { Colors } from "../../../src/components/themes/colors";
-import { Fonts } from "../../../src/components/themes/fonts";
+import { Box, Divider, Grid, ListItemButton, Stack } from "@mui/material"
+import Head from "next/head"
+import React, { useEffect } from "react"
+import DashboardLayouts from "../../../src/Layouts/dashboards/adminLayout"
+import { NavList } from "../../../src/Layouts/dashboards/styles"
+import { StyledCard } from "../../../src/components/forms/textFields"
+import CustomPagination from "../../../src/components/table/pagination"
+import usePagination from "../../../src/components/table/usePagination"
+import { Colors } from "../../../src/components/themes/colors"
+import { Fonts } from "../../../src/components/themes/fonts"
 
 const users = [
   {
@@ -166,29 +166,29 @@ const users = [
       },
     ],
   },
-];
+]
 export default function UserProfilePage() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [info, setInfo] = React.useState([]);
-  const PER_PAGE = 8;
-  const count = Math.ceil(users?.length / PER_PAGE);
-  const _DATA = usePagination(users, PER_PAGE);
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [info, setInfo] = React.useState([])
+  const PER_PAGE = 8
+  const count = Math.ceil(users?.length / PER_PAGE)
+  const _DATA = usePagination(users, PER_PAGE)
 
   useEffect(() => {
     const data = _DATA
       .currentData()
-      .find((item) => item.id === selectedIndex + 1);
-    setInfo(data.profile);
-  }, [_DATA, selectedIndex]);
+      .find((item) => item.id === selectedIndex + 1)
+    setInfo(data.profile)
+  }, [_DATA, selectedIndex])
 
   const handleChange = (e, p) => {
-    _DATA.jump(p);
-  };
+    _DATA.jump(p)
+  }
 
   const handleListItemClick = (item, index) => {
-    setSelectedIndex(index);
-    setInfo(item.profile);
-  };
+    setSelectedIndex(index)
+    setInfo(item.profile)
+  }
 
   return (
     <Box
@@ -215,7 +215,7 @@ export default function UserProfilePage() {
         <Box
           sx={{
             color: Colors.primary,
-            font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+            font: `normal normal 800 22px/24px ${Fonts.primary}`,
             my: 3,
           }}
         >
@@ -231,7 +231,7 @@ export default function UserProfilePage() {
             <Box
               sx={{
                 color: Colors.black,
-                font: `normal normal 400 15px/16px ${Fonts.secondary}`,
+                font: `normal normal 400 15px/16px ${Fonts.primary}`,
               }}
             >
               All Parent of students Profile
@@ -263,7 +263,7 @@ export default function UserProfilePage() {
                         <Box component="span">{user.name}</Box>
                       </ListItemButton>
                     </Box>
-                  );
+                  )
                 })}
                 <Stack
                   spacing={10}
@@ -295,7 +295,7 @@ export default function UserProfilePage() {
                 <Box
                   sx={{
                     color: `#2D3748`,
-                    font: `normal normal 700 18px/140% ${Fonts.secondary}`,
+                    font: `normal normal 700 18px/140% ${Fonts.primaryBold}`,
                   }}
                 >
                   Parent Information
@@ -308,7 +308,7 @@ export default function UserProfilePage() {
                     <Box
                       sx={{
                         color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        font: `normal normal 700 14px/150% ${Fonts.primaryBold}`,
                         display: "flex",
                         mt: 2,
                       }}
@@ -326,7 +326,7 @@ export default function UserProfilePage() {
                     <Box
                       sx={{
                         color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        font: `normal normal 700 14px/150% ${Fonts.primaryBold}`,
                         display: "flex",
                       }}
                     >
@@ -343,7 +343,7 @@ export default function UserProfilePage() {
                     <Box
                       sx={{
                         color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        font: `normal normal 700 14px/150% ${Fonts.primaryBold}`,
                         display: "flex",
                         mt: 1,
                       }}
@@ -361,7 +361,7 @@ export default function UserProfilePage() {
                     <Box
                       sx={{
                         color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        font: `normal normal 700 14px/150% ${Fonts.primaryBold}`,
                         display: "flex",
                         mt: 1,
                       }}
@@ -379,7 +379,7 @@ export default function UserProfilePage() {
                     <Box
                       sx={{
                         color: `#718096`,
-                        font: `normal normal 700 14px/150% ${Fonts.secondary}`,
+                        font: `normal normal 700 14px/150% ${Fonts.primary}`,
                         display: "flex",
                         mt: 1,
                       }}
@@ -402,8 +402,8 @@ export default function UserProfilePage() {
         </Grid>
       </Box>
     </Box>
-  );
+  )
 }
 UserProfilePage.getLayout = function getLayout(page) {
-  return <DashboardLayouts>{page}</DashboardLayouts>;
-};
+  return <DashboardLayouts>{page}</DashboardLayouts>
+}

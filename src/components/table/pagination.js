@@ -1,9 +1,9 @@
-import * as React from "react";
-import usePagination from "@mui/material/usePagination";
-import { styled } from "@mui/material/styles";
-import { Box, Button } from "@mui/material";
-import { Fonts } from "../themes/fonts";
-import { Colors } from "../themes/colors";
+import * as React from "react"
+import usePagination from "@mui/material/usePagination"
+import { styled } from "@mui/material/styles"
+import { Box, Button } from "@mui/material"
+import { Fonts } from "../themes/fonts"
+import { Colors } from "../themes/colors"
 
 const List = styled("ul")({
   listStyle: "none",
@@ -12,13 +12,13 @@ const List = styled("ul")({
   display: "flex",
   background: "transparent",
   gap: 10,
-});
+})
 
 export default function CustomPagination({ count, onChange }) {
   const { items } = usePagination({
     count,
     onChange,
-  });
+  })
   return (
     <Box
       component="nav"
@@ -31,10 +31,10 @@ export default function CustomPagination({ count, onChange }) {
     >
       <List>
         {items.map(({ page, type, selected, ...item }, index) => {
-          let children = null;
+          let children = null
 
           if (type === "start-ellipsis" || type === "end-ellipsis") {
-            children = "…";
+            children = "…"
           } else if (type === "page") {
             children = (
               <Button
@@ -49,8 +49,8 @@ export default function CustomPagination({ count, onChange }) {
                   alignItems: "center",
                   mt: 0.5,
                   font: selected
-                    ? `normal normal 600 14px/16px ${Fonts.secondary}`
-                    : `normal normal 400 14px/16px ${Fonts.secondary}`,
+                    ? `normal normal 600 14px/16px ${Fonts.primarySemiBold}`
+                    : `normal normal 400 14px/16px ${Fonts.primary}`,
                   color: selected ? Colors.light : "#4C4C4C",
                   textTransform: "none",
                   background: selected ? Colors.primary : "#E6E6E6",
@@ -62,7 +62,7 @@ export default function CustomPagination({ count, onChange }) {
               >
                 {page}
               </Button>
-            );
+            )
           } else {
             children = (
               <Button
@@ -70,7 +70,7 @@ export default function CustomPagination({ count, onChange }) {
                 {...item}
                 sx={{
                   color: selected ? "#718096" : "#4C4C4C",
-                  font: `normal normal 600 14px/16px ${Fonts.secondary}`,
+                  font: `normal normal 600 14px/16px ${Fonts.primary}`,
                   textTransform: "none",
                 }}
               >
@@ -80,12 +80,12 @@ export default function CustomPagination({ count, onChange }) {
                   ? "Previos page"
                   : null}
               </Button>
-            );
+            )
           }
 
-          return <li key={index}>{children}</li>;
+          return <li key={index}>{children}</li>
         })}
       </List>
     </Box>
-  );
+  )
 }

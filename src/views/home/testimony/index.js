@@ -1,14 +1,12 @@
-import React, { useRef, useState } from "react"
+import React from "react"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
-
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
 
 // import required modules
-import { Autoplay, FreeMode, Pagination } from "swiper/modules"
 import {
   Avatar,
   Box,
@@ -17,43 +15,23 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material"
+import { Autoplay, FreeMode, Pagination } from "swiper/modules"
+import { QuoteIcon } from "../../../components/svg/menuIcons"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
-import { QuoteIcon } from "../../../components/svg/menuIcons"
 
 const testimonies = [
   {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
+    text: "As a tech entrepreneur, I see the immense potential of coding skills for my kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
     author: "Mrs. Ndubuisi",
     location: "Alabama, United States",
     imgPath: "/images/testimony1.png",
   },
   {
-    text: `We've been very pleased with our experience
-working with Toptal. Their team was incredibly
-helpful in helping us find the perfect developer
-for our project. The work was stellar, the
-communication was excellent and we couldn't
-have been happier with the overall experience.
-We're excited to work with Toptal for more
-projects in the future!`,
+    text: `As a mother of two kids who are now tech-savvy thanks to Peer Learning, I can't overstate the positive impact it's had on their future. Learning coding skills early is crucial, and Peer Learning makes it fun and engaging. Not only did they learn essential coding concepts, but they also developed problem-solving and critical thinking skills. I highly recommend Peer Learning to any parent who wants their child prepared for the digital world.`,
     author: "Mr. Toyin Asokeji",
     location: "United States",
-    imgPath: "/images/idealprofile.png",
-  },
-  {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mrs. Samuel",
-    location: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  },
-  {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mr. Choc",
-    location: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    imgPath: "/images/testimony2.jpeg",
   },
 ]
 export default function Testimonies() {
@@ -144,7 +122,7 @@ export default function Testimonies() {
                     sx={{
                       width: "100%",
                       color: "#091135",
-                      font: `normal normal 400 normal 15px/24px ${Fonts.secondary}`,
+                      font: `normal normal 400 normal 15px/24px ${Fonts.primary}`,
                     }}
                   >
                     {testimony.text}

@@ -1,19 +1,19 @@
-import { Box } from "@mui/material";
-import React from "react";
-import { StyledCard } from "../../../components/forms/textFields";
-import { TableContent } from "../../../components/table";
-import { Colors } from "../../../components/themes/colors";
-import { Fonts } from "../../../components/themes/fonts";
+import { Box } from "@mui/material"
+import React from "react"
+import { StyledCard } from "../../../components/forms/textFields"
+import { TableContent } from "../../../components/table"
+import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
 
 export default function ClassSchedule() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(3);
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(3)
 
-  const handleChangePage = (event, newPage) => setPage(newPage);
+  const handleChangePage = (event, newPage) => setPage(newPage)
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   const columns = [
     {
@@ -28,9 +28,9 @@ export default function ClassSchedule() {
       align: "right",
       minWidth: 100,
     },
-  ];
+  ]
   function createData(name, action) {
-    return { name, action };
+    return { name, action }
   }
 
   const rows = [
@@ -38,7 +38,7 @@ export default function ClassSchedule() {
       "Oliver Liam",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBoldld}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -50,7 +50,7 @@ export default function ClassSchedule() {
       "Aisha Usman",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBoldld}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -62,7 +62,7 @@ export default function ClassSchedule() {
       "Muhammed Garba",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBold}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -74,7 +74,7 @@ export default function ClassSchedule() {
       "Sam Loko",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBold}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -86,7 +86,7 @@ export default function ClassSchedule() {
       "Lucy Mangrove",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBold}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -98,7 +98,7 @@ export default function ClassSchedule() {
       "Musa Malik",
       <Box
         sx={{
-          font: `normal normal 700 13px/150% ${Fonts.secondary}`,
+          font: `normal normal 700 13px/150% ${Fonts.primaryBold}`,
           textTransform: "uppercase",
           color: "#2D3748",
         }}
@@ -106,12 +106,12 @@ export default function ClassSchedule() {
         View class detail
       </Box>
     ),
-  ];
+  ]
   return (
     <Box
       sx={{
         color: Colors.primary,
-        font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+        font: `normal normal 800 22px/24px ${Fonts.primaryBold}`,
         mt: 3,
       }}
     >
@@ -140,5 +140,5 @@ export default function ClassSchedule() {
         />
       </StyledCard>
     </Box>
-  );
+  )
 }

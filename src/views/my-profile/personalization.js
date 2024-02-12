@@ -33,6 +33,7 @@ import {
 } from "../../components/svg"
 import { QuestionMark } from "@mui/icons-material"
 import moment from "moment-timezone"
+import { getProfile, updateProfile } from "../../redux/slices/auth"
 
 export default function PersonalizationPage() {
   const matches = useMediaQuery("(min-width:600px)")
@@ -64,10 +65,9 @@ export default function PersonalizationPage() {
     // }),
   })
 
-  // React.useEffect(
-  //   () => dispatch(getProfile({ id: user?.id })),
-  //   [dispatch, user]
-  // )
+  React.useEffect(() => {
+    dispatch(getProfile({ id: user?.id }))
+  }, [dispatch, user])
 
   // get functions to build form with useForm() hook
   const {
@@ -90,7 +90,6 @@ export default function PersonalizationPage() {
     setValue("lastname", result && result[1])
     setValue("dob", moment.utc(profile?.user_profile.dob).format("YYYY-MM-DD"))
     setValue("tz", moment.utc(profile?.user_profile.timezone))
-
     setValue("gender", profile?.user_profile.gender)
     setValue("country", country?.name)
     setValue("stateOfOrigin", profile?.user_profile.state_province_of_origin)
@@ -155,30 +154,31 @@ export default function PersonalizationPage() {
   function onSubmit(data) {
     const { lastname, dob, country, gender, stateOfOrigin, tz } = data
     const countryInfo = Countries.find((ct) => ct.name === country)
-    // const inputData = {
-    //   user_profile: {
-    //     id: user?.id,
-    //     fullname: lastname,
-    //     dob: moment.utc(dob),
-    //     gender: gender, timezone: tz,
-    //     address: country,
-    //     country: countryInfo.code,
-    //     state_province_of_origin: stateOfOrigin,
-    //   },
-    // }
-    // setLoading(true)
-    // dispatch(updateProfile({ id: user?.id, inputData }))
-    //   .unwrap()
-    //   .then(() => {
-    //     setLoading(false)
-    //     setSuccess(true)
-    //     dispatch(getProfile({ id: user?.id }))
-    //   })
-    //   .catch(() => {
-    //     setError(true)
-    //     setLoading(false)
-    //   })
-    // return false
+    const inputData = {
+      user_profile: {
+        id: user?.id,
+        fullname: lastname,
+        dob: moment.utc(dob),
+        gender: gender,
+        timezone: tz,
+        address: country,
+        country: countryInfo.code,
+        state_province_of_origin: stateOfOrigin,
+      },
+    }
+    setLoading(true)
+    dispatch(updateProfile({ id: user?.id, inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false)
+        setSuccess(true)
+        dispatch(getProfile({ id: user?.id }))
+      })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
+    return false
   }
   return (
     <Box

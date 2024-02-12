@@ -49,6 +49,7 @@ export default function MyApp({
       duration: 500,
     })
   }, [])
+
   return (
     <>
       <Head>

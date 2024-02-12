@@ -55,8 +55,8 @@ export default function CompanyPage() {
               height: { xs: 175, sm: 237 },
               color: Colors.light,
               font: {
-                xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                sm: `normal normal 600 normal 60px/75px ${Fonts.secondary}`,
+                xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBoldmiBold}`,
+                sm: `normal normal 600 normal 60px/75px ${Fonts.primarySemiBoldmiBold}`,
               },
               letterSpacing: { xs: -0.64, sm: 0.25 },
               textAlign: "center",
@@ -109,7 +109,7 @@ export default function CompanyPage() {
                 sx={{
                   width: "100%",
                   color: Colors.primary,
-                  font: `normal normal 600 normal 14px/20.4px ${Fonts.secondary}`,
+                  font: `normal normal 600 normal 14px/20.4px ${Fonts.primarySemiBold}`,
                   letterSpacing: 1,
                   textTransform: "uppercase",
                 }}
@@ -122,7 +122,7 @@ export default function CompanyPage() {
                   width: { xs: "100%", md: 608 },
                   height: { xs: 176, sm: 87 },
                   color: "#091135",
-                  font: `normal normal 700 normal 27.781px/37.6px ${Fonts.secondary}`,
+                  font: `normal normal 700 normal 27.781px/37.6px ${Fonts.primaryBold}`,
                   mb: 1,
                 }}
               >
@@ -135,8 +135,8 @@ export default function CompanyPage() {
                   sx={{
                     width: "100%",
                     color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
-                    // textAlign: "justify",
+                    font: `normal normal 400 normal 16px/27px ${Fonts.primary}`,
+                    textAlign: "justify",
                   }}
                 >
                   We believe in the boundless potential of all children,
@@ -155,7 +155,7 @@ export default function CompanyPage() {
                   sx={{
                     width: "100%",
                     color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
                     // textAlign: "justify",
                     my: 2,
                   }}
@@ -168,7 +168,7 @@ export default function CompanyPage() {
                   sx={{
                     width: "100%",
                     color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
                     // textAlign: "justify",
                     mb: 2,
                   }}
@@ -239,7 +239,7 @@ export default function CompanyPage() {
                 variant="subtitle2"
                 sx={{
                   color: Colors.primary,
-                  font: `normal normal 600 normal 14px/20.4px ${Fonts.secondary}`,
+                  font: `normal normal 600 normal 14px/20.4px ${Fonts.primarySemiBold}`,
                   letterSpacing: 1,
                   textTransform: "uppercase",
                 }}
@@ -253,8 +253,8 @@ export default function CompanyPage() {
                   height: { xs: 187, sm: 127 },
                   color: "#091135",
                   font: {
-                    xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                    sm: `normal normal 600 normal 32px/27px ${Fonts.secondary}`,
+                    xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                    sm: `normal normal 600 normal 32px/27px ${Fonts.primarySemiBold}`,
                   },
                   letterSpacing: { xs: -0.64, sm: 0.25 },
                   textAlign: "center",
@@ -268,7 +268,7 @@ export default function CompanyPage() {
                     // height: 148,
                     display: "block",
                     color: "#091135",
-                    font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                     letterSpacing: 0.25,
                     textAlign: "center",
                     mt: 1,

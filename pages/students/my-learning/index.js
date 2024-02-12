@@ -113,32 +113,32 @@ const AccordionDetails = styled(MuiAccordionDetails)(() => ({
 export default function MyLearningPage() {
   const [value, setValue] = useState(0)
   const [expanded, setExpanded] = useState("panel1")
+  const {
+    activeCourse: courses,
+    courseLoading: loading,
+    coursesError: error,
+  } = useSelector((state) => state.courses)
+  const { message } = useSelector((state) => state.message)
+  const dispatch = useDispatch()
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false)
   }
 
-  // const {
-  //   activeCourse: courses,
-  //   courseLoading: loading,
-  //   coursesError: error,
-  // } = useSelector((state) => state.courses)
-  // const { message } = useSelector((state) => state.message)
-  // const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(activeCourses())
+  }, [dispatch])
 
-  // useEffect(() => dispatch(activeCourses()), [dispatch])
-
-  // const handleCloseSnack = () => dispatch(refresh())
-  // const handleChange = (event, newValue) => setValue(newValue)
-  // const ongoing = courses?.user_course_outlines?.filter(
-  //   (course) => course.status === "pending"
-  // )
-  // const completed = courses?.user_course_outlines?.filter(
-  //   (course) => course.status === "completed"
-  // )
-  // const upcoming = courses?.user_course_outlines?.filter(
-  //   (course) => course.status === "upcoming"
-  // )
+  const handleCloseSnack = () => dispatch(refresh())
+  const ongoing = courses?.user_course_outlines?.filter(
+    (course) => course.status === "pending"
+  )
+  const completed = courses?.user_course_outlines?.filter(
+    (course) => course.status === "completed"
+  )
+  const upcoming = courses?.user_course_outlines?.filter(
+    (course) => course.status === "upcoming"
+  )
 
   return (
     <Box

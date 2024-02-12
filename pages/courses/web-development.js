@@ -59,7 +59,7 @@ export default function WebdevelopmentPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${Fonts.primary}`,
+                font: `normal normal 500 normal 17.016px/18px ${FoprimarySemiBoldry}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -77,7 +77,7 @@ export default function WebdevelopmentPage() {
               sx={{
                 maxWidth: 820,
                 color: Colors.light,
-                font: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
+                font: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 letterSpacing: { xs: 0.3, sm: 0.25 },
                 textAlign: "left",
               }}
@@ -93,7 +93,7 @@ export default function WebdevelopmentPage() {
                   <Typography
                     variant="span"
                     sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
                       color: Colors.light,
                       letterSpacing: 0.1,
                     }}
@@ -108,7 +108,7 @@ export default function WebdevelopmentPage() {
                   <Typography
                     variant="span"
                     sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
                       color: Colors.light,
                       letterSpacing: 0.1,
                       display: { xs: "none", sm: "flex" },
@@ -119,7 +119,7 @@ export default function WebdevelopmentPage() {
                   <Typography
                     variant="span"
                     sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
                       color: Colors.light,
                       letterSpacing: 0.1,
                       display: { xs: "flex", sm: "none" },
@@ -135,7 +135,7 @@ export default function WebdevelopmentPage() {
                   <Typography
                     variant="span"
                     sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
+                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
                       color: Colors.light,
                       letterSpacing: 0.1,
                     }}
@@ -152,7 +152,7 @@ export default function WebdevelopmentPage() {
               maxWidth: 560,
               display: "block",
               color: Colors.light,
-              font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+              font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
               letterSpacing: 0.1,
               textAlign: "left",
             }}
@@ -171,7 +171,7 @@ export default function WebdevelopmentPage() {
               width: 165.2,
               height: 36,
               padding: "10px 16px",
-              font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+              font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
               color: Colors.light,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -228,7 +228,7 @@ export default function WebdevelopmentPage() {
                 maxWidth: 560,
                 display: "block",
                 color: "#020203",
-                font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
+                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                 letterSpacing: 0.1,
                 textAlign: "left",
               }}
@@ -251,7 +251,7 @@ export default function WebdevelopmentPage() {
               display: "flex",
               my: "18px",
               alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+              font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
               color: Colors.primary,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -308,7 +308,7 @@ export default function WebdevelopmentPage() {
                     height: { xs: 142, sm: 70 },
                     display: "block",
                     color: "#020203",
-                    font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                     letterSpacing: 0.1,
                     textAlign: "left",
                   }}
@@ -344,7 +344,7 @@ export default function WebdevelopmentPage() {
                   onClick={() => router.push("/signup")}
                   sx={{
                     padding: "10px 16px",
-                    font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                    font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
                     color: Colors.light,
                     textTransform: "none",
                     letterSpacing: 0.25,
@@ -413,7 +413,7 @@ export default function WebdevelopmentPage() {
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                           textAlign: "left",
                         }}
@@ -465,7 +465,7 @@ export default function WebdevelopmentPage() {
                         variant="span"
                         sx={{
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                           textAlign: "left",
                         }}

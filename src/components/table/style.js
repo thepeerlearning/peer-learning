@@ -1,16 +1,4 @@
-import {
-  TableFixedColumns,
-  TableHeaderRow,
-  Table,
-} from "@devexpress/dx-react-grid-material-ui"
-import {
-  TableRow,
-  styled,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  Box,
-} from "@mui/material"
+import { Box, TableContainer, TablePagination, styled } from "@mui/material"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import { Colors } from "../themes/colors"
 import { Fonts } from "../themes/fonts"

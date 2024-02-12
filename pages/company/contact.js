@@ -64,7 +64,7 @@ export default function ContactPage() {
                   maxWidth: 464,
                   height: { xs: 175, sm: 127 },
                   color: "#091135",
-                  font: `normal normal 600 normal 37px/45px ${Fonts.secondary}`,
+                  font: `normal normal 600 normal 37px/45px ${Fonts.primarySemiBold}`,
                   letterSpacing: { xs: -0.64, sm: 0.25 },
                   textAlign: "center",
                 }}
@@ -77,7 +77,7 @@ export default function ContactPage() {
                     height: { xs: 112, sm: 48 },
                     display: "block",
                     color: "#091135",
-                    font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                     letterSpacing: 0.25,
                     textAlign: "center",
                     mt: 1,
@@ -118,7 +118,7 @@ export default function ContactPage() {
                         <Typography
                           variant="h4"
                           sx={{
-                            font: `normal normal 600 normal 16.734px/20px ${Fonts.secondary}`,
+                            font: `normal normal 600 normal 16.734px/20px ${Fonts.primarySemiBold}`,
                             letterSpacing: -0.1,
                             color: "#F7F8F8",
                           }}
@@ -129,7 +129,7 @@ export default function ContactPage() {
                       <Typography
                         variant="subtitle1"
                         sx={{
-                          font: `normal normal 400 normal 15px/23px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 15px/23px ${Fonts.primary}`,
                           letterSpacing: -0.1,
                           color: "#F7F8F8",
                         }}
@@ -140,7 +140,7 @@ export default function ContactPage() {
                       <Typography
                         variant="body1"
                         sx={{
-                          font: `normal normal 500 normal 14px/22px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 14px/22px ${Fonts.primaryMedium}`,
                           color: "#F7F8F8",
                         }}
                       >
@@ -169,7 +169,7 @@ export default function ContactPage() {
                         <Typography
                           variant="h4"
                           sx={{
-                            font: `normal normal 600 normal 16.734px/20px ${Fonts.secondary}`,
+                            font: `normal normal 600 normal 16.734px/20px ${Fonts.primarySemiBold}`,
                             letterSpacing: -0.1,
                             color: "#F7F8F8",
                           }}
@@ -180,7 +180,7 @@ export default function ContactPage() {
                       <Typography
                         variant="subtitle1"
                         sx={{
-                          font: `normal normal 400 normal 15px/23px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 15px/23px ${Fonts.primary}`,
                           letterSpacing: -0.1,
                           color: "#F7F8F8",
                         }}
@@ -191,7 +191,7 @@ export default function ContactPage() {
                       <Typography
                         variant="body1"
                         sx={{
-                          font: `normal normal 500 normal 14px/22px ${Fonts.secondary}`,
+                          font: `normal normal 500 normal 14px/22px ${Fonts.primaryMedium}`,
                           color: "#F7F8F8",
                           mt: { xs: 1, sm: 0 },
                         }}

@@ -96,7 +96,7 @@ export const Button = styled.button`
     props.small & props.delete &&
     css`
       border: 1px solid ${Colors.buttonError};
-      font: normal normal normal 700 14px/19px ${Fonts.secondary};
+      font: normal normal normal 700 14px/19px ${Fonts.primaryBold};
       background: ${Colors.buttonError} 0% 0% no-repeat padding-box;
       text-transform: none;
       color: ${Colors.light};
@@ -106,7 +106,7 @@ export const Button = styled.button`
     props.small & props.cancel &&
     css`
       border: 1px solid ${Colors.primary};
-      font: normal normal normal 700 14px/19px ${Fonts.secondary};
+      font: normal normal normal 700 14px/19px ${Fonts.primaryBold};
       background: transparent 0% 0% no-repeat padding-box;
       color: ${Colors.primary};
       text-transform: none;

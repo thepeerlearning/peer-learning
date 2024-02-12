@@ -43,12 +43,12 @@ export default function ScratchPage() {
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
+            maxWidth: 1140,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -66,7 +66,7 @@ export default function ScratchPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${Fonts.primary}`,
+                font: `normal normal 500 normal 17.016px/18px ${Fonts.primaryMedium}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -81,11 +81,11 @@ export default function ScratchPage() {
             <Typography
               variant="h2"
               sx={{
-                maxWidth: 820,
+                maxWidth: 1140,
                 color: Colors.light,
                 font: {
-                  xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                  sm: `normal normal 600 normal 40px/48px ${Fonts.secondary}`,
+                  xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                  sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
                 textAlign: "left",
@@ -94,62 +94,42 @@ export default function ScratchPage() {
               SCRATCH
             </Typography>
           </Box>
-          <Box sx={{ width: "100%", display: "flex" }}>
-            <Grid container spacing={1}>
-              <Grid item xs={5} sm={2.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <PeopleIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Ages 7-15
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={7} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <ClockIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Course Duration: 6 months
-                  </Typography>
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={12} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <StarIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.secondary}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Prerequisite: None
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
+          <Box sx={{ width: "100%", display: "flex", gap: "10px" }}>
+            <Box sx={{ width: 125, display: "flex", gap: 1 }}>
+              <PeopleIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                }}
+              >
+                Ages 7-15
+              </Typography>
+            </Box>
+
+            <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
+              <StarIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                }}
+              >
+                Prerequisite: No prerequisites for this course.
+              </Typography>
+            </Box>
           </Box>
           <Box
             component="span"
             sx={{
-              maxWidth: 560,
+              maxWidth: 1140,
               display: "block",
               color: Colors.light,
-              font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+              font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
               letterSpacing: 0.1,
               textAlign: "left",
             }}
@@ -166,15 +146,13 @@ export default function ScratchPage() {
               width: 165.2,
               height: 36,
               padding: "10px 16px",
-              font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+              font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
               color: Colors.light,
               textTransform: "none",
               letterSpacing: 0.25,
               border: `1px solid ${Colors.primary}`,
               borderRadius: "8px",
               background: Colors.primary,
-              boxShadow:
-                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
               "&:hover": {
                 background: Colors.primary,
               },
@@ -184,7 +162,7 @@ export default function ScratchPage() {
           </Button>
         </Box>
       </Box>
-      {/* WHAT IS PYTHON */}
+      {/* WHAT IS SCRATCH */}
       <Box
         id="python-section"
         component="div"
@@ -198,12 +176,12 @@ export default function ScratchPage() {
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
+            maxWidth: 1140,
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -220,10 +198,10 @@ export default function ScratchPage() {
             <Typography
               variant="subtitle1"
               sx={{
-                maxWidth: 560,
+                maxWidth: 1140,
                 display: "block",
                 color: "#020203",
-                font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
+                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                 letterSpacing: 0.1,
                 textAlign: "left",
               }}
@@ -246,7 +224,7 @@ export default function ScratchPage() {
               display: "flex",
               my: "18px",
               alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+              font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
               color: Colors.primary,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -275,7 +253,7 @@ export default function ScratchPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
-              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             }}
           >
             <Box
@@ -303,7 +281,7 @@ export default function ScratchPage() {
                     height: { xs: 142, sm: 70 },
                     display: "block",
                     color: "#020203",
-                    font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
+                    font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                     letterSpacing: 0.1,
                     textAlign: "left",
                   }}
@@ -338,7 +316,7 @@ export default function ScratchPage() {
                   onClick={() => router.push("/signup")}
                   sx={{
                     padding: "10px 16px",
-                    font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                    font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
                     color: Colors.light,
                     textTransform: "none",
                     letterSpacing: 0.25,
@@ -406,7 +384,7 @@ export default function ScratchPage() {
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                           textAlign: "left",
                         }}
@@ -458,7 +436,7 @@ export default function ScratchPage() {
                         variant="subtitle1"
                         sx={{
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                           textAlign: "left",
                         }}

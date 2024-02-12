@@ -91,7 +91,34 @@ input::-webkit-calendar-picker-indicator:hover {
   color: #757575;
   font-family: var(--primary-font);
 }
-
+@font-face {
+  font-family: "SpaceGrotesk";
+  src: url("/fonts/SpaceGrotesk-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SpaceGrotesk-Medium";
+  src: url("/fonts/SpaceGrotesk-Medium.ttf");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SpaceGrotesk-SemiBold";
+  src: url("/fonts/SpaceGrotesk-SemiBold.ttf");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SpaceGrotesk-Bold";
+  src: url("/fonts/SpaceGrotesk-Bold.ttf");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
 .line {
   border-bottom-style: solid;
   border-bottom-width: 1px;

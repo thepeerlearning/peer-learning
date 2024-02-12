@@ -57,7 +57,7 @@ export default function CheckoutForm({ amount }) {
 
     setIsLoading(true)
 
-    const { error } = await stripe.confirmPayment({
+    const { token, error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: "http://app.thepeerlearning.com/verify-payment",
@@ -132,7 +132,7 @@ export default function CheckoutForm({ amount }) {
               color: Colors.buttonError,
               textAlign: "center",
               font: {
-                xs: `normal normal 400 14px/20px ${Fonts.secondary}`,
+                xs: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
               },
               letterSpacing: "-1.2px",
               m: "20px 0 ",

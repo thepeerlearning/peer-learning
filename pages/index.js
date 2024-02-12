@@ -11,7 +11,7 @@ import {
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
 import Image from "next/image"
-import heroImage from "../public/images/svgs/hero-background.svg"
+import heroImage from "../public/images/svgs/hero-bg.svg"
 import buckingham from "../public/images/buckingham.png"
 import ideal from "../public/images/ideal.png"
 import illinois from "../public/images/illinois.png"
@@ -73,12 +73,12 @@ export default function HomePage() {
             <Typography
               variant="h1"
               sx={{
-                color: "#6941C6",
-                font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
-                border: `1px solid rgba(87, 80, 204, 0.50)`,
+                color: Colors.dark,
+                font: `normal normal 500 normal 12px/18px ${Fonts.primaryMedium}`,
+                border: `1px solid ${Colors.dark}`,
                 borderRadius: "12px",
-                background: "#F5F3FF",
-                padding: 0.5,
+                background: "transparent",
+                padding: "4px 10px",
               }}
             >
               Currently teaching Africa Kids Across 18 Countries in Different
@@ -87,19 +87,19 @@ export default function HomePage() {
             <Typography
               variant="h2"
               sx={{
-                maxWidth: 820,
+                maxWidth: 857,
                 height: { xs: 175, sm: 237 },
                 color: "#091135",
                 font: {
-                  xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                  sm: `normal normal 600 normal 60px/75px ${Fonts.secondary}`,
+                  xs: `normal normal 700 normal 32px/44px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 60px/75px ${Fonts.primaryBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
                 textAlign: "center",
                 my: 1,
               }}
             >
-              1:1 online coding class for African kids in the diaspora on their
+              1:1 online tech classes for African kids in the diaspora on their
               preferred schedule.
             </Typography>
             <Box
@@ -114,7 +114,7 @@ export default function HomePage() {
               <Typography
                 sx={{
                   color: "#091135",
-                  font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                  font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                   letterSpacing: 0.25,
                   textAlign: "center",
                 }}
@@ -139,8 +139,8 @@ export default function HomePage() {
                   height: 50,
                   flexShrink: 0,
                   borderRadius: "14px",
-                  border: "1px solid rgba(9, 17, 53, 0.05)",
-                  background: "rgba(9, 17, 53, 0.03)",
+                  border: "1px solid rgba(255, 94, 0, 0.05)",
+                  background: "rgba(255, 94, 0, 0.03)",
                   backdropFilter: "blur(1px)",
                   display: "flex",
                   justifyContent: "center",
@@ -153,15 +153,14 @@ export default function HomePage() {
                     width: 165.2,
                     height: 36,
                     padding: "10px 16px",
-                    font: `normal normal 500 normal 14px/20px ${Fonts.secondary}`,
+                    font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
                     color: Colors.light,
                     textTransform: "none",
                     letterSpacing: 0.25,
                     border: `1px solid ${Colors.primary}`,
                     borderRadius: "8px",
                     background: Colors.primary,
-                    boxShadow:
-                      "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                    boxShadow: "0px 6px 16px 0px rgba(12, 43, 100, 0.32)",
                     "&:hover": {
                       background: Colors.primary,
                     },
@@ -214,8 +213,8 @@ export default function HomePage() {
               height: { xs: 187, sm: 127 },
               color: "#091135",
               font: {
-                xs: `normal normal 600 normal 32px/44px ${Fonts.secondary}`,
-                sm: `normal normal 600 normal 32px/27px ${Fonts.secondary}`,
+                xs: `normal normal 600 normal 32px/44px ${Fonts.primary}`,
+                sm: `normal normal 600 normal 32px/27px ${Fonts.primary}`,
               },
               letterSpacing: { xs: -0.64, sm: 0.25 },
               textAlign: "center",
@@ -229,7 +228,7 @@ export default function HomePage() {
                 height: 48,
                 display: "block",
                 color: "#091135",
-                font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                 letterSpacing: 0.25,
                 textAlign: "center",
                 mt: 1,
@@ -390,14 +389,14 @@ export default function HomePage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            px: { xs: 3, sm: 3, lg: 12.5 },
+            px: { xs: 0, sm: 3, lg: 12.5 },
           }}
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
-              gap: { xs: 1, sm: 2 },
+              gap: { xs: 1, sm: 3 },
             }}
           >
             <Box sx={{ flex: "1 0 0", width: { xs: "100%", md: 600 } }}>
@@ -437,11 +436,11 @@ export default function HomePage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    width: 330.23,
+                    width: 365,
                     color: "#091135",
                     font: {
-                      xs: `normal normal 600 normal 24px/30px ${Fonts.secondary}`,
-                      sm: `normal normal 600 normal 32px/40px ${Fonts.secondary}`,
+                      xs: `normal normal 600 normal 24px/30px ${Fonts.primarySemiBold}`,
+                      sm: `normal normal 600 normal 32px/40px ${Fonts.primarySemiBold}`,
                     },
                     letterSpacing: 0.25,
                     textAlign: { xs: "center", md: "left" },
@@ -450,11 +449,11 @@ export default function HomePage() {
                 >
                   We understand that parents are busy.
                   <Typography
-                    variant="subtitle1"
+                    variant="span"
                     sx={{
                       display: "block",
                       color: "#091135",
-                      font: `normal normal 400 normal 18px/28px ${Fonts.secondary}`,
+                      font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                       letterSpacing: 0.25,
                       textAlign: { xs: "center", md: "left" },
                       mt: 3,
@@ -476,7 +475,7 @@ export default function HomePage() {
                       height: 197.679,
                       display: "flex",
                       flexDirection: "column",
-                      background: Colors.primary,
+                      background: Colors.secondary,
                       boxShadow:
                         "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
                       border: "1px solid #E1E5E9",
@@ -488,7 +487,7 @@ export default function HomePage() {
                       sx={{
                         width: "100%",
                         height: 50,
-                        font: `normal normal 400 normal 20px/20px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
                         textAlign: "center",
                         color: Colors.light,
                         letterSpacing: 0.25,
@@ -507,7 +506,7 @@ export default function HomePage() {
                         alignItems: "center",
                         flexShrink: 0,
                         height: 100.073,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                         color: "#FBFBFD",
                         letterSpacing: 0.25,
                         textAlign: "center",
@@ -527,7 +526,7 @@ export default function HomePage() {
                       height: 197.679,
                       display: "flex",
                       flexDirection: "column",
-                      background: Colors.primary,
+                      background: Colors.secondary,
                       boxShadow:
                         "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
                       border: "1px solid #E1E5E9",
@@ -540,13 +539,13 @@ export default function HomePage() {
                         height: 197.679,
                         display: "flex",
                         flexDirection: "column",
-                        background: Colors.primary,
+                        background: Colors.secondary,
                         boxShadow:
                           "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
                         color: "#FBFBFD",
                         border: "1px solid #E1E5E9",
                         borderRadius: 1,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                         letterSpacing: 0.25,
                         textAlign: "center",
                       }}
@@ -556,7 +555,7 @@ export default function HomePage() {
                         sx={{
                           width: "100%",
                           height: 50,
-                          font: `normal normal 400 normal 20px/20px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
                           textAlign: "center",
                           color: Colors.light,
                           letterSpacing: 0.25,
@@ -576,7 +575,7 @@ export default function HomePage() {
                           alignItems: "center",
                           flexShrink: 0,
                           height: 100.073,
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           color: "#FBFBFD",
                           letterSpacing: 0.25,
                           textAlign: "center",
@@ -598,7 +597,7 @@ export default function HomePage() {
                       height: 197.679,
                       display: "flex",
                       flexDirection: "column",
-                      background: Colors.primary,
+                      background: Colors.secondary,
                       boxShadow:
                         "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
                       border: "1px solid #E1E5E9",
@@ -611,13 +610,13 @@ export default function HomePage() {
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        background: Colors.primary,
+                        background: Colors.secondary,
                         boxShadow:
                           "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
                         color: "#FBFBFD",
                         border: "1px solid #E1E5E9",
                         borderRadius: 1,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                         letterSpacing: 0.25,
                         textAlign: "center",
                       }}
@@ -627,7 +626,7 @@ export default function HomePage() {
                         sx={{
                           width: "100%",
                           height: 50,
-                          font: `normal normal 400 normal 20px/20px ${Fonts.secondary}`,
+                          font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
                           textAlign: "center",
                           color: Colors.light,
                           letterSpacing: 0.25,
@@ -645,8 +644,8 @@ export default function HomePage() {
                           justifyContent: "center",
                           alignItems: "center",
                           flexShrink: 0,
-                          height: 100.073,
-                          font: `normal normal 400 normal 16px/24px ${Fonts.secondary}`,
+                          height: 110.073,
+                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           color: "#FBFBFD",
                           letterSpacing: 0.25,
                           textAlign: "center",
@@ -692,7 +691,7 @@ export default function HomePage() {
             component="h2"
             sx={{
               width: "100%",
-              font: `normal normal 700 normal 32px/27px ${Fonts.secondary}`,
+              font: `normal normal 700 normal 32px/27px ${Fonts.primaryBold}`,
               textAlign: "center",
               letterSpacing: 0.25,
               color: "#091135",
@@ -731,7 +730,7 @@ export default function HomePage() {
             component="h2"
             sx={{
               width: "100%",
-              font: `normal normal 700 normal 32px/27px ${Fonts.secondary}`,
+              font: `normal normal 700 normal 32px/27px ${Fonts.primary}`,
               textAlign: "center",
               letterSpacing: 0.25,
               color: "#091135",
@@ -743,7 +742,7 @@ export default function HomePage() {
             variant="h4"
             sx={{
               maxWidth: 633,
-              font: `normal normal 400 normal 18px/27px ${Fonts.secondary}`,
+              font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
               textAlign: "center",
               color: "#36394A",
               letterSpacing: 0.25,

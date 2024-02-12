@@ -65,7 +65,7 @@ export default function StripePayment() {
             alignItems: "center",
             color: "#374151",
             ml: 2,
-            font: `normal normal 500 18px/24px ${Fonts.secondaryNeu}`,
+            font: `normal normal 500 18px/24px ${Fonts.primaryMedium}`,
           }}
         >
           Choose stripe to pay in USD
@@ -95,7 +95,7 @@ export default function StripePayment() {
               flexDirection: "column",
               color: Colors.black,
               font: {
-                sm: `normal normal 500 25px/48px ${Fonts.secondary}`,
+                sm: `normal normal 500 25px/48px ${Fonts.primaryMedium}`,
               },
               letterSpacing: "-1.2px",
             }}

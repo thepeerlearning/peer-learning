@@ -1,19 +1,19 @@
-import { Box } from "@mui/material";
-import React from "react";
-import { StyledCard } from "../../../components/forms/textFields";
-import { TableContent } from "../../../components/table";
-import { Colors } from "../../../components/themes/colors";
-import { Fonts } from "../../../components/themes/fonts";
+import { Box } from "@mui/material"
+import React from "react"
+import { StyledCard } from "../../../components/forms/textFields"
+import { TableContent } from "../../../components/table"
+import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
 
 export default function Geography() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(3);
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(3)
 
-  const handleChangePage = (event, newPage) => setPage(newPage);
+  const handleChangePage = (event, newPage) => setPage(newPage)
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   const columns = [
     {
@@ -28,9 +28,9 @@ export default function Geography() {
       align: "right",
       minWidth: 100,
     },
-  ];
+  ]
   function createData(country, number) {
-    return { country, number };
+    return { country, number }
   }
 
   const rows = [
@@ -40,12 +40,12 @@ export default function Geography() {
     createData("Ghana", 80),
     createData("Niger", 20),
     createData("South Africa", 100),
-  ];
+  ]
   return (
     <Box
       sx={{
         color: Colors.primary,
-        font: `normal normal 800 22px/24px ${Fonts.secondary}`,
+        font: `normal normal 800 22px/24px ${Fonts.primaryBold}`,
         mt: 3,
       }}
     >
@@ -74,5 +74,5 @@ export default function Geography() {
         />
       </StyledCard>
     </Box>
-  );
+  )
 }

@@ -1,11 +1,6 @@
+import { Box, Grid } from "@mui/material"
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import React from "react"
-import {
-  PaymentElement,
-  LinkAuthenticationElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js"
-import { Grid, Box } from "@mui/material"
 import { SubmitButton } from "../../../../components/forms/buttons"
 import { Colors } from "../../../../components/themes/colors"
 import { Fonts } from "../../../../components/themes/fonts"
@@ -60,7 +55,7 @@ export default function CheckoutForm({ amount }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://app.thepeerlearning.com/verify-payment",
+        return_url: "http://thepeerlearning.com/verify-payment",
       },
     })
     if (error.type === "card_error" || error.type === "validation_error") {
@@ -132,7 +127,7 @@ export default function CheckoutForm({ amount }) {
               color: Colors.buttonError,
               textAlign: "center",
               font: {
-                xs: `normal normal 400 14px/20px ${Fonts.secondary}`,
+                xs: `normal normal 400 14px/20px ${Fonts.primary}`,
               },
               letterSpacing: "-1.2px",
               m: "20px 0 ",

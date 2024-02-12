@@ -12,7 +12,7 @@ export const StyledList = styled(List)({
   "& .MuiListItemButton-root": {
     width: "100%",
     backgroundColor: `${Colors.light} !important`,
-    color: Colors.textColor,
+    color: Colors.dark,
     font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
     display: "inline-flex",
     justifyContent: "flex-start",
@@ -96,34 +96,30 @@ export const NestedStyledList = styled(List)({
   "& .MuiListItemButton-root": {
     width: "100%",
     backgroundColor: `${Colors.light} !important`,
-    color: Colors.textColor,
-    font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
     display: "inline-flex",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     cursor: "pointer",
     borderRadius: 8,
     "&:focused": {
-      backgroundColor: `${Colors.primary} !important`,
-      color: `${Colors.textColor} !important`,
+      backgroundColor: `${Colors.primary}`,
+      color: `${Colors.dark}`,
     },
     "&:hover": {
       backgroundColor: `${Colors.primary}`,
-      color: `${Colors.textColor} !important`,
+      color: `${Colors.dark}`,
     },
   },
-
   "& .Mui-selected": {
-    backgroundColor: `#F9FAFB !important`,
-    color: `${Colors.textColor} !important`,
-    font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+    color: `${Colors.dark}`,
+    font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
     "&:focused": {
-      backgroundColor: `${Colors.primary} !important`,
-      color: `${Colors.secondary} !important`,
+      backgroundColor: `${Colors.primary}`,
+      color: `${Colors.secondary}`,
     },
     "&:hover": {
-      backgroundColor: `${Colors.primary} !important`,
-      color: `${Colors.secondary} !important`,
+      backgroundColor: `${Colors.primary}`,
+      color: `${Colors.secondary}`,
     },
   },
   "& .MuiListItemIcon-root": {
@@ -136,9 +132,9 @@ export const NavList = styled(List)({
   "& .MuiListItemButton-root": {
     margin: "8px 0",
     width: "100%",
-    backgroundColor: `${Colors.light} !important`,
+    backgroundColor: `${Colors.light}`,
     color: Colors.primary,
-    font: `normal normal 700 14px/140% ${Fonts.primary}`,
+    font: `normal normal 700 normal 14px/140% ${Fonts.primaryBold}`,
     display: "inline-flex",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -159,7 +155,7 @@ export const NavList = styled(List)({
     width: "100%",
     backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
     color: `${Colors.light} !important`,
-    font: `normal normal 700 14px/20px ${Fonts.primary}`,
+    font: `normal normal 700 14px/20px ${Fonts.primaryBold}`,
     "&:focused": {
       backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
       color: `${Colors.light} !important`,

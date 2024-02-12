@@ -9,9 +9,7 @@ import { Colors } from "../../../components/themes/colors"
 import { initiatePayment } from "../../../redux/slices/auth"
 import CheckoutForm from "./stripe/form"
 
-const stripePromise = loadStripe(
-  "pk_test_51NLPMPIzACUV2cT0rIjurlArq0RyHYwEMVIGIN9zKLdoeE8AhPpQX34h5XXI0ZsBT9B5KGGjLMfB6vb6VASwsdZr00I9MMuO4c"
-)
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY)
 export default function CoursesPayment() {
   const [clientSecret, setClientSecret] = React.useState(null)
   const [amount, setAmount] = React.useState(null)

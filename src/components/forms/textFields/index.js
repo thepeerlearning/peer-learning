@@ -741,8 +741,8 @@ export function CheckBox({
             value={value}
             onChange={onChange}
             disabled={disabled}
-            {...otherProps}
             {...register(name)}
+            {...otherProps}
           />
         ) : (
           <InputOriginalEl

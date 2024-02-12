@@ -83,7 +83,7 @@ export default function EmailConfirmationPage() {
                 sx={{
                   textAlign: "center",
                   color: Colors.textColor,
-                  font: `normal normal 500 16px/135.8% ${Fonts.secondary}`,
+                  font: `normal normal 500 16px/135.8% ${Fonts.primaryMedium}`,
                 }}
               >
                 We sent a password reset link to {email}

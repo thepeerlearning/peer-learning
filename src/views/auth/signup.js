@@ -69,7 +69,6 @@ export default function SignupForm({ next }) {
     const country = Countries.find(
       (country) => country.code === phoneNumberObj.country
     )
-
     const inputData = {
       user: {
         email,
@@ -86,18 +85,18 @@ export default function SignupForm({ next }) {
         fullname: childname,
       },
     }
-    next()
-    // setLoading(true)
-    // dispatch(signup({ inputData }))
-    //   .unwrap()
-    //   .then(() => {
-    //     setLoading(false)
-    //   })
-    //   .catch(() => {
-    //     setError(true)
-    //     setLoading(false)
-    //   })
-    // return false
+    setLoading(true)
+    dispatch(signup({ inputData }))
+      .unwrap()
+      .then(() => {
+        setLoading(false)
+        next()
+      })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
+    return false
   }
   return (
     <Box>
@@ -249,7 +248,7 @@ export default function SignupForm({ next }) {
             <Box
               sx={{
                 color: "#667085",
-                font: `normal normal 600 normal 16px/20px ${Fonts.secondary}`,
+                font: `normal normal 600 normal 16px/20px ${Fonts.primaryMedium}`,
               }}
             >
               I am a student?{" "}
