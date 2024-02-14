@@ -1,6 +1,6 @@
 :root {
   /* Colors: */
-  --primary: #5750cc;
+  --primary: #ff5e00;
   --light: #ffffff;
   --black: #000000;
   --secondary: #344054;
@@ -138,7 +138,7 @@ input::-webkit-calendar-picker-indicator:hover {
   bottom: 0;
   left: 0;
   z-index: 1;
-  background-color: #5750cc !important;
+  background-color: var(--primary) !important;
 }
 .swiper-pagination-bullet b {
   position: absolute;
@@ -147,7 +147,7 @@ input::-webkit-calendar-picker-indicator:hover {
   z-index: 2;
 }
 .swiper-pagination-bullet-active {
-  background: #5750cc !important;
+  background: var(--primary) !important;
 }
 .chart-container .recharts-y-axis .recharts-label {
   text-anchor: start;

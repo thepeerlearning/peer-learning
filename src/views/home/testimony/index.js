@@ -122,7 +122,7 @@ export default function Testimonies() {
                     sx={{
                       width: "100%",
                       color: "#091135",
-                      font: `normal normal 400 normal 15px/24px ${Fonts.primary}`,
+                      font: `normal normal 400 normal 15px/28px ${Fonts.primary}`,
                     }}
                   >
                     {testimony.text}

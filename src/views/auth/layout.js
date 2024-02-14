@@ -1,8 +1,8 @@
-import React from "react"
 import {
   Avatar,
   Box,
   Card,
+  CardActionArea,
   CardHeader,
   CssBaseline,
   Grid,
@@ -11,14 +11,15 @@ import {
   useMediaQuery,
 } from "@mui/material"
 import MuiAppBar from "@mui/material/AppBar"
+import { useTheme } from "@mui/material/styles"
+import React from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
 import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
-import SwipeableViews from "react-swipeable-views"
-import { autoPlay } from "react-swipeable-views-utils"
-import { useTheme } from "@mui/material/styles"
-import MobileStepper from "@mui/material/MobileStepper"
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+import "swiper/css"
+import "swiper/css/pagination"
+import { Autoplay, Pagination } from "swiper/modules"
 
 const testimonies = [
   {
@@ -161,14 +162,25 @@ export default function AuthLayout({ children }) {
                       boxShadow: "none",
                     }}
                   >
-                    <AutoPlaySwipeableViews
-                      axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                      index={activeStep}
-                      onChangeIndex={handleStepChange}
-                      enableMouseEvents
+                    <Swiper
+                      spaceBetween={30}
+                      centeredSlides={true}
+                      autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                      }}
+                      pagination={{
+                        clickable: true,
+                        type: "bullets",
+
+                        el: ".swiper-custom-pagination",
+                      }}
+                      navigation={true}
+                      modules={[Autoplay, Pagination]}
+                      className="mySwiper"
                     >
                       {testimonies.map((step, index) => (
-                        <div key={step.label}>
+                        <SwiperSlide key={step.label}>
                           {Math.abs(activeStep - index) <= 2 ? (
                             <Box
                               sx={{
@@ -194,17 +206,23 @@ export default function AuthLayout({ children }) {
                                 avatar={
                                   <Avatar
                                     src={step.imgPath}
-                                    sx={{ bgcolor: "#FFE7CC", pl: 0 }}
+                                    sx={{
+                                      bgcolor: "#FFE7CC",
+                                      pl: 0,
+                                      width: 40,
+                                      height: 40,
+                                      border: "2px solid #FFF",
+                                    }}
                                     aria-label="recipe"
                                   >
-                                    A
+                                    {step.author.charAt(0)}
                                   </Avatar>
                                 }
                                 title={
                                   <Box
                                     sx={{
                                       font: `normal normal 400 normal 16px/145% ${Fonts.primary}`,
-                                      fontFeatureSettings: `cv04' on, 'cv03' on, 'cv01' on;`,
+                                      fontFeatureSettings: `'cv04' on, 'cv03' on, 'cv01' on`,
                                       color: Colors.light,
                                     }}
                                   >
@@ -224,26 +242,12 @@ export default function AuthLayout({ children }) {
                               />
                             </Box>
                           ) : null}
-                        </div>
+                        </SwiperSlide>
                       ))}
-                    </AutoPlaySwipeableViews>
-                    <MobileStepper
-                      steps={maxSteps}
-                      position="static"
-                      activeStep={activeStep}
-                      sx={{
-                        maxWidth: 400,
-                        flexGrow: 1,
-                        mt: 2,
-                        background: "transparent",
-                        "& .MuiMobileStepper-dot": {
-                          backgroundColor: Colors.offWhite,
-                        },
-                        "& .MuiMobileStepper-dotActive": {
-                          backgroundColor: Colors.primary,
-                        },
-                      }}
-                    />
+                    </Swiper>
+                    <CardActionArea sx={{ mt: 2 }}>
+                      <Box className="swiper-custom-pagination"></Box>
+                    </CardActionArea>
                   </Card>
                 </Box>
               </Box>
