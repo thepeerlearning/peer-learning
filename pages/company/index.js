@@ -8,6 +8,7 @@ import minna from "../../public/images/minna.png"
 import ourpass from "../../public/images/ourpass.png"
 import rooah from "../../public/images/rooah.png"
 import springboard from "../../public/images/springboard.png"
+
 import swaneza from "../../public/images/swaneza.png"
 import synthesis from "../../public/images/synthesis.png"
 import zaria from "../../public/images/zaria.png"

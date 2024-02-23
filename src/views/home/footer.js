@@ -32,7 +32,6 @@ export default function FooterPage() {
     >
       <Box
         sx={{
-          width: "100%",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           gap: { xs: 2, md: 4 },
@@ -54,7 +53,6 @@ export default function FooterPage() {
             sx={{
               width: "100%",
               display: "flex",
-              gap: 2,
             }}
           >
             <IconButton>
@@ -238,7 +236,7 @@ export default function FooterPage() {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={6} sm={3}>
               <Box
                 sx={{
                   width: { xs: "100%", sm: 180 },

@@ -58,7 +58,6 @@ export default function AuthLayout({ children }) {
       <CssBaseline />
       <MuiAppBar
         position="fixed"
-        open={open}
         sx={{
           width: "100%",
           display: "flex",
@@ -104,7 +103,7 @@ export default function AuthLayout({ children }) {
         <Box
           sx={{
             width: "100%",
-            display: { xs: "flex", sm: "none" },
+            display: { xs: "flex", md: "none" },
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -125,7 +124,7 @@ export default function AuthLayout({ children }) {
             xs={12}
             sm={6}
             xl={4}
-            sx={{ display: { xs: "none", sm: "flex" } }}
+            sx={{ display: { xs: "none", md: "flex" } }}
           >
             <Box
               sx={{
@@ -180,7 +179,10 @@ export default function AuthLayout({ children }) {
                       className="mySwiper"
                     >
                       {testimonies.map((step, index) => (
-                        <SwiperSlide key={step.label}>
+                        <SwiperSlide
+                          key={`item-${index}`}
+                          style={{ width: "100%", height: "100%" }}
+                        >
                           {Math.abs(activeStep - index) <= 2 ? (
                             <Box
                               sx={{

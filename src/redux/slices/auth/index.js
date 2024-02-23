@@ -7,7 +7,7 @@ export const signup = createAsyncThunk(
   "auth/signup",
   async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/register", inputData)
+      const response = await api.post("register", inputData)
       if (response) {
         let { data } = response.data
         localStorage.setItem("token", data.token)
@@ -37,7 +37,7 @@ export const classSchedule = createAsyncThunk(
   "auth/classSchedule",
   async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/users/class-schedule-drafts", inputData)
+      const response = await api.post("schedule", inputData)
       if (response) {
         let { data } = response.data
         localStorage.setItem("courseId", data.course_id)
@@ -119,7 +119,7 @@ export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
   async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/verify-user", inputData)
+      const response = await api.post("verify-email", inputData)
       if (response) {
         localStorage.removeItem("step")
         return response.data
@@ -146,7 +146,7 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await api.post("/login", {
+      const response = await api.post("authenticate", {
         email,
         password,
       })
@@ -157,8 +157,10 @@ export const login = createAsyncThunk(
         return response.data
       }
     } catch (error) {
+      console.log("error", error)
       let message =
         error?.response?.data?.message ||
+        error?.response?.meta?.message ||
         error?.response?.data?.errors ||
         error?.message ||
         error?.toString()
@@ -177,7 +179,7 @@ export const forgotpassword = createAsyncThunk(
   "auth/forgotpassword",
   async ({ email }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/forgot-password", { email })
+      const response = await api.post("forgot-password", { email })
       return response.data
     } catch (error) {
       let message =
@@ -201,7 +203,7 @@ export const validateForgotPasswordEmail = createAsyncThunk(
   "auth/validateForgotPasswordEmail",
   async ({ token }, thunkAPI) => {
     try {
-      const response = awaitapi.post("user/email/validate", token)
+      const response = awaitapi.post("email/validate", token)
       return response.data
     } catch (error) {
       let message =
@@ -224,7 +226,7 @@ export const resetpassword = createAsyncThunk(
   "auth/resetpassword",
   async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post("/onboarding/reset-password", inputData)
+      const response = await api.post("reset-password", inputData)
       return response.data
     } catch (error) {
       let message =
@@ -248,7 +250,7 @@ export const refreshpage = createAsyncThunk(
   "auth/refreshpage",
   async ({}, thunkAPI) => {
     try {
-      const response = await api.post("user/refresh", {})
+      const response = await api.post("refresh-token", {})
       return response.data
     } catch (error) {
       let message =
@@ -271,7 +273,7 @@ export const updateProfile = createAsyncThunk(
   "auth/updateProfile",
   async ({ id, inputData }, thunkAPI) => {
     try {
-      const response = await api.put(`/users/${id}`, inputData)
+      const response = await api.put(`profile`, inputData)
       return response.data
     } catch (error) {
       let message =
@@ -294,7 +296,7 @@ export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.post(`/users/change-password`, inputData)
+      const response = await api.post(`change-password`, inputData)
       return response.data
     } catch (error) {
       let message =
@@ -317,7 +319,7 @@ export const getProfile = createAsyncThunk(
   "auth/getProfile",
   async ({ id }, thunkAPI) => {
     try {
-      const response = await api.get(`/users/${id}`)
+      const response = await api.get(`profile`)
       return response.data
     } catch (error) {
       let message =

@@ -1,23 +1,10 @@
+import { Box, Button, CssBaseline, Grid, Link, Typography } from "@mui/material"
 import React from "react"
-import HomePageLayout from "../../src/views/home/layout"
-import {
-  Box,
-  Button,
-  CssBaseline,
-  Grid,
-  Link,
-  Toolbar,
-  Typography,
-} from "@mui/material"
-import {
-  BlueStarIcon,
-  ClockIcon,
-  PeopleIcon,
-  StarIcon,
-} from "../../src/components/svg"
-import { Fonts } from "../../src/components/themes/fonts"
+import { BlueStarIcon, PeopleIcon, StarIcon } from "../../src/components/svg"
 import { Colors } from "../../src/components/themes/colors"
-import PythonCourseOutlinePage from "../../src/views/home/courseOutlines/python"
+import { Fonts } from "../../src/components/themes/fonts"
+import ScratchCourseOutlinePage from "../../src/views/home/courseOutlines/scratch"
+import HomePageLayout from "../../src/views/home/layout"
 
 export default function ScratchPage() {
   return (
@@ -29,26 +16,30 @@ export default function ScratchPage() {
         flexDirection: "column",
       }}
     >
+      <CssBaseline />
       <Box
-        id="hero-section"
+        id="scratch-hero-section"
         component="div"
         sx={{
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 3, md: 12.5 },
-          background: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          py: { xs: 10, md: 12.5 },
+          backgroundColor:
+            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          backgroundImage: "url(/images/course-bg.svg)",
+          backgroundSize: { xs: "contain", sm: "contain" },
+          backgroundBlendMode: "overlay",
         }}
       >
         <Box
           sx={{
             width: "100%",
-            maxWidth: 1140,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -58,6 +49,7 @@ export default function ScratchPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
+              pt: 5,
             }}
           >
             <Box
@@ -88,13 +80,20 @@ export default function ScratchPage() {
                   sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
-                textAlign: "left",
+                textAlign: "justify",
               }}
             >
               SCRATCH
             </Typography>
           </Box>
-          <Box sx={{ width: "100%", display: "flex", gap: "10px" }}>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: "10px",
+            }}
+          >
             <Box sx={{ width: 125, display: "flex", gap: 1 }}>
               <PeopleIcon />{" "}
               <Typography
@@ -105,7 +104,7 @@ export default function ScratchPage() {
                   letterSpacing: 0.1,
                 }}
               >
-                Ages 7-15
+                Ages 7-10
               </Typography>
             </Box>
 
@@ -114,12 +113,27 @@ export default function ScratchPage() {
               <Typography
                 variant="subtitle1"
                 sx={{
+                  display: { xs: "none", sm: "flex" },
                   font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
                   color: Colors.light,
                   letterSpacing: 0.1,
+                  textAlign: "justify",
                 }}
               >
-                Prerequisite: No prerequisites for this course.
+                Prerequisite: No prerequisites for this course. Beginners with
+                no experience can take this course.
+              </Typography>{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  display: { xs: "flex", sm: "none" },
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  textAlign: "justify",
+                }}
+              >
+                Prerequisite: None
               </Typography>
             </Box>
           </Box>
@@ -129,9 +143,12 @@ export default function ScratchPage() {
               maxWidth: 1140,
               display: "block",
               color: Colors.light,
-              font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+              font: {
+                xs: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+              },
               letterSpacing: 0.1,
-              textAlign: "left",
+              textAlign: "justify",
             }}
           >
             Designed specifically for kids to learn coding, Scratch, a
@@ -164,7 +181,7 @@ export default function ScratchPage() {
       </Box>
       {/* WHAT IS SCRATCH */}
       <Box
-        id="python-section"
+        id="scratch-section"
         component="div"
         sx={{
           width: "100%",
@@ -182,15 +199,17 @@ export default function ScratchPage() {
             justifyContent: "flex-start",
             alignItems: "left",
             px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
-            gap: "37.22px",
+            gap: { xs: "6px", sm: "37.22px" },
           }}
         >
           <Typography
             variant="h2"
             sx={{
+              display: "flex",
+              flexDirection: "column",
               gap: "19.22",
               color: "#020204",
-              textAlign: "left",
+              textAlign: "justify",
               font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
             }}
           >
@@ -201,9 +220,12 @@ export default function ScratchPage() {
                 maxWidth: 1140,
                 display: "block",
                 color: "#020203",
-                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                font: {
+                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                },
                 letterSpacing: 0.1,
-                textAlign: "left",
+                textAlign: "justify",
               }}
             >
               Scratch is a visual programming language and online community
@@ -214,30 +236,30 @@ export default function ScratchPage() {
               drop code blocks to create scripts, eliminating the need for
               traditional text-based coding.
             </Typography>
+            <Link
+              href="/signup"
+              underline="hover"
+              sx={{
+                width: 165.2,
+                height: 36,
+                display: "flex",
+                my: "18px",
+                alignItems: "left",
+                font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                color: Colors.primary,
+                textTransform: "none",
+                letterSpacing: 0.25,
+                "&:hover": {
+                  background: "transparent",
+                },
+              }}
+            >
+              Show more
+            </Link>
           </Typography>
-          <Link
-            href="/signup"
-            underline="hover"
-            sx={{
-              width: 165.2,
-              height: 36,
-              display: "flex",
-              my: "18px",
-              alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
-              color: Colors.primary,
-              textTransform: "none",
-              letterSpacing: 0.25,
-              "&:hover": {
-                background: "transparent",
-              },
-            }}
-          >
-            Show more
-          </Link>
         </Box>
         <Box
-          id="python-section"
+          id="what-to-learn-section"
           component="div"
           sx={{
             width: "100%",
@@ -253,7 +275,7 @@ export default function ScratchPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
-              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+              gap: 5,
             }}
           >
             <Box
@@ -261,6 +283,7 @@ export default function ScratchPage() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Typography
@@ -268,8 +291,11 @@ export default function ScratchPage() {
                 sx={{
                   gap: "19.22",
                   color: "#020204",
-                  textAlign: "left",
-                  font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+                  textAlign: "justify",
+                  font: {
+                    xs: `normal normal 700 normal 25px/30px ${Fonts.primary}`,
+                    sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+                  },
                   m: 0,
                 }}
               >
@@ -278,19 +304,22 @@ export default function ScratchPage() {
                   variant="subtitle1"
                   sx={{
                     maxWidth: 560,
-                    height: { xs: 142, sm: 70 },
                     display: "block",
                     color: "#020203",
-                    font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    font: {
+                      xs: `normal normal 400 normal 13.4px/24px ${Fonts.primary}`,
+                      sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    },
                     letterSpacing: 0.1,
-                    textAlign: "left",
+                    textAlign: "justify",
                   }}
                 >
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
                 </Typography>
               </Typography>
             </Box>
-            <PythonCourseOutlinePage />
+
+            <ScratchCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -324,7 +353,7 @@ export default function ScratchPage() {
                     borderRadius: "8px",
                     background: Colors.primary,
                     boxShadow:
-                      "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                      "0px 6px 16px 0px rgba(255,94,0, 0.32), 0px 1px 2px 0px rgba(255,94,0, 0.32), 0px 0px 0px 1px #FF5E00",
                     "&:hover": {
                       background: Colors.primary,
                     },
@@ -339,6 +368,7 @@ export default function ScratchPage() {
                 width: "100%",
                 display: "flex",
                 mt: 11.875,
+                px: { xs: 3, sm: 6, md: 8, lg: 12.5, xl: 18.4 },
               }}
             >
               <Grid container spacing={3}>
@@ -386,10 +416,10 @@ export default function ScratchPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
-                        Gain a thorough understanding of Python syntax Learn to
+                        Gain a thorough understanding of Scratch syntax Learn to
                         build interactive games, chatbots and apps. Learn to
                         break down and solve complex problems Develop logical
                         and analytical thinking skills.
@@ -438,7 +468,7 @@ export default function ScratchPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
                         Encourage your child to practice regularly by coding at

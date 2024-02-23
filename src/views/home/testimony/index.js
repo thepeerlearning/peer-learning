@@ -56,7 +56,7 @@ export default function Testimonies() {
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 30,
+            spaceBetween: 0,
           },
           1024: {
             slidesPerView: 3,
@@ -91,6 +91,7 @@ export default function Testimonies() {
             >
               <Card
                 sx={{
+                  width: "100%",
                   padding: "33px 25px",
                   background: Colors.light,
                   boxShadow: "0px 2px 3px 0px rgba(0, 0, 0, 0.10)",
@@ -98,10 +99,15 @@ export default function Testimonies() {
                   position: "relative",
                 }}
               >
-                <QuoteIcon />
+                <Box>
+                  <QuoteIcon />
+                </Box>
                 <CardContent
                   sx={{
+                    width: "95%",
                     height: { xs: 210, sm: 300, xl: 180 },
+                    padding: { xs: "33px 0px", sm: "33px 25px" },
+
                     overflow: "auto",
                     "&::-webkit-scrollbar": {
                       width: 1,
@@ -120,16 +126,17 @@ export default function Testimonies() {
                   <Typography
                     variant="h6"
                     sx={{
-                      width: "100%",
+                      width: "90%",
                       color: "#091135",
-                      font: `normal normal 400 normal 15px/28px ${Fonts.primary}`,
+                      font: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                      textAlign: "justify",
                     }}
                   >
                     {testimony.text}
                   </Typography>
                 </CardContent>
                 <CardHeader
-                  sx={{ p: 0 }}
+                  sx={{ p: 0, py: 2 }}
                   avatar={
                     <Avatar
                       src={testimony.imgPath}

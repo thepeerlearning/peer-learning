@@ -22,7 +22,7 @@ export default function WebdevelopmentCourseOutlinePage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        px: { xs: 1, sm: 6, md: 10, lg: 12.5, xl: 16 },
+        px: { xs: 1, sm: 6, md: 4, lg: 9.5, xl: 16 },
       }}
     >
       <Grid container spacing={3}>
@@ -34,7 +34,7 @@ export default function WebdevelopmentCourseOutlinePage() {
               flexDirection: "column",
               gap: 2,
               padding: { xs: 1, sm: "25px" },
-              height: { xs: "auto", md: 880, lg: 750, xl: 692 },
+              height: { xs: "auto", sm: 400, md: 430, lg: 400, xl: 380 },
               alignItems: "flex-start",
               borderRadius: 1,
               border: `1px solid #EDEDED`,
@@ -83,7 +83,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         sx={{
                           width: "100%",
                           color: Colors.light,
-                          font: `normal normal 500 normal 18px/24px ${Fonts.primary}`,
+                          font: `normal normal 500 normal 18px/24px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                         }}
                       >
@@ -94,14 +94,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                       <Button
                         sx={{
                           display: { xs: "none", sm: "flex" },
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -126,9 +126,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                         width: "100%",
                         display: "block",
                         color: Colors.light,
-                        font: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 400 normal 13px/20px ${Fonts.primary}`,
+                          sm: `normal normal 400 normal 12px/20px ${Fonts.primary}`,
+                          lg: `normal normal 400 normal 13px/20px ${Fonts.primary}`,
+                          xl: `normal normal 400 normal 15.875px/20px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
-                        textAlign: "left",
+                        textAlign: "justify",
                         pl: 5,
                         mt: -0.5,
                       }}
@@ -143,21 +148,21 @@ export default function WebdevelopmentCourseOutlinePage() {
                       sx={{
                         width: "100%",
                         display: { xs: "flex", sm: "none" },
-                        justifyContent: "flex-end",
-                        alignItems: "center",
-                        mt: 1,
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        m: 2,
                       }}
                     >
                       <Button
                         sx={{
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primary}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -229,14 +234,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                       <Button
                         sx={{
                           display: { xs: "none", sm: "flex" },
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -284,14 +289,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                     >
                       <Button
                         sx={{
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -322,7 +327,7 @@ export default function WebdevelopmentCourseOutlinePage() {
               flexDirection: "column",
               gap: 2,
               padding: { xs: 1, sm: "25px" },
-              height: { xs: "auto", md: 880, lg: 750, xl: 692 },
+              height: { xs: "auto", sm: 400, md: 430, lg: 400, xl: 380 },
               alignItems: "flex-start",
               borderRadius: 1,
               border: `1px solid #EDEDED`,
@@ -382,14 +387,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                       <Button
                         sx={{
                           display: { xs: "none", sm: "flex" },
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -436,14 +441,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                     >
                       <Button
                         sx={{
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -517,14 +522,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                       <Button
                         sx={{
                           display: { xs: "none", sm: "flex" },
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -542,7 +547,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                     }
                     sx={{ py: 0, px: 0 }}
                   />
-                  <Box sx={{ width: "100%" }}>
+                  {/* <Box sx={{ width: "100%" }}>
                     <Typography
                       variant="span"
                       sx={{
@@ -570,14 +575,14 @@ export default function WebdevelopmentCourseOutlinePage() {
                     >
                       <Button
                         sx={{
-                          color: Colors.primary,
+                          color: "#5750CC",
                           padding: "5px 9.37px 5px 9.57px",
                           flexDirection: "column",
                           alignItems: "center",
                           justifyContent: "center",
                           alignSelf: "stretch",
                           cursor: "pointer",
-                          font: `normal normal 400 normal 14px/21px ${Fontprimary}`,
+                          font: `normal normal 500 normal 14px/21px ${Fonts.primaryMedium}`,
                           letterSpacing: 0.1,
                           borderRadius: "6px",
                           border: `1px solid #FFF`,
@@ -594,7 +599,7 @@ export default function WebdevelopmentCourseOutlinePage() {
                         View
                       </Button>
                     </Box>
-                  </Box>
+                  </Box> */}
                 </Box>
               </Box>
             </Card>

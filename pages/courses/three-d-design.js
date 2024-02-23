@@ -3,10 +3,10 @@ import React from "react"
 import { BlueStarIcon, PeopleIcon, StarIcon } from "../../src/components/svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
-import DesignCourseOutlinePage from "../../src/views/home/courseOutlines/design"
+import ThreeDesignCourseOutlinePage from "../../src/views/home/courseOutlines/three-d-design"
 import HomePageLayout from "../../src/views/home/layout"
 
-export default function DesignPage() {
+export default function ThreeDesignPage() {
   return (
     <Box
       sx={{
@@ -83,7 +83,7 @@ export default function DesignPage() {
                 textAlign: "justify",
               }}
             >
-              UI/UX DESIGN
+              3D DESIGN
             </Typography>
           </Box>
           <Box
@@ -104,7 +104,7 @@ export default function DesignPage() {
                   letterSpacing: 0.1,
                 }}
               >
-                Ages 7-15
+                Ages 10-14
               </Typography>
             </Box>
 
@@ -152,7 +152,7 @@ export default function DesignPage() {
             }}
           >
             In this course, kids embark on a thrilling journey into the world of
-            UI/UX design. Through engaging lessons and hands-on practice, they
+            3D design. Through engaging lessons and hands-on practice, they
             acquire the fundamental skills to become UI/UX designers. They
             acquire a solid grasp of the fundamentals, progressing from the
             essential principles of visual design and user experience.
@@ -181,7 +181,7 @@ export default function DesignPage() {
       </Box>
       {/* WHAT IS PYTHON */}
       <Box
-        id="uiux-section"
+        id="three-d-section"
         component="div"
         sx={{
           width: "100%",
@@ -213,7 +213,7 @@ export default function DesignPage() {
               font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
             }}
           >
-            What is UI/UX Design?
+            What is 3D Design?
             <Typography
               variant="span"
               sx={{
@@ -228,7 +228,7 @@ export default function DesignPage() {
                 textAlign: "justify",
               }}
             >
-              UI/UX design, or User Interface and User Experience design, is a
+              3D design, or User Interface and User Experience design, is a
               comprehensive discipline that focuses on creating digital products
               with a strong emphasis on both visual aesthetics (UI) and user
               interaction and satisfaction (UX). This intricate field involves a
@@ -317,7 +317,7 @@ export default function DesignPage() {
                 </Typography>
               </Typography>
             </Box>
-            <DesignCourseOutlinePage />
+            <ThreeDesignCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -486,6 +486,6 @@ export default function DesignPage() {
     </Box>
   )
 }
-DesignPage.getLayout = function getLayout(page) {
+ThreeDesignPage.getLayout = function getLayout(page) {
   return <HomePageLayout>{page}</HomePageLayout>
 }

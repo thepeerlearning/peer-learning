@@ -46,6 +46,7 @@ export default function HomePage() {
           display: "flex",
           flexDirection: "column",
           py: { xs: 2, md: 12.5 },
+          gap: { xs: 6, sm: 12 },
           background: "url('/images/svgs/grid-bg.svg')",
         }}
       >
@@ -56,9 +57,8 @@ export default function HomePage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
-            gap: 8,
-            mt: { xs: 5, sm: 0 },
+            px: { xs: 3, sm: 3, lg: 12.5, xl: 16 },
+            mt: 12,
           }}
         >
           <Box
@@ -88,7 +88,6 @@ export default function HomePage() {
               variant="h2"
               sx={{
                 maxWidth: 857,
-                height: { xs: 175, sm: 237 },
                 color: "#091135",
                 font: {
                   xs: `normal normal 700 normal 32px/44px ${Fonts.primaryBold}`,
@@ -96,7 +95,7 @@ export default function HomePage() {
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
                 textAlign: "center",
-                my: 1,
+                my: 4,
               }}
             >
               1:1 online tech classes for African kids in the diaspora on their
@@ -106,7 +105,6 @@ export default function HomePage() {
               component="span"
               sx={{
                 maxWidth: 560,
-                // height: 48,
                 display: "flex",
                 flexDirection: "column",
               }}
@@ -171,16 +169,22 @@ export default function HomePage() {
               </Box>
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image src={heroImage} alt="hero background image" />
-          </Box>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+          }}
+        >
+          <Image
+            src={heroImage}
+            width={1339}
+            height={915}
+            alt="hero background image"
+          />
         </Box>
       </Box>
       {/* SECTION TWO */}
@@ -204,16 +208,16 @@ export default function HomePage() {
             backgroundPosition: "center",
             px: { xs: 3, lg: 12.5, xl: 16 },
             py: { xs: 8, xl: 10 },
+            gap: { xs: 6, sm: 8 },
           }}
         >
-          <Box
+          <Typography
             component="h2"
             sx={{
               maxWidth: 820,
-              height: { xs: 187, sm: 127 },
               color: "#091135",
               font: {
-                xs: `normal normal 600 normal 32px/44px ${Fonts.primary}`,
+                xs: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
                 sm: `normal normal 600 normal 32px/27px ${Fonts.primary}`,
               },
               letterSpacing: { xs: -0.64, sm: 0.25 },
@@ -224,21 +228,20 @@ export default function HomePage() {
             <Box
               component="span"
               sx={{
-                maxWidth: 560,
-                height: 48,
+                maxWidth: 700,
                 display: "block",
                 color: "#091135",
-                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                 letterSpacing: 0.25,
                 textAlign: "center",
-                mt: 1,
+                mt: 3,
               }}
             >
               Our instructors are alumni and experts from leading universities
               and tech companies, bringing real-world knowledge and passion
               directly to your kids.
             </Box>
-          </Box>
+          </Typography>
           <Box
             id="gallery-section"
             sx={{
@@ -386,10 +389,10 @@ export default function HomePage() {
         <Box
           sx={{
             width: "100%",
+            px: { xs: 2, sm: 3, md: 2, lg: 7.5, xl: 12.5 },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            px: { xs: 0, sm: 3, lg: 12.5 },
           }}
         >
           <Box
@@ -402,10 +405,10 @@ export default function HomePage() {
             <Box sx={{ flex: "1 0 0", width: { xs: "100%", md: 600 } }}>
               <Box
                 sx={{
-                  width: 370,
+                  width: { xs: "100%", md: 370 },
                   display: "flex",
-                  alignItems: { xs: "center", md: "center" },
-                  justifyContent: { xs: "center", md: "center" },
+                  alignItems: { xs: "center", md: "left" },
+                  justifyContent: { xs: "center", md: "left" },
                 }}
               >
                 <Typography
@@ -429,8 +432,8 @@ export default function HomePage() {
                 sx={{
                   width: "100%",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: { xs: "center", md: "left" },
+                  justifyContent: { xs: "center", md: "left" },
                 }}
               >
                 <Typography
@@ -456,17 +459,19 @@ export default function HomePage() {
                       font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                       letterSpacing: 0.25,
                       textAlign: { xs: "center", md: "left" },
-                      mt: 3,
+                      m: { xs: 3, sm: "35px 5px 35px 0" },
                     }}
                   >
                     That&apos;s why we provide flexible learning options that
                     suits your schedule and we personalize our approach to meet
-                    each child’s unique needs.
+                    each child&apos;s unique needs.
                   </Typography>
                 </Typography>
               </Box>
             </Box>
-            <Stack sx={{ width: "100%", display: "flex", px: 2 }}>
+            <Stack
+              sx={{ width: "100%", display: "flex", px: { xs: 2.5, sm: 0 } }}
+            >
               <Grid container rowSpacing={3} columnSpacing={1}>
                 <Grid item xs={12} sm={4}>
                   <Box
@@ -474,6 +479,7 @@ export default function HomePage() {
                       width: "100%",
                       height: 197.679,
                       display: "flex",
+                      alignItems: "center",
                       flexDirection: "column",
                       background: Colors.secondary,
                       boxShadow:
@@ -510,7 +516,7 @@ export default function HomePage() {
                         color: "#FBFBFD",
                         letterSpacing: 0.25,
                         textAlign: "center",
-                        pb: 1,
+                        p: 1,
                       }}
                     >
                       No need to commute. Our live 1:1 online coding classes are
@@ -525,69 +531,55 @@ export default function HomePage() {
                       width: "100%",
                       height: 197.679,
                       display: "flex",
+                      alignItems: "center",
                       flexDirection: "column",
                       background: Colors.secondary,
                       boxShadow:
                         "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
+                      color: "#FBFBFD",
                       border: "1px solid #E1E5E9",
                       borderRadius: 1,
+                      font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                      letterSpacing: 0.25,
+                      textAlign: "center",
                     }}
                   >
-                    <Box
+                    <Typography
+                      variant="h4"
                       sx={{
                         width: "100%",
-                        height: 197.679,
-                        display: "flex",
-                        flexDirection: "column",
-                        background: Colors.secondary,
-                        boxShadow:
-                          "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
-                        color: "#FBFBFD",
-                        border: "1px solid #E1E5E9",
-                        borderRadius: 1,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                        letterSpacing: 0.25,
+                        height: 50,
+                        font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
                         textAlign: "center",
+                        color: Colors.light,
+                        letterSpacing: 0.25,
+                        py: 1,
+                        mt: 0.5,
                       }}
                     >
-                      <Typography
-                        variant="h4"
-                        sx={{
-                          width: "100%",
-                          height: 50,
-                          font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
-                          textAlign: "center",
-                          color: Colors.light,
-                          letterSpacing: 0.25,
-                          py: 1,
-                          mt: 0.5,
-                        }}
-                      >
-                        At your time
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          width: "100%",
-                          // maxWidth: 330,
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          flexShrink: 0,
-                          height: 100.073,
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                          color: "#FBFBFD",
-                          letterSpacing: 0.25,
-                          textAlign: "center",
-                          pb: 1,
-                          px: 1,
-                        }}
-                      >
-                        With Peer Learning, you&apos;re in control of your
-                        schedule. Choose the days and times that work best for
-                        your child&apos;s classes.
-                      </Typography>
-                    </Box>
+                      At your time
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        width: "100%",
+                        // maxWidth: 330,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexShrink: 0,
+                        height: 100.073,
+                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                        color: "#FBFBFD",
+                        letterSpacing: 0.25,
+                        textAlign: "center",
+                        p: 1,
+                      }}
+                    >
+                      With Peer Learning, you&apos;re in control of your
+                      schedule. Choose the days and times that work best for
+                      your child&apos;s classes.
+                    </Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -596,6 +588,7 @@ export default function HomePage() {
                       width: "100%",
                       height: 197.679,
                       display: "flex",
+                      alignItems: "center",
                       flexDirection: "column",
                       background: Colors.secondary,
                       boxShadow:
@@ -649,8 +642,7 @@ export default function HomePage() {
                           color: "#FBFBFD",
                           letterSpacing: 0.25,
                           textAlign: "center",
-                          pb: 1,
-                          px: 1,
+                          p: 1,
                         }}
                       >
                         Every child is unique, and so is their learning journey.
@@ -683,7 +675,6 @@ export default function HomePage() {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
-
             px: { xs: 2, sm: 3, lg: 12.5 },
           }}
         >

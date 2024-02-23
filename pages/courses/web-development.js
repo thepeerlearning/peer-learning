@@ -23,25 +23,27 @@ export default function WebdevelopmentPage() {
     >
       <CssBaseline />
       <Box
-        id="hero-section"
+        id="web-hero-section"
         component="div"
         sx={{
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 3, md: 12.5 },
-          background: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          py: { xs: 10, md: 12.5 },
+          backgroundColor:
+            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          backgroundImage: "url(/images/course-bg.svg)",
+          backgroundSize: "contain",
         }}
       >
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -51,6 +53,7 @@ export default function WebdevelopmentPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
+              pt: 5,
             }}
           >
             <Box
@@ -59,7 +62,7 @@ export default function WebdevelopmentPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${FoprimarySemiBoldry}`,
+                font: `normal normal 500 normal 17.016px/18px ${Fonts.primaryMedium}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -67,7 +70,6 @@ export default function WebdevelopmentPage() {
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
-                mt: { xs: 4, sm: 0 },
               }}
             >
               Focus on
@@ -75,95 +77,89 @@ export default function WebdevelopmentPage() {
             <Typography
               variant="h2"
               sx={{
-                maxWidth: 820,
+                maxWidth: 1140,
                 color: Colors.light,
-                font: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
-                letterSpacing: { xs: 0.3, sm: 0.25 },
-                textAlign: "left",
+                font: {
+                  xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                  sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
+                },
+                letterSpacing: { xs: -0.64, sm: 0.25 },
+                textAlign: "justify",
               }}
             >
               WEB DEVELOPMENT
             </Typography>
           </Box>
-          <Box sx={{ width: "100%", display: "flex" }}>
-            <Grid container spacing={1}>
-              <Grid item xs={5} sm={2.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <PeopleIcon />{" "}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Ages 7-15
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={7} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <ClockIcon />{" "}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                      display: { xs: "none", sm: "flex" },
-                    }}
-                  >
-                    Course Duration: 6 months
-                  </Typography>
-                  <Typography
-                    variant="span"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                      display: { xs: "flex", sm: "none" },
-                    }}
-                  >
-                    6 months
-                  </Typography>
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={12} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <StarIcon />{" "}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primarySemiBold}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Prerequisite: None
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: "10px",
+            }}
+          >
+            <Box sx={{ width: 125, display: "flex", gap: 1 }}>
+              <PeopleIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                }}
+              >
+                Ages 7-10
+              </Typography>
+            </Box>
+
+            <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
+              <StarIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  textAlign: "justify",
+                }}
+              >
+                Prerequisite: No prerequisites for this course. Beginners with
+                no experience can take this course.
+              </Typography>{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  display: { xs: "flex", sm: "none" },
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  textAlign: "justify",
+                }}
+              >
+                Prerequisite: None
+              </Typography>
+            </Box>
           </Box>
           <Box
             component="span"
             sx={{
-              maxWidth: 560,
+              maxWidth: 1140,
               display: "block",
               color: Colors.light,
-              font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+              font: {
+                xs: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+              },
               letterSpacing: 0.1,
-              textAlign: "left",
+              textAlign: "justify",
             }}
           >
-            This course covers all the relevant topics kids need to master web
-            development. They&apos;ll be fully equipped with the fundamentals,
-            learning how to build beautiful websites using the basic principles
-            of design. They&apos;ll gain proficiency in HTML and CSS, the
-            essential code languages that power all modern websites. The
-            learning structure progresses from basic to intermediate and then
-            advanced topics.
+            This comprehensive web development course equips students with the
+            essential knowledge and skills to build and design modern websites.
+            The curriculum covers a wide range of relevant topics, starting with
+            the core fundamentals of web design and progressing through
+            intermediate and advanced concepts.
           </Box>
           <Button
             onClick={() => router.push("/signup")}
@@ -171,15 +167,13 @@ export default function WebdevelopmentPage() {
               width: 165.2,
               height: 36,
               padding: "10px 16px",
-              font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
+              font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
               color: Colors.light,
               textTransform: "none",
               letterSpacing: 0.25,
               border: `1px solid ${Colors.primary}`,
               borderRadius: "8px",
               background: Colors.primary,
-              boxShadow:
-                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
               "&:hover": {
                 background: Colors.primary,
               },
@@ -191,7 +185,7 @@ export default function WebdevelopmentPage() {
       </Box>
       {/* WHAT IS WEB DEVELOPMENT */}
       <Box
-        id="python-section"
+        id="web-section"
         component="div"
         sx={{
           width: "100%",
@@ -203,21 +197,23 @@ export default function WebdevelopmentPage() {
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
+            maxWidth: 1140,
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
-            gap: "37.22px",
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            gap: { xs: "6px", sm: "37.22px" },
           }}
         >
           <Typography
             variant="h2"
             sx={{
+              display: "flex",
+              flexDirection: "column",
               gap: "19.22",
               color: "#020204",
-              textAlign: "left",
+              textAlign: "justify",
               font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
             }}
           >
@@ -225,12 +221,15 @@ export default function WebdevelopmentPage() {
             <Typography
               variant="span"
               sx={{
-                maxWidth: 560,
+                maxWidth: 1140,
                 display: "block",
                 color: "#020203",
-                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                font: {
+                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                },
                 letterSpacing: 0.1,
-                textAlign: "left",
+                textAlign: "justify",
               }}
             >
               Web development is the process of creating and maintaining
@@ -241,27 +240,27 @@ export default function WebdevelopmentPage() {
               ensuring its usability, functionality, and responsiveness across
               various devices.
             </Typography>
+            <Link
+              href="/signup"
+              underline="hover"
+              sx={{
+                width: 165.2,
+                height: 36,
+                display: "flex",
+                my: "18px",
+                alignItems: "left",
+                font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
+                color: Colors.primary,
+                textTransform: "none",
+                letterSpacing: 0.25,
+                "&:hover": {
+                  background: "transparent",
+                },
+              }}
+            >
+              Show more
+            </Link>
           </Typography>
-          <Link
-            href="/signup"
-            underline="hover"
-            sx={{
-              width: 165.2,
-              height: 36,
-              display: "flex",
-              my: "18px",
-              alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
-              color: Colors.primary,
-              textTransform: "none",
-              letterSpacing: 0.25,
-              "&:hover": {
-                background: "transparent",
-              },
-            }}
-          >
-            Show more
-          </Link>
         </Box>
         <Box
           id="web-section"
@@ -280,7 +279,7 @@ export default function WebdevelopmentPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
-              px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+              gap: 5,
             }}
           >
             <Box
@@ -288,6 +287,7 @@ export default function WebdevelopmentPage() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Typography
@@ -295,9 +295,12 @@ export default function WebdevelopmentPage() {
                 sx={{
                   gap: "19.22",
                   color: "#020204",
-                  textAlign: "left",
-                  font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
-                  px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
+                  textAlign: "justify",
+                  font: {
+                    xs: `normal normal 700 normal 25px/30px ${Fonts.primary}`,
+                    sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+                  },
+                  m: 0,
                 }}
               >
                 What your child will learn in this lesson
@@ -305,19 +308,21 @@ export default function WebdevelopmentPage() {
                   variant="span"
                   sx={{
                     maxWidth: 560,
-                    height: { xs: 142, sm: 70 },
                     display: "block",
                     color: "#020203",
-                    font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    font: {
+                      xs: `normal normal 400 normal 13.4px/24px ${Fonts.primary}`,
+                      sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    },
                     letterSpacing: 0.1,
-                    textAlign: "left",
+                    textAlign: "justify",
                   }}
                 >
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
                 </Typography>
               </Typography>
-              <WebdevelopmentCourseOutlinePage />
             </Box>
+            <WebdevelopmentCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -326,7 +331,6 @@ export default function WebdevelopmentPage() {
                 justifyContent: "center",
                 alignItems: "center",
                 mt: 5,
-                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Box
@@ -344,7 +348,7 @@ export default function WebdevelopmentPage() {
                   onClick={() => router.push("/signup")}
                   sx={{
                     padding: "10px 16px",
-                    font: `normal normal 500 normal 14px/20px ${Fonts.primarySemiBold}`,
+                    font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
                     color: Colors.light,
                     textTransform: "none",
                     letterSpacing: 0.25,
@@ -352,7 +356,7 @@ export default function WebdevelopmentPage() {
                     borderRadius: "8px",
                     background: Colors.primary,
                     boxShadow:
-                      "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                      "0px 6px 16px 0px rgba(255,94,0, 0.32), 0px 1px 2px 0px rgba(255,94,0, 0.32), 0px 0px 0px 1px #FF5E00",
                     "&:hover": {
                       background: Colors.primary,
                     },
@@ -367,7 +371,7 @@ export default function WebdevelopmentPage() {
                 width: "100%",
                 display: "flex",
                 mt: 11.875,
-                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
+                px: { xs: 3, sm: 6, md: 8, lg: 12.5, xl: 18.4 },
               }}
             >
               <Grid container spacing={3}>
@@ -415,13 +419,13 @@ export default function WebdevelopmentPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
-                        Gain a thorough understanding of Python syntax Learn to
-                        build interactive games, chatbots and apps. Learn to
-                        break down and solve complex problems Develop logical
-                        and analytical thinking skills.
+                        Gain a thorough understanding of web development syntax
+                        Learn to build interactive apps, chatbots and apps.
+                        Learn to break down and solve complex problems Develop
+                        logical and analytical thinking skills.
                       </Typography>
                     </Box>
                   </Box>
@@ -467,7 +471,7 @@ export default function WebdevelopmentPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
                         Encourage your child to practice regularly by coding at

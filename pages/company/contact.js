@@ -54,7 +54,6 @@ export default function ContactPage() {
                 background: `url('/images/linear-gred.svg')`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                // px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
                 py: { xs: 2, sm: 3, lg: 5, xl: 6 },
               }}
             >
@@ -62,14 +61,13 @@ export default function ContactPage() {
                 component="h2"
                 sx={{
                   maxWidth: 464,
-                  height: { xs: 175, sm: 127 },
                   color: "#091135",
                   font: `normal normal 600 normal 37px/45px ${Fonts.primarySemiBold}`,
                   letterSpacing: { xs: -0.64, sm: 0.25 },
                   textAlign: "center",
                 }}
               >
-                We’re always happy to chat or receive feedback.
+                We&apos;re always happy to chat or receive feedback.
                 <Box
                   component="span"
                   sx={{

@@ -1,3 +1,4 @@
+import MenuIcon from "@mui/icons-material/Menu"
 import {
   Avatar,
   Box,
@@ -10,18 +11,12 @@ import {
   IconButton,
   Link,
   ListItemButton,
-  ListItemIcon,
   Toolbar,
 } from "@mui/material"
 import MuiAppBar from "@mui/material/AppBar"
+import { motion, useAnimation, useInView } from "framer-motion"
 import Router, { useRouter } from "next/router"
 import React, { useEffect, useRef, useState } from "react"
-import { AppLogo } from "../../components/svg/logo-dark-bg"
-import { AppLogo as SmallAppLogo } from "../../components/svg/logo-light-bg"
-import { Colors } from "../../components/themes/colors"
-import { Fonts } from "../../components/themes/fonts"
-import FooterPage from "./footer"
-import MenuIcon from "@mui/icons-material/Menu"
 import { AiOutlineClose } from "react-icons/ai"
 import {
   NestedStyledList,
@@ -36,8 +31,11 @@ import {
   ScratchIcon,
   ThreeDDesignIcon,
 } from "../../components/svg"
+import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { AngleBackward, AngleDownWard } from "../../components/svg/menuIcons"
-import { motion, useInView, useAnimation } from "framer-motion"
+import { Colors } from "../../components/themes/colors"
+import { Fonts } from "../../components/themes/fonts"
+import FooterPage from "./footer"
 
 function updateKey(str) {
   if (typeof str !== "string") return ""
@@ -135,12 +133,18 @@ export default function HomePageLayout({ children }) {
       : (router.push(item.link), setMobileOpen(false))
   }
   const drawer = (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+      }}
+    >
       <Toolbar
         sx={{ minHeight: `50px !important`, padding: `16px !important` }}
       >
         <Link underline="none" href="/">
-          <SmallAppLogo
+          <AppLogo
             style={{
               width: 150,
               height: 50,
@@ -148,7 +152,6 @@ export default function HomePageLayout({ children }) {
             }}
           />
         </Link>
-
         <Box
           sx={{
             display: { xs: "block", md: "none" },
@@ -219,6 +222,7 @@ export default function HomePageLayout({ children }) {
                       selected={router.pathname.startsWith(
                         `/students/${itemName}`
                       )}
+                      sx={{ my: 1 }}
                     >
                       <Box component="span">{item.name}</Box>
                       {item.children && (
@@ -242,26 +246,54 @@ export default function HomePageLayout({ children }) {
                       unmountOnExit
                     >
                       <NestedStyledList component="div" disablePadding>
-                        {item.children &&
-                          item.children.map((child, index) => {
+                        {item?.children &&
+                          item?.children?.map((child, index) => {
                             return (
-                              <ListItemButton
-                                key={index + 1}
-                                disableRipple
-                                disableTouchRipple
-                                onClick={() => handleClick(child, index)}
-                                selected={
-                                  router.pathname === child.link ||
-                                  router.pathname.startsWith(
-                                    `/${item.name.toLowerCase()}/${child.title.toLowerCase()}`
-                                  )
+                              <CardHeader
+                                onClick={() => handleClick(child)}
+                                sx={{
+                                  p: "12px",
+                                  gap: "6px",
+                                  height: 72,
+                                  borderRadius: "8px",
+                                  cursor: "pointer",
+                                  textAlign: "left",
+                                  "&:hover": {
+                                    background: "#EAECF0",
+                                    transform: "scale(0.99)",
+                                  },
+                                }}
+                                key={index}
+                                avatar={
+                                  <Avatar
+                                    variant="square"
+                                    sx={{ bgcolor: "transparent" }}
+                                  >
+                                    {child.icon}
+                                  </Avatar>
                                 }
-                              >
-                                <ListItemIcon>{child.icon}</ListItemIcon>
-                                <Box component="span" sx={{ color: "red" }}>
-                                  {child.title}
-                                </Box>
-                              </ListItemButton>
+                                title={
+                                  <Box
+                                    sx={{
+                                      font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
+                                      color: Colors.dark,
+                                      letterSpacing: "0em",
+                                    }}
+                                  >
+                                    {child.title}
+                                  </Box>
+                                }
+                                subheader={
+                                  <Box
+                                    sx={{
+                                      font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                                      color: Colors.textColor,
+                                    }}
+                                  >
+                                    {child.description}
+                                  </Box>
+                                }
+                              />
                             )
                           })}
                       </NestedStyledList>
@@ -273,7 +305,14 @@ export default function HomePageLayout({ children }) {
           <StyledList
             component="nav"
             disablePadding
-            sx={{ mt: 10, position: "absolute", bottom: 30 }}
+            sx={{
+              mt: 10,
+              position: "absolute",
+              bottom: 30,
+              width: "100%",
+              left: 0,
+              justifyContent: "center",
+            }}
           >
             <Box
               component="div"
@@ -281,21 +320,23 @@ export default function HomePageLayout({ children }) {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
                 gap: 2,
               }}
             >
               <Button
                 onClick={() => router.push("/auth/login")}
                 sx={{
-                  width: "100%",
+                  width: "90%",
                   height: 36,
                   padding: "12px 16px",
                   display: "flex",
                   font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
-                  color: Colors.primary,
+                  color: Colors.light,
                   textTransform: "none",
                   letterSpacing: 0.25,
-                  border: `1px solid ${Colors.primary}`,
+                  border: `1px solid rgba(255, 255, 255, 0.16)`,
                   borderRadius: "8px",
                   background: "transparent",
                   boxShadow:
@@ -310,7 +351,7 @@ export default function HomePageLayout({ children }) {
               <Button
                 onClick={() => router.push("/signup")}
                 sx={{
-                  width: "100%",
+                  width: "90%",
                   height: 36,
                   padding: "10px 16px",
                   display: "flex",
@@ -322,7 +363,7 @@ export default function HomePageLayout({ children }) {
                   borderRadius: "8px",
                   background: Colors.primary,
                   boxShadow:
-                    "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                    "0px 6px 16px 0px rgba(255,94,0, 0.32), 0px 1px 2px 0px rgba(255,94,0, 0.32), 0px 0px 0px 1px #FF5E00",
                   "&:hover": {
                     background: Colors.primary,
                   },
@@ -364,9 +405,8 @@ export default function HomePageLayout({ children }) {
             display: "flex",
             alignItems: "center",
             backgroundColor: Colors.black,
-            // minHeight: appHeight,
             height: appHeight,
-            px: { xs: 2, sm: 3, sm: 8.5, lg: 10.5, xs: 12.5 },
+            px: { xs: 1, sm: 3, sm: 3, md: 1.5, lg: 5, xl: 12.5 },
           }}
         >
           <Toolbar
@@ -386,7 +426,7 @@ export default function HomePageLayout({ children }) {
               edge="start"
               onClick={handleDrawerToggle}
               sx={{
-                display: { md: "none" },
+                display: { sm: "none" },
                 background: Colors.light,
                 color: Colors.textColor,
                 width: 30,
@@ -403,7 +443,7 @@ export default function HomePageLayout({ children }) {
             <Box
               component="div"
               sx={{
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", sm: "flex" },
                 width: 300,
                 gap: 2,
               }}
@@ -534,10 +574,30 @@ export default function HomePageLayout({ children }) {
             <Box
               component="div"
               sx={{
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", sm: "flex" },
                 gap: 2,
               }}
             >
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{
+                  display: { xs: "none", sm: "flex", md: "none" },
+                  background: Colors.light,
+                  color: Colors.textColor,
+                  width: 30,
+                  height: 30,
+                  borderRadius: 1,
+                  "&:hover": {
+                    background: Colors.light,
+                    color: Colors.textColor,
+                  },
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
               <Button
                 onClick={() => router.push("/auth/login")}
                 sx={{
@@ -564,7 +624,7 @@ export default function HomePageLayout({ children }) {
               <Button
                 onClick={() => router.push("/signup")}
                 sx={{
-                  width: 165.2,
+                  width: { xs: 165.2 },
                   height: 36,
                   padding: "10px 16px",
                   display: { xs: "none", md: "flex" },
@@ -594,8 +654,9 @@ export default function HomePageLayout({ children }) {
               keepMounted: true,
             }}
             sx={{
-              display: { xs: "block", md: "none" },
+              display: { xs: "flex", md: "none" },
               "& .MuiDrawer-paper": {
+                backgroundColor: "#000",
                 boxSizing: "border-box",
                 width: "100%",
                 "&::-webkit-scrollbar": {
@@ -623,7 +684,6 @@ export default function HomePageLayout({ children }) {
             width: "100%",
           }}
         >
-          {/* <Toolbar /> */}
           <CssBaseline />
           {children}
         </Box>

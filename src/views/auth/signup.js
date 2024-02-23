@@ -66,25 +66,15 @@ export default function SignupForm({ next }) {
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data
     const phoneNumberObj = parsePhoneNumber(phone)
-    const country = Countries.find(
-      (country) => country.code === phoneNumberObj.country
-    )
+
     const inputData = {
-      user: {
-        email,
-        password,
-        phone_number: phone,
-        user_type: "user",
-        role: "admin",
-      },
-      parent: {
-        fullname: fullname,
-        country: country?.name,
-      },
-      child: {
-        fullname: childname,
-      },
+      child_full_name: childname,
+      parent_full_name: fullname,
+      email: email,
+      password: password,
+      phone: phone,
     }
+    console.log("inputData", inputData)
     setLoading(true)
     dispatch(signup({ inputData }))
       .unwrap()

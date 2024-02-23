@@ -108,7 +108,7 @@ export default function ResetPasswordPage() {
             textAlign: "left",
             maxWidth: 375,
             color: Colors.textColor,
-            font: `normal normal 500 16px/135.8% ${FontprimaryMediumry}`,
+            font: `normal normal 500 16px/135.8% ${Fonts.primaryMediumry}`,
             mt: { xs: 0, sm: 1.5 },
           }}
         >

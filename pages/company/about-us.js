@@ -8,6 +8,7 @@ import minna from "../../public/images/minna.png"
 import ourpass from "../../public/images/ourpass.png"
 import rooah from "../../public/images/rooah.png"
 import springboard from "../../public/images/springboard.png"
+
 import swaneza from "../../public/images/swaneza.png"
 import synthesis from "../../public/images/synthesis.png"
 import zaria from "../../public/images/zaria.png"
@@ -82,7 +83,7 @@ export default function AboutUsPage() {
               top: { xs: 100, sm: 210, md: 244 },
               width: "100%",
               maxWidth: 960,
-              height: { xs: "auto", md: 653 },
+              // height: { xs: "auto", md: 653 },
               boxShadow: {
                 xs: "none",
                 md: "0px 24px 35px 0px rgba(0, 0, 0, 0.10)",
@@ -91,7 +92,7 @@ export default function AboutUsPage() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              py: { xs: 2, md: "55.8px" },
+              py: { xs: 2, md: "50.8px" },
             }}
           >
             <Box
@@ -120,10 +121,10 @@ export default function AboutUsPage() {
                 variant="h4"
                 sx={{
                   width: { xs: "100%", md: 608 },
-                  height: { xs: 176, sm: 87 },
                   color: "#091135",
-                  font: `normal normal 700 normal 27.781px/37.6px ${Fonts.primaryBold}`,
+                  font: `normal normal 700 normal 25px/36px ${Fonts.primaryBold}`,
                   mb: 1,
+                  textAlign: "justify",
                 }}
               >
                 To equip Africa kids in the diaspora with globally relevant tech
@@ -136,7 +137,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    // textAlign: "justify",
+                    textAlign: "justify",
                   }}
                 >
                   We believe in the boundless potential of all children,
@@ -156,7 +157,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    // textAlign: "justify",
+                    textAlign: "justify",
                     my: 2,
                   }}
                 >
@@ -169,7 +170,7 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    // textAlign: "justify",
+                    textAlign: "justify",
                     mb: 2,
                   }}
                 >
@@ -249,8 +250,10 @@ export default function AboutUsPage() {
               <Box
                 component="h2"
                 sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
                   maxWidth: 820,
-                  height: { xs: 187, sm: 127 },
                   color: "#091135",
                   font: {
                     xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
@@ -265,7 +268,6 @@ export default function AboutUsPage() {
                   component="span"
                   sx={{
                     maxWidth: 560,
-                    // height: 148,
                     display: "block",
                     color: "#091135",
                     font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,

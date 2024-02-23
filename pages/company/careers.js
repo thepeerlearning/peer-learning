@@ -8,6 +8,7 @@ import minna from "../../public/images/minna.png"
 import ourpass from "../../public/images/ourpass.png"
 import rooah from "../../public/images/rooah.png"
 import springboard from "../../public/images/springboard.png"
+
 import swaneza from "../../public/images/swaneza.png"
 import synthesis from "../../public/images/synthesis.png"
 import zaria from "../../public/images/zaria.png"
@@ -82,7 +83,6 @@ export default function CareersPage() {
               top: { xs: 100, sm: 210, md: 244 },
               width: "100%",
               maxWidth: 960,
-              height: { xs: "auto", md: 653 },
               boxShadow: {
                 xs: "none",
                 md: "0px 24px 35px 0px rgba(0, 0, 0, 0.10)",
@@ -120,10 +120,10 @@ export default function CareersPage() {
                 variant="h4"
                 sx={{
                   width: { xs: "100%", md: 608 },
-                  height: { xs: 176, sm: 87 },
                   color: "#091135",
                   font: `normal normal 700 normal 27.781px/37.6px ${Fonts.primaryBold}`,
                   mb: 1,
+                  textAlign: "justify",
                 }}
               >
                 To equip Africa kids in the diaspora with globally relevant tech
@@ -265,7 +265,6 @@ export default function CareersPage() {
                   component="span"
                   sx={{
                     maxWidth: 560,
-                    // height: 148,
                     display: "block",
                     color: "#091135",
                     font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,

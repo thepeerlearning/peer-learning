@@ -42,9 +42,11 @@ export default function LoginPage() {
       setError(false)
     }, 3500)
   }, [error])
+
   React.useEffect(() => {
     dispatch(clearMessage())
   }, [dispatch])
+
   React.useEffect(() => {
     if (message?.email) {
       message?.email?.map((email) => {

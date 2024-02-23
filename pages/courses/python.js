@@ -1,15 +1,10 @@
-import React from "react"
-import HomePageLayout from "../../src/views/home/layout"
 import { Box, Button, CssBaseline, Grid, Link, Typography } from "@mui/material"
-import {
-  BlueStarIcon,
-  ClockIcon,
-  PeopleIcon,
-  StarIcon,
-} from "../../src/components/svg"
-import { Fonts } from "../../src/components/themes/fonts"
+import React from "react"
+import { BlueStarIcon, PeopleIcon, StarIcon } from "../../src/components/svg"
 import { Colors } from "../../src/components/themes/colors"
+import { Fonts } from "../../src/components/themes/fonts"
 import PythonCourseOutlinePage from "../../src/views/home/courseOutlines/python"
+import HomePageLayout from "../../src/views/home/layout"
 
 export default function PythonPage() {
   return (
@@ -30,18 +25,21 @@ export default function PythonPage() {
           display: "flex",
           flexDirection: "column",
           py: { xs: 3, md: 12.5 },
-          background: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          backgroundColor:
+            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          backgroundImage: "url(/images/course-bg.svg)",
+          backgroundSize: { xs: "contain", sm: "contain" },
+          backgroundBlendMode: "overlay",
         }}
       >
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
+            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -51,6 +49,7 @@ export default function PythonPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
+              pt: 5,
             }}
           >
             <Box
@@ -67,7 +66,6 @@ export default function PythonPage() {
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
-                mt: { xs: 4, sm: 0 },
               }}
             >
               Focus on
@@ -75,83 +73,81 @@ export default function PythonPage() {
             <Typography
               variant="h2"
               sx={{
-                maxWidth: 820,
+                maxWidth: 1140,
                 color: Colors.light,
-                font: `normal normal 600 normal 40px/48px ${Fonts.pri}`,
-                letterSpacing: { xs: 0.3, sm: 0.25 },
-                textAlign: "left",
+                font: {
+                  xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                  sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
+                },
+                letterSpacing: { xs: -0.64, sm: 0.25 },
+                textAlign: "justify",
               }}
             >
               PYTHON PROGRAMMING
             </Typography>
           </Box>
-          <Box sx={{ width: "100%", display: "flex" }}>
-            <Grid container spacing={1}>
-              <Grid item xs={5} sm={2.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <PeopleIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Ages 7-15
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={7} sm={4.5}>
-                <Typography
-                  variant="span"
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    display: { xs: "none", sm: "flex" },
-                  }}
-                >
-                  Course Duration: 6 months
-                </Typography>
-                <Typography
-                  variant="span"
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    display: { xs: "flex", sm: "none" },
-                  }}
-                >
-                  6 months
-                </Typography>
-              </Grid>{" "}
-              <Grid item xs={12} sm={4.5}>
-                <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
-                  <StarIcon />{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
-                      color: Colors.light,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    Prerequisite: None
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: "10px",
+            }}
+          >
+            <Box sx={{ width: 125, display: "flex", gap: 1 }}>
+              <PeopleIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                }}
+              >
+                Ages 11-16
+              </Typography>
+            </Box>
+            <Box sx={{ width: "100%", display: "flex", gap: 1 }}>
+              <StarIcon />{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  textAlign: "justify",
+                }}
+              >
+                Prerequisite: No prerequisites for this course. Beginners with
+                no experience can take this course.
+              </Typography>{" "}
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  display: { xs: "flex", sm: "none" },
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  textAlign: "justify",
+                }}
+              >
+                Prerequisite: None
+              </Typography>
+            </Box>
           </Box>
           <Box
             component="span"
             sx={{
-              maxWidth: 560,
+              maxWidth: 1140,
               display: "block",
               color: Colors.light,
-              font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+              font: {
+                xs: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+              },
               letterSpacing: 0.1,
-              textAlign: "left",
+              textAlign: "justify",
             }}
           >
             Python is a programming language used for a variety of different web
@@ -172,8 +168,6 @@ export default function PythonPage() {
               border: `1px solid ${Colors.primary}`,
               borderRadius: "8px",
               background: Colors.primary,
-              boxShadow:
-                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
               "&:hover": {
                 background: Colors.primary,
               },
@@ -197,21 +191,23 @@ export default function PythonPage() {
         <Box
           sx={{
             width: "100%",
-            maxWidth: 960,
+            maxWidth: 1140,
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16 },
-            gap: "37.22px",
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            gap: { xs: "6px", sm: "37.22px" },
           }}
         >
           <Typography
             variant="h2"
             sx={{
+              display: "flex",
+              flexDirection: "column",
               gap: "19.22",
               color: "#020204",
-              textAlign: "left",
+              textAlign: "justify",
               font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
             }}
           >
@@ -219,12 +215,15 @@ export default function PythonPage() {
             <Typography
               variant="subtitle1"
               sx={{
-                maxWidth: 560,
+                maxWidth: 1140,
                 display: "block",
                 color: "#020203",
-                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                font: {
+                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                },
                 letterSpacing: 0.1,
-                textAlign: "left",
+                textAlign: "justify",
               }}
             >
               Python is a user-friendly, text-based programming language that is
@@ -234,27 +233,27 @@ export default function PythonPage() {
               applications and software. For instance, popular platforms like
               YouTube and Instagram are powered by Python.
             </Typography>
+            <Link
+              href="/signup"
+              underline="hover"
+              sx={{
+                width: 165.2,
+                height: 36,
+                display: "flex",
+                my: "18px",
+                alignItems: "left",
+                font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                color: Colors.primary,
+                textTransform: "none",
+                letterSpacing: 0.25,
+                "&:hover": {
+                  background: "transparent",
+                },
+              }}
+            >
+              Show more
+            </Link>
           </Typography>
-          <Link
-            href="/signup"
-            underline="hover"
-            sx={{
-              width: 165.2,
-              height: 36,
-              display: "flex",
-              my: "18px",
-              alignItems: "left",
-              font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
-              color: Colors.primary,
-              textTransform: "none",
-              letterSpacing: 0.25,
-              "&:hover": {
-                background: "transparent",
-              },
-            }}
-          >
-            Show more
-          </Link>
         </Box>
         <Box
           id="python-section"
@@ -273,6 +272,7 @@ export default function PythonPage() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "left",
+              gap: 5,
             }}
           >
             <Box
@@ -280,6 +280,7 @@ export default function PythonPage() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Typography
@@ -287,12 +288,12 @@ export default function PythonPage() {
                 sx={{
                   gap: "19.22",
                   color: "#020204",
-                  textAlign: "left",
+                  textAlign: "justify",
                   font: {
-                    xs: `normal normal 700 normal 28px/32px ${Fonts.primary}`,
+                    xs: `normal normal 700 normal 25px/30px ${Fonts.primary}`,
                     sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
                   },
-                  px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
+                  m: 0,
                 }}
               >
                 What your child will learn in this lesson
@@ -300,19 +301,21 @@ export default function PythonPage() {
                   variant="subtitle1"
                   sx={{
                     maxWidth: 560,
-                    height: { xs: 142, sm: 70 },
                     display: "block",
                     color: "#020203",
-                    font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    font: {
+                      xs: `normal normal 400 normal 13.4px/24px ${Fonts.primary}`,
+                      sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                    },
                     letterSpacing: 0.1,
-                    textAlign: "left",
+                    textAlign: "justify",
                   }}
                 >
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
                 </Typography>
               </Typography>
-              <PythonCourseOutlinePage />
             </Box>
+            <PythonCourseOutlinePage />
             <Box
               sx={{
                 width: "100%",
@@ -321,7 +324,6 @@ export default function PythonPage() {
                 justifyContent: "center",
                 alignItems: "center",
                 mt: 5,
-                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
               }}
             >
               <Box
@@ -347,7 +349,7 @@ export default function PythonPage() {
                     borderRadius: "8px",
                     background: Colors.primary,
                     boxShadow:
-                      "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #5750CC",
+                      "0px 6px 16px 0px rgba(255,94,0, 0.32), 0px 1px 2px 0px rgba(255,94,0, 0.32), 0px 0px 0px 1px #FF5E00",
                     "&:hover": {
                       background: Colors.primary,
                     },
@@ -362,7 +364,7 @@ export default function PythonPage() {
                 width: "100%",
                 display: "flex",
                 mt: 11.875,
-                px: { xs: 3, sm: 6, md: 10, lg: 12.5, xl: 16 },
+                px: { xs: 3, sm: 6, md: 8, lg: 12.5, xl: 18.4 },
               }}
             >
               <Grid container spacing={3}>
@@ -410,10 +412,10 @@ export default function PythonPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
-                        Gain a thorough understanding of Python syntax Learn to
+                        Gain a thorough understanding of Scratch syntax Learn to
                         build interactive games, chatbots and apps. Learn to
                         break down and solve complex problems Develop logical
                         and analytical thinking skills.
@@ -462,7 +464,7 @@ export default function PythonPage() {
                           color: "#212529",
                           font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                           letterSpacing: 0.1,
-                          textAlign: "left",
+                          textAlign: "justify",
                         }}
                       >
                         Encourage your child to practice regularly by coding at

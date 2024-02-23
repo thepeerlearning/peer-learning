@@ -93,12 +93,15 @@ export const NestedStyledList = styled(List)({
   flexDirection: "column",
   cursor: "pointer",
   gap: 4,
+  marginTop: 10,
+  padding: "10px 0",
+  backgroundColor: `${Colors.light}`,
   "& .MuiListItemButton-root": {
     width: "100%",
     backgroundColor: `${Colors.light} !important`,
     display: "inline-flex",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "center",
     cursor: "pointer",
     borderRadius: 8,
     "&:focused": {
