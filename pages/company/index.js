@@ -8,7 +8,6 @@ import minna from "../../public/images/minna.png"
 import ourpass from "../../public/images/ourpass.png"
 import rooah from "../../public/images/rooah.png"
 import springboard from "../../public/images/springboard.png"
-
 import swaneza from "../../public/images/swaneza.png"
 import synthesis from "../../public/images/synthesis.png"
 import zaria from "../../public/images/zaria.png"
@@ -157,7 +156,7 @@ export default function CompanyPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    // textAlign: "justify",
+                    textAlign: "justify",
                     my: 2,
                   }}
                 >
@@ -202,7 +201,8 @@ export default function CompanyPage() {
           flexGrow: 1,
           pt: { xs: 115, sm: 75, md: 70.5 },
           pb: { xs: 2, md: 15.5 },
-          background: "#F6F8FA",
+          // background: "#F6F8FA",
+          backgroundColor: Colors.light,
         }}
       >
         <Box
@@ -266,7 +266,6 @@ export default function CompanyPage() {
                   component="span"
                   sx={{
                     maxWidth: 560,
-                    // height: 148,
                     display: "block",
                     color: "#091135",
                     font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,

@@ -201,7 +201,7 @@ export default function CareersPage() {
           flexGrow: 1,
           pt: { xs: 115, sm: 75, md: 70.5 },
           pb: { xs: 2, md: 15.5 },
-          background: "#F6F8FA",
+          backgroundColor: Colors.light,
         }}
       >
         <Box
