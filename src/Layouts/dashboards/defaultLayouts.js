@@ -19,7 +19,7 @@ import React, { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import Spinner from "../../components/spinner/persist-loader"
-import { AppLogo } from "../../components/svg/logo-light-bg"
+import { AppLogo } from "../../components/svg/logo-dark-bg"
 import {
   AngleBackward,
   DashboardIcon,
@@ -121,13 +121,7 @@ function DashboardLayouts({ children }) {
         sx={{ minHeight: `50px !important`, padding: `16px !important` }}
       >
         <Link underline="none" href="/auth/login">
-          <AppLogo
-            style={{
-              width: 150,
-              height: 50,
-              flexShrink: 0,
-            }}
-          />
+          <AppLogo />
         </Link>
         <Box
           sx={{
@@ -412,13 +406,7 @@ function DashboardLayouts({ children }) {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Link underline="none" href="/auth/login">
-            <AppLogo
-              style={{
-                width: 150,
-                height: 50,
-                flexShrink: 0,
-              }}
-            />
+            <AppLogo />
           </Link>
           <IconButton
             color="inherit"
