@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button, FabStyle } from "./styles";
-import { Colors } from "../../themes/colors";
-import { ThreeDots } from "react-loader-spinner";
-import { styled, Box } from "@mui/material";
-import { Fonts } from "../../themes/fonts";
+import React from "react"
+import PropTypes from "prop-types"
+import { Button, FabStyle } from "./styles"
+import { Colors } from "../../themes/colors"
+import { ThreeDots } from "react-loader-spinner"
+import { styled, Box } from "@mui/material"
+import { Fonts } from "../../themes/fonts"
 
 export const StyledStatusBox = styled(Box)({
   font: `normal normal 600 12px/15px ${Fonts.primaryBold}`,
@@ -15,7 +15,7 @@ export const StyledStatusBox = styled(Box)({
   width: "auto",
   maxWidth: 110,
   color: Colors.light,
-});
+})
 
 export const StyledStatusButton = styled(Button)({
   font: `normal normal 600 12px/15px ${Fonts.primaryBold}`,
@@ -25,7 +25,7 @@ export const StyledStatusButton = styled(Button)({
   padding: "4px",
   maxWidth: 200,
   color: Colors.light,
-});
+})
 export const SubmitButton = ({
   children,
   onClick,
@@ -61,13 +61,13 @@ export const SubmitButton = ({
         children
       )}
     </Button>
-  );
-};
+  )
+}
 SubmitButton.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-};
+}
 
 export const CancelButton = (props) => {
   const {
@@ -78,7 +78,7 @@ export const CancelButton = (props) => {
     disableRipple,
     style,
     ...otherProps
-  } = props;
+  } = props
   return (
     <Button
       small
@@ -90,13 +90,13 @@ export const CancelButton = (props) => {
     >
       {children}
     </Button>
-  );
-};
+  )
+}
 CancelButton.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-};
+}
 
 export const DeleteButton = ({
   children,
@@ -131,16 +131,16 @@ export const DeleteButton = ({
         children
       )}
     </Button>
-  );
-};
+  )
+}
 
 DeleteButton.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-};
+}
 
 export const Fab = (props) => {
-  const { children, onClick, style, ...otherProps } = props;
+  const { children, onClick, style, ...otherProps } = props
   return (
     <FabStyle
       theme={Colors.primary}
@@ -150,9 +150,9 @@ export const Fab = (props) => {
     >
       {children}
     </FabStyle>
-  );
-};
+  )
+}
 Fab.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-};
+}

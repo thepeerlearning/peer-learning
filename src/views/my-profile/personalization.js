@@ -8,6 +8,7 @@ import {
   Select,
   StyledCard,
   StyledTooltip,
+  TextArea,
   TextField,
 } from "../../../src/components/forms/textFields"
 import { Colors } from "../../../src/components/themes/colors"
@@ -53,20 +54,16 @@ export default function PersonalizationPage() {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required("Child's name is required"),
     lastname: Yup.string().required("Child's name is required"),
     dob: Yup.string().required("Date of birth is required"),
     gender: Yup.string().required("Gender is required"),
     country: Yup.string().required("Country is required"),
     tz: Yup.string().required("Time zone is required"),
-    dob: Yup.string().required("Date of birth is required"),
-
-    // img: Yup.mixed().test("required", "Profile image is required", (value) => {
-    //   return value && value.length;
-    // }),
   })
 
   React.useEffect(() => {
-    dispatch(getProfile({ id: user?.id }))
+    dispatch(getProfile())
   }, [dispatch, user])
 
   // get functions to build form with useForm() hook
@@ -81,25 +78,23 @@ export default function PersonalizationPage() {
   })
 
   React.useEffect(() => {
-    const country = Countries.find(
-      (item) => item.code === profile?.user_profile.country
-    )
-    let str = profile?.user_profile.fullname
+    const country = Countries.find((item) => item.code === profile?.country)
+    let str = profile?.fullname
     let result = str?.split(" ")
     setValue("firstname", result && result[0])
     setValue("lastname", result && result[1])
-    setValue("dob", moment.utc(profile?.user_profile.dob).format("YYYY-MM-DD"))
-    setValue("tz", moment.utc(profile?.user_profile.timezone))
-    setValue("gender", profile?.user_profile.gender)
+    setValue("dob", moment.utc(profile?.dob).format("YYYY-MM-DD"))
+    setValue("tz", moment.utc(profile?.timezone))
+    setValue("gender", profile?.gender)
     setValue("country", country?.name)
-    setValue("stateOfOrigin", profile?.user_profile.state_province_of_origin)
+    setValue("address", country?.address)
+    setValue("stateoforigin", profile?.state_of_origin)
   }, [setValue, profile])
 
   const img = watch("img")
   const country = watch("country")
   React.useEffect(() => {
     const selectedCountry = Countries.find((con) => con.name === country)
-    console.log("selectedCountry", selectedCountry)
     setCode(selectedCountry?.code)
   }, [country])
   const convert2Base64 = (file) => {
@@ -117,62 +112,31 @@ export default function PersonalizationPage() {
     }
   }, [img])
 
-  React.useEffect(() => {
-    if (message?.fullname) {
-      message?.fullname?.map((name) => {
-        return setErrorMessage("Child's name " + name)
-      })
-    } else if (message?.gender) {
-      message?.gender?.map((gender) => {
-        return setErrorMessage("Gender " + gender)
-      })
-    } else if (message?.address) {
-      message?.address?.map((address) => {
-        return setErrorMessage("Address" + address)
-      })
-    } else if (message?.dob) {
-      message?.dob?.map((dob) => {
-        return setErrorMessage("Date of birth" + dob)
-      })
-    } else if (message?.state_province_of_origin) {
-      message?.state_province_of_origin?.map((state) => {
-        return setErrorMessage("State of provice origin " + state)
-      })
-    } else if (message?.state_province_of_origin) {
-      message?.state_province_of_origin?.map((state) => {
-        return setErrorMessage("State of provice origin " + state)
-      })
-    } else {
-      setErrorMessage(message)
-    }
-  }, [message])
-
   const handleCloseSnack = () => {
     setError(false)
     setSuccess(false)
   }
   function onSubmit(data) {
-    const { lastname, dob, country, gender, stateOfOrigin, tz } = data
+    const { lastname, dob, country, gender, stateoforigin, address, tz } = data
     const countryInfo = Countries.find((ct) => ct.name === country)
     const inputData = {
-      user_profile: {
-        id: user?.id,
-        fullname: lastname,
-        dob: moment.utc(dob),
-        gender: gender,
-        timezone: tz,
-        address: country,
-        country: countryInfo.code,
-        state_province_of_origin: stateOfOrigin,
-      },
+      firstname: firstname,
+      lastname: lastname,
+      dob: dob,
+      gender: gender,
+      image: img,
+      timezone: tz,
+      address: address,
+      country: countryInfo.code,
+      state_of_origin: stateoforigin,
     }
     setLoading(true)
-    dispatch(updateProfile({ id: user?.id, inputData }))
+    dispatch(updateProfile({ inputData }))
       .unwrap()
       .then(() => {
         setLoading(false)
         setSuccess(true)
-        dispatch(getProfile({ id: user?.id }))
+        dispatch(getProfile())
       })
       .catch(() => {
         setError(true)
@@ -405,7 +369,7 @@ export default function PersonalizationPage() {
                           top: -25,
                         }}
                       >
-                        {profile?.user_profile?.fullname?.charAt(0)}
+                        {profile?.user_profile?.first_name?.charAt(0)}
                       </Avatar>
                     }
                     title={
@@ -561,6 +525,59 @@ export default function PersonalizationPage() {
                     </option>
                   ))}
                 </Select>
+              </Stack>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+                sx={{ width: "100%", maxWidth: 760, pb: 2 }}
+              >
+                <Box
+                  sx={{
+                    width: 120,
+                    alignSelf: "stretch",
+                    font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                    position: "relative",
+                    top: 20,
+                  }}
+                >
+                  State of origin
+                </Box>
+                <TextField
+                  id="stateoforigin"
+                  htmlFor="stateoforigin"
+                  name="stateoforigin"
+                  type="text"
+                  label="State/Province of Origin"
+                  register={register}
+                  disabled={loading}
+                  style={{ padding: "10px 14px" }}
+                />
+              </Stack>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+                sx={{ width: "100%", maxWidth: 760, pb: 2 }}
+              >
+                <Box
+                  sx={{
+                    width: 120,
+                    alignSelf: "stretch",
+                    font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                    position: "relative",
+                    top: 20,
+                  }}
+                >
+                  Address
+                </Box>
+                <TextArea
+                  id="address"
+                  htmlFor="address"
+                  name="address"
+                  type="text"
+                  label="Address"
+                  register={register}
+                  disabled={loading}
+                />
               </Stack>
             </Box>
             <Box

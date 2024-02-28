@@ -9,16 +9,17 @@ import ClassSchedule from "../../src/views/auth/classSchedule"
 import AuthLayout from "../../src/views/auth/layout"
 import CoursesPayment from "../../src/views/auth/payment"
 import SignupForm from "../../src/views/auth/signup"
+import Cookies from "js-cookie"
 
 const steps = ["Let’s get started", "Class Schedule Selection", "Payment"]
 
 export default function SignupPage() {
   const router = useRouter()
-  const [activeStep, setActiveStep] = React.useState(0)
+  const [activeStep, setActiveStep] = React.useState(1)
   const maxSteps = steps.length
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    setActiveStep(2)
   }
 
   const handleBack = () => {
@@ -37,11 +38,11 @@ export default function SignupPage() {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <SignupForm next={handleNext} />
+        return <SignupForm next={handleStepChange(1)} />
       case 1:
-        return <ClassSchedule next={handleNext} back={handleBack} />
+        return <ClassSchedule next={handleStepChange(2)} back={handleBack} />
       case 2:
-        return <CoursesPayment next={handleNext} back={handleBack} />
+        return <CoursesPayment back={handleBack} />
       default:
         return "Unknown step"
     }
@@ -49,15 +50,12 @@ export default function SignupPage() {
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const step = localStorage.getItem("step")
-        ? localStorage.getItem("step")
-        : user && user.registration_step
-
+      const step = Cookies.get("step")
       if (step) {
         return step === "account_created"
-          ? handleNext()
+          ? handleStepChange(1)
           : step === "class_schedule"
-          ? handleClassScheduleNext()
+          ? handleStepChange(2)
           : step === "completed"
           ? router.push("/")
           : null

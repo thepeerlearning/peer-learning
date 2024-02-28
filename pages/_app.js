@@ -32,6 +32,7 @@ export default function MyApp({
   const [networkOnline, setNetworkOnline] = useState(false)
 
   const handleOnlineClose = () => setNetworkOnline(false)
+
   useEffect(() => {
     window.addEventListener("offline", function (e) {
       setNetworkOnline(false)

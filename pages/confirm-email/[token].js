@@ -1,47 +1,44 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { validateEmail } from "../../../../src/redux/slices/auth";
-import MetaData from "../../../../src/utils/meta";
-import { Box, Grid } from "@mui/material";
-import { VerifiedIcon } from "../../../../src/components/svg/menuIcons";
-import Spinner from "../../../../src/components/spinner/persist-loader";
-import { Colors } from "../../../../src/components/themes/colors";
-import { isEmpty } from "lodash";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { validateEmail } from "../../src/redux/slices/auth"
+import MetaData from "../../src/utils/meta"
+import { Box, Grid } from "@mui/material"
+import { VerifiedIcon } from "../../src/components/svg/menuIcons"
+import Spinner from "../../src/components/spinner/persist-loader"
+import { isEmpty } from "lodash"
+import { Colors } from "../../src/components/themes/colors"
 
 export default function VerifyAccount() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState(null);
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [data, setData] = useState(null)
+  const { message } = useSelector((state) => state.message)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const inputData = {
-      token: router.query.token,
-      email: router.query.email,
-    };
-    setLoading(true);
-    dispatch(validateEmail({ inputData }))
+    const { token } = router.query
+    setLoading(true)
+    dispatch(validateEmail({ token }))
       .unwrap()
       .then((res) => {
-        setLoading(false);
-        setData(res.data);
+        setLoading(false)
+        setData(res.data)
       })
       .catch((err) => {
-        setLoading(false);
-        setError(true);
-      });
-  }, [dispatch, router]);
+        setLoading(false)
+        setError(true)
+      })
+  }, [dispatch, router])
 
   useEffect(() => {
     if (data) {
       setTimeout(() => {
-        router.push("/students/my-dashboard");
-      }, 3200);
+        router.push("/students/my-dashboard")
+      }, 3200)
     }
-  }, [data, router]);
+  }, [data, router])
   return (
     <div>
       <MetaData
@@ -141,5 +138,5 @@ export default function VerifyAccount() {
         </Box>
       )}
     </div>
-  );
+  )
 }

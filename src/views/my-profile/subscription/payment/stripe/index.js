@@ -12,6 +12,7 @@ import { initiatePayment } from "../../../../../redux/slices/auth"
 import CheckoutForm from "./form"
 import Image from "next/image"
 import { Add } from "@mui/icons-material"
+import Cookies from "js-cookie"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -26,7 +27,7 @@ export default function StripeSubscriptionPayment() {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const courseId = localStorage.getItem("courseId")
+    const courseId = Cookies.get("cl_id")
     dispatch(initiatePayment({ course_id: courseId }))
       .unwrap()
       .then((res) => {

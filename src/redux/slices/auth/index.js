@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import api, { timeout } from "../../../common/axios"
 import { setMessage } from "../message"
 import { HYDRATE } from "next-redux-wrapper"
+import Cookies from "js-cookie"
 
 export const signup = createAsyncThunk(
   "auth/signup",
@@ -10,16 +11,16 @@ export const signup = createAsyncThunk(
       const response = await api.post("register", inputData)
       if (response) {
         let { data } = response.data
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("step", data.user.registration_step)
-        localStorage.setItem("children_id", data.user.children.data[0].id)
+        Cookies.set("token", data.token)
+        Cookies.set("step", "account_created")
+        Cookies.set("c_id", data.id)
         return response.data
       }
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       console.log("error", message)
       if (error.message === `timeout of ${timeout}ms exceeded`) {
@@ -40,14 +41,16 @@ export const classSchedule = createAsyncThunk(
       const response = await api.post("schedule", inputData)
       if (response) {
         let { data } = response.data
-        localStorage.setItem("courseId", data.course_id)
+        Cookies.set("cl_id", data.id)
+        Cookies.set("step", "class_schedule")
+
         return response.data
       }
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -65,16 +68,15 @@ export const initiatePayment = createAsyncThunk(
   "auth/initiatePayment",
   async ({ course_id }, thunkAPI) => {
     try {
-      const response = await api.post(
-        `/courses/${course_id}/billings/initiate-payment`,
-        {}
-      )
+      const response = await api.post(`initiate`, {
+        class_id: course_id,
+      })
       return response.data
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -91,18 +93,19 @@ export const validatePayment = createAsyncThunk(
   "auth/validatePayment",
   async ({ token }, thunkAPI) => {
     try {
-      const response = await api.get(
-        `billings/payment-intents/${token}/verify-payment`
-      )
+      const response = await api.get(`/verify-payment/${token}`)
       if (response) {
-        localStorage.removeItem("step")
+        Cookies.remove("step")
+        Cookies.remove("c_id")
+        Cookies.remove("cl_id")
+        Cookies.set("step", "completed")
         return response.data
       }
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -121,14 +124,14 @@ export const validateEmail = createAsyncThunk(
     try {
       const response = await api.post("verify-email", inputData)
       if (response) {
-        localStorage.removeItem("step")
+        Cookies.remove("step")
         return response.data
       }
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -136,7 +139,7 @@ export const validateEmail = createAsyncThunk(
       if (error.message === "Network Error") {
         message = "Please check your network connectivity"
       }
-      localStorage.removeItem("step")
+      Cookies.remove("step")
       thunkAPI.dispatch(setMessage(message))
       return thunkAPI.rejectWithValue()
     }
@@ -153,14 +156,13 @@ export const login = createAsyncThunk(
 
       if (response) {
         let { data } = response.data
-        localStorage.setItem("token", data.token)
+        Cookies.set("token", data.jwtToken)
         return response.data
       }
     } catch (error) {
-      console.log("error", error)
       let message =
         error?.response?.data?.message ||
-        error?.response?.meta?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
         error?.message ||
         error?.toString()
@@ -184,10 +186,10 @@ export const forgotpassword = createAsyncThunk(
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
-      error.toString()
+
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
       }
@@ -208,8 +210,8 @@ export const validateForgotPasswordEmail = createAsyncThunk(
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -231,8 +233,8 @@ export const resetpassword = createAsyncThunk(
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -255,8 +257,8 @@ export const refreshpage = createAsyncThunk(
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -271,15 +273,30 @@ export const refreshpage = createAsyncThunk(
 )
 export const updateProfile = createAsyncThunk(
   "auth/updateProfile",
-  async ({ id, inputData }, thunkAPI) => {
+  async ({ inputData }, thunkAPI) => {
     try {
-      const response = await api.put(`profile`, inputData)
+      const formdata = new FormData()
+      formdata.append("image", inputData.img)
+      formdata.append("last_name", inputData.lastname)
+      formdata.append("first_name", inputData.firstname)
+      formdata.append("state_of_origin", inputData.state_of_origin)
+      formdata.append("address", inputData.address)
+      formdata.append("country", inputData.country)
+      formdata.append("dob", inputData.dob)
+      formdata.append("gender", inputData.gender)
+      formdata.append("timezone", inputData.time)
+
+      const response = await api.put(`profile`, formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       return response.data
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -301,8 +318,8 @@ export const changePassword = createAsyncThunk(
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -317,15 +334,15 @@ export const changePassword = createAsyncThunk(
 )
 export const getProfile = createAsyncThunk(
   "auth/getProfile",
-  async ({ id }, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const response = await api.get(`profile`)
       return response.data
     } catch (error) {
       let message =
         error?.response?.data?.message ||
+        error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
-        error?.message ||
         error?.toString()
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
@@ -362,7 +379,7 @@ const authSlice = createSlice({
     })
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.isLoggedIn = true
-      state.user = payload.data?.user
+      state.user = payload.data
     })
     builder.addCase(validateForgotPasswordEmail.fulfilled, (state, action) => {
       state.user = action.payload

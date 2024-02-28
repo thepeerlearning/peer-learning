@@ -1,7 +1,7 @@
+import MenuIcon from "@mui/icons-material/Menu"
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardHeader,
   Collapse,
@@ -16,25 +16,21 @@ import {
 import AppBar from "@mui/material/AppBar"
 import Router, { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineClose } from "react-icons/ai"
+import { useDispatch, useSelector } from "react-redux"
 import Spinner from "../../components/spinner/persist-loader"
 import { AppLogo } from "../../components/svg/logo-light-bg"
 import {
   AngleBackward,
-  AngleForward,
-  CircleProfileIcon,
   DashboardIcon,
-  IdeaIcon,
   LearningIcon,
   Logout,
   ProfileIcon,
 } from "../../components/svg/menuIcons"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
-import { NestedStyledList, SecondStyledList, StyledList } from "./styles"
-import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../redux/slices/auth"
-import MenuIcon from "@mui/icons-material/Menu"
+import { NestedStyledList, SecondStyledList, StyledList } from "./styles"
 
 function updateKey(str) {
   if (typeof str !== "string") return ""
@@ -45,7 +41,7 @@ function updateKey(str) {
 }
 const drawerWidth = 280
 const appHeight = 72
-function DashboardLayouts({ children, window, title, breadcrumb }) {
+function DashboardLayouts({ children }) {
   const [loading, setLoading] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openNest, setOpenNest] = useState("")
@@ -64,17 +60,24 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
     }
   }, [])
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) return router.push("/");
-  //   if (
-  // !(
-  //       user?.role === "instructor" ||
-  //       user?.role === "admin" ||
-  //       user?.role === "parent"
-  //     )
-  //   )
-  //     return router.push("/unauthorised");
-  // }, [isLoggedIn, router, user]);
+  useEffect(() => {
+    const role = user?.role.toLowerCase()
+    console.log("user?.role", role)
+    if (!isLoggedIn) {
+      router.push("/")
+    }
+    if (
+      !(
+        role === "instructor" ||
+        role === "admin" ||
+        role === "parent" ||
+        role === "student"
+      )
+    ) {
+      router.push("/unauthorised")
+    }
+    return () => {}
+  }, [isLoggedIn, router, user])
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
 
@@ -85,9 +88,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
       ? setOpenNest(index)
       : (router.push(item.link), setMobileOpen(false))
   }
-  // if (!isLoggedIn) return <Spinner />
-  const container =
-    window !== undefined ? () => window().document.body : undefined
+
   const menu = [
     {
       name: "My Dashboard",
@@ -95,7 +96,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
       link: "/students/my-dashboard",
     },
     {
-      name: "My Learning",
+      name: "My lessons",
       icon: <LearningIcon />,
       link: "/students/my-learning",
     },
@@ -273,7 +274,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
             component="div"
             sx={{
               width: 250,
-              background: "#F9F9F9",
+              background: Colors.primary,
               display: "inline-flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -285,10 +286,11 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
             <SecondStyledList component="nav" disablePadding>
               <Box
                 sx={{
-                  color: Colors.primary,
+                  color: "#F9FAFB",
                   font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
                   px: 2,
                   textAlign: "left",
+                  mb: 0.5,
                 }}
               >
                 Coming Soon...
@@ -301,63 +303,91 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
                       disableTouchRipple
                       key={index}
                     >
-                      <Box component="span">{item}</Box>
+                      <Box
+                        component="span"
+                        sx={{
+                          font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
+                        }}
+                      >
+                        {item}
+                      </Box>
                     </ListItemButton>
                   )
                 })}
             </SecondStyledList>
           </Box>
-          <div className="line" style={{ margin: "20px 0" }} />
-          <Card
-            sx={{ maxWidth: 248, boxShadow: "none", cursor: "pointer" }}
-            onClick={() => dispatch(logout())}
+          <div
+            className="line"
+            style={{
+              width: "100%",
+              margin: "20px 0",
+            }}
+          />
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            <CardHeader
-              avatar={
-                <Avatar
-                  src="/images/boy-profile.png"
-                  alt="passport"
-                  sx={{ bgcolor: Colors.dark }}
-                  aria-label="recipe"
-                >
-                  S
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="Logout">
-                  <Logout />
-                </IconButton>
-              }
-              title={
-                <Box
-                  component="span"
-                  sx={{
-                    maxWidth: 200,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
-                  }}
-                >
-                  Sam Rhye
-                </Box>
-              }
-              subheader={
-                <Box
-                  sx={{
-                    maxWidth: 200,
-                    font: `normal normal 400 normal 12px/16px ${Fonts.primary}`,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    color: Colors.textColor,
-                  }}
-                >
-                  samrhye@gmail.com
-                </Box>
-              }
-            />
-          </Card>
+            <Card
+              sx={{
+                backgroundColor: Colors.primary,
+                maxWidth: "100%",
+                boxShadow: "none",
+                cursor: "pointer",
+              }}
+              onClick={() => dispatch(logout())}
+            >
+              <CardHeader
+                avatar={
+                  <Avatar
+                    src="/images/boy-profile.png"
+                    alt="passport"
+                    sx={{ bgcolor: Colors.dark }}
+                    aria-label="recipe"
+                  >
+                    S
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="Logout" sx={{ color: "#F9FAFB" }}>
+                    <Logout />
+                  </IconButton>
+                }
+                title={
+                  <Box
+                    component="span"
+                    sx={{
+                      maxWidth: 200,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
+                      color: "#F9FAFB",
+                    }}
+                  >
+                    Sam Rhye
+                  </Box>
+                }
+                subheader={
+                  <Box
+                    sx={{
+                      maxWidth: 200,
+                      font: `normal normal 400 normal 12px/16px ${Fonts.primary}`,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      color: "#F9FAFB",
+                    }}
+                  >
+                    samrhye@gmail.com
+                  </Box>
+                }
+              />
+            </Card>
+          </Box>
         </Box>
       </Box>
     </div>
@@ -410,7 +440,6 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
         sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
@@ -448,7 +477,7 @@ function DashboardLayouts({ children, window, title, breadcrumb }) {
             display: { xs: "none", md: "flex" },
             "& .MuiDrawer-paper": {
               position: "fixed",
-              background: `${Colors.light} 0% 0% no-repeat padding-box`,
+              background: `${Colors.black} 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
               width: drawerWidth,
               // padding: "16px",

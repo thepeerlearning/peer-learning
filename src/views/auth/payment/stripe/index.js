@@ -21,7 +21,7 @@ export default function StripePayment() {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const courseId = localStorage.getItem("courseId")
+    const courseId = Cookies.get("cl_id")
     dispatch(initiatePayment({ course_id: courseId }))
       .unwrap()
       .then((res) => {

@@ -117,6 +117,7 @@ export default function HomePageLayout({ children }) {
       Router.events.off("routeChangeError", () => setLoading(false))
     }
   }, [])
+
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget)

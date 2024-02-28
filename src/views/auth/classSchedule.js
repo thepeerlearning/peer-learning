@@ -35,6 +35,7 @@ import { classSchedule } from "../../redux/slices/auth"
 import { getCourses } from "../../redux/slices/courses"
 import { clearMessage } from "../../redux/slices/message"
 import { scheduleArray } from "../../utils/data"
+import Cookies from "js-cookie"
 
 const StyledTabs = styled(Tabs)({
   width: "100%",
@@ -119,7 +120,6 @@ export default function ClassSchedule({ next, back }) {
   const [value, setValue] = React.useState(0)
   const [errorMessage, setErrorMessage] = React.useState("")
   const { data } = useSelector((state) => state.courses)
-  const { message } = useSelector((state) => state.message)
   const dispatch = useDispatch()
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"))
@@ -141,29 +141,6 @@ export default function ClassSchedule({ next, back }) {
     }, 3500)
   }, [limit])
 
-  React.useEffect(() => {
-    if (message?.other_options) {
-      message?.other_options?.map((opt) => {
-        return setErrorMessage("other options " + opt)
-      })
-    } else if (message?.start_date) {
-      message?.start_date?.map((start) => {
-        return setErrorMessage("Start date " + start)
-      })
-    } else if (message?.timezone) {
-      message?.timezone?.map((time) => {
-        return setErrorMessage("Time zone " + time)
-      })
-    } else if (message?.weeks) {
-      message?.weeks?.map((wk) => {
-        return setErrorMessage("class schedules " + wk)
-      })
-    } else if (message?.detail) {
-      return setErrorMessage("Detail " + message.detail)
-    } else {
-      setErrorMessage(message)
-    }
-  }, [message])
   React.useEffect(() => {
     if (selected.length !== 0) {
       const renderClasses = (
@@ -323,9 +300,9 @@ export default function ClassSchedule({ next, back }) {
           schedules: selectedItems[id],
         }
       })
-      let childrenId = localStorage.getItem("children_id")
+      let childrenId = Cookies.get("c_id")
       const inputData = {
-        children_id: childrenId,
+        account_id: childrenId,
         course_id: data.course,
         other_options: data.otherOptions,
         start_date: data.startDate,

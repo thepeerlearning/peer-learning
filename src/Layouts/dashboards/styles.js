@@ -11,8 +11,8 @@ export const StyledList = styled(List)({
   gap: 4,
   "& .MuiListItemButton-root": {
     width: "100%",
-    backgroundColor: `${Colors.light} !important`,
-    color: Colors.dark,
+    backgroundColor: `transparent !important`,
+    color: "#F9FAFB",
     font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
     display: "inline-flex",
     justifyContent: "flex-start",
@@ -21,26 +21,26 @@ export const StyledList = styled(List)({
     borderRadius: 8,
     padding: "8px 12px",
     "&:focused": {
-      backgroundColor: `${Colors.light}`,
-      color: Colors.textColor,
+      backgroundColor: `transparent`,
+      color: "#F9FAFB",
     },
     "&:hover": {
-      backgroundColor: `${Colors.light}`,
-      color: Colors.textColor,
+      backgroundColor: `transparent`,
+      color: "#F9FAFB",
     },
   },
   "& .Mui-selected": {
     width: "100%",
-    backgroundColor: `#F9FAFB !important`,
-    color: `${Colors.textColor} !important`,
+    backgroundColor: `${Colors.primary} !important`,
+    color: `"#F9FAFB" !important`,
     font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
     "&:focused": {
       backgroundColor: `#F9FAFB !important`,
-      color: `${Colors.textColor} !important`,
+      color: `"#F9FAFB" !important`,
     },
     "&:hover": {
       backgroundColor: `#F9FAFB !important`,
-      color: `${Colors.textColor}`,
+      color: `"#F9FAFB"`,
     },
   },
   "& .MuiListItemIcon-root": {
@@ -53,10 +53,10 @@ export const SecondStyledList = styled(List)({
   flexDirection: "column",
   cursor: "pointer",
   gap: 4,
-  backgroundColor: "#F9FAFB",
+  backgroundColor: Colors.primary,
   "& .MuiListItemButton-root": {
     width: "100%",
-    color: Colors.textColor,
+    color: "#F9FAFB",
     font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
     display: "flex",
     justifyContent: "flex-start",
@@ -65,12 +65,12 @@ export const SecondStyledList = styled(List)({
     gap: 4,
     borderRadius: 8,
     "&:focused": {
-      backgroundColor: "#F9FAFB",
-      color: Colors.textColor,
+      backgroundColor: Colors.primary,
+      color: "#F9FAFB",
     },
     "&:hover": {
-      backgroundColor: "#F9FAFB",
-      color: Colors.textColor,
+      backgroundColor: Colors.primary,
+      color: "#F9FAFB",
     },
   },
 })
@@ -80,7 +80,7 @@ export const StyledMenuTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.tooltip}`]: {
     width: "100%",
     borderRadius: 12,
-    background: Colors.light,
+    background: "#F9FAFB",
     border: `1px solid #EAECF0`,
     boxShadow: `0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08)`,
   },
@@ -95,10 +95,10 @@ export const NestedStyledList = styled(List)({
   gap: 4,
   marginTop: 10,
   padding: "10px 0",
-  backgroundColor: `${Colors.light}`,
+  backgroundColor: `"#F9FAFB"`,
   "& .MuiListItemButton-root": {
     width: "100%",
-    backgroundColor: `${Colors.light} !important`,
+    backgroundColor: `"#F9FAFB" !important`,
     display: "inline-flex",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -135,7 +135,7 @@ export const NavList = styled(List)({
   "& .MuiListItemButton-root": {
     margin: "8px 0",
     width: "100%",
-    backgroundColor: `${Colors.light}`,
+    backgroundColor: `"#F9FAFB"`,
     color: Colors.primary,
     font: `normal normal 700 normal 14px/140% ${Fonts.primaryBold}`,
     display: "inline-flex",
@@ -146,26 +146,26 @@ export const NavList = styled(List)({
     borderRadius: 15,
     border: "1px solid #E2E8F0",
     "&:focused": {
-      backgroundColor: `${Colors.light}`,
+      backgroundColor: `"#F9FAFB"`,
       color: Colors.primary,
     },
     "&:hover": {
-      backgroundColor: `${Colors.light}`,
+      backgroundColor: `"#F9FAFB"`,
       color: Colors.primary,
     },
   },
   "& .Mui-selected": {
     width: "100%",
     backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-    color: `${Colors.light} !important`,
+    color: `"#F9FAFB" !important`,
     font: `normal normal 700 14px/20px ${Fonts.primaryBold}`,
     "&:focused": {
       backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-      color: `${Colors.light} !important`,
+      color: `"#F9FAFB" !important`,
     },
     "&:hover": {
       backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-      color: `${Colors.light}`,
+      color: `"#F9FAFB"`,
     },
   },
   "& .MuiListItemIcon-root": {
@@ -182,15 +182,15 @@ export const HomeNavList = styled(List)({
   "& .MuiListItemButton-root": {
     margin: "8px 0",
     width: "100%",
-    backgroundColor: `${Colors.light}`,
+    backgroundColor: `"#F9FAFB"`,
     color: Colors.primary,
     font: `normal normal 700 14px/140% ${Fonts.primary}`,
     "&:focused": {
-      backgroundColor: `${Colors.light}`,
+      backgroundColor: `"#F9FAFB"`,
       color: Colors.primary,
     },
     "&:hover": {
-      backgroundColor: `${Colors.light}`,
+      backgroundColor: `"#F9FAFB"`,
       color: `rgba(247,11,88,0.70)`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",
@@ -198,20 +198,20 @@ export const HomeNavList = styled(List)({
   },
   "& .Mui-selected": {
     width: "100%",
-    backgroundColor: `${Colors.light} !important`,
+    backgroundColor: `"#F9FAFB" !important`,
     color: `${Colors.secondary} !important`,
     font: `normal normal 700 14px/20px ${Fonts.primary}`,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     paddingBottom: 8,
     "&:focused": {
-      backgroundColor: `${Colors.light} !important`,
+      backgroundColor: `"#F9FAFB" !important`,
       color: `rgba(247,11,88,0.10) !important`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",
     },
     "&:hover": {
-      backgroundColor: `${Colors.light} !important`,
+      backgroundColor: `"#F9FAFB" !important`,
       color: `${Colors.secondary}`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",

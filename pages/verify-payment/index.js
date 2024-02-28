@@ -28,7 +28,7 @@ export default function VerifyPayment() {
       .then(() => {
         setLoading(false)
         setTimeout(() => {
-          router.push("/email-confirmation")
+          router.push("/payment-complete")
         }, 3200)
       })
       .catch(() => {

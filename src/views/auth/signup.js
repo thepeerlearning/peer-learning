@@ -65,7 +65,6 @@ export default function SignupForm({ next }) {
 
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data
-    const phoneNumberObj = parsePhoneNumber(phone)
 
     const inputData = {
       child_full_name: childname,
@@ -74,7 +73,6 @@ export default function SignupForm({ next }) {
       password: password,
       phone: phone,
     }
-    console.log("inputData", inputData)
     setLoading(true)
     dispatch(signup({ inputData }))
       .unwrap()

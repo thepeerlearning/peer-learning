@@ -8,6 +8,7 @@ import cardmockup from "../../../../public/images/Card.png"
 import { Colors } from "../../../components/themes/colors"
 import { initiatePayment } from "../../../redux/slices/auth"
 import CheckoutForm from "./stripe/form"
+import Cookies from "js-cookie"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY)
 export default function CoursesPayment() {
@@ -16,13 +17,14 @@ export default function CoursesPayment() {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const courseId = localStorage.getItem("courseId")
+    const courseId = Cookies.get("cl_id")
     courseId &&
       dispatch(initiatePayment({ course_id: courseId }))
         .unwrap()
         .then(({ data }) => {
-          setClientSecret(data?.metadata.client_secret)
-          setAmount(data?.pretty_amount)
+          console.log("data", data)
+          setClientSecret(data?.client_secret)
+          setAmount(data?.amount)
         })
         .catch(() => {})
   }, [dispatch])
@@ -37,6 +39,7 @@ export default function CoursesPayment() {
         width: "100%",
         display: "flex",
         maxWidth: 480,
+        gap: 2,
         p: 0,
         flexDirection: "column",
         alignItems: "center",
@@ -48,7 +51,9 @@ export default function CoursesPayment() {
       }}
     >
       <Box sx={{ width: "100%", p: 3 }}>
-        <Image src={cardmockup} alt="peer learning card mockup" />
+        <Box sx={{ mb: 2 }}>
+          <Image src={cardmockup} alt="peer learning card mockup" />
+        </Box>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm amount={amount} />

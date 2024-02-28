@@ -20,6 +20,7 @@ import { Fonts } from "../../../src/components/themes/fonts"
 import { login } from "../../../src/redux/slices/auth"
 import { clearMessage } from "../../../src/redux/slices/message"
 import AuthLayout from "../../../src/views/auth/layout"
+import Cookies from "js-cookie"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -98,23 +99,22 @@ export default function LoginPage() {
     dispatch(login({ email: username, password }))
       .unwrap()
       .then(({ data }) => {
-        const { user } = data
         setLoading(false)
-        if (user && user?.role === "instructor") {
+        if (data?.role === "instructor") {
           router.push("/admin/dashboard")
-        } else if (user && user?.registration_step === "completed") {
+        } else if (data?.isVerified) {
+          router.push("/students/my-dashboard")
+        } else if (!data?.isVerified) {
           router.push("/students/my-dashboard")
         } else {
           setInfo(true)
-          setInfoMessage(
-            "Registration process still ongoing, redirecting you to complete the process"
-          )
           setTimeout(() => {
             router.push("/signup")
           }, 3200)
         }
       })
       .catch((err) => {
+        console.log("err", err)
         setError(true)
         setLoading(false)
       })
