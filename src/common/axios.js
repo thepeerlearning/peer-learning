@@ -1,8 +1,9 @@
 import axios from "axios"
+import Cookies from "js-cookie"
 
 function getLocalAccessToken() {
   if (typeof window !== "undefined") {
-    const accessToken = localStorage.getItem("token")
+    const accessToken = Cookies.get("token")
     return accessToken
   }
 }

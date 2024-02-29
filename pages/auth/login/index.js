@@ -101,21 +101,21 @@ export default function LoginPage() {
       .then(({ data }) => {
         const role = data.role.toLowerCase()
         setLoading(false)
-        if (!data.isVerified) {
-          router.push(`/signup/email-confirmation/${data.email}`)
+        // if (!data.isVerified) {
+        //   router.push(`/signup/email-confirmation/${data.email}`)
+        // } else {
+        if (role === "instructor") {
+          router.push("/admin/dashboard")
+        } else if (role === "admin") {
+          router.push("/admin/dashboard")
+        } else if (role === "student") {
+          router.push("/students/my-dashboard")
+        } else if (role === "parent") {
+          router.push("/students/my-dashboard")
         } else {
-          if (role === "instructor") {
-            router.push("/admin/dashboard")
-          } else if (role === "admin") {
-            router.push("/admin/dashboard")
-          } else if (role === "student") {
-            router.push("/students/my-dashboard")
-          } else if (role === "parent") {
-            router.push("/students/my-dashboard")
-          } else {
-            router.push("/unauthorised")
-          }
+          router.push("/unauthorised")
         }
+        // }
       })
       .catch((err) => {
         setError(true)

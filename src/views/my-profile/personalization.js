@@ -3,7 +3,10 @@ import { Avatar, Box, Card, CardHeader, Grid, Stack } from "@mui/material"
 import React from "react"
 import { useForm } from "react-hook-form"
 import * as Yup from "yup"
-import { SubmitButton } from "../../../src/components/forms/buttons"
+import {
+  CancelButton,
+  SubmitButton,
+} from "../../../src/components/forms/buttons"
 import {
   Select,
   StyledCard,
@@ -76,10 +79,9 @@ export default function PersonalizationPage() {
   } = useForm({
     resolver: yupResolver(validationSchema),
   })
-  console.log("profile", profile)
   React.useEffect(() => {
     const country = Countries.find((item) => item.code === profile?.country)
-    let str = profile?.fullname
+    let str = profile?.child_full_name
     let result = str?.split(" ")
     setValue("firstname", result && result[0])
     setValue("lastname", result && result[1])
@@ -87,8 +89,9 @@ export default function PersonalizationPage() {
     setValue("tz", moment.utc(profile?.timezone))
     setValue("gender", profile?.gender)
     setValue("country", country?.name)
-    setValue("address", country?.address)
-    setValue("stateoforigin", profile?.state_of_origin)
+    setValue("address", profile?.address)
+    setValue("stateoforigin", profile?.state_province_of_origin)
+    setValue("img", profile?.image)
   }, [setValue, profile])
 
   const img = watch("img")
@@ -117,19 +120,29 @@ export default function PersonalizationPage() {
     setSuccess(false)
   }
   function onSubmit(data) {
-    const { lastname, dob, country, gender, stateoforigin, address, tz } = data
+    const {
+      firstname,
+      lastname,
+      dob,
+      country,
+      gender,
+      stateoforigin,
+      address,
+      tz,
+    } = data
     const countryInfo = Countries.find((ct) => ct.name === country)
     const inputData = {
       firstname: firstname,
       lastname: lastname,
       dob: dob,
       gender: gender,
-      image: img,
+      image: img[0],
       timezone: tz,
       address: address,
       country: countryInfo.code,
       state_of_origin: stateoforigin,
     }
+    console.log("inputData", inputData)
     setLoading(true)
     dispatch(updateProfile({ inputData }))
       .unwrap()
@@ -198,14 +211,13 @@ export default function PersonalizationPage() {
               justifyContent: "flex-end",
             }}
           >
-            <SubmitButton
-              ghost
+            <CancelButton
               disabled={loading}
               loading={loading}
               style={{ width: 80 }}
             >
               Cancel
-            </SubmitButton>
+            </CancelButton>
             <SubmitButton
               disabled={loading}
               loading={loading}
@@ -239,7 +251,7 @@ export default function PersonalizationPage() {
                     top: 20,
                   }}
                 >
-                  Name
+                  First name
                 </Box>
                 <TextField
                   id="firstname"
@@ -257,7 +269,6 @@ export default function PersonalizationPage() {
                   id="lastname"
                   htmlFor="lastname"
                   name="lastname"
-                  type="text"
                   placeholder="Child's last name"
                   register={register}
                   error={errors.lastname ? true : false}
@@ -711,7 +722,6 @@ export default function PersonalizationPage() {
                   error={errors.dob ? true : false}
                   helper={errors.dob?.message}
                   disabled={loading}
-                  icon={<TimeIcon />}
                 />
               </Stack>
             </Box>

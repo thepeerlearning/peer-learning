@@ -71,7 +71,6 @@ export const initiatePayment = createAsyncThunk(
         class_id: course_id,
       })
       if (response) {
-        Cookies.remove("token")
         Cookies.remove("step")
         Cookies.remove("c_id")
         return response.data
@@ -99,6 +98,7 @@ export const validatePayment = createAsyncThunk(
     try {
       const response = await api.get(`/verify-payment/${token}`)
       if (response) {
+        console.log("validated response.data", response.data)
         Cookies.remove("step")
         Cookies.remove("c_id")
         Cookies.remove("cl_id")
@@ -391,9 +391,9 @@ const authSlice = createSlice({
       state.isLoggedIn = true
       state.token = action.payload
     })
-    builder.addCase(getProfile.fulfilled, (state, action) => {
+    builder.addCase(getProfile.fulfilled, (state, { payload }) => {
       state.isLoggedIn = true
-      state.profile = action.payload.data
+      state.profile = payload.data
     })
   },
 })

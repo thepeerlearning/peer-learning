@@ -19,8 +19,12 @@ export default function VerifyAccount() {
 
   useEffect(() => {
     const { token } = router.query
+    console.log("token", token)
+    const inputData = {
+      token,
+    }
     setLoading(true)
-    dispatch(validateEmail({ token }))
+    dispatch(validateEmail({ inputData }))
       .unwrap()
       .then((res) => {
         setLoading(false)

@@ -333,6 +333,7 @@ export default function ClassSchedule({ next, back }) {
             error={errors.timezone ? true : false}
             helper={errors.timezone?.message}
             disabled={loading}
+            style={{ padding: "10px 14px" }}
           >
             {timezone?.map((timezone) => (
               <option value={timezone} key={"time" + timezone}>
@@ -352,6 +353,7 @@ export default function ClassSchedule({ next, back }) {
             error={errors.course ? true : false}
             helper={errors.course?.message}
             disabled={loading}
+            style={{ padding: "10px 14px" }}
           >
             {data?.map((data, i) => (
               <option value={data.id} key={"course" + i}>
