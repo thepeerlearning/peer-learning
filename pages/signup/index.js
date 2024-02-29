@@ -57,7 +57,7 @@ export default function SignupPage() {
           ? handleStepChange(1)
           : step === "class_schedule"
           ? handleStepChange(2)
-          : null
+          : handleStepChange(0)
       }
     }
   }, [router, user])
