@@ -71,7 +71,6 @@ export default function DashboardPage() {
   const fullname = user?.child_full_name
   const activeCourse = courses?.next_class
   const [isClassTime, setIsClassTime] = useState(false)
-  console.log("user", user)
   useEffect(() => {
     const currentTime = moment.utc()
     const startTime = moment.utc(courses?.next_class?.date)

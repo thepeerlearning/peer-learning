@@ -227,10 +227,6 @@ export default function ClassSchedule({ next, back }) {
     setSelected([])
     setValue(0)
   }
-  const handleWeekSelect = () => {
-    setSelected([])
-    setValue(0)
-  }
 
   const handleTimeClick = (item) => {
     if (selected.length < 8 && selected.includes(item)) {
@@ -317,7 +313,6 @@ export default function ClassSchedule({ next, back }) {
           next()
         })
         .catch((err) => {
-          console.log("err", err)
           setError(true)
           setLoading(false)
         })

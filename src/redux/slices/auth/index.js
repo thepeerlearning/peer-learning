@@ -22,7 +22,6 @@ export const signup = createAsyncThunk(
         error?.response?.data?.meta.message ||
         error?.response?.data?.errors ||
         error?.toString()
-      console.log("error", message)
       if (error.message === `timeout of ${timeout}ms exceeded`) {
         message = "Response timeout, Retry"
       }
@@ -71,7 +70,12 @@ export const initiatePayment = createAsyncThunk(
       const response = await api.post(`initiate`, {
         class_id: course_id,
       })
-      return response.data
+      if (response) {
+        Cookies.remove("token")
+        Cookies.remove("step")
+        Cookies.remove("c_id")
+        return response.data
+      }
     } catch (error) {
       let message =
         error?.response?.data?.message ||
@@ -98,7 +102,6 @@ export const validatePayment = createAsyncThunk(
         Cookies.remove("step")
         Cookies.remove("c_id")
         Cookies.remove("cl_id")
-        Cookies.set("step", "completed")
         return response.data
       }
     } catch (error) {

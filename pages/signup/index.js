@@ -19,7 +19,7 @@ export default function SignupPage() {
   const maxSteps = steps.length
 
   const handleNext = () => {
-    setActiveStep(2)
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
 
   const handleBack = () => {
@@ -27,6 +27,8 @@ export default function SignupPage() {
   }
 
   const handleStepChange = (step) => {
+    const stepco = Cookies.get("step")
+    console.log("step", stepco)
     setActiveStep(step)
   }
   const { user } = useSelector((state) => state.auth)
@@ -37,11 +39,9 @@ export default function SignupPage() {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <SignupForm next={() => handleStepChange(1)} />
+        return <SignupForm next={handleNext} />
       case 1:
-        return (
-          <ClassSchedule next={() => handleStepChange(2)} back={handleBack} />
-        )
+        return <ClassSchedule next={handleNext} back={handleBack} />
       case 2:
         return <CoursesPayment back={handleBack} />
       default:
@@ -57,8 +57,6 @@ export default function SignupPage() {
           ? handleStepChange(1)
           : step === "class_schedule"
           ? handleStepChange(2)
-          : step === "completed"
-          ? router.push("/")
           : null
       }
     }

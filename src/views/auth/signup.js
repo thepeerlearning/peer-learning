@@ -47,21 +47,6 @@ export default function SignupForm({ next }) {
   } = useForm({
     resolver: yupResolver(validationSchema),
   })
-  useEffect(() => {
-    if (message && message?.email) {
-      message?.email?.map((email) => {
-        return setErrorMessage("Email " + email)
-      })
-    } else if (message && message?.user?.password) {
-      message?.user?.password?.map((password) => {
-        return setErrorMessage("Password " + password)
-      })
-    } else if (message?.detail) {
-      setErrorMessage(message?.detail)
-    } else {
-      return setErrorMessage(message)
-    }
-  }, [message])
 
   function onSubmit(data) {
     const { email, password, phone, fullname, childname } = data

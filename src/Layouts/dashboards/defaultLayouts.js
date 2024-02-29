@@ -71,7 +71,6 @@ function DashboardLayouts({ children }) {
 
   useEffect(() => {
     const role = user?.role.toLowerCase()
-    console.log("user?.role", role)
     if (!isLoggedIn) {
       router.push("/")
     }

@@ -244,7 +244,6 @@ export default function ClassSchedulePage() {
   }
   const handlePageNavigation = (direction) => {
     if (direction === "next") {
-      console.log("page", page, totalPageNumbers)
       page < totalPageNumbers ? setPage(page + 1) : setPage(totalPageNumbers)
     } else {
       page > 1 ? setPage(page - 1) : setPage(0)
@@ -254,11 +253,7 @@ export default function ClassSchedulePage() {
   function createData(name, action) {
     return { name, action }
   }
-  console.log(
-    "totalPageNumbers",
-    totalPageNumbers,
-    page + 1 === totalPageNumbers || count === 0
-  )
+
   const handleViewClass = (schedule) => {
     setSchedule(schedule)
   }

@@ -97,7 +97,6 @@ export default function SubscriptionPage() {
       })
     return false
   }
-  console.log("currentCard", currentCard)
   return (
     <Box
       sx={{

@@ -1,7 +1,10 @@
 import { Box, Grid } from "@mui/material"
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import React from "react"
-import { SubmitButton } from "../../../../components/forms/buttons"
+import {
+  CancelButton,
+  SubmitButton,
+} from "../../../../components/forms/buttons"
 import { Colors } from "../../../../components/themes/colors"
 import { Fonts } from "../../../../components/themes/fonts"
 
@@ -45,8 +48,6 @@ export default function CheckoutForm({ amount }) {
     e.preventDefault()
 
     if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
 
@@ -102,20 +103,13 @@ export default function CheckoutForm({ amount }) {
               mt: 4,
             }}
           >
-            <SubmitButton
-              type="submit"
-              ghost
-              disabled={isLoading || !stripe || !elements}
-              loading={isLoading}
-            >
-              Cancel
-            </SubmitButton>
+            <CancelButton disabled={isLoading}>Cancel</CancelButton>
             <SubmitButton
               type="submit"
               disabled={isLoading || !stripe || !elements}
               loading={isLoading}
             >
-              Pay now ({amount})
+              Pay now ( ${amount} )
             </SubmitButton>
           </Box>
         </Grid>
