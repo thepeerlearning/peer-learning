@@ -33,9 +33,6 @@ export default function SignupPage() {
   }
   const { user } = useSelector((state) => state.auth)
 
-  // const handleClassScheduleNext = () =>
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1)
-
   const getStepContent = (step) => {
     switch (step) {
       case 0:

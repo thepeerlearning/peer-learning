@@ -10,9 +10,11 @@ import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
 import { DeleteButton } from "../../../components/forms/buttons"
 import { logout } from "../../../redux/slices/auth"
+import { useRouter } from "next/router"
 
 export default function AppbarProfile() {
   const dispatch = useDispatch()
+  const router = useRouter()
   return (
     <div>
       <StyledTooltip

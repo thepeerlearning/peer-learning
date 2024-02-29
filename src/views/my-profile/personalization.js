@@ -76,7 +76,7 @@ export default function PersonalizationPage() {
   } = useForm({
     resolver: yupResolver(validationSchema),
   })
-
+  console.log("profile", profile)
   React.useEffect(() => {
     const country = Countries.find((item) => item.code === profile?.country)
     let str = profile?.fullname
