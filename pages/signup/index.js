@@ -15,7 +15,7 @@ const steps = ["Let’s get started", "Class Schedule Selection", "Payment"]
 
 export default function SignupPage() {
   const router = useRouter()
-  const [activeStep, setActiveStep] = React.useState(1)
+  const [activeStep, setActiveStep] = React.useState(0)
   const maxSteps = steps.length
 
   const handleNext = () => {
@@ -29,7 +29,6 @@ export default function SignupPage() {
   const handleStepChange = (step) => {
     setActiveStep(step)
   }
-  // const [activeStep, setActiveStep] = React.useState(0)
   const { user } = useSelector((state) => state.auth)
 
   // const handleClassScheduleNext = () =>
@@ -38,9 +37,11 @@ export default function SignupPage() {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <SignupForm next={handleStepChange(1)} />
+        return <SignupForm next={() => handleStepChange(1)} />
       case 1:
-        return <ClassSchedule next={handleStepChange(2)} back={handleBack} />
+        return (
+          <ClassSchedule next={() => handleStepChange(2)} back={handleBack} />
+        )
       case 2:
         return <CoursesPayment back={handleBack} />
       default:

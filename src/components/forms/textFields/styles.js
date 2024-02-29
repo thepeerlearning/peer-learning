@@ -138,7 +138,7 @@ export const InputLabel = styled.label`
   width: ${(props) => (props.width ? props.width : "100%")};
   text-align: left;
   font: normal normal 500 normal 16px/20px ${Fonts.primary};
-  color: #101828;
+  color: ${Colors.dark};
   text-transform: capitalize;
   margin-left: 5px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};

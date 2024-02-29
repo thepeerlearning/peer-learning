@@ -22,11 +22,9 @@ export default function CoursesPayment() {
       dispatch(initiatePayment({ course_id: courseId }))
         .unwrap()
         .then(({ data }) => {
-          console.log("data", data)
           setClientSecret(data?.client_secret)
           setAmount(data?.amount)
         })
-        .catch(() => {})
   }, [dispatch])
 
   const options = {

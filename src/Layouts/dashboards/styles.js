@@ -12,8 +12,8 @@ export const StyledList = styled(List)({
   "& .MuiListItemButton-root": {
     width: "100%",
     backgroundColor: `transparent !important`,
-    color: "#F9FAFB",
-    font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+    color: "#F0F2F5",
+    font: `normal normal 400 normal 14px/20.3px ${Fonts.primary}`,
     display: "inline-flex",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -22,25 +22,24 @@ export const StyledList = styled(List)({
     padding: "8px 12px",
     "&:focused": {
       backgroundColor: `transparent`,
-      color: "#F9FAFB",
+      color: "#F0F2F5",
     },
     "&:hover": {
       backgroundColor: `transparent`,
-      color: "#F9FAFB",
+      color: "#F0F2F5",
     },
   },
   "& .Mui-selected": {
     width: "100%",
     backgroundColor: `${Colors.primary} !important`,
-    color: `"#F9FAFB" !important`,
-    font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
+    color: `"#F0F2F5" !important`,
     "&:focused": {
-      backgroundColor: `#F9FAFB !important`,
-      color: `"#F9FAFB" !important`,
+      backgroundColor: `#F0F2F5 !important`,
+      color: `"#F0F2F5" !important`,
     },
     "&:hover": {
-      backgroundColor: `#F9FAFB !important`,
-      color: `"#F9FAFB"`,
+      backgroundColor: `#F0F2F5 !important`,
+      color: `"#F0F2F5"`,
     },
   },
   "& .MuiListItemIcon-root": {
@@ -56,7 +55,7 @@ export const SecondStyledList = styled(List)({
   backgroundColor: Colors.primary,
   "& .MuiListItemButton-root": {
     width: "100%",
-    color: "#F9FAFB",
+    color: "#F0F2F5",
     font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
     display: "flex",
     justifyContent: "flex-start",
@@ -66,11 +65,11 @@ export const SecondStyledList = styled(List)({
     borderRadius: 8,
     "&:focused": {
       backgroundColor: Colors.primary,
-      color: "#F9FAFB",
+      color: "#F0F2F5",
     },
     "&:hover": {
       backgroundColor: Colors.primary,
-      color: "#F9FAFB",
+      color: "#F0F2F5",
     },
   },
 })
@@ -80,7 +79,7 @@ export const StyledMenuTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.tooltip}`]: {
     width: "100%",
     borderRadius: 12,
-    background: "#F9FAFB",
+    background: "#F0F2F5",
     border: `1px solid #EAECF0`,
     boxShadow: `0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08)`,
   },
@@ -95,10 +94,10 @@ export const NestedStyledList = styled(List)({
   gap: 4,
   marginTop: 10,
   padding: "10px 0",
-  backgroundColor: `"#F9FAFB"`,
+  backgroundColor: `"#F0F2F5"`,
   "& .MuiListItemButton-root": {
     width: "100%",
-    backgroundColor: `"#F9FAFB" !important`,
+    backgroundColor: `"#F0F2F5" !important`,
     display: "inline-flex",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -135,7 +134,7 @@ export const NavList = styled(List)({
   "& .MuiListItemButton-root": {
     margin: "8px 0",
     width: "100%",
-    backgroundColor: `"#F9FAFB"`,
+    backgroundColor: `"#F0F2F5"`,
     color: Colors.primary,
     font: `normal normal 700 normal 14px/140% ${Fonts.primaryBold}`,
     display: "inline-flex",
@@ -146,26 +145,26 @@ export const NavList = styled(List)({
     borderRadius: 15,
     border: "1px solid #E2E8F0",
     "&:focused": {
-      backgroundColor: `"#F9FAFB"`,
+      backgroundColor: `"#F0F2F5"`,
       color: Colors.primary,
     },
     "&:hover": {
-      backgroundColor: `"#F9FAFB"`,
+      backgroundColor: `"#F0F2F5"`,
       color: Colors.primary,
     },
   },
   "& .Mui-selected": {
     width: "100%",
     backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-    color: `"#F9FAFB" !important`,
+    color: `"#F0F2F5" !important`,
     font: `normal normal 700 14px/20px ${Fonts.primaryBold}`,
     "&:focused": {
       backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-      color: `"#F9FAFB" !important`,
+      color: `"#F0F2F5" !important`,
     },
     "&:hover": {
       backgroundColor: `rgba(10, 37, 64, 0.69) !important`,
-      color: `"#F9FAFB"`,
+      color: `"#F0F2F5"`,
     },
   },
   "& .MuiListItemIcon-root": {
@@ -182,15 +181,15 @@ export const HomeNavList = styled(List)({
   "& .MuiListItemButton-root": {
     margin: "8px 0",
     width: "100%",
-    backgroundColor: `"#F9FAFB"`,
+    backgroundColor: `"#F0F2F5"`,
     color: Colors.primary,
     font: `normal normal 700 14px/140% ${Fonts.primary}`,
     "&:focused": {
-      backgroundColor: `"#F9FAFB"`,
+      backgroundColor: `"#F0F2F5"`,
       color: Colors.primary,
     },
     "&:hover": {
-      backgroundColor: `"#F9FAFB"`,
+      backgroundColor: `"#F0F2F5"`,
       color: `rgba(247,11,88,0.70)`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",
@@ -198,20 +197,20 @@ export const HomeNavList = styled(List)({
   },
   "& .Mui-selected": {
     width: "100%",
-    backgroundColor: `"#F9FAFB" !important`,
+    backgroundColor: `"#F0F2F5" !important`,
     color: `${Colors.secondary} !important`,
     font: `normal normal 700 14px/20px ${Fonts.primary}`,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     paddingBottom: 8,
     "&:focused": {
-      backgroundColor: `"#F9FAFB" !important`,
+      backgroundColor: `"#F0F2F5" !important`,
       color: `rgba(247,11,88,0.10) !important`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",
     },
     "&:hover": {
-      backgroundColor: `"#F9FAFB" !important`,
+      backgroundColor: `"#F0F2F5" !important`,
       color: `${Colors.secondary}`,
       textDecorationLine: "underline",
       textDecorationStyle: "solid",

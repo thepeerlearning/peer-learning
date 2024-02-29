@@ -2,6 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardHeader,
   Collapse,
@@ -12,6 +13,7 @@ import {
   ListItemButton,
   ListItemIcon,
   Toolbar,
+  Typography,
 } from "@mui/material"
 import AppBar from "@mui/material/AppBar"
 import Router, { useRouter } from "next/router"
@@ -19,18 +21,25 @@ import React, { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import Spinner from "../../components/spinner/persist-loader"
-import { AppLogo } from "../../components/svg/logo-dark-bg"
 import {
   AngleBackward,
   DashboardIcon,
   LearningIcon,
+  ProjectIcon,
+  CourseRoadmapAltIcon,
+  CompletedCoursesIcon,
   Logout,
   ProfileIcon,
+  Notification,
+  CommentIcon,
 } from "../../components/svg/menuIcons"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import { logout } from "../../redux/slices/auth"
 import { NestedStyledList, SecondStyledList, StyledList } from "./styles"
+import { AppDrawerLogo } from "../../components/svg/drawer-logo"
+import AppbarProfile from "./profile"
+import Notifications from "./notifications"
 
 function updateKey(str) {
   if (typeof str !== "string") return ""
@@ -40,7 +49,7 @@ function updateKey(str) {
   return update
 }
 const drawerWidth = 280
-const appHeight = 72
+const appHeight = 64
 function DashboardLayouts({ children }) {
   const [loading, setLoading] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -101,27 +110,29 @@ function DashboardLayouts({ children }) {
       link: "/students/my-learning",
     },
     {
-      name: "My Profile",
-      icon: <ProfileIcon />,
-      link: "/students/my-profile",
+      name: "My projects",
+      icon: <ProjectIcon />,
+      link: "/students/my-projects",
     },
-  ]
-
-  const featuresMenu = [
-    "My projects",
-    "My quiz",
-    "My certificates",
-    "Invite friends $ earn",
-    "Points",
+    {
+      name: "Courses roadmap",
+      icon: <CourseRoadmapAltIcon />,
+      link: "/students/course-roadmap",
+    },
+    {
+      name: "Completed courses",
+      icon: <CompletedCoursesIcon />,
+      link: "/students/completed-courses",
+    },
   ]
 
   const drawer = (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <Toolbar
-        sx={{ minHeight: `50px !important`, padding: `16px !important` }}
+        sx={{ minHeight: `64px !important`, padding: `16px !important` }}
       >
         <Link underline="none" href="/auth/login">
-          <AppLogo />
+          <AppDrawerLogo />
         </Link>
         <Box
           sx={{
@@ -267,54 +278,67 @@ function DashboardLayouts({ children }) {
           <Box
             component="div"
             sx={{
-              width: 250,
-              background: Colors.primary,
+              width: "100%",
               display: "inline-flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "flex-start",
-              py: 4,
-              mx: 2,
+              alignItems: "center",
             }}
           >
-            <SecondStyledList component="nav" disablePadding>
-              <Box
+            <Box
+              sx={{
+                maxWidth: 240,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "20px",
+                padding: "20px 16px 16px 16px",
+                borderRadius: "8px",
+                background:
+                  "linear-gradient(44.2deg, #000000 39.82%, #FF5E00 147.44%)",
+                boxShadow:
+                  "0px 4px 6px -2px rgba(0, 0, 0, 0.06),0px 12px 16px -4px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <Typography
                 sx={{
-                  color: "#F9FAFB",
-                  font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
-                  px: 2,
+                  font: `normal normal 700 normal 16px/23px ${Fonts.primaryBold}`,
+                  letterSpacing: "0em",
                   textAlign: "left",
-                  mb: 0.5,
+                  color: "rgba(240, 242, 245, 1)",
                 }}
               >
-                Coming Soon...
-              </Box>
-              {featuresMenu &&
-                featuresMenu.map((item, index) => {
-                  return (
-                    <ListItemButton
-                      disableRipple
-                      disableTouchRipple
-                      key={index}
-                    >
-                      <Box
-                        component="span"
-                        sx={{
-                          font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
-                        }}
-                      >
-                        {item}
-                      </Box>
-                    </ListItemButton>
-                  )
-                })}
-            </SecondStyledList>
+                Certificate
+              </Typography>
+              <Typography
+                sx={{
+                  font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                  letterSpacing: "0em",
+                  textAlign: "left",
+                  color: "rgba(208, 213, 221, 1)",
+                }}
+              >
+                When you complete a course, a certificate will appear here.
+              </Typography>
+              <Button
+                disableRipple
+                sx={{
+                  font: `normal normal 700 normal 14px/20.3px ${Fonts.primaryBold}`,
+                  textAlign: "left",
+                  color: "rgba(208, 213, 221, 1)",
+                  textTransform: "none",
+                }}
+              >
+                View certificate
+              </Button>
+            </Box>
           </Box>
           <div
             className="line"
             style={{
               width: "100%",
-              margin: "20px 0",
+              margin: "24px 0",
+              borderBottomColor: "rgba(29, 39, 57, 1)",
             }}
           />
           <Box
@@ -327,7 +351,7 @@ function DashboardLayouts({ children }) {
           >
             <Card
               sx={{
-                backgroundColor: Colors.primary,
+                backgroundColor: "transparent",
                 maxWidth: "100%",
                 boxShadow: "none",
                 cursor: "pointer",
@@ -358,7 +382,7 @@ function DashboardLayouts({ children }) {
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
-                      font: `normal normal 600 normal 16px/20px ${Fonts.primary}`,
+                      font: `normal normal 600 normal 16px/20px ${Fonts.primarySemiBold}`,
                       color: "#F9FAFB",
                     }}
                   >
@@ -387,40 +411,73 @@ function DashboardLayouts({ children }) {
     </div>
   )
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", background: "#FDFDFD", borderRadius: 3 }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: "100%",
           ml: { md: `${drawerWidth}px` },
-          display: { md: "none" },
           color: Colors.textColor,
-          background: `${Colors.light} 0% 0% no-repeat padding-box`,
+          background: {
+            xs: `${Colors.black} 0% 0% no-repeat padding-box`,
+            sm: `${Colors.light} 0% 0% no-repeat padding-box`,
+          },
           transition: `all .3s,width 0s`,
-          padding: "0px 16px",
+          padding: "0 28px 0 24px",
           height: appHeight,
           boxShadow: "none",
           justifyContent: "center",
+          borderBottom: `1px solid #F0F2F5`,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Link underline="none" href="/auth/login">
-            <AppLogo />
-          </Link>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
+        <Toolbar
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
             sx={{
-              display: { md: "none" },
-              background: Colors.primary,
-              color: Colors.light,
+              width: "100%",
+              justifyContent: "space-between",
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
             }}
           >
-            <MenuIcon />
-          </IconButton>
+            <Link underline="none" href="/auth/login">
+              <AppDrawerLogo />
+            </Link>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{
+                background: Colors.primary,
+                color: Colors.light,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              width: "100%",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              display: { xs: "none", md: "flex" },
+              gap: 1,
+            }}
+          >
+            <Notifications />
+            <IconButton color="inherit" aria-label="open drawer" edge="start">
+              <CommentIcon />
+            </IconButton>
+
+            <AppbarProfile />
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -437,10 +494,8 @@ function DashboardLayouts({ children }) {
           sx={{
             display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
+              background: `${Colors.black} 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
-
-              // padding: "16px",
-
               width: drawerWidth,
               "&::-webkit-scrollbar": {
                 width: "0.1px !important",
@@ -468,9 +523,7 @@ function DashboardLayouts({ children }) {
               background: `${Colors.black} 0% 0% no-repeat padding-box`,
               boxSizing: "border-box",
               width: drawerWidth,
-              // padding: "16px",
-              gap: "203px",
-              borderRight: `1px solid rgba(0, 0, 0, 0.10)`,
+              borderRight: `1px solid #000`,
               "&::-webkit-scrollbar": {
                 width: "0.1px !important",
                 height: "0.1px !important",
@@ -500,15 +553,8 @@ function DashboardLayouts({ children }) {
           height: "100vh",
         }}
       >
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            {/* <Box component="div" sx={{ display: "block" }}> */}
-            {children}
-            {/* </Box> */}
-          </>
-        )}
+        <Toolbar />
+        {loading ? <Spinner /> : children}
       </Box>
     </Box>
   )

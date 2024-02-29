@@ -1,15 +1,15 @@
-import { keyframes } from "@emotion/react";
-import { Badge, Box, IconButton, styled } from "@mui/material";
-import { StyledTooltip } from "../../../components/forms/textFields";
-import { Notification } from "../../../components/svg/menuIcons";
-import { Nodata } from "../../../components/svg/nodata";
-import { Colors } from "../../../components/themes/colors";
-import { Fonts } from "../../../components/themes/fonts";
+import { keyframes } from "@emotion/react"
+import { Badge, Box, IconButton, styled } from "@mui/material"
+import { StyledTooltip } from "../../../components/forms/textFields"
+import { Nodata } from "../../../components/svg/nodata"
+import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
+import { Notification } from "../../../components/svg/menuIcons"
 
 const blink = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
-`;
+`
 const StyledBadge = styled(Badge)(() => ({
   "& .MuiBadge-badge": {
     right: 5,
@@ -22,7 +22,7 @@ const StyledBadge = styled(Badge)(() => ({
     textAlign: "center",
     animation: `${blink} 3s infinite ease`,
   },
-}));
+}))
 
 export default function Notifications() {
   const notifications = [
@@ -31,7 +31,7 @@ export default function Notifications() {
       subject: "Pending lessons",
       link: "/students/my-lessons",
     },
-  ];
+  ]
   return (
     <div>
       <StyledTooltip
@@ -122,13 +122,13 @@ export default function Notifications() {
           sx={{ marginRight: "20px", position: "relative", top: 3 }}
         >
           <StyledBadge
-            badgeContent="4"
+            badgeContent={0}
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           >
-            <Notification style={{ width: 18, height: 19, color: "#C3CAD9" }} />
+            <Notification />
           </StyledBadge>
         </IconButton>
       </StyledTooltip>
     </div>
-  );
+  )
 }

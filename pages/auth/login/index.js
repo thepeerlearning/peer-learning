@@ -99,22 +99,25 @@ export default function LoginPage() {
     dispatch(login({ email: username, password }))
       .unwrap()
       .then(({ data }) => {
+        const role = data.role.toLowerCase()
         setLoading(false)
-        if (data?.role === "instructor") {
-          router.push("/admin/dashboard")
-        } else if (data?.isVerified) {
-          router.push("/students/my-dashboard")
-        } else if (!data?.isVerified) {
-          router.push("/students/my-dashboard")
+        if (!data.isVerified) {
+          router.push(`/signup/email-confirmation/${data.email}`)
         } else {
-          setInfo(true)
-          setTimeout(() => {
-            router.push("/signup")
-          }, 3200)
+          if (role === "instructor") {
+            router.push("/admin/dashboard")
+          } else if (role === "admin") {
+            router.push("/admin/dashboard")
+          } else if (role === "student") {
+            router.push("/students/my-dashboard")
+          } else if (role === "parent") {
+            router.push("/students/my-dashboard")
+          } else {
+            router.push("/unauthorised")
+          }
         }
       })
       .catch((err) => {
-        console.log("err", err)
         setError(true)
         setLoading(false)
       })

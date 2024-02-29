@@ -82,10 +82,12 @@ export const CancelButton = (props) => {
   return (
     <Button
       small
-      cancel
+      ghost
+      theme={Colors.primary}
       onClick={onClick}
-      style={style}
       disabled={disabled}
+      disableRipple={disableRipple}
+      style={style}
       {...otherProps}
     >
       {children}

@@ -50,10 +50,8 @@ export const StyledTooltip = styled(({ className, ...props }) => (
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: "#FFFFFF",
     boxShadow: "0px 8px 32px -2px rgba(0, 0, 0, 0.18)",
-    borderRadius: 2,
-    padding: "15px 16px",
-    color: "#000",
-    font: `normal normal 400 14px/25px ${Fonts.primary}`,
+    borderRadius: 8,
+    // padding: "15px 16px",
   },
   [`& .${tooltipClasses.arrow}`]: {
     color: "#FFFFFF",

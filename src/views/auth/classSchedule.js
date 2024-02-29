@@ -19,7 +19,7 @@ import * as React from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
-import { SubmitButton } from "../../components/forms/buttons"
+import { CancelButton, SubmitButton } from "../../components/forms/buttons"
 import {
   DateInputField,
   InputWithIcon,
@@ -797,9 +797,9 @@ export default function ClassSchedule({ next, back }) {
               gap: "12px",
             }}
           >
-            <SubmitButton ghost onClick={back} disabled={loading}>
+            <CancelButton ghost onClick={back} disabled={loading}>
               Back
-            </SubmitButton>
+            </CancelButton>
 
             <SubmitButton disabled={loading} loading={loading}>
               Next

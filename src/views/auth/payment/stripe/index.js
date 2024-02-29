@@ -28,10 +28,74 @@ export default function StripePayment() {
         setClientSecret(res?.data?.metadata.client_secret)
         setAmount(res?.data?.pretty_amount)
       })
-      .catch(() => {})
   }, [dispatch])
+
+  const appearance = {
+    theme: "stripe",
+    variables: {
+      colorPrimary: Colors.primary,
+      colorBackground: "#ffffff",
+      colorText: Colors.textColor,
+      colorDanger: Colors.buttonError,
+      fontFamily: "'SpaceGrotesk' Sans, system-ui, sans-serif",
+      spacingUnit: "2px",
+      borderRadius: "5px",
+      rules: {
+        ".Tab": {
+          border: `1px solid ${Colors.borderColor}`,
+          boxShadow:
+            "0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 6px rgba(18, 42, 66, 0.02)",
+        },
+
+        ".Tab:hover": {
+          color: Colors.textColor,
+        },
+
+        ".Tab--selected": {
+          borderColor: "#FF5E00",
+          boxShadow: `0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 6px rgba(18, 42, 66, 0.02), 0 0 0 2px ${Colors.primary}`,
+        },
+
+        ".Input--invalid": {
+          boxShadow: "none",
+          borderColor: Colors.buttonError,
+        },
+        ".Label": {
+          color: Colors.dark,
+          borderColor: Colors.buttonError,
+          textAlign: "left",
+          font: `normal normal 500 normal 16px/20px ${Fonts.primary}`,
+          textTransform: "capitalize",
+          marginLeft: 5,
+        },
+        ".Input": {
+          padding: "10.5px 10px 10.5px 45px",
+          font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+          color: "#425466",
+          borderColor: "#d0d5dd",
+          borderRadius: "8px",
+          boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+          gap: 8,
+          background: Colors.light,
+          textAlign: "left",
+          "&:hover": {
+            borderColor: Colors.primary,
+          },
+          "&:focus": {
+            borderColor: Colors.primary,
+          },
+        },
+        ".Error": {
+          color: Colors.buttonError,
+          marginTop: -10,
+          font: `normal normal 400 normal 0.6rem/18px ${Fonts.primary}`,
+        },
+      },
+    },
+  }
   const options = {
     clientSecret,
+    appearance,
   }
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
