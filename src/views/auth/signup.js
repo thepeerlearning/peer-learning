@@ -1,8 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Box, Grid, Link } from "@mui/material"
-import React, { useEffect } from "react"
+import React from "react"
 import { Controller, useForm } from "react-hook-form"
-import { parsePhoneNumber } from "react-phone-number-input"
 import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
 import { SubmitButton } from "../../components/forms/buttons"
@@ -16,12 +15,10 @@ import { EmailIcon, UserIcon } from "../../components/svg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import { signup } from "../../redux/slices/auth"
-import { Countries } from "../../utils/data"
 
 export default function SignupForm({ next }) {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
-  const [errorMessage, setErrorMessage] = React.useState("")
   const [showPassword, setShowPassword] = React.useState(false)
   const { message } = useSelector((state) => state.message)
   const dispatch = useDispatch()
@@ -241,7 +238,7 @@ export default function SignupForm({ next }) {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={errorMessage}
+        message={message}
         isOpen={error === true}
       />
     </Box>

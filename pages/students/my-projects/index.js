@@ -14,7 +14,7 @@ import OngoingCourses from "../../../src/views/myLearning/ongoing"
 import UpcomingCourses from "../../../src/views/myLearning/upcoming"
 import Snackbars from "../../../src/components/snackbar"
 import { useDispatch, useSelector } from "react-redux"
-import { activeCourses, refresh } from "../../../src/redux/slices/courses"
+import { activeCourses, refresh } from "../../../src/redux/slices/student"
 import { isEmpty } from "lodash"
 import { Nodata } from "../../../src/components/svg/nodata"
 import Spinner from "../../../src/components/spinner/persist-loader"
@@ -110,14 +110,14 @@ const AccordionDetails = styled(MuiAccordionDetails)(() => ({
   borderRadius: 0,
 }))
 
-export default function MyCompletedCoursesPage() {
+export default function MyLearningPage() {
   const [value, setValue] = useState(0)
   const [expanded, setExpanded] = useState("panel1")
   const {
     activeCourse: courses,
     courseLoading: loading,
     coursesError: error,
-  } = useSelector((state) => state.courses)
+  } = useSelector((state) => state.student)
   const { message } = useSelector((state) => state.message)
   const dispatch = useDispatch()
 
@@ -720,6 +720,6 @@ export default function MyCompletedCoursesPage() {
     </Box>
   )
 }
-MyCompletedCoursesPage.getLayout = function getLayout(page) {
+MyLearningPage.getLayout = function getLayout(page) {
   return <DashboardLayouts>{page}</DashboardLayouts>
 }

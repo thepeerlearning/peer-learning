@@ -324,8 +324,7 @@ export const SelectInput = styled.select`
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   position: relative;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  background: url("/images/svgs/calender-alt.svg") no-repeat right
-    ${Colors.light};
+  background: url("/images/svgs/angle-down.svg") no-repeat right ${Colors.light};
   -webkit-appearance: none;
   background-position: right 18px top 50%;
   &:hover {

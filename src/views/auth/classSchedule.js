@@ -32,7 +32,7 @@ import { CircledAdd } from "../../components/svg/menuIcons"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import { classSchedule } from "../../redux/slices/auth"
-import { getCourses } from "../../redux/slices/courses"
+import { getCourses } from "../../redux/slices/student"
 import { clearMessage } from "../../redux/slices/message"
 import { scheduleArray } from "../../utils/data"
 import Cookies from "js-cookie"
@@ -118,8 +118,8 @@ export default function ClassSchedule({ next, back }) {
   const [mintime, setMinTime] = React.useState(false)
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState(0)
-  const [errorMessage, setErrorMessage] = React.useState("")
-  const { data } = useSelector((state) => state.courses)
+  const { message } = useSelector((state) => state.message)
+  const { data } = useSelector((state) => state.student)
   const dispatch = useDispatch()
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"))
@@ -819,7 +819,7 @@ export default function ClassSchedule({ next, back }) {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={errorMessage}
+        message={message}
         isOpen={error === true}
       />
       <Snackbars

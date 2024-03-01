@@ -1,4 +1,4 @@
-export function AppDrawerLogo(props) {
+export function AppDrawerLogo() {
   return (
     <svg
       width="165"
@@ -6,7 +6,6 @@ export function AppDrawerLogo(props) {
       viewBox="0 0 165 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={props.style}
     >
       <g clipPath="url(#clip0_5981_22386)">
         <path

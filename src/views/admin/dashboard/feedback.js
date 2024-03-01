@@ -18,7 +18,7 @@ import { Fonts } from "../../../components/themes/fonts"
 import {
   classSchedules,
   updateClassStatus,
-} from "../../../redux/slices/courses"
+} from "../../../redux/slices/student"
 import { CancelButton, SubmitButton } from "../../../components/forms/buttons"
 import Snackbars from "../../../components/snackbar"
 import { ButtonsRow } from "../../../components/forms/buttons/styles"

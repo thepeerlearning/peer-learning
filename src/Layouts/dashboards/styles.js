@@ -22,11 +22,11 @@ export const StyledList = styled(List)({
     padding: "8px 12px",
     "&:focused": {
       backgroundColor: `transparent`,
-      color: "#F0F2F5",
+      color: Colors.primary,
     },
     "&:hover": {
       backgroundColor: `transparent`,
-      color: "#F0F2F5",
+      color: Colors.primary,
     },
   },
   "& .Mui-selected": {
@@ -34,11 +34,11 @@ export const StyledList = styled(List)({
     backgroundColor: `${Colors.primary} !important`,
     color: `"#F0F2F5" !important`,
     "&:focused": {
-      backgroundColor: `#F0F2F5 !important`,
+      backgroundColor: `${Colors.primary} !important`,
       color: `"#F0F2F5" !important`,
     },
     "&:hover": {
-      backgroundColor: `#F0F2F5 !important`,
+      backgroundColor: `${Colors.primary} !important`,
       color: `"#F0F2F5"`,
     },
   },

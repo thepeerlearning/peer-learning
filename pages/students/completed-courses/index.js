@@ -110,7 +110,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(() => ({
   borderRadius: 0,
 }))
 
-export default function CourseRoadmapPage() {
+export default function MyCompletedCoursesPage() {
   const [value, setValue] = useState(0)
   const [expanded, setExpanded] = useState("panel1")
   const {
@@ -720,6 +720,6 @@ export default function CourseRoadmapPage() {
     </Box>
   )
 }
-CourseRoadmapPage.getLayout = function getLayout(page) {
+MyCompletedCoursesPage.getLayout = function getLayout(page) {
   return <DashboardLayouts>{page}</DashboardLayouts>
 }

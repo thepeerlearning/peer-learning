@@ -1,79 +1,45 @@
-import React from "react"
-import {
-  PaymentElement,
-  LinkAuthenticationElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js"
-import { Grid, Box } from "@mui/material"
+import { Box, Grid } from "@mui/material"
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import React, { useState } from "react"
+import { SubmitButton } from "../../../../../components/forms/buttons"
 import { Colors } from "../../../../../components/themes/colors"
 import { Fonts } from "../../../../../components/themes/fonts"
-import { SubmitButton } from "../../../../../components/forms/buttons"
+import { useDispatch } from "react-redux"
+import { addPaymentMethod } from "../../../../../redux/slices/student"
 
-export default function CheckoutForm({ amount }) {
+export default function AddPaymentMethodForm() {
   const stripe = useStripe()
   const elements = useElements()
-  const [message, setMessage] = React.useState(null)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    if (!stripe) {
-      return
-    }
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    )
-
-    if (!clientSecret) {
-      return
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!")
-          break
-        case "processing":
-          setMessage("Your payment is processing.")
-          break
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.")
-          break
-        default:
-          setMessage("Something went wrong.")
-          break
-      }
-    })
-  }, [stripe])
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (event) => {
+    event.preventDefault()
 
     if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
-
     setIsLoading(true)
 
-    const { token, error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: "http://app.thepeerlearning.com/verify-payment",
-      },
+    const result = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
     })
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message)
+
+    if (result.error) {
+      setIsLoading(false)
+      setError(result.error.message)
     } else {
-      setMessage("An unexpected error occurred.")
+      const inputData = {
+        id: result.paymentMethod.id,
+      }
+      setIsLoading(false)
+      dispatch(addPaymentMethod({ inputData }))
+      // Handle successful payment method creation
+      console.log(result.paymentMethod)
+      // Save result.paymentMethod.id to your backend or database
     }
-
-    setIsLoading(false)
-  }
-
-  const paymentElementOptions = {
-    layout: "tabs",
   }
 
   return (
@@ -85,15 +51,13 @@ export default function CheckoutForm({ amount }) {
         flexDirection: "column",
         m: "auto",
         width: { xs: "fit-content", sm: 400 },
+        mt: 5,
       }}
       id="payment-form"
     >
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <PaymentElement
-            id="payment-element"
-            options={paymentElementOptions}
-          />
+          <CardElement />
         </Grid>
 
         <Grid item xs={12}>
@@ -109,22 +73,14 @@ export default function CheckoutForm({ amount }) {
           >
             <SubmitButton
               type="submit"
-              ghost
               disabled={isLoading || !stripe || !elements}
               loading={isLoading}
             >
-              Cancel
-            </SubmitButton>
-            <SubmitButton
-              type="submit"
-              disabled={isLoading || !stripe || !elements}
-              loading={isLoading}
-            >
-              Pay now ({amount})
+              Add Payment Method
             </SubmitButton>
           </Box>
         </Grid>
-        {message && (
+        {error && (
           <Box
             id="payment-message"
             component="div"
@@ -138,7 +94,7 @@ export default function CheckoutForm({ amount }) {
               m: "20px 0 ",
             }}
           >
-            {message}
+            {error}
           </Box>
         )}
       </Grid>

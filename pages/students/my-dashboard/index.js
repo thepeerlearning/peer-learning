@@ -23,7 +23,7 @@ import Spinner from "../../../src/components/spinner/persist-loader"
 import { Nodata } from "../../../src/components/svg/nodata"
 import { Colors } from "../../../src/components/themes/colors"
 import { Fonts } from "../../../src/components/themes/fonts"
-import { activeCourses, refresh } from "../../../src/redux/slices/courses"
+import { activeCourses, refresh } from "../../../src/redux/slices/student"
 import {
   BriefcaseIcon,
   ClockIcon,
@@ -65,7 +65,7 @@ export default function DashboardPage() {
     activeCourse: courses,
     courseLoading: loading,
     coursesError: error,
-  } = useSelector((state) => state.courses)
+  } = useSelector((state) => state.student)
   const { message } = useSelector((state) => state.message)
   const dispatch = useDispatch()
   const fullname = user?.child_full_name
@@ -740,7 +740,7 @@ export default function DashboardPage() {
               }}
             >
               <Button
-                onClick={() => router.push("/student/my-lessons")}
+                onClick={() => router.push("/students/my-lessons")}
                 sx={{
                   width: 150,
                   textTransform: "none",

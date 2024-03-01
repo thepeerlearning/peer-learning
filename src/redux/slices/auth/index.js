@@ -11,6 +11,7 @@ export const signup = createAsyncThunk(
       const response = await api.post("register", inputData)
       if (response) {
         let { data } = response.data
+        console.log("data", data)
         Cookies.set("token", data.token)
         Cookies.set("step", "account_created")
         Cookies.set("c_id", data.id)
@@ -40,6 +41,8 @@ export const classSchedule = createAsyncThunk(
       const response = await api.post("schedule", inputData)
       if (response) {
         let { data } = response.data
+        console.log("data in class schedule", data)
+        Cookies.set("token", data.token)
         Cookies.set("cl_id", data.id)
         Cookies.set("step", "class_schedule")
 
@@ -71,8 +74,6 @@ export const initiatePayment = createAsyncThunk(
         class_id: course_id,
       })
       if (response) {
-        Cookies.remove("step")
-        Cookies.remove("c_id")
         return response.data
       }
     } catch (error) {
@@ -98,7 +99,6 @@ export const validatePayment = createAsyncThunk(
     try {
       const response = await api.get(`/verify-payment/${token}`)
       if (response) {
-        console.log("validated response.data", response.data)
         Cookies.remove("step")
         Cookies.remove("c_id")
         Cookies.remove("cl_id")
@@ -274,44 +274,7 @@ export const refreshpage = createAsyncThunk(
     }
   }
 )
-export const updateProfile = createAsyncThunk(
-  "auth/updateProfile",
-  async ({ inputData }, thunkAPI) => {
-    try {
-      const formdata = new FormData()
-      formdata.append("image", inputData.img)
-      formdata.append("last_name", inputData.lastname)
-      formdata.append("first_name", inputData.firstname)
-      formdata.append("state_of_origin", inputData.state_of_origin)
-      formdata.append("address", inputData.address)
-      formdata.append("country", inputData.country)
-      formdata.append("dob", inputData.dob)
-      formdata.append("gender", inputData.gender)
-      formdata.append("timezone", inputData.time)
 
-      const response = await api.put(`profile`, formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      return response.data
-    } catch (error) {
-      let message =
-        error?.response?.data?.message ||
-        error?.response?.data?.meta.message ||
-        error?.response?.data?.errors ||
-        error?.toString()
-      if (error.message === `timeout of ${timeout}ms exceeded`) {
-        message = "Response timeout, Retry"
-      }
-      if (error.message === "Network Error") {
-        message = "Please check your network connectivity"
-      }
-      thunkAPI.dispatch(setMessage(message))
-      return thunkAPI.rejectWithValue()
-    }
-  }
-)
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async ({ inputData }, thunkAPI) => {
@@ -335,34 +298,11 @@ export const changePassword = createAsyncThunk(
     }
   }
 )
-export const getProfile = createAsyncThunk(
-  "auth/getProfile",
-  async (_, thunkAPI) => {
-    try {
-      const response = await api.get(`profile`)
-      return response.data
-    } catch (error) {
-      let message =
-        error?.response?.data?.message ||
-        error?.response?.data?.meta.message ||
-        error?.response?.data?.errors ||
-        error?.toString()
-      if (error.message === `timeout of ${timeout}ms exceeded`) {
-        message = "Response timeout, Retry"
-      }
-      if (error.message === "Network Error") {
-        message = "Please check your network connectivity"
-      }
-      thunkAPI.dispatch(setMessage(message))
-      return thunkAPI.rejectWithValue()
-    }
-  }
-)
+
 const initialState = {
   isLoggedIn: false,
   user: null,
   token: null,
-  profile: null,
 }
 const authSlice = createSlice({
   name: "auth",
@@ -390,10 +330,6 @@ const authSlice = createSlice({
     builder.addCase(refreshpage.fulfilled, (state, action) => {
       state.isLoggedIn = true
       state.token = action.payload
-    })
-    builder.addCase(getProfile.fulfilled, (state, { payload }) => {
-      state.isLoggedIn = true
-      state.profile = payload.data
     })
   },
 })

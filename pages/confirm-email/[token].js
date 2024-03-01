@@ -19,7 +19,6 @@ export default function VerifyAccount() {
 
   useEffect(() => {
     const { token } = router.query
-    console.log("token", token)
     const inputData = {
       token,
     }

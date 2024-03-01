@@ -3,14 +3,17 @@ import { Box, Grid, Stack } from "@mui/material"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as Yup from "yup"
-import { SubmitButton } from "../../../src/components/forms/buttons"
+import {
+  CancelButton,
+  SubmitButton,
+} from "../../../src/components/forms/buttons"
 import { PasswordField } from "../../../src/components/forms/textFields"
 import { Colors } from "../../../src/components/themes/colors"
 import { Fonts } from "../../../src/components/themes/fonts"
-// import { changePassword } from "../../redux/slices/auth"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { useDispatch, useSelector } from "react-redux"
 import Snackbars from "../../components/snackbar"
+import { changePassword } from "../../redux/slices/auth"
 
 export default function SecurityPage() {
   const matches = useMediaQuery("(min-width:600px)")
@@ -20,7 +23,6 @@ export default function SecurityPage() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
-  const [errorMessage, setErrorMessage] = React.useState("")
   const { message } = useSelector((state) => state.message)
   const dispatch = useDispatch()
 
@@ -32,16 +34,6 @@ export default function SecurityPage() {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
   })
-
-  React.useEffect(() => {
-    if (message?.new_password) {
-      message?.new_password?.map((password) => {
-        return setErrorMessage("Password " + password)
-      })
-    } else {
-      setErrorMessage(message)
-    }
-  }, [message])
 
   const handleClickShowOldPassword = () => setShowNoldPassword(!showOldPassword)
   const handleClickShowPassword = () => setShowPassword(!showPassword)
@@ -64,10 +56,11 @@ export default function SecurityPage() {
   })
 
   function onSubmit(data) {
-    const { password, oldPassword } = data
+    const { password, oldPassword, confirmPassword } = data
     const inputData = {
-      new_password: password,
-      old_password: oldPassword,
+      current_password: oldPassword,
+      password: password,
+      confirm_password: confirmPassword,
     }
     setLoading(true)
     dispatch(changePassword({ inputData }))
@@ -82,7 +75,7 @@ export default function SecurityPage() {
       })
     return false
   }
-
+  console.log("error", message)
   return (
     <Box
       sx={{
@@ -136,14 +129,13 @@ export default function SecurityPage() {
               justifyContent: "flex-end",
             }}
           >
-            <SubmitButton
-              ghost
+            <CancelButton
               disabled={loading}
               loading={loading}
               style={{ width: 80 }}
             >
               Cancel
-            </SubmitButton>
+            </CancelButton>
             <SubmitButton
               disabled={loading}
               loading={loading}
@@ -190,6 +182,7 @@ export default function SecurityPage() {
                   register={register}
                   error={errors.oldPassword ? true : false}
                   helper={errors.oldPassword?.message}
+                  autoComplete="current-password"
                 />
               </Stack>
             </Box>
@@ -233,6 +226,7 @@ export default function SecurityPage() {
                   register={register}
                   error={errors.password ? true : false}
                   helper={errors.password?.message}
+                  autoComplete="new-password"
                 />
               </Stack>
             </Box>
@@ -285,6 +279,7 @@ export default function SecurityPage() {
                   error={errors.confirmPassword ? true : false}
                   helper={errors.confirmPassword?.message}
                   disabled={loading}
+                  autoComplete="new-password"
                 />
               </Stack>
             </Box>
@@ -368,7 +363,7 @@ export default function SecurityPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={errorMessage}
+        message={message}
         isOpen={error}
       />
       <Snackbars

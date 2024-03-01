@@ -17,6 +17,10 @@ import { CheckBox } from "../../../components/forms/textFields"
 import SubscriptionHistory from "./history"
 import StripeSubscriptionPayment from "./payment/stripe"
 import { updateProfile, getProfile } from "../../../redux/slices/auth"
+import {
+  getPaymentMethod,
+  getSubscriptions,
+} from "../../../redux/slices/student"
 
 const cardinfo = [
   {
@@ -37,33 +41,25 @@ const cardinfo = [
   },
 ]
 export default function SubscriptionPage() {
-  const matches = useMediaQuery("(min-width:600px)")
-  const [photo, setPhoto] = React.useState(undefined)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
-  const [photoName, setPhotoName] = React.useState(undefined)
-  const [code, setCode] = React.useState("")
-  const [errorMessage, setErrorMessage] = React.useState("")
   const { message } = useSelector((state) => state.message)
-  const { user, profile } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
+  const { paymentMethod: method } = useSelector((state) => state.student)
   const [currentCard, setCurrentCard] = useState("")
   const [cardId, setCardId] = useState()
-  // form validation rules
-  const validationSchema = Yup.object().shape({
-    // current: Yup.bool(),
-  })
+  const dispatch = useDispatch()
+  const dataObject = { method }
+  // const jsonObject = JSON.parse(jsonString)
+
+  React.useEffect(() => {
+    dispatch(getPaymentMethod())
+  }, [dispatch])
 
   // get functions to build form with useForm() hook
-  const {
-    register,
-    handleSubmit,
-    watch,
-    control,
-    formState: { errors },
-    setValue,
-  } = useForm({
-    resolver: yupResolver(validationSchema),
+  const { register, handleSubmit, watch } = useForm({
+    // resolver: yupResolver(validationSchema),
     defaultValues: {
       current: "",
     },
@@ -190,7 +186,7 @@ export default function SubscriptionPage() {
                   maxWidth: 900,
                 }}
               >
-                {cardinfo?.map((card, i) => {
+                {dataObject?.method?.data?.map((card, i) => {
                   return (
                     <Card
                       key={card.id + i}
@@ -210,7 +206,13 @@ export default function SubscriptionPage() {
                       onClick={() => setCurrentCard(card.id)}
                     >
                       <CardHeader
-                        avatar={card.icon}
+                        avatar={
+                          card.card.brand === "visa" ? (
+                            <VisaIcon />
+                          ) : card.card.brand === "mastercard" ? (
+                            <MastercardIcon />
+                          ) : null
+                        }
                         title={
                           <Box
                             sx={{
@@ -220,7 +222,7 @@ export default function SubscriptionPage() {
                               color: Colors.secondary,
                             }}
                           >
-                            Visa ending in 1234
+                            {`${card.card.brand} ending in ${card.card.last4}`}
                           </Box>
                         }
                         subheader={
@@ -232,7 +234,8 @@ export default function SubscriptionPage() {
                                 color: Colors.textColor,
                               }}
                             >
-                              Expiry 06/2024
+                              Expiry{" "}
+                              {`${card.card.exp_month}/${card.card.exp_year}`}
                             </Box>
                             <Box
                               sx={{

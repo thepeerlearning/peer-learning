@@ -38,7 +38,7 @@ export default function StripePayment() {
       colorText: Colors.textColor,
       colorDanger: Colors.buttonError,
       fontFamily: "'SpaceGrotesk' Sans, system-ui, sans-serif",
-      spacingUnit: "2px",
+      spacingUnit: "8px",
       borderRadius: "5px",
       rules: {
         ".Tab": {

@@ -1,5 +1,5 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import { createWrapper } from "next-redux-wrapper"
 import {
   persistReducer,
   persistStore,
@@ -9,36 +9,36 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import authReducer from "./slices/auth";
-import coursesReducer from "./slices/courses";
-import messageReducer from "./slices/message";
+} from "redux-persist"
+import storage from "redux-persist/lib/storage"
+import authReducer from "./slices/auth"
+import studentReducer from "./slices/student"
+import messageReducer from "./slices/message"
 
 const rootReducer = combineReducers({
   auth: authReducer,
   message: messageReducer,
-  courses: coursesReducer,
-});
+  student: studentReducer,
+})
 
 const makeConfiguredStore = () =>
   configureStore({
     reducer: rootReducer,
     devTools: true,
-  });
+  })
 
 export const makeStore = () => {
-  const isServer = typeof window === "undefined";
+  const isServer = typeof window === "undefined"
   if (isServer) {
-    return makeConfiguredStore();
+    return makeConfiguredStore()
   } else {
     // we need it only on client side
     const persistConfig = {
       key: "nextjs",
       whitelist: ["auth"],
       storage,
-    };
-    const persistedReducer = persistReducer(persistConfig, rootReducer);
+    }
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
     let store = configureStore({
       reducer: persistedReducer,
       middleware: (getDefaultMiddleware) =>
@@ -48,11 +48,11 @@ export const makeStore = () => {
           },
         }),
       devTools: process.env.NODE_ENV !== "production",
-    });
+    })
 
-    store.__persistor = persistStore(store);
-    return store;
+    store.__persistor = persistStore(store)
+    return store
   }
-};
+}
 
-export const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper(makeStore)

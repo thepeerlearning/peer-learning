@@ -1,7 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Avatar, Box, Card, CardHeader, Grid, Stack } from "@mui/material"
+import useMediaQuery from "@mui/material/useMediaQuery"
+import moment from "moment-timezone"
 import React from "react"
 import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
 import {
   CancelButton,
@@ -9,7 +12,6 @@ import {
 } from "../../../src/components/forms/buttons"
 import {
   Select,
-  StyledCard,
   StyledTooltip,
   TextArea,
   TextField,
@@ -17,27 +19,14 @@ import {
 import { Colors } from "../../../src/components/themes/colors"
 import { Fonts } from "../../../src/components/themes/fonts"
 import { Countries } from "../../../src/utils/data"
-import {
-  FormHelper,
-  InputElWrapper,
-  InputFileBox,
-} from "../../components/forms/textFields/styles"
-// import { updateProfile, getProfile } from "../../redux/slices/auth"
-import { useDispatch, useSelector } from "react-redux"
 import Snackbars from "../../components/snackbar"
-import useMediaQuery from "@mui/material/useMediaQuery"
-import { Person } from "../../components/svg/menuIcons"
 import {
-  ClockIcon,
   EmailIcon,
   ExclamationMarkIcon,
-  QuestionIcon,
   QuestionMarkIcon,
   TimeIcon,
 } from "../../components/svg"
-import { QuestionMark } from "@mui/icons-material"
-import moment from "moment-timezone"
-import { getProfile, updateProfile } from "../../redux/slices/auth"
+import { getProfile, updateProfile } from "../../redux/slices/student"
 
 export default function PersonalizationPage() {
   const matches = useMediaQuery("(min-width:600px)")
@@ -47,12 +36,10 @@ export default function PersonalizationPage() {
   const [success, setSuccess] = React.useState(false)
   const [photoName, setPhotoName] = React.useState(undefined)
   const [code, setCode] = React.useState("")
-  const [errorMessage, setErrorMessage] = React.useState("")
   const { message } = useSelector((state) => state.message)
-  const { user, profile } = useSelector((state) => state.auth)
+  const { profile } = useSelector((state) => state.student)
   const timezone = moment.tz.names()
   const currentZone = moment.tz.guess()
-  const today = new Date().toISOString().split("T")[0]
   const dispatch = useDispatch()
 
   // form validation rules
@@ -67,7 +54,7 @@ export default function PersonalizationPage() {
 
   React.useEffect(() => {
     dispatch(getProfile())
-  }, [dispatch, user])
+  }, [dispatch])
 
   // get functions to build form with useForm() hook
   const {
@@ -85,21 +72,23 @@ export default function PersonalizationPage() {
     let result = str?.split(" ")
     setValue("firstname", result && result[0])
     setValue("lastname", result && result[1])
+    setValue("email", profile?.email)
     setValue("dob", moment.utc(profile?.dob).format("YYYY-MM-DD"))
     setValue("tz", moment.utc(profile?.timezone))
     setValue("gender", profile?.gender)
     setValue("country", country?.name)
     setValue("address", profile?.address)
     setValue("stateoforigin", profile?.state_province_of_origin)
-    setValue("img", profile?.image)
+    // setValue("img", profile?.image)
   }, [setValue, profile])
-
   const img = watch("img")
   const country = watch("country")
+
   React.useEffect(() => {
     const selectedCountry = Countries.find((con) => con.name === country)
     setCode(selectedCountry?.code)
   }, [country])
+
   const convert2Base64 = (file) => {
     setPhotoName(file.name)
     const reader = new FileReader()
@@ -123,6 +112,7 @@ export default function PersonalizationPage() {
     const {
       firstname,
       lastname,
+      email,
       dob,
       country,
       gender,
@@ -134,22 +124,22 @@ export default function PersonalizationPage() {
     const inputData = {
       firstname: firstname,
       lastname: lastname,
+      email: email,
       dob: dob,
       gender: gender,
-      image: img[0],
+      image: img?.[0],
       timezone: tz,
       address: address,
       country: countryInfo.code,
       state_of_origin: stateoforigin,
     }
-    console.log("inputData", inputData)
     setLoading(true)
     dispatch(updateProfile({ inputData }))
       .unwrap()
       .then(() => {
         setLoading(false)
         setSuccess(true)
-        dispatch(getProfile())
+        router.reload()
       })
       .catch(() => {
         setError(true)
@@ -164,7 +154,6 @@ export default function PersonalizationPage() {
         display: "inline-flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        background: Colors.light,
         p: { xs: "16px 0", md: "24px 0" },
         my: 2,
         // boxShadow: "none",
@@ -380,7 +369,7 @@ export default function PersonalizationPage() {
                           top: -25,
                         }}
                       >
-                        {profile?.user_profile?.first_name?.charAt(0)}
+                        {profile?.child_full_name?.charAt(0)}
                       </Avatar>
                     }
                     title={
@@ -467,7 +456,50 @@ export default function PersonalizationPage() {
                           </Box>
                         </Box>
                       ) : (
-                        <strong>{watch("img")[0].name}</strong>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            maxWidth: 380,
+                            mt: 1,
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            padding: "16px 24px",
+                            border: `2px solid ${Colors.primary}`,
+                            background: Colors.light,
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              padding: "10px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              boxShadow:
+                                "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                              borderRadius: 1,
+                              border: `1px solid #EAECF0`,
+                            }}
+                          >
+                            <ExclamationMarkIcon />
+                          </Box>
+                          <Box
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                            component="label"
+                          >
+                            <strong>{watch("img")[0].name}</strong>
+                          </Box>
+                        </Box>
                       )
                     }
                   />
@@ -722,6 +754,7 @@ export default function PersonalizationPage() {
                   error={errors.dob ? true : false}
                   helper={errors.dob?.message}
                   disabled={loading}
+                  icon={<TimeIcon />}
                 />
               </Stack>
             </Box>
@@ -1016,7 +1049,7 @@ export default function PersonalizationPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={errorMessage}
+        message={message}
         isOpen={error}
       />
       <Snackbars

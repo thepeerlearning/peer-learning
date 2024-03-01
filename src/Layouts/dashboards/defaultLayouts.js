@@ -21,25 +21,25 @@ import React, { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import Spinner from "../../components/spinner/persist-loader"
+import { AppDrawerLogo } from "../../components/svg/drawer-logo"
 import {
   AngleBackward,
+  CommentIcon,
+  CompletedCoursesIcon,
+  CourseRoadmapAltIcon,
   DashboardIcon,
   LearningIcon,
-  ProjectIcon,
-  CourseRoadmapAltIcon,
-  CompletedCoursesIcon,
   Logout,
-  ProfileIcon,
-  Notification,
-  CommentIcon,
+  ProjectIcon,
 } from "../../components/svg/menuIcons"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import { logout } from "../../redux/slices/auth"
-import { NestedStyledList, SecondStyledList, StyledList } from "./styles"
-import { AppDrawerLogo } from "../../components/svg/drawer-logo"
-import AppbarProfile from "./profile"
 import Notifications from "./notifications"
+import AppbarProfile from "./profile"
+import { NestedStyledList, StyledList } from "./styles"
+import { AppLogo } from "../../components/svg/logo-dark-bg"
+import PageLoader from "../../components/lottie/page-loader"
 
 function updateKey(str) {
   if (typeof str !== "string") return ""
@@ -57,6 +57,7 @@ function DashboardLayouts({ children }) {
   const { user, isLoggedIn } = useSelector((state) => state.auth)
   const router = useRouter()
   const dispatch = useDispatch()
+  const role = user?.role.toLowerCase()
 
   useEffect(() => {
     Router.events.on("routeChangeStart", () => setLoading(true))
@@ -71,6 +72,7 @@ function DashboardLayouts({ children }) {
 
   useEffect(() => {
     const role = user?.role.toLowerCase()
+
     if (!isLoggedIn) {
       router.push("/")
     }
@@ -86,7 +88,7 @@ function DashboardLayouts({ children }) {
     }
     return () => {}
   }, [isLoggedIn, router, user])
-
+  console.log("role", role)
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
 
   const handleClick = (item, index) => {
@@ -106,7 +108,7 @@ function DashboardLayouts({ children }) {
     {
       name: "My lessons",
       icon: <LearningIcon />,
-      link: "/students/my-learning",
+      link: "/students/my-lessons",
     },
     {
       name: "My projects",
@@ -128,10 +130,13 @@ function DashboardLayouts({ children }) {
   const drawer = (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <Toolbar
-        sx={{ minHeight: `64px !important`, padding: `16px !important` }}
+        sx={{
+          minHeight: `64px !important`,
+          padding: `18px 16px !important`,
+        }}
       >
         <Link underline="none" href="/auth/login">
-          <AppDrawerLogo />
+          <AppLogo />
         </Link>
         <Box
           sx={{
@@ -553,7 +558,7 @@ function DashboardLayouts({ children }) {
         }}
       >
         <Toolbar />
-        {loading ? <Spinner /> : children}
+        {loading ? <PageLoader /> : !role ? <Spinner /> : children}
       </Box>
     </Box>
   )

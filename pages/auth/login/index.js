@@ -20,7 +20,6 @@ import { Fonts } from "../../../src/components/themes/fonts"
 import { login } from "../../../src/redux/slices/auth"
 import { clearMessage } from "../../../src/redux/slices/message"
 import AuthLayout from "../../../src/views/auth/layout"
-import Cookies from "js-cookie"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -28,9 +27,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [routing, setRouting] = useState(false)
   const [error, setError] = React.useState(false)
-  const [errorMessage, setErrorMessage] = React.useState("")
-  const [info, setInfo] = React.useState(false)
-  const [infoMessage, setInfoMessage] = React.useState("")
   const { message } = useSelector((state) => state.message)
 
   const dispatch = useDispatch()
@@ -48,21 +44,6 @@ export default function LoginPage() {
     dispatch(clearMessage())
   }, [dispatch])
 
-  React.useEffect(() => {
-    if (message?.email) {
-      message?.email?.map((email) => {
-        return setErrorMessage(email)
-      })
-    } else if (message?.password) {
-      message?.password?.map((password) => {
-        return setErrorMessage(password)
-      })
-    } else if (message?.detail) {
-      setErrorMessage(message?.detail)
-    } else {
-      return setErrorMessage(message)
-    }
-  }, [message])
   React.useEffect(() => {
     Router.events.on("routeChangeStart", () => setRouting(true))
     Router.events.on("routeChangeComplete", () => setRouting(false))
@@ -272,14 +253,8 @@ export default function LoginPage() {
       <Snackbars
         variant="error"
         handleClose={handleCloseSnack}
-        message={errorMessage}
+        message={message}
         isOpen={error}
-      />
-      <Snackbars
-        variant="info"
-        handleClose={handleCloseSnack}
-        message={infoMessage}
-        isOpen={info}
       />
     </Box>
   )
