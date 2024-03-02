@@ -12,8 +12,8 @@ import {
   PasswordField,
   TextField,
 } from "../../../src/components/forms/textFields"
+import PageLoader from "../../../src/components/lottie/page-loader"
 import Snackbars from "../../../src/components/snackbar"
-import Spinner from "../../../src/components/spinner/persist-loader"
 import { EmailIcon } from "../../../src/components/svg"
 import { Colors } from "../../../src/components/themes/colors"
 import { Fonts } from "../../../src/components/themes/fonts"
@@ -112,7 +112,7 @@ export default function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {routing ? (
-        <Spinner />
+        <PageLoader />
       ) : (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
           <Box

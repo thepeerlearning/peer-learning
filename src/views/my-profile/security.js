@@ -75,7 +75,6 @@ export default function SecurityPage() {
       })
     return false
   }
-  console.log("error", message)
   return (
     <Box
       sx={{

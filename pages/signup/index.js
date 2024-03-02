@@ -28,7 +28,6 @@ export default function SignupPage() {
 
   const handleStepChange = (step) => {
     const stepco = Cookies.get("step")
-    console.log("step", stepco)
     setActiveStep(step)
   }
   const { user } = useSelector((state) => state.auth)

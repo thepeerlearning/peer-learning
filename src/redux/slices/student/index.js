@@ -49,7 +49,6 @@ export const updateProfile = createAsyncThunk(
       })
       return response.data
     } catch (error) {
-      console.log("error", error, error.response)
       let message =
         error?.response?.data?.message ||
         error?.response?.data?.meta.message ||

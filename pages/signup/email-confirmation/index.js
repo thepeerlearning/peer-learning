@@ -10,7 +10,6 @@ import { SubmitButton } from "../../../src/components/forms/buttons"
 
 export default function EmailConfirmationPage() {
   const router = useRouter()
-  const { email } = router.query
   return (
     <Box>
       <Head>
@@ -84,7 +83,7 @@ export default function EmailConfirmationPage() {
                   font: `normal normal 500 16px/135.8% ${Fonts.primaryMedium}`,
                 }}
               >
-                We sent a link to {email}.Please click the link to verify your
+                We sent a link to your mail.Please click the link to verify your
                 account.
               </Box>
             </Box>

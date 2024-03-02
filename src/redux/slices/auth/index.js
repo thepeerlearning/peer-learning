@@ -11,7 +11,6 @@ export const signup = createAsyncThunk(
       const response = await api.post("register", inputData)
       if (response) {
         let { data } = response.data
-        console.log("data", data)
         Cookies.set("token", data.token)
         Cookies.set("step", "account_created")
         Cookies.set("c_id", data.id)
@@ -41,7 +40,6 @@ export const classSchedule = createAsyncThunk(
       const response = await api.post("schedule", inputData)
       if (response) {
         let { data } = response.data
-        console.log("data in class schedule", data)
         Cookies.set("token", data.token)
         Cookies.set("cl_id", data.id)
         Cookies.set("step", "class_schedule")

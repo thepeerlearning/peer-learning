@@ -1,17 +1,16 @@
-import { Box, Grid, Link } from "@mui/material"
+import { ArrowBack } from "@mui/icons-material"
+import { Box, Link } from "@mui/material"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Spinner from "../../src/components/spinner/persist-loader"
+import { SubmitButton } from "../../src/components/forms/buttons"
+import DataLoader from "../../src/components/lottie/loader"
 import { VerifiedIcon } from "../../src/components/svg/menuIcons"
 import { Colors } from "../../src/components/themes/colors"
+import { Fonts } from "../../src/components/themes/fonts"
 import { validatePayment } from "../../src/redux/slices/auth"
 import MetaData from "../../src/utils/meta"
-import { isEmpty } from "lodash"
-import { ButtonsRow } from "../../src/components/forms/buttons/styles"
-import Image from "next/image"
 import AuthLayout from "../../src/views/auth/layout"
-import { Fonts } from "../../src/components/themes/fonts"
 
 export default function VerifyPayment() {
   const router = useRouter()
@@ -25,10 +24,10 @@ export default function VerifyPayment() {
     if (!router.isReady) return
     dispatch(validatePayment({ token: router.query.payment_intent }))
       .unwrap()
-      .then(() => {
+      .then(({ data }) => {
         setLoading(false)
         setTimeout(() => {
-          router.push("/payment-complete")
+          router.push(`/signup/email-confirmation`)
         }, 3200)
       })
       .catch(() => {
@@ -40,11 +39,11 @@ export default function VerifyPayment() {
   return (
     <div>
       <MetaData
-        title="Payment veriification confirmation"
-        content="Peer learning email veriification confirmation message"
+        title="Payment confirmation"
+        content="Peer learning email confirmation message"
       />
       {loading ? (
-        <Spinner />
+        <DataLoader />
       ) : error === true ? (
         <Box
           component="div"
@@ -69,53 +68,99 @@ export default function VerifyPayment() {
         </Box>
       ) : (
         <Box
-          component="div"
           sx={{
+            width: "100%",
             display: "flex",
-            textAlign: "center",
-            flexDirection: "column",
-            padding: { xs: "150px 24px", sm: "150px 0px 150px 0" },
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Box
             component="div"
             sx={{
+              width: "100%",
+              maxWidth: 768,
               display: "flex",
               flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: "24px",
+              background: {
+                xs: `url('/images/smGridBg.png')`,
+                lg: `url('/images/lgGridBg.png')`,
+              },
+              backgroundRepeat: "no-repeat",
+              gap: 3,
             }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <VerifiedIcon />
-              </Grid>
-              <Grid item xs={12}>
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: 480,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 4,
+                px: { xs: 2, lg: 3 },
+                pt: { xs: "52px", lg: "100px" },
+              }}
+            >
+              <VerifiedIcon />
+              <Box
+                component="h1"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignSelf: "stretch",
+                  textAlign: "center",
+                  m: 0,
+                  color: Colors.black,
+                  font: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
+                  gap: "12px",
+                }}
+              >
+                Payment successfully
                 <Box
-                  component="h1"
                   sx={{
-                    color: "#001B38",
-                    font: {
-                      xs: `normal normal 700 25px/30px ${Fonts.primaryBold}`,
-                      sm: `normal normal 700 28px/30px ${Fonts.primaryBold}`,
-                    },
-                    letterSpacing: "-1.2px",
-                    m: { xs: "40px 0 0px", sm: 0 },
+                    textAlign: "center",
+                    color: "#475467",
+                    m: 0,
+                    font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
                   }}
                 >
-                  Payment successful
-                  <Box
-                    sx={{
-                      textAlign: "center",
-                      color: "#6F6C90",
-                      font: `normal normal 400 20px/31px "Helvetica Neue"`,
-                      mt: { xs: 0, sm: 1.5 },
-                      mb: { xs: 3, sm: 4 },
-                    }}
-                  >
-                    Thank you for registering.
-                  </Box>
+                  We&apos;ve just sent all the class details to your email.
                 </Box>
-              </Grid>
-            </Grid>
+              </Box>
+              <Box
+                sx={{
+                  width: "100%",
+                }}
+              >
+                <SubmitButton
+                  onClick={() =>
+                    router.push("https://accounts.google.com/signin")
+                  }
+                >
+                  Open email app
+                </SubmitButton>
+              </Box>
+              <Link
+                sx={{
+                  textAlign: "center",
+                  color: Colors.textColor,
+                  color: Colors.primary,
+                  font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: 1,
+                }}
+                href="/"
+                underline="hover"
+              >
+                <ArrowBack /> Back to home page
+              </Link>
+            </Box>
           </Box>
         </Box>
       )}

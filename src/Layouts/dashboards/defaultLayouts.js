@@ -88,7 +88,7 @@ function DashboardLayouts({ children }) {
     }
     return () => {}
   }, [isLoggedIn, router, user])
-  console.log("role", role)
+
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
 
   const handleClick = (item, index) => {
@@ -558,7 +558,7 @@ function DashboardLayouts({ children }) {
         }}
       >
         <Toolbar />
-        {loading ? <PageLoader /> : !role ? <Spinner /> : children}
+        {loading ? <PageLoader /> : !role ? <PageLoader /> : children}
       </Box>
     </Box>
   )

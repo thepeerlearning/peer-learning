@@ -14,6 +14,7 @@ import {
   StyledTablePagination,
 } from "./style"
 import { Colors } from "../themes/colors"
+import DataLoader from "../lottie/loader"
 
 export function TableContent({
   loading,
@@ -40,7 +41,7 @@ export function TableContent({
             py: 4,
           }}
         >
-          <Spinner />
+          <DataLoader />
         </Box>
       ) : rows.length === 0 ? (
         <Box

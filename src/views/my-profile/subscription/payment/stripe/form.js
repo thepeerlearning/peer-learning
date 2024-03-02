@@ -37,7 +37,6 @@ export default function AddPaymentMethodForm() {
       setIsLoading(false)
       dispatch(addPaymentMethod({ inputData }))
       // Handle successful payment method creation
-      console.log(result.paymentMethod)
       // Save result.paymentMethod.id to your backend or database
     }
   }

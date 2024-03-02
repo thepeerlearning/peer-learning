@@ -8,6 +8,7 @@ import { VerifiedIcon } from "../../src/components/svg/menuIcons"
 import Spinner from "../../src/components/spinner/persist-loader"
 import { isEmpty } from "lodash"
 import { Colors } from "../../src/components/themes/colors"
+import DataLoader from "../../src/components/lottie/loader"
 
 export default function VerifyAccount() {
   const router = useRouter()
@@ -49,7 +50,7 @@ export default function VerifyAccount() {
         content="Peer learning email veriification confirmation message"
       />
       {loading ? (
-        <Spinner />
+        <DataLoader />
       ) : error && isEmpty(data) ? (
         <Box
           component="div"

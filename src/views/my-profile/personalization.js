@@ -306,7 +306,7 @@ export default function PersonalizationPage() {
                   register={register}
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
-                  disabled={loading}
+                  disabled
                   icon={<EmailIcon />}
                 />
               </Stack>
@@ -801,7 +801,7 @@ export default function PersonalizationPage() {
                   register={register}
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
-                  disabled={loading}
+                  disabled
                   icon={<EmailIcon />}
                 />
               </Grid>
@@ -944,7 +944,50 @@ export default function PersonalizationPage() {
                             </Box>
                           </Box>
                         ) : (
-                          <strong>{watch("img")[0].name}</strong>
+                          <Box
+                            sx={{
+                              width: "100%",
+                              maxWidth: 380,
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              padding: "16px 24px",
+                              border: `2px solid ${Colors.primary}`,
+                              background: Colors.light,
+                              borderRadius: "12px",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                width: 40,
+                                height: 40,
+                                padding: "10px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                boxShadow:
+                                  "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
+                                borderRadius: 1,
+                                border: `1px solid #EAECF0`,
+                              }}
+                            >
+                              <ExclamationMarkIcon />
+                            </Box>
+                            <Box
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: 3,
+                              }}
+                              component="label"
+                            >
+                              <strong>{watch("img")[0].name}</strong>
+                            </Box>
+                          </Box>
                         )
                       }
                     />

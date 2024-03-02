@@ -130,15 +130,15 @@ export default function MyCompletedCoursesPage() {
   }, [dispatch])
 
   const handleCloseSnack = () => dispatch(refresh())
-  const ongoing = courses?.user_course_outlines?.filter(
-    (course) => course.status === "pending"
-  )
-  const completed = courses?.user_course_outlines?.filter(
-    (course) => course.status === "completed"
-  )
-  const upcoming = courses?.user_course_outlines?.filter(
-    (course) => course.status === "upcoming"
-  )
+  // const ongoing = courses?.user_course_outlines?.filter(
+  //   (course) => course.status === "pending"
+  // )
+  // const completed = courses?.user_course_outlines?.filter(
+  //   (course) => course.status === "completed"
+  // )
+  // const upcoming = courses?.user_course_outlines?.filter(
+  //   (course) => course.status === "upcoming"
+  // )
 
   return (
     <Box

@@ -1,45 +1,20 @@
-import { yupResolver } from "@hookform/resolvers/yup"
-import { Avatar, Box, Card, CardHeader, Grid, Stack } from "@mui/material"
-import React, { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
-import useMediaQuery from "@mui/material/useMediaQuery"
-import { useDispatch, useSelector } from "react-redux"
-import * as Yup from "yup"
+import { Box, Card, CardHeader, Stack } from "@mui/material"
 import moment from "moment-timezone"
-import {
-  ExclamationMarkIcon,
-  MastercardIcon,
-  VisaIcon,
-} from "../../../components/svg"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import { CheckBox } from "../../../components/forms/textFields"
+import { MastercardIcon, VisaIcon } from "../../../components/svg"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
-import { CheckBox } from "../../../components/forms/textFields"
-import SubscriptionHistory from "./history"
-import StripeSubscriptionPayment from "./payment/stripe"
-import { updateProfile, getProfile } from "../../../redux/slices/auth"
 import {
   getPaymentMethod,
-  getSubscriptions,
+  getProfile,
+  updateProfile,
 } from "../../../redux/slices/student"
+import SubscriptionHistory from "./history"
+import StripeSubscriptionPayment from "./payment/stripe"
 
-const cardinfo = [
-  {
-    id: 1,
-    name: "master",
-    icon: <MastercardIcon />,
-    type: "mastercard",
-    last_digits: "1234",
-    expires: "12/12/2026",
-  },
-  {
-    id: 2,
-    name: "visa",
-    icon: <VisaIcon />,
-    type: "visacard",
-    last_digits: "4321",
-    expires: "01/05/2028",
-  },
-]
 export default function SubscriptionPage() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
@@ -220,6 +195,7 @@ export default function SubscriptionPage() {
                               display: "flex",
                               font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
                               color: Colors.secondary,
+                              textTransform: "capitalize",
                             }}
                           >
                             {`${card.card.brand} ending in ${card.card.last4}`}

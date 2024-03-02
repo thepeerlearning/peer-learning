@@ -1,6 +1,6 @@
 //PAYMENTS
-import { Add } from "@mui/icons-material"
-import { Box, Dialog, Slide } from "@mui/material"
+import { Add, Close } from "@mui/icons-material"
+import { Box, Dialog, IconButton, Slide } from "@mui/material"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import Image from "next/image"
@@ -9,6 +9,7 @@ import cardmockup from "../../../../../../public/images/Card.png"
 import { Colors } from "../../../../../components/themes/colors"
 import { Fonts } from "../../../../../components/themes/fonts"
 import AddPaymentMethodForm from "./form"
+import { ClockIcon } from "../../../../../components/svg"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -119,6 +120,21 @@ export default function StripeSubscriptionPayment() {
         maxWidth="600px"
       >
         <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            position: "absolute",
+            right: 10,
+            top: 10,
+          }}
+        >
+          <IconButton onClick={handleClose}>
+            <Close />
+          </IconButton>
+        </Box>
+        <Box
           component="div"
           sx={{
             width: "100%",
@@ -130,6 +146,7 @@ export default function StripeSubscriptionPayment() {
             gap: 0,
             borderRadius: "12px",
             backgroundColor: Colors.light,
+            mt: 4,
             boxShadow:
               "0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08)",
           }}

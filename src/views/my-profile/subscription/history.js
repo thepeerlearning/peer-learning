@@ -69,6 +69,7 @@ export default function SubscriptionHistory() {
   React.useEffect(() => {
     dispatch(getSubscriptions())
   }, [dispatch])
+
   const rows =
     data && data.length !== 0
       ? data?.map((row, i) =>
@@ -79,13 +80,13 @@ export default function SubscriptionHistory() {
                 fontWeight: 500,
               }}
             >
-              {row.course}
+              {row.title}
             </Box>,
             `USD $${Number(row.amount).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}`,
-            moment(row.date).format("ll"),
+            moment(row.date).format("ll MM:HH:ss"),
             <Box
               sx={{
                 width: "100%",

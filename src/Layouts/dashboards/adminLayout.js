@@ -18,7 +18,7 @@ import Router, { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
-import Spinner from "../../components/spinner/persist-loader"
+import PageLoader from "../../components/lottie/page-loader"
 import { PeopleIcon } from "../../components/svg"
 import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { AngleBackward, Logout } from "../../components/svg/menuIcons"
@@ -76,7 +76,7 @@ function AdminDashboardLayouts({ children, window }) {
       ? setOpenNest(index)
       : (router.push(item.link), setMobileOpen(false))
   }
-  // if (!isLoggedIn) return <Spinner />
+  if (!isLoggedIn) return <PageLoader />
   const container =
     window !== undefined ? () => window().document.body : undefined
   const menu = [
@@ -427,7 +427,7 @@ function AdminDashboardLayouts({ children, window }) {
         }}
       >
         {loading ? (
-          <Spinner />
+          <PageLoader />
         ) : (
           <>
             {/* <Box component="div" sx={{ display: "block" }}> */}
