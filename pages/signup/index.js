@@ -15,7 +15,7 @@ const steps = ["Let’s get started", "Class Schedule Selection", "Payment"]
 
 export default function SignupPage() {
   const router = useRouter()
-  const [activeStep, setActiveStep] = React.useState(1)
+  const [activeStep, setActiveStep] = React.useState(0)
   const maxSteps = steps.length
 
   const handleNext = () => {
@@ -27,7 +27,6 @@ export default function SignupPage() {
   }
 
   const handleStepChange = (step) => {
-    const stepco = Cookies.get("step")
     setActiveStep(step)
   }
   const { user } = useSelector((state) => state.auth)
