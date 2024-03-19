@@ -127,8 +127,8 @@ export default function AboutUsPage() {
                   textAlign: "justify",
                 }}
               >
-                To equip Africa kids in the diaspora with globally relevant tech
-                skills on their preferred schedule.
+                To provide children worldwide with globally relevant tech skills
+                on their preferred schedule.
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography
@@ -141,15 +141,14 @@ export default function AboutUsPage() {
                   }}
                 >
                   We believe in the boundless potential of all children,
-                  including those of African descent living abroad. We recognize
-                  that access to affordable quality tech education can be a
-                  barrier for many families, limiting their opportunities to
-                  thrive in a world increasingly driven by technology. This
-                  disparity can create disadvantages in the job market and limit
-                  their ability to reach their full potential. At Peer Learning,
-                  we are committed to addressing this gap by providing
-                  affordable and accessible tech education to all children,
-                  regardless of background or location.
+                  regardless of their background or location. We recognize that
+                  access to affordable quality tech education can be a barrier
+                  for many families, limiting their opportunities to thrive in a
+                  world increasingly driven by technology. This disparity can
+                  create disadvantages in the job market and limit their ability
+                  to reach their full potential. At Peer Learning, we are
+                  committed to addressing this gap by providing affordable and
+                  accessible tech education to all children.
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -161,8 +160,8 @@ export default function AboutUsPage() {
                     my: 2,
                   }}
                 >
-                  Peer Learning currently teaches Africa Kids Across 18
-                  Countries in Different Time Zones!
+                  Peer Learning currently teaches children across 18 countries
+                  in different time zones!
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -174,18 +173,10 @@ export default function AboutUsPage() {
                     mb: 2,
                   }}
                 >
-                  Here&apos;s how we&apos;re bridging the gap in global tech
-                  education for African children living in the diaspora:{" "}
-                  <Box
-                    component="span"
-                    sx={{
-                      color: "#1D2C4C",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Affordable learning | Flexible schedules | Globally relevant
-                    curriculum | Expert instructors | Community-driven learning
-                  </Box>
+                  With a globally relevant curriculum, expert instructors, and
+                  community-driven learning, we offer affordable learning and
+                  flexible schedules to ensure every child has the opportunity
+                  to succeed.
                 </Typography>
               </Box>
             </Box>

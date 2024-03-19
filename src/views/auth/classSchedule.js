@@ -108,7 +108,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ClassSchedule({ next, back }) {
   const [selected, setSelected] = React.useState([])
   const [availability, setAvailability] = React.useState(
-    "Add (8) schedule options"
+    "Add (4) schedule options"
   )
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(false)
@@ -152,7 +152,7 @@ export default function ClassSchedule({ next, back }) {
         >
           <Grid container spacing={2}>
             {selected.map((opt, index) => (
-              <Grid item xs={6} lg={4} key={"Selected" + index}>
+              <Grid item xs={6} key={"Selected" + index}>
                 <InputElWrapper>
                   <Box
                     component="span"
@@ -163,20 +163,12 @@ export default function ClassSchedule({ next, back }) {
                     }}
                   >
                     {index === 0
-                      ? "Week 1 option 1"
+                      ? "Week 1"
                       : index === 1
-                      ? "Week 1 option 2"
+                      ? "Week 2"
                       : index === 2
-                      ? "Week 2 option 1"
-                      : index === 3
-                      ? "Week 2 option 2"
-                      : index === 4
-                      ? "Week 3 option 1"
-                      : index === 5
-                      ? "Week 3 option 2"
-                      : index === 6
-                      ? "Week 4 option 1"
-                      : "Week 4 option 2"}
+                      ? "Week 3"
+                      : "Week 4"}
                   </Box>
                   <Box
                     key={opt.id}
@@ -208,7 +200,7 @@ export default function ClassSchedule({ next, back }) {
       )
       setAvailability(renderClasses)
     } else {
-      setAvailability("Add (8) schedule options")
+      setAvailability("Add (4) schedule options")
     }
   }, [selected])
 
@@ -229,17 +221,17 @@ export default function ClassSchedule({ next, back }) {
   }
 
   const handleTimeClick = (item) => {
-    if (selected.length < 8 && selected.includes(item)) {
+    if (selected.length < 4 && selected.includes(item)) {
       setSelected(selected.filter((selectedItem) => selectedItem !== item))
     } else {
-      if (selected.length >= 8) {
+      if (selected.length >= 4) {
         setLimit(true)
         setDisabled(true)
       }
       const weekLength = selected.filter((obj) => {
         return obj.weekId === item.weekId
       })
-      if (weekLength.length < 2) {
+      if (weekLength.length < 1) {
         setSelected([...selected, item])
       } else {
         setWeekLimit(true)
@@ -266,7 +258,7 @@ export default function ClassSchedule({ next, back }) {
   })
 
   function onSubmit(data) {
-    if (selected.length < 8) {
+    if (selected.length < 4) {
       setMinTime(true)
     } else {
       const selectedItems = selected?.reduce((week, item) => {
@@ -381,7 +373,7 @@ export default function ClassSchedule({ next, back }) {
                     sx={{
                       display: "flex",
                       justifyContent: "flex-end",
-                      mt: { xs: 0, md: -4 },
+                      mt: { xs: 0, md: 2 },
                     }}
                   >
                     <Button
@@ -457,27 +449,14 @@ export default function ClassSchedule({ next, back }) {
             >
               <Box
                 sx={{
-                  display: "flex",
                   font: {
-                    xs: `normal normal 600 normal 12px/28px ${Fonts.primary}`,
-                    sm: `normal normal 600 normal 18px/28px ${Fonts.primary}`,
+                    xs: `normal normal 400 normal 12px/28px ${Fonts.primary}`,
+                    sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                   },
                   color: "#101828",
-                  gap: 1,
                 }}
               >
-                Time availability:{" "}
-                <Box
-                  sx={{
-                    font: {
-                      xs: `normal normal 400 normal 12px/28px ${Fonts.primary}`,
-                      sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
-                    },
-                    color: "#101828",
-                  }}
-                >
-                  Please select 2 classes on a weekly basis.
-                </Box>
+                Please select one classes on a weekly basis.
               </Box>
             </Box>
 
@@ -672,7 +651,7 @@ export default function ClassSchedule({ next, back }) {
                                       : "transparent",
                                     m: 2,
                                     cursor:
-                                      selected.length >= 8
+                                      selected.length >= 4
                                         ? "not-allowed"
                                         : "pointer",
                                     color: exists
@@ -719,7 +698,7 @@ export default function ClassSchedule({ next, back }) {
                     color: "#344054",
                   }}
                 >
-                  {selected.length} of 8 classes selected
+                  {selected.length} of 4 classes selected
                 </Box>
 
                 <SubmitButton
@@ -728,7 +707,7 @@ export default function ClassSchedule({ next, back }) {
                     padding: "13px 49.27px 13px 48px",
                     width: 80,
                   }}
-                  disabled={selected.length !== 8}
+                  disabled={selected.length !== 4}
                 >
                   Continue
                 </SubmitButton>

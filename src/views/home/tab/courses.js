@@ -50,7 +50,7 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -92,7 +92,7 @@ export default function Courses() {
                     letterSpacing: 0.1,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -168,27 +168,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -197,6 +176,7 @@ export default function Courses() {
                   display: "flex",
                   gap: 2,
                   position: "relative",
+                  alignItems: "center",
                 }}
               >
                 <MarkIcon />
@@ -210,7 +190,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}
@@ -295,7 +275,7 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -337,7 +317,7 @@ export default function Courses() {
                     my: 2,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -413,27 +393,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -455,7 +414,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}
@@ -540,7 +499,7 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -582,7 +541,7 @@ export default function Courses() {
                     my: 2,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -659,27 +618,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -701,7 +639,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}
@@ -797,7 +735,7 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -839,7 +777,7 @@ export default function Courses() {
                     my: 2,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -916,27 +854,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -958,7 +875,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}
@@ -1043,8 +960,8 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
-              height: 609,
+              height: 550,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -1086,7 +1003,7 @@ export default function Courses() {
                     my: 2,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -1163,27 +1080,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -1205,7 +1101,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}
@@ -1290,7 +1186,7 @@ export default function Courses() {
             sx={{
               width: "100%",
               width: { xs: "100%", md: 350 },
-              height: 609,
+              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -1332,7 +1228,7 @@ export default function Courses() {
                     my: 2,
                   }}
                 >
-                  $120{" "}
+                  $150{" "}
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -1410,27 +1306,6 @@ export default function Courses() {
                 mt: 4,
               }}
             >
-              {/* ITEM 1 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  2 private live classes per week
-                </Box>
-              </Box>
               {/* ITEM 2 */}
               <Box
                 sx={{
@@ -1452,7 +1327,7 @@ export default function Courses() {
                     left: 30,
                   }}
                 >
-                  8 private live classes month
+                  4 private live classes month
                 </Box>
               </Box>
               {/*  ITEM 3 */}

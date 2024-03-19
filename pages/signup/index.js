@@ -15,7 +15,7 @@ const steps = ["Let’s get started", "Class Schedule Selection", "Payment"]
 
 export default function SignupPage() {
   const router = useRouter()
-  const [activeStep, setActiveStep] = React.useState(0)
+  const [activeStep, setActiveStep] = React.useState(1)
   const maxSteps = steps.length
 
   const handleNext = () => {

@@ -81,8 +81,8 @@ export default function HomePage() {
                 padding: "4px 10px",
               }}
             >
-              Currently teaching Africa Kids Across 18 Countries in Different
-              Time Zones!
+              Currently teaching Kids Across 18 Countries in Different Time
+              Zones!
             </Typography>
             <Typography
               variant="h2"
@@ -98,7 +98,7 @@ export default function HomePage() {
                 my: 4,
               }}
             >
-              1:1 online tech classes for African kids in the diaspora on their
+              TECH classes for kids with a personalized curriculum on their
               preferred schedule.
             </Typography>
             <Box
@@ -117,8 +117,8 @@ export default function HomePage() {
                   textAlign: "center",
                 }}
               >
-                We&apos;re equipping African kids in the diaspora with globally
-                relevant tech skills on their preferred schedules.
+                We&apos;re equipping kids with globally relevant tech skills on
+                their preferred schedules.
               </Typography>
             </Box>
             <Box
