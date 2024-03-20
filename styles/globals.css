@@ -128,17 +128,28 @@ input::-webkit-clear-button {
 .swiper {
   width: 100%;
   height: 100%;
+  position: relative;
 }
-
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 50px;
+}
 .swiper-pagination-bullet {
   position: relative;
+  /* top: 20px !important; */
+  background-color: "#010101" !important;
+  opacity: 1 !important;
+  width: 12px !important;
+  height: 12px !important;
+  margin: 120px 15px 0 15px !important;
 }
 .swiper-pagination-bullet i {
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 1;
-  background-color: var(--primary) !important;
 }
 .swiper-pagination-bullet b {
   position: absolute;

@@ -272,11 +272,11 @@ export default function DashboardPage() {
                   >
                     <Avatar
                       sx={{ bgcolor: "#101928", width: 48, height: 48 }}
-                      src="/images/ms-becky.png"
+                      src="/images/orange-profile.svg"
                       alt="passport"
                       aria-label="recipe"
                     >
-                      I
+                      S
                     </Avatar>
                   </Badge>
                 }
@@ -294,7 +294,7 @@ export default function DashboardPage() {
                       color: "#101928",
                     }}
                   >
-                    Ms. Becky
+                    Sam
                   </Box>
                 }
                 subheader={

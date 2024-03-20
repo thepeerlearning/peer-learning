@@ -365,12 +365,12 @@ function DashboardLayouts({ children }) {
               <CardHeader
                 avatar={
                   <Avatar
-                    src="/images/boy-profile.png"
+                    src="/images/avartar.svg"
                     alt="passport"
                     sx={{ bgcolor: Colors.dark }}
                     aria-label="recipe"
                   >
-                    S
+                    {user?.name?.charAt(0)}
                   </Avatar>
                 }
                 action={
@@ -390,7 +390,7 @@ function DashboardLayouts({ children }) {
                       color: "#F9FAFB",
                     }}
                   >
-                    Sam Rhye
+                    {user?.name}
                   </Box>
                 }
                 subheader={
@@ -404,7 +404,7 @@ function DashboardLayouts({ children }) {
                       color: "#F9FAFB",
                     }}
                   >
-                    samrhye@gmail.com
+                    {user?.CourseRoadmapAltIcon}
                   </Box>
                 }
               />

@@ -5,33 +5,31 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
-
 // import required modules
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-} from "@mui/material"
-import { Autoplay, FreeMode, Pagination } from "swiper/modules"
+import { Avatar, Box, Card, CardHeader, Typography } from "@mui/material"
+import { Autoplay, Pagination } from "swiper/modules"
 import { QuoteIcon } from "../../../components/svg/menuIcons"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
 
-const testimonies = [
+export const testimonies = [
   {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for my kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mrs. Ndubuisi",
+    text: "As a tech entrepreneur, I've seen firsthand the value of coding skills. It's not just about programming, but also about developing problem-solving and critical thinking. Peer Learning's approach has been fantastic for my kids. They're learning valuable skills while building confidence. I highly recommend",
+    author: "Mr. Hameed",
     location: "Alabama, United States",
-    imgPath: "/images/testimony1.png",
+    imgPath: "/images/mr-hameed.jpeg",
   },
   {
-    text: `As a mother of two kids who are now tech-savvy thanks to Peer Learning, I can't overstate the positive impact it's had on their future. Learning coding skills early is crucial, and Peer Learning makes it fun and engaging. Not only did they learn essential coding concepts, but they also developed problem-solving and critical thinking skills. I highly recommend Peer Learning to any parent who wants their child prepared for the digital world.`,
-    author: "Mr. Toyin Asokeji",
-    location: "United States",
+    text: `Being a mom of two, I always wanted them to be future-proof with tech skills. Peer Learning has been amazing! They're not just learning to code; they're tackling challenges and figuring things out on their own. It's incredible to see them building their own projects with confidence!`,
+    author: "Mrs. Roy",
+    location: "Florida, United States",
     imgPath: "/images/testimony2.jpeg",
+  },
+  {
+    text: `What sets Peer Learning apart for me is that their flexible schedule and personalized learning are perfect for my kids' different learning styles. The post-class reports are like mini-report cards, keeping me informed on their progress. Plus, the patient and professional instructors make all the difference.`,
+    author: "Mrs. Faith",
+    location: "Melbourne, Australia",
+    imgPath: "/images/mrs-faith.jpeg",
   },
 ]
 export default function Testimonies() {
@@ -47,8 +45,6 @@ export default function Testimonies() {
       <Swiper
         slidesPerView={1}
         spaceBetween={5}
-        freeMode={true}
-        autoHeight
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -60,7 +56,7 @@ export default function Testimonies() {
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 0,
           },
         }}
         autoplay={{
@@ -81,13 +77,17 @@ export default function Testimonies() {
           },
         }}
         className="swiper"
-        modules={[Autoplay, FreeMode, Pagination]}
+        modules={[Autoplay, Pagination]}
       >
         <Box className="swiper-wrapper">
           {testimonies.map((testimony, index) => (
             <SwiperSlide
               key={index}
-              style={{ width: "100%", position: "relative" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "relative",
+              }}
             >
               <Card
                 sx={{
@@ -102,12 +102,11 @@ export default function Testimonies() {
                 <Box>
                   <QuoteIcon />
                 </Box>
-                <CardContent
+                <Box
                   sx={{
                     width: "95%",
                     height: { xs: 210, sm: 300, xl: 180 },
                     padding: { xs: "33px 0px", sm: "33px 25px" },
-
                     overflow: "auto",
                     "&::-webkit-scrollbar": {
                       width: 1,
@@ -127,14 +126,14 @@ export default function Testimonies() {
                     variant="h6"
                     sx={{
                       width: "90%",
-                      color: "#091135",
-                      font: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                      color: "#010101",
+                      font: `normal normal 400 normal 16px/23.2px ${Fonts.primary}`,
                       textAlign: "justify",
                     }}
                   >
                     {testimony.text}
                   </Typography>
-                </CardContent>
+                </Box>
                 <CardHeader
                   sx={{ p: 0, py: 2 }}
                   avatar={

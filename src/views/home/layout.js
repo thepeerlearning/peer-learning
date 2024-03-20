@@ -468,14 +468,15 @@ export default function HomePageLayout({ children }) {
                           position: "relative",
                           top: -6,
                           minWidth: 336,
+                          background: "#FFF",
                         },
                       }}
                       title={
                         <Card
                           sx={{
                             boxShadow: "none",
-                            p: 0,
-                            padding: "12px",
+                            background: "#FFF",
+                            padding: "12px 0",
                           }}
                         >
                           {item.children.map((child, index) => {
@@ -483,7 +484,7 @@ export default function HomePageLayout({ children }) {
                               <CardHeader
                                 onClick={() => handleClick(child)}
                                 sx={{
-                                  p: "12px",
+                                  // p: "12px",
                                   gap: "6px",
                                   height: 72,
                                   borderRadius: "8px",

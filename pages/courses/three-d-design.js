@@ -5,8 +5,10 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import ThreeDesignCourseOutlinePage from "../../src/views/home/courseOutlines/three-d-design"
 import HomePageLayout from "../../src/views/home/layout"
+import { useRouter } from "next/router"
 
 export default function ThreeDesignPage() {
+  const router = useRouter()
   return (
     <Box
       sx={{
@@ -39,7 +41,7 @@ export default function ThreeDesignPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
             gap: "37.22px",
           }}
         >

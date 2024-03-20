@@ -122,7 +122,7 @@ export default function AboutUsPage() {
                 sx={{
                   width: { xs: "100%", md: 608 },
                   color: "#091135",
-                  font: `normal normal 700 normal 25px/36px ${Fonts.primaryBold}`,
+                  font: `normal normal 700 normal 23.78px/32.6px ${Fonts.primaryBold}`,
                   mb: 1,
                   textAlign: "justify",
                 }}

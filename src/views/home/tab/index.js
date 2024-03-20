@@ -1,5 +1,4 @@
 import { Box } from "@mui/material"
-import Head from "next/head"
 import { useState } from "react"
 import {
   StyledTab,
@@ -8,7 +7,6 @@ import {
   a11yProps,
 } from "../../../components/tab"
 import { Colors } from "../../../components/themes/colors"
-import { Fonts } from "../../../components/themes/fonts"
 import Courses from "./courses"
 
 export default function HomeCoursesTab() {

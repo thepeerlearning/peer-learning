@@ -8,6 +8,7 @@ import minna from "../../public/images/minna.png"
 import ourpass from "../../public/images/ourpass.png"
 import rooah from "../../public/images/rooah.png"
 import springboard from "../../public/images/springboard.png"
+
 import swaneza from "../../public/images/swaneza.png"
 import synthesis from "../../public/images/synthesis.png"
 import zaria from "../../public/images/zaria.png"
@@ -15,7 +16,7 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
 
-export default function CompanyPage() {
+export default function CareerPage() {
   return (
     <Box
       sx={{
@@ -55,15 +56,15 @@ export default function CompanyPage() {
               height: { xs: 175, sm: 237 },
               color: Colors.light,
               font: {
-                xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBoldmiBold}`,
-                sm: `normal normal 600 normal 60px/75px ${Fonts.primarySemiBoldmiBold}`,
+                xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                sm: `normal normal 600 normal 60px/75px ${Fonts.primarySemiBold}`,
               },
               letterSpacing: { xs: -0.64, sm: 0.25 },
               textAlign: "center",
               my: 1,
             }}
           >
-            About us
+            Company
           </Box>
         </Box>
         <Box
@@ -82,7 +83,7 @@ export default function CompanyPage() {
               top: { xs: 100, sm: 210, md: 244 },
               width: "100%",
               maxWidth: 960,
-              height: { xs: "auto", md: 653 },
+              // height: { xs: "auto", md: 653 },
               boxShadow: {
                 xs: "none",
                 md: "0px 24px 35px 0px rgba(0, 0, 0, 0.10)",
@@ -91,7 +92,7 @@ export default function CompanyPage() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              py: { xs: 2, md: "55.8px" },
+              py: { xs: 2, md: "50.8px" },
             }}
           >
             <Box
@@ -120,14 +121,14 @@ export default function CompanyPage() {
                 variant="h4"
                 sx={{
                   width: { xs: "100%", md: 608 },
-                  height: { xs: 176, sm: 87 },
                   color: "#091135",
-                  font: `normal normal 700 normal 27.781px/37.6px ${Fonts.primaryBold}`,
+                  font: `normal normal 700 normal 23.78px/32.6px ${Fonts.primaryBold}`,
                   mb: 1,
+                  textAlign: "justify",
                 }}
               >
-                To equip Africa kids in the diaspora with globally relevant tech
-                skills on their preferred schedule.
+                To provide children worldwide with globally relevant tech skills
+                on their preferred schedule.
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography
@@ -135,20 +136,19 @@ export default function CompanyPage() {
                   sx={{
                     width: "100%",
                     color: "#36394A",
-                    font: `normal normal 400 normal 16px/27px ${Fonts.primary}`,
+                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
                     textAlign: "justify",
                   }}
                 >
                   We believe in the boundless potential of all children,
-                  including those of African descent living abroad. We recognize
-                  that access to affordable quality tech education can be a
-                  barrier for many families, limiting their opportunities to
-                  thrive in a world increasingly driven by technology. This
-                  disparity can create disadvantages in the job market and limit
-                  their ability to reach their full potential. At Peer Learning,
-                  we are committed to addressing this gap by providing
-                  affordable and accessible tech education to all children,
-                  regardless of background or location.
+                  regardless of their background or location. We recognize that
+                  access to affordable quality tech education can be a barrier
+                  for many families, limiting their opportunities to thrive in a
+                  world increasingly driven by technology. This disparity can
+                  create disadvantages in the job market and limit their ability
+                  to reach their full potential. At Peer Learning, we are
+                  committed to addressing this gap by providing affordable and
+                  accessible tech education to all children.
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -160,8 +160,8 @@ export default function CompanyPage() {
                     my: 2,
                   }}
                 >
-                  Peer Learning currently teaches Africa Kids Across 18
-                  Countries in Different Time Zones!
+                  Peer Learning currently teaches children across 18 countries
+                  in different time zones!
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -169,22 +169,14 @@ export default function CompanyPage() {
                     width: "100%",
                     color: "#36394A",
                     font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    // textAlign: "justify",
+                    textAlign: "justify",
                     mb: 2,
                   }}
                 >
-                  Here&apos;s how we&apos;re bridging the gap in global tech
-                  education for African children living in the diaspora:{" "}
-                  <Box
-                    component="span"
-                    sx={{
-                      color: "#1D2C4C",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Affordable learning | Flexible schedules | Globally relevant
-                    curriculum | Expert instructors | Community-driven learning
-                  </Box>
+                  With a globally relevant curriculum, expert instructors, and
+                  community-driven learning, we offer affordable learning and
+                  flexible schedules to ensure every child has the opportunity
+                  to succeed.
                 </Typography>
               </Box>
             </Box>
@@ -201,7 +193,6 @@ export default function CompanyPage() {
           flexGrow: 1,
           pt: { xs: 115, sm: 75, md: 70.5 },
           pb: { xs: 2, md: 15.5 },
-          // background: "#F6F8FA",
           backgroundColor: Colors.light,
         }}
       >
@@ -250,8 +241,10 @@ export default function CompanyPage() {
               <Box
                 component="h2"
                 sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
                   maxWidth: 820,
-                  height: { xs: 187, sm: 127 },
                   color: "#091135",
                   font: {
                     xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
@@ -285,6 +278,7 @@ export default function CompanyPage() {
                   width: "100%",
                   display: "flex",
                   mt: 5,
+                  backgroundColor: Colors.light,
                 }}
               >
                 <Grid container spacing={0}>
@@ -430,6 +424,6 @@ export default function CompanyPage() {
   )
 }
 
-CompanyPage.getLayout = function getLayout(page) {
+CareerPage.getLayout = function getLayout(page) {
   return <HomePageLayout>{page}</HomePageLayout>
 }

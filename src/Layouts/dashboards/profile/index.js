@@ -1,4 +1,5 @@
 import { Avatar, Box, Button, List, ListItem } from "@mui/material"
+import { useRouter } from "next/router"
 import { useDispatch } from "react-redux"
 import { StyledTooltip } from "../../../components/forms/textFields"
 import {
@@ -8,9 +9,7 @@ import {
 } from "../../../components/svg/menuIcons"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
-import { DeleteButton } from "../../../components/forms/buttons"
 import { logout } from "../../../redux/slices/auth"
-import { useRouter } from "next/router"
 
 export default function AppbarProfile() {
   const dispatch = useDispatch()
@@ -88,12 +87,12 @@ export default function AppbarProfile() {
         <Button
           startIcon={
             <Avatar
-              src="/images/boy-profile.png"
+              src="/images/avatar.svg"
               alt="passport"
               sx={{ bgcolor: Colors.dark }}
               aria-label="recipe"
             >
-              S
+              {user?.name?.charAt(0)}
             </Avatar>
           }
           endIcon={<AngleDownWard style={{ color: Colors.textColor }} />}

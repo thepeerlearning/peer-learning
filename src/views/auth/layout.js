@@ -18,31 +18,9 @@ import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import "swiper/css"
-import "swiper/css/pagination"
-import { Autoplay, Pagination } from "swiper/modules"
+import { Autoplay } from "swiper/modules"
+import { testimonies } from "../home/testimony"
 
-const testimonies = [
-  {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mrs. Ndubuisi",
-    location: "Alabama, United States",
-    imgPath: "/images/testimony1.png",
-  },
-  {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mrs. Samuel",
-    location: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
-  },
-  {
-    text: "As a tech entrepreneur, I see the immense potential of coding skills for our kids's future. Peer Learning is making it possible for more African kids to join the tech revolution. I'm proud to support their mission to bridge the digital divide.",
-    author: "Mr. Choc",
-    location: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-  },
-]
 export default function AuthLayout({ children }) {
   const matches = useMediaQuery("(max-width:599px)")
   const theme = useTheme()
@@ -168,14 +146,14 @@ export default function AuthLayout({ children }) {
                         delay: 2500,
                         disableOnInteraction: false,
                       }}
-                      pagination={{
-                        clickable: true,
-                        type: "bullets",
+                      // pagination={{
+                      //   clickable: true,
+                      //   type: "bullets",
 
-                        el: ".swiper-custom-pagination",
-                      }}
+                      //   el: ".swiper-custom-pagination",
+                      // }}
                       navigation={true}
-                      modules={[Autoplay, Pagination]}
+                      modules={[Autoplay]}
                       className="mySwiper"
                     >
                       {testimonies.map((step, index) => (

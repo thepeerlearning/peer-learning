@@ -1,17 +1,14 @@
 import { Box, Button, CssBaseline, Grid, Link, Typography } from "@mui/material"
+import { useRouter } from "next/router"
 import React from "react"
-import {
-  BlueStarIcon,
-  ClockIcon,
-  PeopleIcon,
-  StarIcon,
-} from "../../src/components/svg"
+import { BlueStarIcon, PeopleIcon, StarIcon } from "../../src/components/svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import WebdevelopmentCourseOutlinePage from "../../src/views/home/courseOutlines/webDevelopment"
 import HomePageLayout from "../../src/views/home/layout"
 
 export default function WebdevelopmentPage() {
+  const router = useRouter()
   return (
     <Box
       sx={{
@@ -43,7 +40,7 @@ export default function WebdevelopmentPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
             gap: "37.22px",
           }}
         >

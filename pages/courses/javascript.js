@@ -5,8 +5,10 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import JavascriptCourseOutlinePage from "../../src/views/home/courseOutlines/javascript"
 import HomePageLayout from "../../src/views/home/layout"
+import { useRouter } from "next/router"
 
 export default function JavascriptPage() {
+  const router = useRouter()
   return (
     <Box
       sx={{
@@ -198,7 +200,7 @@ export default function JavascriptPage() {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
             gap: { xs: "6px", sm: "37.22px" },
           }}
         >
