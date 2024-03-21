@@ -11,25 +11,18 @@ import {
   useMediaQuery,
 } from "@mui/material"
 import MuiAppBar from "@mui/material/AppBar"
-import { useTheme } from "@mui/material/styles"
 import React from "react"
+import "swiper/css"
+import { Autoplay } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
-import "swiper/css"
-import { Autoplay } from "swiper/modules"
 import { testimonies } from "../home/testimony"
 
 export default function AuthLayout({ children }) {
   const matches = useMediaQuery("(max-width:599px)")
-  const theme = useTheme()
   const [activeStep, setActiveStep] = React.useState(0)
-  const maxSteps = testimonies.length
-
-  const handleStepChange = (step) => {
-    setActiveStep(step)
-  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -66,7 +59,19 @@ export default function AuthLayout({ children }) {
               color: Colors.light,
             }}
           >
-            Support: +234 8169924908 (WhatsApp 24/7)
+            Support:{" "}
+            <Link
+              underline="hover"
+              sx={{
+                ml: 0.5,
+                display: { xs: "none", sm: "flex" },
+                font: `normal normal 600 normal 14px/24px ${Fonts.primary}`,
+                color: Colors.light,
+              }}
+              href="mailto:hello@thepeerlearning.com"
+            >
+              hello@thepeerlearning.com
+            </Link>
           </Box>
         </Toolbar>
       </MuiAppBar>
@@ -82,8 +87,9 @@ export default function AuthLayout({ children }) {
           sx={{
             width: "100%",
             display: { xs: "flex", md: "none" },
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
+            mx: 3,
           }}
         >
           <Box
@@ -93,7 +99,18 @@ export default function AuthLayout({ children }) {
               color: Colors.primary,
             }}
           >
-            Support: +234 8169924908 (WhatsApp 24/7)
+            Support:{" "}
+            <Link
+              underline="hover"
+              sx={{
+                ml: 0.5,
+                font: `normal normal 600 normal 14px/24px ${Fonts.primary}`,
+                color: Colors.primary,
+              }}
+              href="mailto:hello@thepeerlearning.com"
+            >
+              hello@thepeerlearning.com
+            </Link>
           </Box>
         </Box>
         <Grid container>
@@ -137,6 +154,8 @@ export default function AuthLayout({ children }) {
                       background: "rgba(177, 164, 164, 0.40)",
                       transform: "rotate(180deg)",
                       boxShadow: "none",
+                      position: "absolute",
+                      top: 20,
                     }}
                   >
                     <Swiper
@@ -146,12 +165,6 @@ export default function AuthLayout({ children }) {
                         delay: 2500,
                         disableOnInteraction: false,
                       }}
-                      // pagination={{
-                      //   clickable: true,
-                      //   type: "bullets",
-
-                      //   el: ".swiper-custom-pagination",
-                      // }}
                       navigation={true}
                       modules={[Autoplay]}
                       className="mySwiper"

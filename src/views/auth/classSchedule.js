@@ -242,7 +242,7 @@ export default function ClassSchedule({ next, back }) {
   const validationSchema = Yup.object().shape({
     timezone: Yup.string().required("Timezone is required"),
     course: Yup.string().required("course is required"),
-    startDate: Yup.string().required("Preferred start date is required?"),
+    // startDate: Yup.string().required("Preferred start date is required?"),
   })
 
   // get functions to build form with useForm() hook
@@ -293,7 +293,7 @@ export default function ClassSchedule({ next, back }) {
         account_id: childrenId,
         course_id: data.course,
         other_options: data.otherOptions,
-        start_date: data.startDate,
+        // start_date: data.startDate,
         timezone: data.timezone,
         weeks,
       }
@@ -715,7 +715,7 @@ export default function ClassSchedule({ next, back }) {
             </Grid>
           </Dialog>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <DateInputField
             id="startDate"
             htmlFor="startDate"
@@ -747,7 +747,7 @@ export default function ClassSchedule({ next, back }) {
             disabled={loading}
             min={today}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12}>
           <TextArea
