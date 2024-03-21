@@ -135,15 +135,6 @@ export default function ContactPage() {
                         Chat with our admin and advisor on WhatsApp and receive
                         a quick response (24/7)
                       </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          font: `normal normal 500 normal 14px/22px ${Fonts.primaryMedium}`,
-                          color: "#F7F8F8",
-                        }}
-                      >
-                        +234 8160394314 (WhatsApp)
-                      </Typography>
                     </Box>
                   </Grid>{" "}
                   <Grid item xs={12} sm={6}>

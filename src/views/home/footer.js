@@ -305,16 +305,6 @@ export default function FooterPage() {
                       font: `normal normal 400 normal 14px/24.48px ${Fonts.primary}`,
                     }}
                   >
-                    +234 84732123 (WhatsApp)
-                  </Typography>{" "}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      textAlign: "left",
-                      color: "#8A8F98",
-                      font: `normal normal 400 normal 14px/24.48px ${Fonts.primary}`,
-                    }}
-                  >
                     hello@thepeerlearning.com
                   </Typography>{" "}
                 </Box>
