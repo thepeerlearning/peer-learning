@@ -191,7 +191,7 @@ export default function HomePageLayout({ children }) {
           component="div"
           sx={{
             width: "100%",
-            height: "45vh",
+            height: { xs: "100%", sm: "45vh" },
             overflowX: "hidden",
             overflowY: "auto",
             px: 2,

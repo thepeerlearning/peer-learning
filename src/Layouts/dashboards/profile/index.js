@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, List, ListItem } from "@mui/material"
 import { useRouter } from "next/router"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { StyledTooltip } from "../../../components/forms/textFields"
 import {
   AngleDownWard,
@@ -14,6 +14,8 @@ import { logout } from "../../../redux/slices/auth"
 export default function AppbarProfile() {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <div>
       <StyledTooltip

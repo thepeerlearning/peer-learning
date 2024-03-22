@@ -133,9 +133,9 @@ export default function MyCompletedCoursesPage() {
   // const ongoing = courses?.user_course_outlines?.filter(
   //   (course) => course.status === "pending"
   // )
-  // const completed = courses?.user_course_outlines?.filter(
-  //   (course) => course.status === "completed"
-  // )
+  const completed = courses?.user_course_outlines?.filter(
+    (course) => course.status === "completed"
+  )
   // const upcoming = courses?.user_course_outlines?.filter(
   //   (course) => course.status === "upcoming"
   // )
@@ -172,7 +172,7 @@ export default function MyCompletedCoursesPage() {
             color: Colors.dark,
           }}
         >
-          Course Roadmap
+          Course Completed
           <Box
             sx={{
               maxWidth: 800,
@@ -193,523 +193,539 @@ export default function MyCompletedCoursesPage() {
           color: Colors.dark,
         }}
       >
-        Web Development Track
+        Web Development
       </Box>
       <Box
         sx={{
           width: "100%",
         }}
       >
-        <Grid container spacing={6}>
-          {/* FIRST WEEK */}
-          <Grid item xs={12} sm={6}>
-            <Box
+        {isEmpty(completed) ? (
+          <Grid container spacing={6}>
+            <Grid
+              item
+              xs={12}
               sx={{
-                maxWidth: 800,
-                color: Colors.black,
-                font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
-                letterSpacing: 0.1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              First Week
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Accordion
-                expanded={expanded === "panel1"}
-                onChange={handleChange("panel1")}
+              <Nodata />
+            </Grid>
+          </Grid>
+        ) : (
+          <Grid container spacing={6}>
+            {/* FIRST WEEK */}
+            <Grid item xs={12} sm={6}>
+              <Box
+                sx={{
+                  maxWidth: 800,
+                  color: Colors.black,
+                  font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
               >
-                <AccordionSummary
-                  aria-controls="panel1d-content"
-                  id="panel1d-header"
+                First Week
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Accordion
                   expanded={expanded === "panel1"}
+                  onChange={handleChange("panel1")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 1.2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel1d-content"
+                    id="panel1d-header"
+                    expanded={expanded === "panel1"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 1.2,
                       }}
                     >
-                      Lesson 1
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 1
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === "panel2"}
-                onChange={handleChange("panel2")}
-              >
-                <AccordionSummary
-                  aria-controls="panel2d-content"
-                  id="panel2d-header"
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
                   expanded={expanded === "panel2"}
+                  onChange={handleChange("panel2")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel2d-content"
+                    id="panel2d-header"
+                    expanded={expanded === "panel2"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 1
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 1
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
-          </Grid>
-          {/* SECOND WEEK */}
-          <Grid item xs={12} sm={6}>
-            <Box
-              sx={{
-                maxWidth: 800,
-                color: Colors.black,
-                font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
-                letterSpacing: 0.1,
-              }}
-            >
-              Second Week
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Accordion
-                expanded={expanded === "panel3"}
-                onChange={handleChange("panel3")}
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+            </Grid>
+            {/* SECOND WEEK */}
+            <Grid item xs={12} sm={6}>
+              <Box
+                sx={{
+                  maxWidth: 800,
+                  color: Colors.black,
+                  font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
               >
-                <AccordionSummary
-                  aria-controls="panel3d-content"
-                  id="panel3d-header"
+                Second Week
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Accordion
                   expanded={expanded === "panel3"}
+                  onChange={handleChange("panel3")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel3d-content"
+                    id="panel3d-header"
+                    expanded={expanded === "panel3"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 1{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 1{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === "panel4"}
-                onChange={handleChange("panel4")}
-              >
-                <AccordionSummary
-                  aria-controls="panel4d-content"
-                  id="panel4d-header"
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
                   expanded={expanded === "panel4"}
+                  onChange={handleChange("panel4")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel4d-content"
+                    id="panel4d-header"
+                    expanded={expanded === "panel4"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 2{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 2{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
-          </Grid>
-          {/* THIRD WEEK */}
-          <Grid item xs={12} sm={6}>
-            <Box
-              sx={{
-                maxWidth: 800,
-                color: Colors.black,
-                font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
-                letterSpacing: 0.1,
-              }}
-            >
-              Third Week
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Accordion
-                expanded={expanded === "panel5"}
-                onChange={handleChange("panel5")}
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+            </Grid>
+            {/* THIRD WEEK */}
+            <Grid item xs={12} sm={6}>
+              <Box
+                sx={{
+                  maxWidth: 800,
+                  color: Colors.black,
+                  font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
               >
-                <AccordionSummary
-                  aria-controls="panel5d-content"
-                  id="panel5d-header"
+                Third Week
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Accordion
                   expanded={expanded === "panel5"}
+                  onChange={handleChange("panel5")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel5d-content"
+                    id="panel5d-header"
+                    expanded={expanded === "panel5"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 1{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 1{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === "panel6"}
-                onChange={handleChange("panel6")}
-              >
-                <AccordionSummary
-                  aria-controls="panel6d-content"
-                  id="panel6d-header"
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
                   expanded={expanded === "panel6"}
+                  onChange={handleChange("panel6")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel6d-content"
+                    id="panel6d-header"
+                    expanded={expanded === "panel6"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 2{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 2{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
-          </Grid>
-          {/* FOURTH WEEK */}
-          <Grid item xs={12} sm={6}>
-            <Box
-              sx={{
-                maxWidth: 800,
-                color: Colors.black,
-                font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
-                letterSpacing: 0.1,
-              }}
-            >
-              Fourth Week
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              <Accordion
-                expanded={expanded === "panel7"}
-                onChange={handleChange("panel7")}
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+            </Grid>
+            {/* FOURTH WEEK */}
+            <Grid item xs={12} sm={6}>
+              <Box
+                sx={{
+                  maxWidth: 800,
+                  color: Colors.black,
+                  font: `normal normal 500 normal 20px/30px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
               >
-                <AccordionSummary
-                  aria-controls="panel7d-content"
-                  id="panel7d-header"
+                Fourth Week
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Accordion
                   expanded={expanded === "panel7"}
+                  onChange={handleChange("panel7")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel7d-content"
+                    id="panel7d-header"
+                    expanded={expanded === "panel7"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 1{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 1{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === "panel8"}
-                onChange={handleChange("panel8")}
-              >
-                <AccordionSummary
-                  aria-controls="panel8d-content"
-                  id="panel8d-header"
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
                   expanded={expanded === "panel8"}
+                  onChange={handleChange("panel8")}
                 >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      flex: "1 0 0",
-                      gap: 2,
-                    }}
+                  <AccordionSummary
+                    aria-controls="panel8d-content"
+                    id="panel8d-header"
+                    expanded={expanded === "panel8"}
                   >
-                    <LessonsIcon />
-                    <Typography
+                    <Box
                       sx={{
-                        color: Colors.light,
-                        font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
-                        letterSpacing: 0.1,
-                        mt: -0.5,
+                        width: "100%",
+                        display: "flex",
+                        flex: "1 0 0",
+                        gap: 2,
                       }}
                     >
-                      Lesson 2{" "}
+                      <LessonsIcon />
                       <Typography
-                        variant="subtitle"
                         sx={{
-                          display: "block",
                           color: Colors.light,
-                          font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                          font: `normal normal 400 normal 16px/24px Roboto,sans-serif`,
                           letterSpacing: 0.1,
+                          mt: -0.5,
                         }}
                       >
-                        60 minutes
+                        Lesson 2{" "}
+                        <Typography
+                          variant="subtitle"
+                          sx={{
+                            display: "block",
+                            color: Colors.light,
+                            font: `normal normal 400 normal 11.813px/18px Roboto,sans-serif`,
+                            letterSpacing: 0.1,
+                          }}
+                        >
+                          60 minutes
+                        </Typography>
                       </Typography>
-                    </Typography>
-                  </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box
-                    sx={{
-                      font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
-                      color: "#333",
-                    }}
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        font: `normal normal 400 normal 16px/20px Roboto,sans-serif`,
+                        color: "#333",
+                      }}
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Suspendisse malesuada lacus ex, sit amet blandit leo
+                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
+                      blandit leo lobortis eget.
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Box>
       {/* <Snackbars
         variant="error"

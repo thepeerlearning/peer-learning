@@ -40,24 +40,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     padding: "0 4px",
   },
 }))
-const title = (
-  <Box
-    sx={{
-      font: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
-      color: Colors.dark,
-    }}
-  >
-    Welcome to class, Sam{" "}
-    <Box
-      sx={{
-        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-        color: Colors.textColor,
-      }}
-    >
-      Measure your
-    </Box>
-  </Box>
-)
 export default function DashboardPage() {
   const { user } = useSelector((state) => state.auth)
   const router = useRouter()
@@ -271,7 +253,12 @@ export default function DashboardPage() {
                     }
                   >
                     <Avatar
-                      sx={{ bgcolor: "#101928", width: 48, height: 48 }}
+                      sx={{
+                        bgcolor: "#FFF",
+                        color: "#FFF",
+                        width: 48,
+                        height: 48,
+                      }}
                       src="/images/orange-profile.svg"
                       alt="passport"
                       aria-label="recipe"
@@ -372,7 +359,7 @@ export default function DashboardPage() {
               </Box>
             </Box>
           </Box>{" "}
-          <Box
+          {/* <Box
             sx={{
               width: { xs: "100%", lg: 467, xl: 500 },
               p: "16px 16px",
@@ -528,9 +515,9 @@ export default function DashboardPage() {
                 }
               />
             </Card>
-          </Box>
+          </Box> */}
         </Box>
-        <Box sx={{ width: "100%", display: "flex", mt: { xs: 4, md: 6 } }}>
+        {/* <Box sx={{ width: "100%", display: "flex", mt: { xs: 4, md: 6 } }}>
           <Card
             sx={{
               width: "100%",
@@ -751,7 +738,7 @@ export default function DashboardPage() {
               </Button>
             </Box>
           </Card>
-        </Box>
+        </Box> */}
       </Box>
       {/* <Snackbars
         variant="error"
@@ -763,5 +750,5 @@ export default function DashboardPage() {
   )
 }
 DashboardPage.getLayout = function getLayout(page) {
-  return <DashboardLayouts title={title}>{page}</DashboardLayouts>
+  return <DashboardLayouts>{page}</DashboardLayouts>
 }

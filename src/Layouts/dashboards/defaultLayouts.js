@@ -20,7 +20,7 @@ import Router, { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
-import Spinner from "../../components/spinner/persist-loader"
+// import Spinner from "../../components/spinner/persist-loader"
 import { AppDrawerLogo } from "../../components/svg/drawer-logo"
 import {
   AngleBackward,
@@ -363,18 +363,22 @@ function DashboardLayouts({ children }) {
               onClick={() => dispatch(logout())}
             >
               <CardHeader
+                sx={{ display: "flex", alignItems: "center" }}
                 avatar={
                   <Avatar
-                    src="/images/avartar.svg"
+                    src="/images/avatar.svg"
                     alt="passport"
-                    sx={{ bgcolor: Colors.dark }}
+                    sx={{ textTransform: "capitalize" }}
                     aria-label="recipe"
                   >
                     {user?.name?.charAt(0)}
                   </Avatar>
                 }
                 action={
-                  <IconButton aria-label="Logout" sx={{ color: "#F9FAFB" }}>
+                  <IconButton
+                    aria-label="Logout"
+                    sx={{ mt: 0.7, color: "#F9FAFB" }}
+                  >
                     <Logout />
                   </IconButton>
                 }
@@ -404,7 +408,7 @@ function DashboardLayouts({ children }) {
                       color: "#F9FAFB",
                     }}
                   >
-                    {user?.CourseRoadmapAltIcon}
+                    {user?.email}
                   </Box>
                 }
               />

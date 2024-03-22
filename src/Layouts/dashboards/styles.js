@@ -94,6 +94,8 @@ export const NestedStyledList = styled(List)({
   gap: 4,
   marginTop: 10,
   padding: "10px 0",
+  background: "#FFF",
+  // height: "100vh",
   "& .MuiListItemButton-root": {
     width: "100%",
     backgroundColor: `transparent !important`,
