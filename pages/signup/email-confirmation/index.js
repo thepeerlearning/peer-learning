@@ -94,25 +94,6 @@ export default function EmailConfirmationPage() {
               Open email app
             </SubmitButton>
 
-            {/* <Box
-              sx={{
-                textAlign: "center",
-                color: Colors.textColor,
-                font: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
-              }}
-            >
-              Didn&apos;t receive the email?{" "}
-              <Link
-                href="/forgot-password"
-                underline="hover"
-                sx={{
-                  color: Colors.primary,
-                  font: `normal normal 600 normal 14px/20px ${Fonts.primary}`,
-                }}
-              >
-                Click to resend
-              </Link>
-            </Box> */}
             <Link
               sx={{
                 textAlign: "center",

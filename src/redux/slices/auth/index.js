@@ -72,6 +72,7 @@ export const initiatePayment = createAsyncThunk(
         class_id: course_id,
       })
       if (response) {
+        Cookies.remove("step")
         return response.data
       }
     } catch (error) {

@@ -24,7 +24,7 @@ export default function VerifyPayment() {
     if (!router.isReady) return
     dispatch(validatePayment({ token: router.query.payment_intent }))
       .unwrap()
-      .then(({ data }) => {
+      .then(() => {
         setLoading(false)
         setTimeout(() => {
           router.push(`/signup/email-confirmation`)
