@@ -1,22 +1,12 @@
-import { Box, CssBaseline, Grid, Typography } from "@mui/material"
+import { Box, Button, CssBaseline, Typography } from "@mui/material"
 import Image from "next/image"
 import React from "react"
-import buckingham from "../../public/images/buckingham.png"
-import ideal from "../../public/images/ideal.png"
-import illinois from "../../public/images/illinois.png"
-import minna from "../../public/images/minna.png"
-import ourpass from "../../public/images/ourpass.png"
-import rooah from "../../public/images/rooah.png"
-import springboard from "../../public/images/springboard.png"
 
-import swaneza from "../../public/images/swaneza.png"
-import synthesis from "../../public/images/synthesis.png"
-import zaria from "../../public/images/zaria.png"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
 
-export default function CareerPage() {
+export default function CompanyPage() {
   return (
     <Box
       sx={{
@@ -34,8 +24,8 @@ export default function CareerPage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
-          py: { xs: 2, md: 12.5 },
+          background: Colors.light,
+          py: { xs: 2, md: 12 },
           position: "relative",
         }}
       >
@@ -46,28 +36,52 @@ export default function CareerPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+            px: { xs: 2, sm: 3, lg: 12, xl: 15 },
           }}
         >
           <Box
-            component="h2"
             sx={{
-              maxWidth: 820,
-              height: { xs: 175, sm: 237 },
-              color: Colors.light,
-              font: {
-                xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
-                sm: `normal normal 600 normal 60px/75px ${Fonts.primarySemiBold}`,
-              },
-              letterSpacing: { xs: -0.64, sm: 0.25 },
-              textAlign: "center",
-              my: 1,
+              width: "100%",
+              maxWidth: 657,
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mt: 4,
             }}
           >
-            Company
+            <Typography
+              variant="h2"
+              sx={{
+                color: Colors.primary,
+                font: {
+                  xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
+                  sm: `normal normal 600 normal 50px/49px ${Fonts.primarySemiBold}`,
+                },
+                letterSpacing: { xs: -0.64, sm: 0.25 },
+                textAlign: "center",
+              }}
+            >
+              About Peer Learning
+            </Typography>
+
+            <Typography
+              sx={{
+                width: "100%",
+                color: "#0C1419",
+                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                letterSpacing: 0.25,
+                textAlign: "center",
+              }}
+            >
+              At Peer Learning, we empower kids with the essential skills they
+              need to thrive in the digital world. We do this by equipping them
+              with coding, AI, and design, combined with real-world
+              problem-solving. Our core belief&apos;is that learning should be
+              engaging, challenging, and personalized.
+            </Typography>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             width: "100%",
             display: "flex",
@@ -181,36 +195,51 @@ export default function CareerPage() {
               </Box>
             </Box>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
       {/* SECTION TWO */}
       <Box
-        id="why-peerlearing"
-        component="div"
+        id="alumi-section"
         sx={{
           width: "100%",
           display: "flex",
-          flexGrow: 1,
-          pt: { xs: 115, sm: 75, md: 70.5 },
-          pb: { xs: 2, md: 15.5 },
-          backgroundColor: Colors.light,
+          flexDirection: "column",
+          backgroundColor: "#0C1419",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+          py: 12,
         }}
       >
         <Box
           sx={{
             width: "100%",
+            maxWidth: 1264,
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
-            px: { xs: 2, sm: 3, lg: 12.5 },
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
           }}
         >
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Image
+              style={{ width: "100%", height: "100%" }}
+              src={"/images/smiling-people.svg"}
+              width={1200}
+              height={1200}
+              alt="People smiling"
+            />
+          </Box>
           <Box
-            id="alumi-section"
             sx={{
               width: "100%",
+              flexGrow: "1 0 0",
               display: "flex",
               flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              gap: 3,
             }}
           >
             <Box
@@ -218,204 +247,172 @@ export default function CareerPage() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                background: `url('/images/linear-gred.svg')`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                px: { xs: 3, lg: 12.5, xl: 16 },
-                py: { xs: 8, xl: 10 },
+                gap: 4,
               }}
             >
               <Typography
-                variant="subtitle2"
+                variant="h3"
                 sx={{
-                  color: Colors.primary,
-                  font: `normal normal 600 normal 14px/20.4px ${Fonts.primarySemiBold}`,
-                  letterSpacing: 1,
-                  textTransform: "uppercase",
+                  color: "#0C1419",
+                  font: `normal normal 500 normal 14.88px/16px ${Fonts.primaryMedium}`,
+                  border: `1px solid #FFDA79`,
+                  borderRadius: "20px",
+                  height: 40,
+                  width: 245,
+                  background: "#FFDA79",
+                  padding: "12px 16px",
                 }}
               >
-                Where we come from
+                Expertly Curated Instructors
               </Typography>
               <Box
-                component="h2"
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                  maxWidth: 820,
-                  color: "#091135",
-                  font: {
-                    xs: `normal normal 600 normal 32px/44px ${Fonts.primarySemiBold}`,
-                    sm: `normal normal 600 normal 32px/27px ${Fonts.primarySemiBold}`,
-                  },
-                  letterSpacing: { xs: -0.64, sm: 0.25 },
-                  textAlign: "center",
-                }}
-              >
-                A tapestry of brilliance.{" "}
-                <Box
-                  component="span"
-                  sx={{
-                    maxWidth: 560,
-                    display: "block",
-                    color: "#091135",
-                    font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
-                    letterSpacing: 0.25,
-                    textAlign: "center",
-                    mt: 1,
-                  }}
-                >
-                  Our instructors are alumni and experts from leading
-                  universities and tech companies, bringing real-world knowledge
-                  and passion directly to your kids.
-                </Box>
-              </Box>
-              <Box
-                id="gallery-section"
                 sx={{
                   width: "100%",
                   display: "flex",
-                  mt: 5,
-                  backgroundColor: Colors.light,
+                  flexDirection: "column",
+                  gap: 2,
                 }}
               >
-                <Grid container spacing={0}>
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Image
-                        src={illinois}
-                        alt="illinois university"
-                        priority
-                      />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 1.8,
-                      }}
-                    >
-                      <Image
-                        src={buckingham}
-                        alt="buckingham university"
-                        priority
-                      />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 1.8,
-                      }}
-                    >
-                      <Image src={minna} alt="FUT Minna" priority />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Image src={zaria} alt="illinois university" priority />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Image src={swaneza} alt="illinois university" priority />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Image
-                        src={synthesis}
-                        alt="illinois university"
-                        priority
-                      />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Image
-                        src={springboard}
-                        alt="illinois university"
-                        priority
-                      />
-                    </Box>
-                  </Grid>{" "}
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Image src={ourpass} alt="illinois university" priority />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Image src={ideal} alt="illinois university" priority />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6} sm={3} md={2.4}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Image src={rooah} alt="Rooah university" priority />
-                    </Box>
-                  </Grid>
-                </Grid>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    width: "100%",
+                    color: "#FF5E00",
+                    font: {
+                      xs: `normal normal 700 normal 28px/30px ${Fonts.primaryBold}`,
+                      sm: `normal normal 700 normal 40px/50px ${Fonts.primaryBold}`,
+                      xl: `normal normal 700 normal 45px/50px ${Fonts.primaryBold}`,
+                    },
+                    letterSpacing: { xs: -0.64, sm: 0.25 },
+                    textAlign: "left",
+                  }}
+                >
+                  A tapestry of brilliance.
+                </Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#FFFFFF",
+                      font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                      letterSpacing: 0.25,
+                      textAlign: "left",
+                    }}
+                  >
+                    Our instructors are alumni and experts from top universities
+                    and tech companies, bringing real-world knowledge and
+                    passion directly to your kids.
+                  </Typography>
+                </Box>
               </Box>
+            </Box>
+
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
+              }}
+            >
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <Image
+                  src="/images/uni-surrey.png"
+                  alt="university of Surrey"
+                  width={137}
+                  height={32}
+                  priority
+                />{" "}
+                <Image
+                  src="/images/uni-illinois.png"
+                  alt="Illinois university"
+                  width={137}
+                  height={32}
+                  priority
+                />{" "}
+                <Image
+                  src="/images/caltech.png"
+                  alt="Caltech"
+                  width={100}
+                  height={22}
+                  priority
+                />
+                <Image
+                  src="/images/uni-california.png"
+                  alt="University of california"
+                  priority
+                  width={141}
+                  height={40}
+                />
+              </Box>
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <Image
+                  src="/images/springboard.png"
+                  alt="springboard"
+                  width={214}
+                  height={36}
+                  priority
+                />
+                <Image
+                  src="/images/synthesis.png"
+                  alt="synthesis"
+                  width={228}
+                  height={32}
+                  priority
+                />
+                <Image
+                  src="/images/andela.png"
+                  alt="Andela"
+                  width={143}
+                  height={36}
+                  priority
+                />
+              </Box>
+            </Box>
+            <Box sx={{ display: { xs: "block", sm: "none" }, mt: 2 }}>
+              <Image
+                style={{ width: "100%", height: "100%" }}
+                src={"/images/smiling-people.svg"}
+                width={1300}
+                height={1300}
+                alt="People smiling"
+              />
+            </Box>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: { xs: "center", sm: "flex-start" },
+                alignItems: { xs: "center", sm: "flex-start" },
+                mt: 3,
+              }}
+            >
+              <Button
+                onClick={() => router.push("/signup")}
+                sx={{
+                  width: 165.2,
+                  height: 40,
+                  padding: "12px 18px",
+                  font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  textTransform: "none",
+                  letterSpacing: 0.25,
+                  border: `1px solid ${Colors.primary}`,
+                  borderRadius: "8px",
+                  background: Colors.primary,
+                  "&:hover": {
+                    background: Colors.primary,
+                  },
+                }}
+              >
+                Register my child
+              </Button>
             </Box>
           </Box>
         </Box>
@@ -424,6 +421,6 @@ export default function CareerPage() {
   )
 }
 
-CareerPage.getLayout = function getLayout(page) {
+CompanyPage.getLayout = function getLayout(page) {
   return <HomePageLayout>{page}</HomePageLayout>
 }

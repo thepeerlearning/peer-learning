@@ -17,10 +17,12 @@ export default function Courses() {
           justifyContent: "center",
           alignItems: "center",
           gap: { xs: 2, sm: 4, xl: 6 },
+          px: 20,
         }}
       >
         <Box
           sx={{
+            width: "100%",
             maxWidth: 633,
             font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
             textAlign: "center",
@@ -41,7 +43,7 @@ export default function Courses() {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: { xs: "column", md: "row" },
-            gap: 3,
+            gap: { xs: 1, sm: 3 },
           }}
         >
           {/* CARD 1 */}

@@ -5,7 +5,7 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
 import LegalVersion from "../../src/views/home/legal/legalversion"
-import SimpleVersion from "../../src/views/home/legal/simpleversion"
+import SimpleVersion from "../../src/views/home/legal/terms"
 
 const StyledTabs = styled(Tabs)({
   width: 310,
@@ -28,13 +28,9 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   alignItems: "center",
   justifyContent: "center",
   textTransform: "capitalize",
-  // width: 148,
   height: 44,
   cursor: "pointer",
   color: "#667085",
-  // padding: "8px 12px",
-  // background: "#F9FAFB",
-  // border: `1px solid #D0D5DD`,
   font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
   gap: 8,
   "&.Mui-selected": {

@@ -220,9 +220,7 @@ export default function HomePageLayout({ children }) {
                       disableTouchRipple
                       key={index}
                       onClick={() => handleClick(item, index)}
-                      selected={router.pathname.startsWith(
-                        `/students/${itemName}`
-                      )}
+                      selected={router.pathname.startsWith(`/${itemName}`)}
                       sx={{ my: 1 }}
                     >
                       <Box component="span">{item.name}</Box>

@@ -1,35 +1,20 @@
+import { Box, Button, CssBaseline, Typography } from "@mui/material"
+import Image from "next/image"
+import { useRouter } from "next/router"
 import React from "react"
-import HomePageLayout from "../src/views/home/layout"
-import {
-  Box,
-  Button,
-  CssBaseline,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material"
+import heroImage from "../public/images/svgs/hero-bg.svg"
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
-import Image from "next/image"
-import heroImage from "../public/images/svgs/hero-bg.svg"
-import buckingham from "../public/images/buckingham.png"
-import ideal from "../public/images/ideal.png"
-import illinois from "../public/images/illinois.png"
-import minna from "../public/images/minna.png"
-import ourpass from "../public/images/ourpass.png"
-import rooah from "../public/images/rooah.png"
-import springboard from "../public/images/springboard.png"
-import swaneza from "../public/images/swaneza.png"
-import synthesis from "../public/images/synthesis.png"
-import zaria from "../public/images/zaria.png"
+import HomePageLayout from "../src/views/home/layout"
+import StudentImages from "../src/views/home/students"
 import HomeCoursesTab from "../src/views/home/tab"
-import Testimonies from "../src/views/home/testimony"
-import { useRouter } from "next/router"
+// import Testimonies from "../src/views/home/testimony"
 
 export default function HomePage() {
   const router = useRouter()
   return (
     <Box
+      component="div"
       sx={{
         width: "100%",
         display: "flex",
@@ -45,20 +30,29 @@ export default function HomePage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 2, md: 12.5 },
           gap: { xs: 6, sm: 12 },
-          background: "url('/images/svgs/grid-bg.svg')",
+          position: "relative",
         }}
       >
         <Box
+          id="hero-section"
+          component="div"
           sx={{
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            px: { xs: 3, sm: 3, lg: 12.5, xl: 16 },
-            mt: 12,
+            width: "100%",
+            py: { xs: 20, sm: 14, lg: 25 },
+            height: { xs: 645, sm: 550, lg: 850, xl: 900 },
+            backgroundColor: Colors.primary,
+            backgroundImage: {
+              xs: "transparent",
+              sm: `url("/images/hero-image.svg")`,
+            },
+            backgroundSize: "cover",
+            backgroundPosition: { xs: "right center", xl: "right center" },
+            backgroundAttachment: "fixed",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <Box
@@ -66,101 +60,105 @@ export default function HomePage() {
               width: "100%",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              justifyContent: { xs: "center", sm: "flex-start" },
+              alignItems: { xs: "center", sm: "flex-start" },
+              px: { xs: 1.2, sm: 3, lg: 12.5, xl: 16 },
             }}
           >
-            <Typography
-              variant="h1"
-              sx={{
-                color: Colors.dark,
-                font: `normal normal 500 normal 12px/18px ${Fonts.primaryMedium}`,
-                border: `1px solid ${Colors.dark}`,
-                borderRadius: "12px",
-                background: "transparent",
-                padding: "4px 10px",
-              }}
-            >
-              Currently teaching Kids Across 18 Countries in Different Time
-              Zones!
-            </Typography>
-            <Typography
-              variant="h2"
-              sx={{
-                maxWidth: 857,
-                color: "#091135",
-                font: {
-                  xs: `normal normal 700 normal 32px/44px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 60px/75px ${Fonts.primaryBold}`,
-                },
-                letterSpacing: { xs: -0.64, sm: 0.25 },
-                textAlign: "center",
-                my: 4,
-              }}
-            >
-              TECH classes for kids with a personalized curriculum on their
-              preferred schedule.
-            </Typography>
-            <Box
-              component="span"
-              sx={{
-                maxWidth: 560,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "#091135",
-                  font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
-                  letterSpacing: 0.25,
-                  textAlign: "center",
-                }}
-              >
-                We&apos;re equipping kids with globally relevant tech skills on
-                their preferred schedules.
-              </Typography>
-            </Box>
             <Box
               sx={{
                 width: "100%",
+                maxWidth: { xs: "100%", sm: 550, xl: 724 },
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                mt: "58px",
-                mb: "15px",
+                flexDirection: "column",
+                justifyContent: { xs: "center", sm: "flex-start" },
+                alignItems: { xs: "center", sm: "flex-start" },
+                gap: "20px",
               }}
             >
+              <Typography
+                variant="h1"
+                sx={{
+                  color: "#0C1419",
+                  font: {
+                    xs: `normal normal 500 normal 11.4px/16px ${Fonts.primaryMedium}`,
+                    sm: `normal normal 500 normal 14.88px/16px ${Fonts.primaryMedium}`,
+                  },
+                  border: `1px solid #FFDA79`,
+                  borderRadius: "20px",
+                  height: 40,
+                  background: "#FFDA79",
+                  padding: "12px 16px",
+                }}
+              >
+                Currently teaching Kids Across 18 Countries in Different Time
+                Zones!
+              </Typography>
+              <Typography
+                variant="h2"
+                sx={{
+                  width: "100%",
+                  color: "#FFFFFF",
+                  font: {
+                    xs: `normal normal 700 normal 32px/44px ${Fonts.primaryBold}`,
+                    sm: `normal normal 700 normal 40px/50.72px ${Fonts.primaryBold}`,
+                    xl: `normal normal 700 normal 50px/62.72px ${Fonts.primaryBold}`,
+                  },
+                  letterSpacing: { xs: -0.64, sm: 0.25 },
+                  textAlign: { xs: "center", sm: "left" },
+                }}
+              >
+                Empower Your kids with Coding, AI, and Design Skills on Their
+                Preferred Schedule.
+              </Typography>
+              <Box
+                component="span"
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#FFFFFF",
+                    font: {
+                      xs: `normal normal 400 normal 14px/20px ${Fonts.primary}`,
+                      xl: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                    },
+                    letterSpacing: 0.25,
+                    textAlign: { xs: "center", sm: "left" },
+                  }}
+                >
+                  They&apos;ll gain the programming knowledge, skills, and
+                  confidence to become creators in the digital world while
+                  solving real-world problems.
+                </Typography>
+              </Box>
               <Box
                 sx={{
-                  width: 179.2,
-                  height: 50,
-                  flexShrink: 0,
-                  borderRadius: "14px",
-                  border: "1px solid rgba(255, 94, 0, 0.05)",
-                  background: "rgba(255, 94, 0, 0.03)",
-                  backdropFilter: "blur(1px)",
+                  width: "100%",
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  justifyContent: { xs: "center", sm: "flex-start" },
+                  alignItems: { xs: "center", sm: "flex-start" },
+                  mt: { xs: 4, sm: 0 },
                 }}
               >
                 <Button
                   onClick={() => router.push("/signup")}
                   sx={{
-                    width: 165.2,
-                    height: 36,
-                    padding: "10px 16px",
+                    width: { xs: "100%", sm: 165.2 },
+                    height: 40,
+                    padding: "12px 18px",
                     font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
-                    color: Colors.light,
+                    color: "#0C1419",
                     textTransform: "none",
                     letterSpacing: 0.25,
-                    border: `1px solid ${Colors.primary}`,
+                    border: `1px solid ${Colors.light}`,
                     borderRadius: "8px",
-                    background: Colors.primary,
-                    boxShadow: "0px 6px 16px 0px rgba(12, 43, 100, 0.32)",
+                    background: Colors.light,
                     "&:hover": {
-                      background: Colors.primary,
+                      background: Colors.light,
                     },
                   }}
                 >
@@ -170,22 +168,144 @@ export default function HomePage() {
             </Box>
           </Box>
         </Box>
+      </Box>
+      {/* STUDENTS */}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "32px",
+          background: "#F9F9F9",
+          py: { xs: 15, sm: 25 },
+          height: { xs: "100%", sm: 840 },
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+
+            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{
+              width: "100%",
+              color: "#0C1419",
+              font: {
+                xs: `normal normal 700 normal 29px/40px ${Fonts.primaryBold}`,
+                sm: `normal normal 700 normal 50px/62.72px ${Fonts.primaryBold}`,
+              },
+              textAlign: "center",
+            }}
+          >
+            Everyday Students: Extraordinary Results
+          </Typography>
+          <Box
+            component="span"
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                maxWidth: 724,
+                color: "#0C1419",
+                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                letterSpacing: 0.25,
+                textAlign: "center",
+              }}
+            >
+              Explore the amazing accomplishments of students in coding, AI, and
+              design, and see the incredible projects they create.
+            </Typography>
+          </Box>
+        </Box>
+
+        <StudentImages />
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+          py: { xs: 15, sm: 25 },
+          gap: "32px",
+          backgroundImage: `url("/images/svgs/grid-bg.svg")`,
+          backgroundSize: "cover",
+          backgroundPosition: "right center",
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <Box
           sx={{
             width: "100%",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+            flexDirection: "column",
+            gap: 1,
           }}
         >
-          <Image
-            src={heroImage}
-            width={1339}
-            height={915}
-            alt="hero background image"
-          />
+          <Typography
+            variant="h2"
+            sx={{
+              width: "100%",
+              color: "#0C1419",
+              font: {
+                xs: `normal normal 700 normal 29px/40px ${Fonts.primaryBold}`,
+                sm: `normal normal 700 normal 50px/62.72px ${Fonts.primaryBold}`,
+              },
+              textAlign: "center",
+            }}
+          >
+            Innovative Learning: Fun, Impactful Online Class
+          </Typography>
+          <Box
+            component="span"
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                maxWidth: 724,
+                color: "#0C1419",
+                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                letterSpacing: 0.25,
+                textAlign: "center",
+              }}
+            >
+              All your child&apos;s learning needs are here! From their
+              assignments to projects to the course roadmap, we&apos;ve got it
+              covered.
+            </Typography>
+          </Box>
         </Box>
+
+        <Image
+          src={heroImage}
+          width={1339}
+          height={915}
+          alt="hero background image"
+        />
       </Box>
       {/* SECTION TWO */}
       <Box
@@ -194,466 +314,216 @@ export default function HomePage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
+          backgroundColor: "#0C1419",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+          py: 12,
         }}
       >
         <Box
           sx={{
             width: "100%",
+            maxWidth: 1264,
             display: "flex",
-            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            background: `url('/images/linear-gred.svg')`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            px: { xs: 3, lg: 12.5, xl: 16 },
-            py: { xs: 8, xl: 10 },
-            gap: { xs: 6, sm: 8 },
+            flexDirection: { xs: "column", sm: "row" },
           }}
         >
-          <Typography
-            component="h2"
-            sx={{
-              maxWidth: 820,
-              color: "#091135",
-              font: {
-                xs: `normal normal 600 normal 30px/38px ${Fonts.primary}`,
-                sm: `normal normal 600 normal 32px/27px ${Fonts.primary}`,
-              },
-              letterSpacing: { xs: -0.64, sm: 0.25 },
-              textAlign: "center",
-            }}
-          >
-            A tapestry of brilliance.{" "}
-            <Box
-              component="span"
-              sx={{
-                maxWidth: 700,
-                display: "block",
-                color: "#091135",
-                font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
-                letterSpacing: 0.25,
-                textAlign: "center",
-                mt: 3,
-              }}
-            >
-              Our instructors are alumni and experts from leading universities
-              and tech companies, bringing real-world knowledge and passion
-              directly to your kids.
-            </Box>
-          </Typography>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Image
+              style={{ width: "100%", height: "100%" }}
+              src={"/images/smiling-people.svg"}
+              width={1200}
+              height={1200}
+              alt="People smiling"
+            />
+          </Box>
           <Box
-            id="gallery-section"
             sx={{
               width: "100%",
+              flexGrow: "1 0 0",
               display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              gap: 3,
             }}
           >
-            <Grid container spacing={0}>
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Image src={illinois} alt="illinois university" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 1.8,
-                  }}
-                >
-                  <Image
-                    src={buckingham}
-                    alt="buckingham university"
-                    priority
-                  />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 1.8,
-                  }}
-                >
-                  <Image src={minna} alt="FUT Minna" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Image src={zaria} alt="illinois university" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Image src={swaneza} alt="illinois university" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 2,
-                  }}
-                >
-                  <Image src={synthesis} alt="illinois university" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Image src={springboard} alt="illinois university" priority />
-                </Box>
-              </Grid>{" "}
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 2,
-                  }}
-                >
-                  <Image src={ourpass} alt="illinois university" priority />
-                </Box>
-              </Grid>
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 2,
-                  }}
-                >
-                  <Image src={ideal} alt="illinois university" priority />
-                </Box>
-              </Grid>
-              <Grid item xs={6} sm={3} md={2.4}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mt: 2,
-                  }}
-                >
-                  <Image src={rooah} alt="Rooah university" priority />
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Box>
-      {/* SECTION THREE */}
-      <Box
-        id="why-peerlearing"
-        component="div"
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexGrow: 1,
-          py: { xs: 8.5, md: 12.5 },
-          background: "#F6F8FA",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            px: { xs: 2, sm: 3, md: 2, lg: 7.5, xl: 12.5 },
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              gap: { xs: 1, sm: 3 },
-            }}
-          >
-            <Box sx={{ flex: "1 0 0", width: { xs: "100%", md: 600 } }}>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+              }}
+            >
+              <Typography
+                variant="h3"
+                sx={{
+                  color: "#0C1419",
+                  font: `normal normal 500 normal 14.88px/16px ${Fonts.primaryMedium}`,
+                  border: `1px solid #FFDA79`,
+                  borderRadius: "20px",
+                  height: 40,
+                  width: 245,
+                  background: "#FFDA79",
+                  padding: "12px 16px",
+                }}
+              >
+                Expertly Curated Instructors
+              </Typography>
               <Box
                 sx={{
-                  width: { xs: "100%", md: 370 },
+                  width: "100%",
                   display: "flex",
-                  alignItems: { xs: "center", md: "left" },
-                  justifyContent: { xs: "center", md: "left" },
+                  flexDirection: "column",
+                  gap: 2,
                 }}
               >
                 <Typography
                   variant="h4"
                   sx={{
-                    width: 229,
-                    color: "#6941C6",
-                    font: `normal normal 500 normal 12px/18px ${Fonts.primary}`,
-                    border: `1px solid rgba(87, 80, 204, 0.50)`,
-                    borderRadius: "12px",
-                    background: "#F5F3FF",
-                    padding: 0.5,
-                    m: 0,
-                    textAlign: "center",
-                  }}
-                >
-                  Ownership that&apos;s crafted for results
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: { xs: "center", md: "left" },
-                  justifyContent: { xs: "center", md: "left" },
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    width: 365,
-                    color: "#091135",
+                    width: "100%",
+                    color: "#FF5E00",
                     font: {
-                      xs: `normal normal 600 normal 24px/30px ${Fonts.primarySemiBold}`,
-                      sm: `normal normal 600 normal 32px/40px ${Fonts.primarySemiBold}`,
+                      xs: `normal normal 700 normal 28px/30px ${Fonts.primaryBold}`,
+                      sm: `normal normal 700 normal 40px/50px ${Fonts.primaryBold}`,
+                      xl: `normal normal 700 normal 45px/50px ${Fonts.primaryBold}`,
                     },
-                    letterSpacing: 0.25,
-                    textAlign: { xs: "center", md: "left" },
-                    my: 1,
+                    letterSpacing: { xs: -0.64, sm: 0.25 },
+                    textAlign: "left",
                   }}
                 >
-                  We understand that parents are busy.
+                  A tapestry of brilliance.
+                </Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <Typography
-                    variant="span"
                     sx={{
-                      display: "block",
-                      color: "#091135",
-                      font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                      color: "#FFFFFF",
+                      font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                       letterSpacing: 0.25,
-                      textAlign: { xs: "center", md: "left" },
-                      m: { xs: 3, sm: "35px 5px 35px 0" },
+                      textAlign: "left",
                     }}
                   >
-                    That&apos;s why we provide flexible learning options that
-                    suits your schedule and we personalize our approach to meet
-                    each child&apos;s unique needs.
+                    Our instructors are alumni and experts from top universities
+                    and tech companies, bringing real-world knowledge and
+                    passion directly to your kids.
                   </Typography>
-                </Typography>
+                </Box>
               </Box>
             </Box>
-            <Stack
-              sx={{ width: "100%", display: "flex", px: { xs: 2.5, sm: 0 } }}
+
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
+              }}
             >
-              <Grid container rowSpacing={3} columnSpacing={1}>
-                <Grid item xs={12} sm={4}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: 197.679,
-                      display: "flex",
-                      alignItems: "center",
-                      flexDirection: "column",
-                      background: Colors.secondary,
-                      boxShadow:
-                        "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
-                      border: "1px solid #E1E5E9",
-                      borderRadius: 1,
-                    }}
-                  >
-                    <Typography
-                      variant="h4"
-                      sx={{
-                        width: "100%",
-                        height: 50,
-                        font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
-                        textAlign: "center",
-                        color: Colors.light,
-                        letterSpacing: 0.25,
-                        py: 1,
-                        mt: 0.5,
-                      }}
-                    >
-                      At your home
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexShrink: 0,
-                        height: 100.073,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                        color: "#FBFBFD",
-                        letterSpacing: 0.25,
-                        textAlign: "center",
-                        p: 1,
-                      }}
-                    >
-                      No need to commute. Our live 1:1 online coding classes are
-                      the perfect way for children to learn coding at their
-                      home.
-                    </Typography>
-                  </Box>
-                </Grid>{" "}
-                <Grid item xs={12} sm={4}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: 197.679,
-                      display: "flex",
-                      alignItems: "center",
-                      flexDirection: "column",
-                      background: Colors.secondary,
-                      boxShadow:
-                        "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
-                      color: "#FBFBFD",
-                      border: "1px solid #E1E5E9",
-                      borderRadius: 1,
-                      font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                      letterSpacing: 0.25,
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography
-                      variant="h4"
-                      sx={{
-                        width: "100%",
-                        height: 50,
-                        font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
-                        textAlign: "center",
-                        color: Colors.light,
-                        letterSpacing: 0.25,
-                        py: 1,
-                        mt: 0.5,
-                      }}
-                    >
-                      At your time
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        width: "100%",
-                        // maxWidth: 330,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexShrink: 0,
-                        height: 100.073,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                        color: "#FBFBFD",
-                        letterSpacing: 0.25,
-                        textAlign: "center",
-                        p: 1,
-                      }}
-                    >
-                      With Peer Learning, you&apos;re in control of your
-                      schedule. Choose the days and times that work best for
-                      your child&apos;s classes.
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: 197.679,
-                      display: "flex",
-                      alignItems: "center",
-                      flexDirection: "column",
-                      background: Colors.secondary,
-                      boxShadow:
-                        "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
-                      border: "1px solid #E1E5E9",
-                      borderRadius: 1,
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        background: Colors.secondary,
-                        boxShadow:
-                          "0px 1px 2px 0px rgba(18, 55, 105, 0.12), 0px 0px 0px 1px rgba(18, 55, 105, 0.08)",
-                        color: "#FBFBFD",
-                        border: "1px solid #E1E5E9",
-                        borderRadius: 1,
-                        font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                        letterSpacing: 0.25,
-                        textAlign: "center",
-                      }}
-                    >
-                      <Typography
-                        variant="h4"
-                        sx={{
-                          width: "100%",
-                          height: 50,
-                          font: `normal normal 400 normal 20px/20px ${Fonts.primary}`,
-                          textAlign: "center",
-                          color: Colors.light,
-                          letterSpacing: 0.25,
-                          py: 1,
-                          mt: 0.5,
-                        }}
-                      >
-                        At your pace
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          flexShrink: 0,
-                          height: 110.073,
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
-                          color: "#FBFBFD",
-                          letterSpacing: 0.25,
-                          textAlign: "center",
-                          p: 1,
-                        }}
-                      >
-                        Every child is unique, and so is their learning journey.
-                        Our curriculum is designed to enable each child to
-                        progress at their own pace.
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Stack>
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <Image
+                  src="/images/uni-surrey.png"
+                  alt="university of Surrey"
+                  width={137}
+                  height={32}
+                  priority
+                />{" "}
+                <Image
+                  src="/images/uni-illinois.png"
+                  alt="Illinois university"
+                  width={137}
+                  height={32}
+                  priority
+                />{" "}
+                <Image
+                  src="/images/caltech.png"
+                  alt="Caltech"
+                  width={100}
+                  height={22}
+                  priority
+                />
+                <Image
+                  src="/images/uni-california.png"
+                  alt="University of california"
+                  priority
+                  width={141}
+                  height={40}
+                />
+              </Box>
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <Image
+                  src="/images/springboard.png"
+                  alt="springboard"
+                  width={214}
+                  height={36}
+                  priority
+                />
+                <Image
+                  src="/images/synthesis.png"
+                  alt="synthesis"
+                  width={228}
+                  height={32}
+                  priority
+                />
+                <Image
+                  src="/images/andela.png"
+                  alt="Andela"
+                  width={143}
+                  height={36}
+                  priority
+                />
+              </Box>
+            </Box>
+            <Box sx={{ display: { xs: "block", sm: "none" }, mt: 2 }}>
+              <Image
+                style={{ width: "100%", height: "100%" }}
+                src={"/images/smiling-people.svg"}
+                width={1300}
+                height={1300}
+                alt="People smiling"
+              />
+            </Box>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: { xs: "center", sm: "flex-start" },
+                alignItems: { xs: "center", sm: "flex-start" },
+                mt: 3,
+              }}
+            >
+              <Button
+                onClick={() => router.push("/signup")}
+                sx={{
+                  width: 165.2,
+                  height: 40,
+                  padding: "12px 18px",
+                  font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                  color: Colors.light,
+                  textTransform: "none",
+                  letterSpacing: 0.25,
+                  border: `1px solid ${Colors.primary}`,
+                  borderRadius: "8px",
+                  background: Colors.primary,
+                  "&:hover": {
+                    background: Colors.primary,
+                  },
+                }}
+              >
+                Register my child
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -664,7 +534,7 @@ export default function HomePage() {
         sx={{
           width: "100%",
           display: "flex",
-          flexGrow: 1,
+
           py: { xs: 8.5, md: 12.5 },
         }}
       >
@@ -694,7 +564,7 @@ export default function HomePage() {
         </Box>
       </Box>
       {/* TESTIMONIES */}
-      <Box
+      {/* <Box
         id="testimony-section"
         component="div"
         sx={{
@@ -745,6 +615,122 @@ export default function HomePage() {
           </Typography>
         </Box>
         <Testimonies />
+      </Box> */}
+      <Box
+        id="alumi-section"
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: Colors.primary,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          px: { xs: 2, sm: 3, lg: 8, xl: 12 },
+          py: 2,
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 1264,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 2,
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              flexGrow: "1 0 0",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              gap: 3,
+            }}
+          >
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                flexGrow: "1 0 0",
+              }}
+            >
+              <Typography
+                sx={{
+                  maxWidth: 606,
+                  color: "#FFFFFF",
+                  font: {
+                    xs: `normal normal 400 normal 17px/24px ${Fonts.primary}`,
+                    lg: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                  },
+                  letterSpacing: 0.25,
+                  textAlign: "left",
+                }}
+              >
+                As a tech entrepreneur, I&apos;ve seen firsthand the value of
+                coding skills. It&apos;s not just about programming, but also
+                about developing problem-solving and critical thinking. Peer
+                Learning&apos;s approach has been fantastic. They&apos;re
+                learning valuable skills while building confidence. I highly
+                recommend.
+              </Typography>
+              <Box
+                sx={{
+                  font: `normal normal 400 normal 15px/22px ${Fonts.primary}`,
+                  fontFeatureSettings: `cv04' on, 'cv03' on, 'cv01' on;`,
+                  color: "rgba(255, 255, 255, 0.7)",
+                }}
+              >
+                Hameed, Alabama, United States
+              </Box>
+            </Box>
+          </Box>
+          <Box sx={{ position: "relative" }}>
+            <Box sx={{ position: "relative" }}>
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 4,
+                  display: "block",
+                }}
+                src={"/images/mr-hameed.jpeg"}
+                width={487}
+                height={462}
+                alt="People smiling"
+              />
+            </Box>
+            <Box
+              component="div"
+              sx={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: 0,
+                display: "block",
+              }}
+            >
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 8,
+                  display: "block",
+                }}
+                src="/images/play.svg"
+                width={487}
+                height={462}
+                alt="Play"
+              />
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Box>
   )

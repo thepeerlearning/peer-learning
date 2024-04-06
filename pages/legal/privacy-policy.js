@@ -5,7 +5,7 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
 import LegalVersion from "../../src/views/home/legal/legalversion"
-import SimpleVersion from "../../src/views/home/legal/simpleversion"
+import TermsOfService from "../../src/views/home/legal/terms"
 
 const StyledTabs = styled(Tabs)({
   width: 310,
@@ -32,9 +32,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   height: 44,
   cursor: "pointer",
   color: "#667085",
-  // padding: "8px 12px",
-  // background: "#F9FAFB",
-  // border: `1px solid #D0D5DD`,
   font: `normal normal 600 normal 16px/24px ${Fonts.primary}`,
   gap: 8,
   "&.Mui-selected": {
@@ -151,7 +148,7 @@ export default function PrivacyPolicyPage() {
                   letterSpacing: 1,
                 }}
               >
-                Privacy Policy
+                {value === 0 ? "Privacy Policy" : "Terms of service"}
               </Typography>
               <Box
                 component="h2"
@@ -200,7 +197,7 @@ export default function PrivacyPolicyPage() {
                 <Box sx={{ pb: "96px" }}>
                   <StyledTabs value={value} onChange={handleChange} centered>
                     <StyledTab label="Legal version" {...a11yProps(0)} />
-                    <StyledTab label="Simple version" {...a11yProps(1)} />
+                    <StyledTab label="Terms of service" {...a11yProps(1)} />
                   </StyledTabs>
                 </Box>
                 <Box component="div" sx={{ width: "100%", display: "block" }}>
@@ -208,7 +205,7 @@ export default function PrivacyPolicyPage() {
                     <LegalVersion />
                   </TabPanel>
                   <TabPanel value={value} index={1}>
-                    <SimpleVersion />
+                    <TermsOfService />
                   </TabPanel>
                 </Box>
                 <Box sx={{ pb: "96px" }} />

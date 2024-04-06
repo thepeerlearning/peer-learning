@@ -6,19 +6,16 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"
-import {
-  CancelButton,
-  SubmitButton,
-} from "../../../src/components/forms/buttons"
+import { CancelButton, SubmitButton } from "../../components/forms/buttons"
 import {
   Select,
   StyledTooltip,
   TextArea,
   TextField,
-} from "../../../src/components/forms/textFields"
-import { Colors } from "../../../src/components/themes/colors"
-import { Fonts } from "../../../src/components/themes/fonts"
-import { Countries } from "../../../src/utils/data"
+} from "../../components/forms/textFields"
+import { Colors } from "../../components/themes/colors"
+import { Fonts } from "../../components/themes/fonts"
+import { Countries } from "../../utils/data"
 import Snackbars from "../../components/snackbar"
 import {
   EmailIcon,

@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
-// import required modules
 import { Avatar, Box, Card, CardHeader, Typography } from "@mui/material"
 import { Autoplay, Pagination } from "swiper/modules"
 import { QuoteIcon } from "../../../components/svg/menuIcons"
