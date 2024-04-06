@@ -5,6 +5,7 @@ import React from "react"
 import heroImage from "../public/images/svgs/hero-bg.svg"
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
+import MetaData from "../src/utils/meta"
 import HomePageLayout from "../src/views/home/layout"
 import StudentImages from "../src/views/home/students"
 import HomeCoursesTab from "../src/views/home/tab"
@@ -23,6 +24,7 @@ export default function HomePage() {
       }}
     >
       <CssBaseline />
+      <MetaData />
       <Box
         id="hero-section"
         component="div"

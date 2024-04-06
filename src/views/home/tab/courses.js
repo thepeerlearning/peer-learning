@@ -963,7 +963,6 @@ export default function Courses() {
               width: "100%",
               width: { xs: "100%", md: 350 },
               height: 550,
-              height: 550,
               padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
@@ -1039,6 +1038,7 @@ export default function Courses() {
                   color: Colors.light,
                   letterSpacing: 0.3,
                   my: 2,
+                  mb: 4.5,
                 }}
               >
                 This course progressively guides students through essential

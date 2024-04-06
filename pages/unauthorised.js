@@ -7,6 +7,8 @@ import { SubmitButton } from "../src/components/forms/buttons"
 import { AppLogo } from "../src/components/svg/logo-light-bg"
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
+import Head from "next/head"
+import MetaData from "../src/utils/meta"
 
 export default function PageNotFound() {
   const router = useRouter()
@@ -21,6 +23,7 @@ export default function PageNotFound() {
         background: "#F6F9FC",
       }}
     >
+      <MetaData title="Unauthorized" content="Peer learning Unauthorized" />
       <Box
         sx={{
           width: "100%",

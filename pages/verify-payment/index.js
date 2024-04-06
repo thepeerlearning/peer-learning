@@ -40,7 +40,7 @@ export default function VerifyPayment() {
     <div>
       <MetaData
         title="Payment confirmation"
-        content="Peer learning email confirmation message"
+        content="Peer learning payment confirmation message"
       />
       {loading ? (
         <DataLoader />

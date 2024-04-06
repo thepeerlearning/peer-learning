@@ -1,32 +1,21 @@
-import { yupResolver } from "@hookform/resolvers/yup"
-import { Box, Card, CardHeader, Grid, Link, Typography } from "@mui/material"
-import Head from "next/head"
+import { ArrowBack } from "@mui/icons-material"
+import { Box, Card, CardHeader, Typography } from "@mui/material"
 import { useRouter } from "next/router"
 import React from "react"
-import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
-import * as Yup from "yup"
-import { TextField } from "../src/components/forms/textFields"
-import Snackbars from "../src/components/snackbar"
+import { MessageChatIcon } from "../src/components/svg"
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
-import { forgotpassword } from "../src/redux/slices/auth"
-import AuthLayout from "../src/views/auth/layout"
-import { PasswordIcon } from "../src/components/svg/menuIcons"
-import { CommentIcon, EmailIcon, MessageChatIcon } from "../src/components/svg"
-import { ArrowBack } from "@mui/icons-material"
-import { SubmitButton } from "../src/components/forms/buttons"
+import MetaData from "../src/utils/meta"
 import HomePageLayout from "../src/views/home/layout"
 
 export default function PageNotFound() {
   const router = useRouter()
   return (
     <Box>
-      <Head>
-        <title>Page not found | Peer learning</title>
-        <meta name="description" content="Peer-learning forgot password page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetaData
+        title="Page not found"
+        content="Ther Peerlearning page not found"
+      />
       <Box
         sx={{
           width: "100%",

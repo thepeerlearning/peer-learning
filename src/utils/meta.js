@@ -1,10 +1,13 @@
-import Head from "next/head";
-import React from "react";
+import Head from "next/head"
+import React from "react"
+import { Colors } from "../components/themes/colors"
 
 export default function MetaData({ title, content }) {
   return (
     <Head>
-      <title>{title} | Peer learning </title>
+      <title>
+        {title ? `${title} | The Peerlearning ` : `The Peerlearning`}{" "}
+      </title>
       <meta name="description" content={content} />
       <link
         rel="apple-touch-icon"
@@ -25,9 +28,9 @@ export default function MetaData({ title, content }) {
       />
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0d1825" />
-      <meta name="msapplication-TileColor" content="#da532c" />
-      <meta name="theme-color" content="#0d1825" />
+      <meta name="msapplication-TileColor" content="" />
+      <meta name="theme-color" content={Colors.primary} />
       {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
     </Head>
-  );
+  )
 }
