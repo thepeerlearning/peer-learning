@@ -97,6 +97,11 @@ export default function StudentImages() {
               }}
             >
               <Image
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  position: "relative",
+                }}
                 src={img.imgPath}
                 alt={img.course}
                 priority
@@ -105,7 +110,6 @@ export default function StudentImages() {
 
               <Button
                 sx={{
-                  filter: `blur(1)`,
                   font: `normal normal 700 normal 11px/11px ${Fonts.primary}`,
                   textAlign: "center",
                   padding: "7px 13px 10px 13px",

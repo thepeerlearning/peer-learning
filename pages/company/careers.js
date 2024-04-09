@@ -35,7 +35,7 @@ export default function CareerPage() {
           display: "flex",
           flexDirection: "column",
           background: Colors.light,
-          py: { xs: 2, md: 12 },
+          py: { xs: 6, md: 12 },
           position: "relative",
         }}
       >
@@ -78,7 +78,10 @@ export default function CareerPage() {
               sx={{
                 width: "100%",
                 color: "#0C1419",
-                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                font: {
+                  xs: `normal normal 400 normal 16.5px/25px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                },
                 letterSpacing: 0.25,
                 textAlign: "center",
               }}
@@ -91,121 +94,6 @@ export default function CareerPage() {
             </Typography>
           </Box>
         </Box>
-        {/* <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: { xs: 100, sm: 210, md: 244 },
-              width: "100%",
-              maxWidth: 960,
-              // height: { xs: "auto", md: 653 },
-              boxShadow: {
-                xs: "none",
-                md: "0px 24px 35px 0px rgba(0, 0, 0, 0.10)",
-              },
-              background: Colors.light,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              py: { xs: 2, md: "50.8px" },
-            }}
-          >
-            <Box
-              sx={{
-                width: "100%",
-                maxWidth: 750,
-                display: "flex",
-                flexDirection: "column",
-                gap: "29.81px",
-                px: { xs: 3, md: "55.8px" },
-              }}
-            >
-              <Typography
-                variant="h1"
-                sx={{
-                  width: "100%",
-                  color: Colors.primary,
-                  font: `normal normal 600 normal 14px/20.4px ${Fonts.primarySemiBold}`,
-                  letterSpacing: 1,
-                  textTransform: "uppercase",
-                }}
-              >
-                Our mission
-              </Typography>
-              <Typography
-                variant="h4"
-                sx={{
-                  width: { xs: "100%", md: 608 },
-                  color: "#091135",
-                  font: `normal normal 700 normal 23.78px/32.6px ${Fonts.primaryBold}`,
-                  mb: 1,
-                  textAlign: "justify",
-                }}
-              >
-                To provide children worldwide with globally relevant tech skills
-                on their preferred schedule.
-              </Typography>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    width: "100%",
-                    color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    textAlign: "justify",
-                  }}
-                >
-                  We believe in the boundless potential of all children,
-                  regardless of their background or location. We recognize that
-                  access to affordable quality tech education can be a barrier
-                  for many families, limiting their opportunities to thrive in a
-                  world increasingly driven by technology. This disparity can
-                  create disadvantages in the job market and limit their ability
-                  to reach their full potential. At Peer Learning, we are
-                  committed to addressing this gap by providing affordable and
-                  accessible tech education to all children.
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    width: "100%",
-                    color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    textAlign: "justify",
-                    my: 2,
-                  }}
-                >
-                  Peer Learning currently teaches children across 18 countries
-                  in different time zones!
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    width: "100%",
-                    color: "#36394A",
-                    font: `normal normal 400 normal 18px/27.2px ${Fonts.primary}`,
-                    textAlign: "justify",
-                    mb: 2,
-                  }}
-                >
-                  With a globally relevant curriculum, expert instructors, and
-                  community-driven learning, we offer affordable learning and
-                  flexible schedules to ensure every child has the opportunity
-                  to succeed.
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </Box> */}
       </Box>
       {/* SECTION TWO */}
       <Box
@@ -325,7 +213,7 @@ export default function CareerPage() {
                     sx={{
                       color: "#FFFFFF",
                       font: {
-                        xs: `normal normal 400 normal 17.5px/25px ${Fonts.primary}`,
+                        xs: `normal normal 400 normal 17px/25px ${Fonts.primary}`,
                         sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                       },
                       letterSpacing: 0.25,
@@ -368,6 +256,7 @@ export default function CareerPage() {
                 height: 141,
                 display: { xs: "flex", sm: "none" },
                 gap: { xs: 2, sm: 2 },
+                my: 2,
               }}
             >
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 26 }}>

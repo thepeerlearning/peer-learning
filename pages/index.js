@@ -125,7 +125,7 @@ export default function HomePage() {
                   maxWidth: { xs: "100%", sm: 635, xl: 724 },
                   color: "#FFFFFF",
                   font: {
-                    xs: `normal normal 400 normal 16.5px/25px ${Fonts.primary}`,
+                    xs: `normal normal 400 normal 16px/24.5px ${Fonts.primary}`,
                     sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                   },
                   letterSpacing: 0.25,
@@ -143,8 +143,8 @@ export default function HomePage() {
                   flexDirection: { xs: "column", sm: "row" },
                   justifyContent: { xs: "center", sm: "flex-start" },
                   alignItems: { xs: "center", sm: "flex-start" },
-                  mt: { xs: 8, sm: 0 },
-                  gap: 1,
+                  mt: { xs: 6, sm: 0 },
+                  gap: 1.8,
                   p: { xs: 0.5, sm: 0 },
                 }}
               >
@@ -255,7 +255,7 @@ export default function HomePage() {
                   maxWidth: 560,
                   color: "#0C1419",
                   font: {
-                    xs: `normal normal 400 normal 17.5px/25px ${Fonts.primary}`,
+                    xs: `normal normal 400 normal 17px/25px ${Fonts.primary}`,
                     sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                   },
                   textAlign: "center",
@@ -483,7 +483,7 @@ export default function HomePage() {
                     sx={{
                       color: "#FFFFFF",
                       font: {
-                        xs: `normal normal 400 normal 17.5px/25px ${Fonts.primary}`,
+                        xs: `normal normal 400 normal 17px/25px ${Fonts.primary}`,
                         sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                       },
                       letterSpacing: 0.25,
@@ -793,17 +793,12 @@ export default function HomePage() {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ position: "relative", maxWidth: { xs: 360, sm: 487 } }}>
-            <Image
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "block",
-              }}
-              src={parent}
-              alt="parent testimony"
-              priority
-            />
+          <Box
+            sx={{
+              position: "relative",
+            }}
+          >
+            <Image src={parent} alt="parent testimony" priority />
           </Box>
         </Box>
       </Box>

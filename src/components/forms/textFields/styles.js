@@ -209,14 +209,14 @@ export const InputTextElement = styled.input`
 
 export const InputPasswordElement = styled(InputTextElement)`
   padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
-    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+    ${(props) => (props.hpadding ? props.hpadding : "17px")};
 `
 //PASSWORD FIELD
 
 export const InputDateElement = styled(InputTextElement)`
   background: ${Colors.light};
   padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
-    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+    ${(props) => (props.hpadding ? props.hpadding : "17px")};
   border: 1px solid #d0d5dd;
   border-radius: 8px;
   height: 44px;
@@ -229,7 +229,7 @@ export const PhoneNumberTextField = styled(PhoneInput)`
     margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
       ${(props) => (props.hmargin ? hmargin : 0)};
     padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
-      ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+      ${(props) => (props.hpadding ? props.hpadding : "17px")};
     border: ${(props) =>
       props.disabled
         ? `1px solid ${Colors.greyLightest}`
@@ -294,7 +294,7 @@ export const InputSearchElement = styled(InputTextElement)`
 export const TextAreaInput = styled(InputTextElement)`
   min-height: ${(props) => props.height || "89px"};
   padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
-    ${(props) => (props.hpadding ? props.hpadding : "17.5px")};
+    ${(props) => (props.hpadding ? props.hpadding : "17px")};
   resize: none;
   font: normal normal 400 normal 16px/20px ${Fonts.primary};
   display: flex;
@@ -651,7 +651,7 @@ export const InputFileBox = styled(Box)`
   width: ${(props) => (props.width ? props.width : "100%")};
   min-height: ${(props) => (props.height ? props.height : "10px")};
   margin: 10px 0;
-  padding: 16px 17.5px;
+  padding: 16px 17px;
   font: normal normal 400 normal 16px/20px ${Fonts.primary};
   border: ${(props) =>
     props.disabled

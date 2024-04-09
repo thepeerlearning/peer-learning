@@ -24,8 +24,8 @@ export default function AboutUsPage() {
         flexDirection: "column",
       }}
     >
-      <MetaData title="About us" description="The peerlearning about us page" />
       <CssBaseline />
+      <MetaData title="About us" description="The peerlearning about us page" />
       <Box
         id="hero-section"
         component="div"
@@ -34,7 +34,7 @@ export default function AboutUsPage() {
           display: "flex",
           flexDirection: "column",
           background: Colors.light,
-          py: { xs: 2, md: 12 },
+          py: { xs: 6, md: 12 },
           position: "relative",
         }}
       >
@@ -77,7 +77,10 @@ export default function AboutUsPage() {
               sx={{
                 width: "100%",
                 color: "#0C1419",
-                font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                font: {
+                  xs: `normal normal 400 normal 16.5px/25px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                },
                 letterSpacing: 0.25,
                 textAlign: "center",
               }}
@@ -324,7 +327,7 @@ export default function AboutUsPage() {
                     sx={{
                       color: "#FFFFFF",
                       font: {
-                        xs: `normal normal 400 normal 17.5px/25px ${Fonts.primary}`,
+                        xs: `normal normal 400 normal 17px/25px ${Fonts.primary}`,
                         sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
                       },
                       letterSpacing: 0.25,
@@ -367,6 +370,7 @@ export default function AboutUsPage() {
                 height: 141,
                 display: { xs: "flex", sm: "none" },
                 gap: { xs: 2, sm: 2 },
+                my: 2,
               }}
             >
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 26 }}>
