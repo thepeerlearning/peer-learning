@@ -6,6 +6,7 @@ import { Fonts } from "../../src/components/themes/fonts"
 import DesignCourseOutlinePage from "../../src/views/home/courseOutlines/design"
 import HomePageLayout from "../../src/views/home/layout"
 import { useRouter } from "next/router"
+import MetaData from "../../src/utils/meta"
 
 export default function DesignPage() {
   const router = useRouter()
@@ -18,6 +19,11 @@ export default function DesignPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="UI/UX course"
+        description="The peerlearning UI/UX course page"
+      />
+
       <CssBaseline />
       <Box
         id="hero-section"

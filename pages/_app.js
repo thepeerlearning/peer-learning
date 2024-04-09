@@ -16,6 +16,7 @@ import createEmotionCache from "../src/lib/createEmotionCache"
 import { wrapper } from "../src/redux/store"
 import "../styles/globals.css"
 import theme from "../styles/muiTheme"
+import MetaData from "../src/utils/meta"
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
@@ -53,10 +54,10 @@ export default function MyApp({
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <link rel="icon" href="/favicon.ico" />
+      <MetaData
+        title="Payment verification"
+        description="The peerlearning payment verification page"
+      />
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
           <CssBaseline />

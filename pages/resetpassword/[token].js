@@ -15,6 +15,7 @@ import { resetpassword } from "../../src/redux/slices/auth"
 import { clearMessage } from "../../src/redux/slices/message"
 import AuthLayout from "../../src/views/auth/layout"
 import { PasswordIcon } from "../../src/components/svg/menuIcons"
+import MetaData from "../../src/utils/meta"
 
 export default function ResetPasswordPage() {
   const router = useRouter()
@@ -79,11 +80,10 @@ export default function ResetPasswordPage() {
 
   return (
     <Box>
-      <Head>
-        <title>Forgot password | Peer learning</title>
-        <meta name="description" content="Peer-learning forgot password page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetaData
+        title="Reset password"
+        description="The peerlearning reset password page"
+      />
       <Box
         sx={{
           width: "100%",

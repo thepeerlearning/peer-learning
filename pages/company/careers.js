@@ -12,6 +12,7 @@ import caltech from "../../public/images/caltech.svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
+import MetaData from "../../src/utils/meta"
 
 export default function CareerPage() {
   return (
@@ -23,6 +24,8 @@ export default function CareerPage() {
         flexDirection: "column",
       }}
     >
+      {" "}
+      <MetaData title="Career us" description="The peerlearning career page" />
       <CssBaseline />
       <Box
         id="hero-section"

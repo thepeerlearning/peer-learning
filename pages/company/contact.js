@@ -3,6 +3,7 @@ import React from "react"
 import { CommentIcon, MailIcon } from "../../src/components/svg"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
+import MetaData from "../../src/utils/meta"
 
 export default function ContactPage() {
   return (
@@ -14,6 +15,11 @@ export default function ContactPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Contact us"
+        description="The peerlearning contact us page"
+      />
+
       <CssBaseline />
       <Box
         id="hero-section"

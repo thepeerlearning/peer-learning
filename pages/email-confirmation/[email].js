@@ -1,28 +1,22 @@
-import { Box, Grid, Link } from "@mui/material"
-import Head from "next/head"
-import Image from "next/image"
+import { ArrowBack } from "@mui/icons-material"
+import { Box, Link } from "@mui/material"
 import { useRouter } from "next/router"
 import React from "react"
-import { ButtonsRow } from "../../src/components/forms/buttons/styles"
+import { SubmitButton } from "../../src/components/forms/buttons"
 import { CheckEmailIcon } from "../../src/components/svg/menuIcons"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
-import { SubmitButton } from "../../src/components/forms/buttons"
-import { ArrowBack } from "@mui/icons-material"
+import MetaData from "../../src/utils/meta"
 
 export default function EmailConfirmationPage() {
   const router = useRouter()
   const { email } = router.query
   return (
     <Box>
-      <Head>
-        <title>Email confirmation | Peer learning</title>
-        <meta
-          name="description"
-          content="Peer-learning email confirmation page"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetaData
+        title="Email confirmation"
+        description="The peerlearning email confirmation page"
+      />
       <Box
         sx={{
           width: "100%",

@@ -6,6 +6,7 @@ import { Fonts } from "../../src/components/themes/fonts"
 import JavascriptCourseOutlinePage from "../../src/views/home/courseOutlines/javascript"
 import HomePageLayout from "../../src/views/home/layout"
 import { useRouter } from "next/router"
+import MetaData from "../../src/utils/meta"
 
 export default function JavascriptPage() {
   const router = useRouter()
@@ -18,6 +19,10 @@ export default function JavascriptPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Javascript course"
+        description="The peerlearning Javascript course page"
+      />
       <CssBaseline />
       <Box
         id="hero-section"

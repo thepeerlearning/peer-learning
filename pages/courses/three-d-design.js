@@ -6,6 +6,7 @@ import { Fonts } from "../../src/components/themes/fonts"
 import ThreeDesignCourseOutlinePage from "../../src/views/home/courseOutlines/three-d-design"
 import HomePageLayout from "../../src/views/home/layout"
 import { useRouter } from "next/router"
+import MetaData from "../../src/utils/meta"
 
 export default function ThreeDesignPage() {
   const router = useRouter()
@@ -18,6 +19,10 @@ export default function ThreeDesignPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="3D design course"
+        description="The peerlearning 3D design course page"
+      />
       <CssBaseline />
       <Box
         id="hero-section"

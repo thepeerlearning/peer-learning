@@ -12,6 +12,7 @@ import caltech from "../../public/images/caltech.svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
+import MetaData from "../../src/utils/meta"
 
 export default function CompanyPage() {
   return (
@@ -24,6 +25,11 @@ export default function CompanyPage() {
       }}
     >
       <CssBaseline />
+      <MetaData
+        title="Comapny information"
+        description="The peerlearning company information page"
+      />
+
       <Box
         id="hero-section"
         component="div"

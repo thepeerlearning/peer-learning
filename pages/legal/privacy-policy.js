@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
+import MetaData from "../../src/utils/meta"
 import HomePageLayout from "../../src/views/home/layout"
 import LegalVersion from "../../src/views/home/legal/legalversion"
 import TermsOfService from "../../src/views/home/legal/terms"
@@ -98,6 +99,10 @@ export default function PrivacyPolicyPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Privacy policy"
+        description="The peerlearning privacy policy page"
+      />
       <CssBaseline />
       <Box
         id="legal-section"

@@ -6,6 +6,7 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import WebdevelopmentCourseOutlinePage from "../../src/views/home/courseOutlines/webDevelopment"
 import HomePageLayout from "../../src/views/home/layout"
+import MetaData from "../../src/utils/meta"
 
 export default function WebdevelopmentPage() {
   const router = useRouter()
@@ -18,6 +19,10 @@ export default function WebdevelopmentPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Web development course"
+        description="The peerlearning Web development course page"
+      />
       <CssBaseline />
       <Box
         id="web-hero-section"

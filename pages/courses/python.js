@@ -6,6 +6,7 @@ import { Fonts } from "../../src/components/themes/fonts"
 import PythonCourseOutlinePage from "../../src/views/home/courseOutlines/python"
 import HomePageLayout from "../../src/views/home/layout"
 import { useRouter } from "next/router"
+import MetaData from "../../src/utils/meta"
 
 export default function PythonPage() {
   const router = useRouter()
@@ -18,6 +19,10 @@ export default function PythonPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Python course"
+        description="The peerlearning Python course page"
+      />
       <CssBaseline />
       <Box
         id="hero-section"

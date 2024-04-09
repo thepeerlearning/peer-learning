@@ -12,6 +12,7 @@ import caltech from "../../public/images/caltech.svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
+import MetaData from "../../src/utils/meta"
 
 export default function AboutUsPage() {
   return (
@@ -23,6 +24,7 @@ export default function AboutUsPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData title="About us" description="The peerlearning about us page" />
       <CssBaseline />
       <Box
         id="hero-section"

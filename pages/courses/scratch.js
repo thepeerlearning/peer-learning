@@ -6,6 +6,7 @@ import { Fonts } from "../../src/components/themes/fonts"
 import ScratchCourseOutlinePage from "../../src/views/home/courseOutlines/scratch"
 import HomePageLayout from "../../src/views/home/layout"
 import { useRouter } from "next/router"
+import MetaData from "../../src/utils/meta"
 
 export default function ScratchPage() {
   const router = useRouter()
@@ -18,6 +19,11 @@ export default function ScratchPage() {
         flexDirection: "column",
       }}
     >
+      <MetaData
+        title="Scratch course"
+        description="The peerlearning scratch course page"
+      />
+
       <CssBaseline />
       <Box
         id="scratch-hero-section"

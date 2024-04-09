@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { ArrowBack } from "@mui/icons-material"
 import { Box, Grid, Link } from "@mui/material"
-import Head from "next/head"
 import { useRouter } from "next/router"
 import React from "react"
 import { useForm } from "react-hook-form"
@@ -15,6 +14,7 @@ import { PasswordIcon } from "../../src/components/svg/menuIcons"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import { forgotpassword } from "../../src/redux/slices/auth"
+import MetaData from "../../src/utils/meta"
 
 export default function ForgotPasswordPage() {
   const router = useRouter()
@@ -57,11 +57,10 @@ export default function ForgotPasswordPage() {
 
   return (
     <Box>
-      <Head>
-        <title>Forgot password | Peer learning</title>
-        <meta name="description" content="Peer-learning forgot password page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetaData
+        title="forgot password"
+        description="The peerlearning forgot password page"
+      />
       <Box
         sx={{
           width: "100%",
