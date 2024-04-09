@@ -38,7 +38,7 @@ export default function HomeCoursesTab() {
           <StyledTab label="Path(coming soon)" {...a11yProps(1)} disabled />
         </StyledTabs>
       </Box>
-      <Box sx={{ bgcolor: Colors.light }}>
+      <Box sx={{ width: "100%", bgcolor: Colors.light }}>
         <TabPanel value={value} index={0}>
           <Courses />
         </TabPanel>

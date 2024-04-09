@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import React from "react"
 import { Fonts } from "../../../components/themes/fonts"
 import { Colors } from "../../../components/themes/colors"
@@ -8,1406 +8,1350 @@ import { useRouter } from "next/router"
 export default function Courses() {
   const router = useRouter()
   return (
-    <Box component="div" sx={{ width: "100%" }}>
+    <Box
+      component="div"
+      sx={{
+        width: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: { xs: 2, sm: 4, xl: 6 },
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 520,
+          font: {
+            xs: `normal normal 400 normal 15.5px/25px ${Fonts.primary}`,
+            sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+          },
+          textAlign: "center",
+          color: "#36394A",
+          letterSpacing: 0.25,
+          my: 1,
+        }}
+      >
+        Personalized Learning Paths Tailored to Their Interests and Taught by
+        Expert tutors
+      </Box>
+      {/* CARDS */}
       <Box
         sx={{
           width: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          gap: { xs: 2, sm: 4, xl: 6 },
-          px: 20,
+          justifyContent: "center",
+          flexDirection: { xs: "column", md: "row" },
+          gap: { xs: 1, sm: 3 },
         }}
       >
+        {/* CARD 1 */}
         <Box
+          component="div"
           sx={{
             width: "100%",
-            maxWidth: 633,
-            font: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
-            textAlign: "center",
-            color: "#36394A",
-            letterSpacing: 0.25,
-            my: 1,
-          }}
-        >
-          Tailored to their interests, and taught by experienced instructors.
-          Choose the learning path according to your child&apos;s needs and
-          goals.{" "}
-        </Box>
-        {/* CARDS */}
-        <Box
-          sx={{
-            width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: { xs: "column", md: "row" },
-            gap: { xs: 1, sm: 3 },
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: 4,
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
           }}
         >
-          {/* CARD 1 */}
           <Box
-            component="div"
             sx={{
               width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
+              gap: 1,
             }}
           >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                Scratch
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                  my: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                  }}
-                >
-                  Age 7-10
-                </Typography>
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
-                  // textAlign: "justify",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
-                }}
-              >
-                In this course, students will dive headfirst into building their
-                games and animations. They&apos;ll code and master essential
-                programming concepts.
-              </Typography>
-            </Box>
-            <Box
-              onClick={() => router.push("/signup")}
+            <Typography
+              variant="subtitle"
               sx={{
                 width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                },
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              Scratch
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
                 letterSpacing: 0.1,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
-                },
               }}
             >
-              Register my child
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              {/* ITEM 2 */}
+              $150{" "}
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                  alignItems: "center",
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
+                / month
               </Box>
-              {/*  ITEM 3 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
-              </Box>
-              {/*  ITEM 4 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
-              </Box>
-            </Box>
+            </Typography>
           </Box>
-          {/* CARD 2 */}
-          <Box
-            component="div"
+          <Typography
+            variant="subtitle1"
             sx={{
               width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
-              display: "flex",
-              flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
+              font: `normal normal 400 normal 15px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
             }}
           >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                Web Development
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  Age 10-16
-                </Typography>
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
-                }}
-              >
-                In this course, students will focus on Web development. Starting
-                with the basic. This course covers HTML, CSS and Bootstrap.
-              </Typography>
-            </Box>
-            <Box
-              onClick={() => router.push("/signup")}
-              sx={{
-                width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
-                letterSpacing: 0.25,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
-                },
-              }}
-            >
-              Register my child
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              {/* ITEM 2 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
-              </Box>
-              {/*  ITEM 3 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
-              </Box>
-              {/*  ITEM 4 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-          {/* CARD 3 */}
-          <Box
-            component="div"
+            In this course, students will dive headfirst into building their
+            games and animations. They&apos;ll code and master essential
+            programming concepts.
+          </Typography>
+
+          <Button
+            onClick={() => router.push("/signup")}
             sx={{
               width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
+              height: 36,
               display: "flex",
-              flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.1,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              textTransform: "none",
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
             }}
           >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                Python
-              </Typography>
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+                alignItems: "center",
+              }}
+            >
+              <MarkIcon />
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  Age 11-16
-                </Typography>
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
                   textAlign: "left",
                   color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
                 }}
               >
-                This course dives deep into Python, starting with foundational
-                concepts and progressing through intermediate and advanced
-                topics.
-              </Typography>
+                4 private live classes month
+              </Box>
             </Box>
-            <Box
-              onClick={() => router.push("/signup")}
-              sx={{
-                width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
-                letterSpacing: 0.25,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
-                },
-              }}
-            >
-              Register my child
-            </Box>
+            {/*  ITEM 3 */}
             <Box
               sx={{
                 width: "100%",
+                height: 24,
                 display: "flex",
-                flexDirection: "column",
                 gap: 2,
-                mt: 4,
+                position: "relative",
               }}
             >
-              {/* ITEM 2 */}
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
+                Receive progress reports and feedback after every class.
               </Box>
-              {/*  ITEM 3 */}
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
+                A structured, project-based curriculum taught by experts.
               </Box>
-              {/*  ITEM 4 */}
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
+                Certificates of Completion
               </Box>
             </Box>
           </Box>
+          <Box />
         </Box>
+        {/* CARD 2 */}
         <Box
+          component="div"
           sx={{
             width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 3,
+            flexDirection: "column",
+            gap: 4,
+            justifyContent: "space-between",
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
           }}
         >
-          {/* CARD 1 */}
           <Box
-            component="div"
             sx={{
               width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
               display: "flex",
               flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
+              gap: 1,
             }}
           >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                Javascript
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  Age 12-16
-                </Typography>
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
-                }}
-              >
-                This course takes students from foundational blocks to
-                intermediate and advanced techniques, ensuring a solid
-                understanding at every stage.
-              </Typography>
-            </Box>
-            <Box
-              onClick={() => router.push("/signup")}
+            <Typography
+              variant="subtitle"
               sx={{
                 width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
-                letterSpacing: 0.25,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
                 },
-              }}
-            >
-              Register my child
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              {/* ITEM 2 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
-              </Box>
-              {/*  ITEM 3 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
-              </Box>
-              {/*  ITEM 4 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-          {/* CARD 2 */}
-          <Box
-            component="div"
-            sx={{
-              width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
-              display: "flex",
-              flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
-            }}
-          >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                UX/UI Design
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  Age 12-16
-                </Typography>
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
-                  textAlign: "left",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
-                  mb: 4.5,
-                }}
-              >
-                This course progressively guides students through essential
-                skills to design interfaces that are both beautiful and
-                functional.
-              </Typography>
-            </Box>
-            <Box
-              onClick={() => router.push("/signup")}
-              sx={{
-                width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
-                letterSpacing: 0.25,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
-                },
-              }}
-            >
-              Register my child
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 4,
-              }}
-            >
-              {/* ITEM 2 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
-              </Box>
-              {/*  ITEM 3 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
-              </Box>
-              {/*  ITEM 4 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-          {/* CARD 3 */}
-          <Box
-            component="div"
-            sx={{
-              width: "100%",
-              width: { xs: "100%", md: 350 },
-              height: 550,
-              padding: "32px 32px",
-              display: "flex",
-              flexDirection: "column",
-              background:
-                "linear-gradient(358deg, #73E2CE 0%, #6C63FF 0%, #000 84.32%)",
-              boxShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
-              border: "1px solid #E1E5E9",
-              borderRadius: 3,
-            }}
-          >
-            <Box sx={{ width: 286 }}>
-              <Typography
-                variant="subtitle"
-                sx={{
-                  width: "100%",
-                  font: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
-                  textAlign: "lefft",
-                  color: Colors.light,
-                  letterSpacing: 0.3,
-                }}
-              >
-                3D Design
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: 2,
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  $150{" "}
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
-                      letterSpacing: 0.1,
-                    }}
-                  >
-                    / month
-                  </Box>
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    // width: 250,
-                    font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    my: 2,
-                  }}
-                >
-                  Age 10-16
-                </Typography>
-              </Box>
 
-              <Typography
-                variant="subtitle1"
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              Web Development
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                width: "100%",
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
+                letterSpacing: 0.1,
+              }}
+            >
+              $150{" "}
+              <Box
                 sx={{
-                  width: "100%",
-                  font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
+              >
+                / month
+              </Box>
+            </Typography>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              width: "100%",
+              font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
+            }}
+          >
+            In this course, students will focus on Web development. Starting
+            with the basic. This course covers HTML, CSS and Bootstrap.
+          </Typography>
+
+          <Button
+            onClick={() => router.push("/signup")}
+            sx={{
+              width: "100%",
+              height: 36,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.25,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              textTransform: "none",
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
+            }}
+          >
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
                   textAlign: "left",
                   color: Colors.light,
-                  letterSpacing: 0.3,
-                  my: 2,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
                 }}
               >
-                The course will cover a wide range of topics, including basic
-                modeling techniques, creating 3D shapes, using different tools,
-                and applying textures.
-              </Typography>
+                4 private live classes month
+              </Box>
             </Box>
-            <Box
-              onClick={() => router.push("/signup")}
-              sx={{
-                width: "100%",
-                height: 36,
-                display: "flex",
-                mt: "16px",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "10px 16px",
-                font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
-                color: Colors.black,
-                textTransform: "none",
-                letterSpacing: 0.25,
-                border: `1px solid #EDEDED`,
-                borderRadius: "8px",
-                background: `#EDEDED !important`,
-                boxShadow:
-                  "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
-                "&:hover": {
-                  background: `#EDEDED !important`,
-                },
-              }}
-            >
-              Register my child
-            </Box>
+            {/*  ITEM 3 */}
             <Box
               sx={{
                 width: "100%",
+                height: 24,
                 display: "flex",
-                flexDirection: "column",
                 gap: 2,
-                mt: 4,
+                position: "relative",
               }}
             >
-              {/* ITEM 2 */}
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  4 private live classes month
-                </Box>
+                Receive progress reports and feedback after every class.
               </Box>
-              {/*  ITEM 3 */}
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  Receive progress reports and feedback after every class.
-                </Box>
+                A structured, project-based curriculum taught by experts.
               </Box>
-              {/*  ITEM 4 */}
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
               <Box
                 sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
                 }}
               >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 31,
-                  }}
-                >
-                  A structured, project-based curriculum taught by experts.
-                </Box>
-              </Box>
-              {/*  ITEM 5 */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 24,
-                  display: "flex",
-                  gap: 2,
-                  mt: 2,
-                  position: "relative",
-                }}
-              >
-                <MarkIcon />
-                <Box
-                  sx={{
-                    font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
-                    textAlign: "left",
-                    color: Colors.light,
-                    letterSpacing: 0.1,
-                    position: "absolute",
-                    left: 30,
-                  }}
-                >
-                  Certificates of Completion
-                </Box>
+                Certificates of Completion
               </Box>
             </Box>
           </Box>
+          <Box />
+        </Box>
+        {/* CARD 3 */}
+        <Box
+          component="div"
+          sx={{
+            width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: 3,
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 1,
+            }}
+          >
+            <Typography
+              variant="subtitle"
+              sx={{
+                width: "100%",
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                },
+
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              Python
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                width: "100%",
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
+                letterSpacing: 0.1,
+              }}
+            >
+              $150{" "}
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
+              >
+                / month
+              </Box>
+            </Typography>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              width: "100%",
+              font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
+            }}
+          >
+            This course dives deep into Python, starting with foundational
+            concepts and progressing through intermediate and advanced topics.
+          </Typography>
+          <Button
+            onClick={() => router.push("/signup")}
+            sx={{
+              width: "100%",
+              height: 36,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.25,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
+            }}
+          >
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                4 private live classes month
+              </Box>
+            </Box>
+            {/*  ITEM 3 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                Receive progress reports and feedback after every class.
+              </Box>
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                A structured, project-based curriculum taught by experts.
+              </Box>
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                Certificates of Completion
+              </Box>
+            </Box>
+          </Box>
+          <Box />
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: { xs: "column", md: "row" },
+          gap: 3,
+        }}
+      >
+        {/* CARD 1 */}
+        <Box
+          component="div"
+          sx={{
+            width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            justifyContent: "space-between",
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle"
+              sx={{
+                width: "100%",
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                },
+
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              Javascript
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              sx={{
+                width: "100%",
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
+                letterSpacing: 0.1,
+              }}
+            >
+              $150{" "}
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
+              >
+                / month
+              </Box>
+            </Typography>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              width: "100%",
+              font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
+            }}
+          >
+            This course takes students from foundational blocks to intermediate
+            and advanced techniques, ensuring a solid understanding at every
+            stage.
+          </Typography>
+
+          <Button
+            onClick={() => router.push("/signup")}
+            sx={{
+              width: "100%",
+              height: 36,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.25,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              textTransform: "none",
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
+            }}
+          >
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mt: 4,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                4 private live classes month
+              </Box>
+            </Box>
+            {/*  ITEM 3 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                Receive progress reports and feedback after every class.
+              </Box>
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                A structured, project-based curriculum taught by experts.
+              </Box>
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                Certificates of Completion
+              </Box>
+            </Box>
+          </Box>
+          <Box />
+        </Box>
+        {/* CARD 2 */}
+        <Box
+          component="div"
+          sx={{
+            width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            justifyContent: "space-between",
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle"
+              sx={{
+                width: "100%",
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                },
+
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              UX/UI Design
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              sx={{
+                width: "100%",
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
+                letterSpacing: 0.1,
+              }}
+            >
+              $150{" "}
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
+              >
+                / month
+              </Box>
+            </Typography>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              width: "100%",
+              font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
+            }}
+          >
+            This course progressively guides students through essential skills
+            to design interfaces that are both beautiful and functional.
+          </Typography>
+          <Button
+            onClick={() => router.push("/signup")}
+            sx={{
+              width: "100%",
+              height: 36,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.25,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              textTransform: "none",
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
+            }}
+          >
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mt: 4,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                4 private live classes month
+              </Box>
+            </Box>
+            {/*  ITEM 3 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                Receive progress reports and feedback after every class.
+              </Box>
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                A structured, project-based curriculum taught by experts.
+              </Box>
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                Certificates of Completion
+              </Box>
+            </Box>
+          </Box>
+          <Box />
+        </Box>
+        {/* CARD 3 */}
+        <Box
+          component="div"
+          sx={{
+            width: "100%",
+            maxWidth: 390,
+            height: 609,
+            padding: "32px 32px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            justifyContent: "space-between",
+            background:
+              "linear-gradient(358.38deg, #665EF0 -38.07%, #685FF4 -11.13%, #000000 44.13%)",
+            dropShadow: "0px 2px 8px 0px rgba(128, 128, 128, 0.05)",
+            border: "1px solid #E1E5E9",
+            borderRadius: 3,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle"
+              sx={{
+                width: "100%",
+                font: {
+                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                },
+
+                textAlign: "lefft",
+                color: Colors.light,
+                letterSpacing: 0.3,
+              }}
+            >
+              3D Design
+            </Typography>
+
+            <Typography
+              variant="subtitle1"
+              sx={{
+                width: "100%",
+                font: `normal normal 700 normal 18px/26.4px ${Fonts.primaryBold}`,
+                textAlign: "left",
+                color: Colors.light,
+                letterSpacing: 0.1,
+              }}
+            >
+              $150{" "}
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  font: `normal normal 400 normal 22px/26.4px ${Fonts.primary}`,
+                  letterSpacing: 0.1,
+                }}
+              >
+                / month
+              </Box>
+            </Typography>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              width: "100%",
+              font: `normal normal 400 normal 16px/20px ${Fonts.primary}`,
+              textAlign: "left",
+              color: Colors.light,
+              letterSpacing: 0.3,
+            }}
+          >
+            The course will cover a wide range of topics, including basic
+            modeling techniques, creating 3D shapes, using different tools, and
+            applying textures.
+          </Typography>
+          <Button
+            onClick={() => router.push("/signup")}
+            sx={{
+              width: "100%",
+              height: 36,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+              padding: "10px 16px",
+              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              color: Colors.black,
+              textTransform: "none",
+              letterSpacing: 0.25,
+              border: `1px solid #EDEDED`,
+              borderRadius: "8px",
+              background: `#EDEDED !important`,
+              textTransform: "none",
+              boxShadow:
+                "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
+              "&:hover": {
+                background: `#EDEDED !important`,
+              },
+            }}
+          >
+            Register my child
+          </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mt: 4,
+            }}
+          >
+            {/* ITEM 2 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                4 private live classes month
+              </Box>
+            </Box>
+            {/*  ITEM 3 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                Receive progress reports and feedback after every class.
+              </Box>
+            </Box>
+            {/*  ITEM 4 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 31,
+                }}
+              >
+                A structured, project-based curriculum taught by experts.
+              </Box>
+            </Box>
+            {/*  ITEM 5 */}
+            <Box
+              sx={{
+                width: "100%",
+                height: 24,
+                display: "flex",
+                gap: 2,
+                mt: 2,
+                position: "relative",
+              }}
+            >
+              <MarkIcon />
+              <Box
+                sx={{
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primary}`,
+                  textAlign: "left",
+                  color: Colors.light,
+                  letterSpacing: 0.1,
+                  position: "absolute",
+                  left: 30,
+                }}
+              >
+                Certificates of Completion
+              </Box>
+            </Box>
+          </Box>
+          <Box />
         </Box>
       </Box>
     </Box>

@@ -21,11 +21,11 @@ export default function FooterPage() {
         width: "100%",
         flexShrink: 0,
         background: Colors.black,
-        px: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
+        px: { xs: 4, sm: 3, lg: 12.5, xl: 16 },
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        p: { xs: 3, md: "56px 32px 55.8px 32px" },
+        p: { xs: "32px 32px", md: "56px 32px 55.8px 32px" },
         flexWrap: "wrap",
         gap: 7.25,
       }}

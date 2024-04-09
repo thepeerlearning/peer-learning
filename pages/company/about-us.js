@@ -1,7 +1,14 @@
 import { Box, Button, CssBaseline, Typography } from "@mui/material"
 import Image from "next/image"
 import React from "react"
-
+import smilinglady from "../../public/images/smiling-people.svg"
+import surrey from "../../public/images/surrey.svg"
+import illinois from "../../public/images/illinois.svg"
+import andela from "../../public/images/andela.svg"
+import synthesis from "../../public/images/synthesis.svg"
+import uci from "../../public/images/uci.svg"
+import springboard from "../../public/images/springboard.svg"
+import caltech from "../../public/images/caltech.svg"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
@@ -220,15 +227,24 @@ export default function AboutUsPage() {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: { xs: "column", sm: "row" },
+            gap: { xs: 2, sm: 4, lg: 10 },
           }}
         >
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+                width: "100%",
+                height: 618,
+              },
+            }}
+          >
             <Image
               style={{ width: "100%", height: "100%" }}
-              src={"/images/smiling-people.svg"}
-              width={1200}
-              height={1200}
+              src={smilinglady}
               alt="People smiling"
+              priority
             />
           </Box>
           <Box
@@ -237,8 +253,8 @@ export default function AboutUsPage() {
               flexGrow: "1 0 0",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
+              justifyContent: { xs: "center", sm: "flex-start" },
+              alignItems: { xs: "center", sm: "flex-start" },
               gap: 3,
             }}
           >
@@ -247,6 +263,8 @@ export default function AboutUsPage() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: { xs: "center", sm: "flex-start" },
+                alignItems: { xs: "center", sm: "flex-start" },
                 gap: 4,
               }}
             >
@@ -258,7 +276,7 @@ export default function AboutUsPage() {
                   border: `1px solid #FFDA79`,
                   borderRadius: "20px",
                   height: 40,
-                  width: 245,
+                  width: 240,
                   background: "#FFDA79",
                   padding: "12px 16px",
                 }}
@@ -270,6 +288,8 @@ export default function AboutUsPage() {
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
+                  justifyContent: { xs: "center", sm: "flex-start" },
+                  alignItems: { xs: "center", sm: "flex-start" },
                   gap: 2,
                 }}
               >
@@ -279,12 +299,11 @@ export default function AboutUsPage() {
                     width: "100%",
                     color: "#FF5E00",
                     font: {
-                      xs: `normal normal 700 normal 28px/30px ${Fonts.primaryBold}`,
-                      sm: `normal normal 700 normal 40px/50px ${Fonts.primaryBold}`,
-                      xl: `normal normal 700 normal 45px/50px ${Fonts.primaryBold}`,
+                      xs: `normal normal 700 normal 29px/46px ${Fonts.primaryBold}`,
+                      sm: `normal normal 700 normal 50px/49px ${Fonts.primaryBold}`,
                     },
-                    letterSpacing: { xs: -0.64, sm: 0.25 },
-                    textAlign: "left",
+                    letterSpacing: 0.25,
+                    textAlign: { xs: "center", sm: "left" },
                   }}
                 >
                   A tapestry of brilliance.
@@ -295,14 +314,19 @@ export default function AboutUsPage() {
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
+                    justifyContent: { xs: "center", sm: "flex-start" },
+                    alignItems: { xs: "center", sm: "flex-start" },
                   }}
                 >
                   <Typography
                     sx={{
                       color: "#FFFFFF",
-                      font: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                      font: {
+                        xs: `normal normal 400 normal 17.5px/25px ${Fonts.primary}`,
+                        sm: `normal normal 400 normal 18px/28px ${Fonts.primary}`,
+                      },
                       letterSpacing: 0.25,
-                      textAlign: "left",
+                      textAlign: { xs: "center", sm: "left" },
                     }}
                   >
                     Our instructors are alumni and experts from top universities
@@ -316,72 +340,96 @@ export default function AboutUsPage() {
             <Box
               sx={{
                 width: "100%",
-                display: "flex",
+                display: { xs: "none", sm: "flex" },
+                height: 80,
                 flexDirection: "column",
-                gap: 3,
+                gap: { xs: 0, sm: 2 },
               }}
             >
-              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
+                <Image src={surrey} alt="university of Surrey" priority />{" "}
+                <Image src={illinois} alt="Illinois university" priority />{" "}
+                <Image src={caltech} alt="Caltech" priority />
+                <Image src={uci} alt="University of california" priority />
+              </Box>
+              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
+                <Image src={springboard} alt="springboard" priority />
+                <Image src={synthesis} alt="synthesis" priority />
+                <Image src={andela} alt="Andela" priority />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: "100%",
+                flexDirection: "column",
+                height: 141,
+                display: { xs: "flex", sm: "none" },
+                gap: { xs: 2, sm: 2 },
+              }}
+            >
+              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 26 }}>
                 <Image
-                  src="/images/uni-surrey.png"
+                  src={surrey}
                   alt="university of Surrey"
-                  width={137}
-                  height={32}
                   priority
+                  style={{ width: "100%", height: "100%" }}
                 />{" "}
                 <Image
-                  src="/images/uni-illinois.png"
+                  src={illinois}
                   alt="Illinois university"
-                  width={137}
-                  height={32}
                   priority
+                  style={{ width: "100%", height: "100%" }}
                 />{" "}
                 <Image
-                  src="/images/caltech.png"
+                  src={caltech}
                   alt="Caltech"
-                  width={100}
-                  height={22}
                   priority
-                />
-                <Image
-                  src="/images/uni-california.png"
-                  alt="University of california"
-                  priority
-                  width={141}
-                  height={40}
+                  style={{ width: "100%", height: "100%" }}
                 />
               </Box>
-              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 39 }}>
                 <Image
-                  src="/images/springboard.png"
-                  alt="springboard"
-                  width={214}
-                  height={36}
+                  src={uci}
+                  alt="University of california"
                   priority
+                  style={{ width: "100%", height: "100%" }}
                 />
                 <Image
-                  src="/images/synthesis.png"
-                  alt="synthesis"
-                  width={228}
-                  height={32}
-                  priority
-                />
-                <Image
-                  src="/images/andela.png"
+                  src={andela}
                   alt="Andela"
-                  width={143}
-                  height={36}
                   priority
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </Box>
+              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 30 }}>
+                <Image
+                  src={springboard}
+                  alt="springboard"
+                  priority
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <Image
+                  src={synthesis}
+                  alt="synthesis"
+                  priority
+                  style={{ width: "100%", height: "100%" }}
                 />
               </Box>
             </Box>
-            <Box sx={{ display: { xs: "block", sm: "none" }, mt: 2 }}>
+            <Box
+              sx={{
+                display: { xs: "block", sm: "none" },
+                mt: 2,
+                ml: 2,
+                width: "100%",
+                height: 475,
+              }}
+            >
               <Image
                 style={{ width: "100%", height: "100%" }}
-                src={"/images/smiling-people.svg"}
-                width={1300}
-                height={1300}
+                src={smilinglady}
                 alt="People smiling"
+                priority
               />
             </Box>
             <Box
@@ -390,7 +438,7 @@ export default function AboutUsPage() {
                 display: "flex",
                 justifyContent: { xs: "center", sm: "flex-start" },
                 alignItems: { xs: "center", sm: "flex-start" },
-                mt: 3,
+                mt: { xs: 0, sm: 2 },
               }}
             >
               <Button

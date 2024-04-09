@@ -30,7 +30,6 @@ export default function MetaData({ title, content }) {
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0d1825" />
       <meta name="msapplication-TileColor" content="" />
       <meta name="theme-color" content={Colors.primary} />
-      {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
     </Head>
   )
 }

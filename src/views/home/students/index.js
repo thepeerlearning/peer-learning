@@ -11,27 +11,32 @@ import Image from "next/image"
 import { Autoplay } from "swiper/modules"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
+import pythongirl from "../../../../public/images/python-girl.svg"
+import webboy from "../../../../public/images/web-boy.svg"
+import scratchgirl from "../../../../public/images/scratch-girl.svg"
+import uiuxboy from "../../../../public/images/uiux-boy.svg"
+import jsboy from "../../../../public/images/js-girl.svg"
 
 export const images = [
   {
     course: "python",
-    imgPath: "/images/python-girl.jpeg",
+    imgPath: pythongirl,
   },
   {
     course: "Web development",
-    imgPath: "/images/web-boy.jpeg",
+    imgPath: webboy,
   },
   {
     course: "Scratch",
-    imgPath: "/images/scratch-girl.jpeg",
+    imgPath: scratchgirl,
   },
   {
     course: "UX/UI Design",
-    imgPath: "/images/uiux-boy.jpeg",
+    imgPath: uiuxboy,
   },
   {
     course: "Javascript",
-    imgPath: "/images/js-boy.jpeg",
+    imgPath: jsboy,
   },
 ]
 export default function StudentImages() {
@@ -39,12 +44,11 @@ export default function StudentImages() {
     <Box
       sx={{
         width: "100%",
-        pl: { xs: 2, sm: 3, lg: 12.5, xl: 16 },
         position: "relative",
       }}
     >
       <Swiper
-        slidesPerView={1.18}
+        slidesPerView={1.75}
         spaceBetween={35}
         breakpoints={{
           640: {
@@ -59,8 +63,12 @@ export default function StudentImages() {
             slidesPerView: 3.2,
             spaceBetween: 0,
           },
+          1280: {
+            slidesPerView: 4.2,
+            spaceBetween: 0,
+          },
           1500: {
-            slidesPerView: 3.8,
+            slidesPerView: 5,
             spaceBetween: 0,
           },
         }}
@@ -77,24 +85,24 @@ export default function StudentImages() {
             style={{
               width: "100%",
               height: "100%",
+              marginBottom: 200,
               position: "relative",
             }}
           >
             <Box
               sx={{
-                width: 350,
-                height: 340,
-                borderRadius: "32px",
+                width: "100%",
+                height: "100%",
                 position: "relative",
               }}
             >
               <Image
-                style={{ borderRadius: "32px", position: "relative" }}
                 src={img.imgPath}
                 alt={img.course}
-                width={350}
-                height={340}
+                priority
+                style={{ position: "relative" }}
               />
+
               <Button
                 sx={{
                   filter: `blur(1)`,
@@ -104,8 +112,8 @@ export default function StudentImages() {
                   borderRadius: "10px",
                   textTransform: "capitalize",
                   position: "absolute",
-                  bottom: 18,
-                  left: 15,
+                  bottom: 70,
+                  left: 30,
                   color: Colors.light,
                   border: `1px solid ${Colors.light}`,
                 }}
