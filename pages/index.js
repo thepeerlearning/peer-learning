@@ -17,7 +17,7 @@ import synthesis from "../public/images/synthesis.svg"
 import uci from "../public/images/uci.svg"
 import springboard from "../public/images/springboard.svg"
 import caltech from "../public/images/caltech.svg"
-import parent from "../public/images/parent.png"
+import parent from "../public/images/parent.svg"
 // import Testimonies from "../src/views/home/testimony"
 
 export default function HomePage() {
