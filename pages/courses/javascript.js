@@ -29,13 +29,19 @@ export default function JavascriptPage() {
         component="div"
         sx={{
           width: "100%",
+          minHeight: 615,
           display: "flex",
           flexDirection: "column",
-          py: { xs: 10, md: 12.5 },
-          backgroundColor:
-            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
-          backgroundImage: "url(/images/course-bg.svg)",
-          backgroundSize: { xs: "contain", sm: "contain" },
+          py: { xs: 6, md: 12.5 },
+          backgroundColor: {
+            xs: "#030306",
+            sm: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          },
+          backgroundImage: {
+            xs: "transparent",
+            sm: "url(/images/course-bg.svg)",
+          },
+          backgroundSize: "contain",
           backgroundBlendMode: "overlay",
         }}
       >
@@ -56,7 +62,7 @@ export default function JavascriptPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
-              pt: 5,
+              pt: { xs: 8, sm: 5 },
             }}
           >
             <Box
@@ -65,7 +71,7 @@ export default function JavascriptPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${Fonts.primaryMedium}`,
+                font: `normal normal 500 normal 17px/25px ${Fonts.primaryMedium}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -87,7 +93,7 @@ export default function JavascriptPage() {
                   sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
-                textAlign: "justify",
+                textAlign: "left",
               }}
             >
               JAVASCRIPT PROGRAMMING
@@ -129,7 +135,7 @@ export default function JavascriptPage() {
               >
                 Prerequisite: No prerequisites for this course. Beginners with
                 no experience can take this course.
-              </Typography>{" "}
+              </Typography>
               <Typography
                 variant="subtitle1"
                 sx={{
@@ -137,7 +143,7 @@ export default function JavascriptPage() {
                   font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
                   color: Colors.light,
                   letterSpacing: 0.1,
-                  textAlign: "justify",
+                  textAlign: "left",
                 }}
               >
                 Prerequisite: None
@@ -214,10 +220,13 @@ export default function JavascriptPage() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "19.22",
+              gap: "19.22px",
               color: "#020204",
-              textAlign: "justify",
-              font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              textAlign: "left",
+              font: {
+                xs: `normal normal 700 normal 22px/40px ${Fonts.primary}`,
+                sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              },
             }}
           >
             What is Javascript?
@@ -228,8 +237,8 @@ export default function JavascriptPage() {
                 display: "block",
                 color: "#020203",
                 font: {
-                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
-                  sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
+                  xs: `normal normal 400 normal 12px/20px ${Fonts.primary}`,
+                  sm: `normal normal 400 normal 17px/25px ${Fonts.primary}`,
                 },
                 letterSpacing: 0.1,
                 textAlign: "justify",
@@ -297,7 +306,7 @@ export default function JavascriptPage() {
               <Typography
                 variant="h2"
                 sx={{
-                  gap: "19.22",
+                  gap: "19.22px",
                   color: "#020204",
                   textAlign: "justify",
                   font: {
@@ -319,7 +328,7 @@ export default function JavascriptPage() {
                       sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                     },
                     letterSpacing: 0.1,
-                    textAlign: "justify",
+                    textAlign: "left",
                   }}
                 >
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
@@ -393,13 +402,15 @@ export default function JavascriptPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 28px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
                       Skills your child will gain
                     </Typography>
-
                     <Box
                       sx={{
                         maxWidth: 560,
@@ -414,14 +425,17 @@ export default function JavascriptPage() {
                           height: 55,
                           marginTop: -15,
                         }}
-                      />{" "}
+                      />
                       <Typography
                         variant="subtitle1"
                         sx={{
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}
@@ -448,7 +462,10 @@ export default function JavascriptPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 26px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -473,7 +490,10 @@ export default function JavascriptPage() {
                         variant="subtitle1"
                         sx={{
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}

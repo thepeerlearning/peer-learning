@@ -31,12 +31,18 @@ export default function PythonPage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 3, md: 12.5 },
-          backgroundColor:
-            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
-          backgroundImage: "url(/images/course-bg.svg)",
-          backgroundSize: { xs: "contain", sm: "contain" },
+          py: { xs: 6, md: 12.5 },
+          backgroundColor: {
+            xs: "#030306",
+            sm: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          },
+          backgroundImage: {
+            xs: "transparent",
+            sm: "url(/images/course-bg.svg)",
+          },
+          backgroundSize: "contain",
           backgroundBlendMode: "overlay",
+          minHeight: 615,
         }}
       >
         <Box
@@ -56,7 +62,7 @@ export default function PythonPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
-              pt: 5,
+              pt: { xs: 8, sm: 5 },
             }}
           >
             <Box
@@ -65,7 +71,7 @@ export default function PythonPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${Fonts.primaryMedium}`,
+                font: `normal normal 500 normal 17px/25px ${Fonts.primaryMedium}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -87,7 +93,7 @@ export default function PythonPage() {
                   sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
-                textAlign: "justify",
+                textAlign: "left",
               }}
             >
               PYTHON PROGRAMMING
@@ -146,6 +152,7 @@ export default function PythonPage() {
           <Box
             component="span"
             sx={{
+              width: "100%",
               maxWidth: 1140,
               display: "block",
               color: Colors.light,
@@ -212,7 +219,7 @@ export default function PythonPage() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "19.22",
+              gap: "19.22px",
               color: "#020204",
               textAlign: "justify",
               font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
@@ -293,7 +300,7 @@ export default function PythonPage() {
               <Typography
                 variant="h2"
                 sx={{
-                  gap: "19.22",
+                  gap: "19.22px",
                   color: "#020204",
                   textAlign: "justify",
                   font: {
@@ -389,7 +396,10 @@ export default function PythonPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 28px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -417,7 +427,10 @@ export default function PythonPage() {
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}
@@ -442,9 +455,13 @@ export default function PythonPage() {
                     <Typography
                       variant="h2"
                       sx={{
+                        width: "100%",
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 26px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -468,8 +485,12 @@ export default function PythonPage() {
                       <Typography
                         variant="subtitle1"
                         sx={{
+                          width: "100%",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}

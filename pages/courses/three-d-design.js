@@ -31,12 +31,18 @@ export default function ThreeDesignPage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 3, md: 12.5 },
-          backgroundColor:
-            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
-          backgroundImage: "url(/images/course-bg.svg)",
-          backgroundSize: { xs: "contain", sm: "contain" },
+          py: { xs: 6, md: 12.5 },
+          backgroundColor: {
+            xs: "#030306",
+            sm: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          },
+          backgroundImage: {
+            xs: "transparent",
+            sm: "url(/images/course-bg.svg)",
+          },
+          backgroundSize: "contain",
           backgroundBlendMode: "overlay",
+          minHeight: 615,
         }}
       >
         <Box
@@ -46,7 +52,7 @@ export default function ThreeDesignPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
+            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -56,7 +62,7 @@ export default function ThreeDesignPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
-              pt: 5,
+              pt: { xs: 8, sm: 5 },
             }}
           >
             <Box
@@ -65,7 +71,7 @@ export default function ThreeDesignPage() {
                 height: 45,
                 color: Colors.black,
                 textAlign: "center",
-                font: `normal normal 500 normal 17.016px/18px ${Fonts.primaryMedium}`,
+                font: `normal normal 500 normal 17px/25px ${Fonts.primaryMedium}`,
                 borderRadius: "160px",
                 background: "#F5F3FF",
                 padding: "12.39px 12.8px 9.39px 12.8px",
@@ -87,7 +93,7 @@ export default function ThreeDesignPage() {
                   sm: `normal normal 600 normal 40px/48px ${Fonts.primarySemiBold}`,
                 },
                 letterSpacing: { xs: -0.64, sm: 0.25 },
-                textAlign: "justify",
+                textAlign: "left",
               }}
             >
               3D DESIGN
@@ -147,11 +153,12 @@ export default function ThreeDesignPage() {
           <Box
             component="span"
             sx={{
+              width: "100%",
               maxWidth: 1140,
               display: "block",
               color: Colors.light,
               font: {
-                xs: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                xs: `normal normal 400 normal 12.5px/24px ${Fonts.primary}`,
                 sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
               },
               letterSpacing: 0.1,
@@ -205,7 +212,7 @@ export default function ThreeDesignPage() {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
             gap: { xs: "6px", sm: "37.22px" },
           }}
         >
@@ -214,21 +221,25 @@ export default function ThreeDesignPage() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "19.22",
+              gap: "19.22px",
               color: "#020204",
-              textAlign: "justify",
-              font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              textAlign: "left",
+              font: {
+                xs: `normal normal 700 normal 22px/40px ${Fonts.primary}`,
+                sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              },
             }}
           >
             What is 3D Design?
             <Typography
               variant="span"
               sx={{
+                width: "100%",
                 maxWidth: 1140,
                 display: "block",
                 color: "#020203",
                 font: {
-                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
+                  xs: `normal normal 400 normal 12px/20px ${Fonts.primary}`,
                   sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                 },
                 letterSpacing: 0.1,
@@ -265,7 +276,7 @@ export default function ThreeDesignPage() {
           </Typography>
         </Box>
         <Box
-          id="ux-what-to-learn-section"
+          id="3d-what-to-learn-section"
           component="div"
           sx={{
             width: "100%",
@@ -295,9 +306,9 @@ export default function ThreeDesignPage() {
               <Typography
                 variant="h2"
                 sx={{
-                  gap: "19.22",
+                  gap: "19.22px",
                   color: "#020204",
-                  textAlign: "justify",
+                  textAlign: "left",
                   font: {
                     xs: `normal normal 700 normal 25px/30px ${Fonts.primary}`,
                     sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
@@ -317,7 +328,8 @@ export default function ThreeDesignPage() {
                       sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                     },
                     letterSpacing: 0.1,
-                    textAlign: "justify",
+                    textAlign: "left",
+                    py: 0.5,
                   }}
                 >
                   7 Modules, 56 Lessons, 50+ Activities, Projects, and Quizzes
@@ -391,7 +403,10 @@ export default function ThreeDesignPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 28px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -419,7 +434,10 @@ export default function ThreeDesignPage() {
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}
@@ -446,7 +464,10 @@ export default function ThreeDesignPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 26px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -471,7 +492,10 @@ export default function ThreeDesignPage() {
                         variant="subtitle1"
                         sx={{
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}

@@ -31,11 +31,18 @@ export default function WebdevelopmentPage() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          py: { xs: 10, md: 12.5 },
-          backgroundColor:
-            "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
-          backgroundImage: "url(/images/course-bg.svg)",
+          py: { xs: 6, md: 12.5 },
+          backgroundColor: {
+            xs: "#030306",
+            sm: "linear-gradient(90deg, #000 3.31%, #232153 129.56%)",
+          },
+          backgroundImage: {
+            xs: "transparent",
+            sm: "url(/images/course-bg.svg)",
+          },
           backgroundSize: "contain",
+          backgroundBlendMode: "overlay",
+          minHeight: 615,
         }}
       >
         <Box
@@ -45,7 +52,7 @@ export default function WebdevelopmentPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
+            px: { xs: 3.5, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
             gap: "37.22px",
           }}
         >
@@ -55,7 +62,7 @@ export default function WebdevelopmentPage() {
               display: "flex",
               flexDirection: "column",
               gap: "21.39px",
-              pt: 5,
+              pt: { xs: 8, sm: 5 },
             }}
           >
             <Box
@@ -150,7 +157,7 @@ export default function WebdevelopmentPage() {
               display: "block",
               color: Colors.light,
               font: {
-                xs: `normal normal 400 normal 14px/28px ${Fonts.primary}`,
+                xs: `normal normal 400 normal 12.5px/24px ${Fonts.primary}`,
                 sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
               },
               letterSpacing: 0.1,
@@ -204,7 +211,7 @@ export default function WebdevelopmentPage() {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "left",
-            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 18.4 },
+            px: { xs: 4, sm: 6, md: 10, lg: 12.5, xl: 16.4 },
             gap: { xs: "6px", sm: "37.22px" },
           }}
         >
@@ -213,10 +220,13 @@ export default function WebdevelopmentPage() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "19.22",
+              gap: "19.22px",
               color: "#020204",
-              textAlign: "justify",
-              font: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              textAlign: "left",
+              font: {
+                xs: `normal normal 700 normal 22px/40px ${Fonts.primary}`,
+                sm: `normal normal 700 normal 30px/48px ${Fonts.primary}`,
+              },
             }}
           >
             What is Web Development?
@@ -227,7 +237,7 @@ export default function WebdevelopmentPage() {
                 display: "block",
                 color: "#020203",
                 font: {
-                  xs: `normal normal 400 normal 13px/24px ${Fonts.primary}`,
+                  xs: `normal normal 400 normal 12px/20px ${Fonts.primary}`,
                   sm: `normal normal 400 normal 18px/27px ${Fonts.primary}`,
                 },
                 letterSpacing: 0.1,
@@ -295,7 +305,7 @@ export default function WebdevelopmentPage() {
               <Typography
                 variant="h2"
                 sx={{
-                  gap: "19.22",
+                  gap: "19.22px",
                   color: "#020204",
                   textAlign: "justify",
                   font: {
@@ -390,8 +400,10 @@ export default function WebdevelopmentPage() {
                       variant="h2"
                       sx={{
                         color: "#020204",
-                        textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 28px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -419,7 +431,10 @@ export default function WebdevelopmentPage() {
                           maxWidth: 560,
                           display: "flex",
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}
@@ -446,7 +461,10 @@ export default function WebdevelopmentPage() {
                       sx={{
                         color: "#020204",
                         textAlign: "left",
-                        font: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        font: {
+                          xs: `normal normal 700 normal 26px/28px ${Fonts.primary}`,
+                          sm: `normal normal 700 normal 30px/29px ${Fonts.primary}`,
+                        },
                         letterSpacing: 0.1,
                       }}
                     >
@@ -471,7 +489,10 @@ export default function WebdevelopmentPage() {
                         variant="span"
                         sx={{
                           color: "#212529",
-                          font: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          font: {
+                            xs: `normal normal 400 normal 12.5px/20px ${Fonts.primary}`,
+                            sm: `normal normal 400 normal 16px/24px ${Fonts.primary}`,
+                          },
                           letterSpacing: 0.1,
                           textAlign: "justify",
                         }}

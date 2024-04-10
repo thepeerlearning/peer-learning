@@ -157,7 +157,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -292,7 +293,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -557,8 +559,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
-                          mt: 1,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -710,7 +712,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -788,8 +791,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
-                          mt: 1,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -919,7 +922,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
@@ -973,8 +977,8 @@ export default function DesignCourseOutlinePage() {
                           border: `1px solid #FFF`,
                           textTransform: "capitalize",
                           background: "#FFF",
-                          ml: 2,
-                          mt: 1,
+                          ml: 3,
+                          mt: 2,
                           "&:hover": {
                             background: "#FFF",
                           },
