@@ -76,7 +76,7 @@ export default function LoginPage() {
   function onSubmit(data) {
     const { username, password } = data
     setLoading(true)
-    dispatch(login({ email: username, password }))
+    dispatch(login({ username: username, password }))
       .unwrap()
       .then(({ data }) => {
         const role = data.role.toLowerCase()
@@ -159,7 +159,7 @@ export default function LoginPage() {
                 <TextField
                   id="username"
                   htmlFor="username"
-                  label="Email address"
+                  label="Username"
                   name="username"
                   placeholder="john.doe@gmail.com"
                   type="email"
