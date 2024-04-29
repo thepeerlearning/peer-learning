@@ -39,6 +39,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "next": "^12.1.6",
+    "next-cloudinary": "^6.5.1",
     "next-redux-wrapper": "^8.1.0",
     "npm": "^8.4.0",
     "or": "^0.2.0",

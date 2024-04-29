@@ -19,6 +19,7 @@ import { AppLogo } from "../../components/svg/logo-dark-bg"
 import { Colors } from "../../components/themes/colors"
 import { Fonts } from "../../components/themes/fonts"
 import { testimonies } from "../home/testimony"
+import { CldImage } from "next-cloudinary"
 
 export default function AuthLayout({ children }) {
   const matches = useMediaQuery("(max-width:599px)")
@@ -141,12 +142,30 @@ export default function AuthLayout({ children }) {
               >
                 <Box
                   sx={{
+                    transform: "rotate(179.886deg)",
+                    position: "fixed",
+                    bottom: 190,
+                  }}
+                >
+                  <CldImage
+                    style={{ borderRadius: "10px" }}
+                    src="hhxbqv8os3myua39gtzd"
+                    alt="parent testimony"
+                    width={487}
+                    height={462}
+                    crop="thumb"
+                    gravity="auto"
+                    loading="lazy"
+                  />
+                </Box>
+                <Box
+                  sx={{
                     width: "100%",
                     position: "fixed",
                     top: 70,
                   }}
                 >
-                  <Card
+                  {/* <Card
                     sx={{
                       width: 492,
                       padding: "24px",
@@ -241,6 +260,53 @@ export default function AuthLayout({ children }) {
                     <CardActionArea sx={{ mt: 2 }}>
                       <Box className="swiper-custom-pagination"></Box>
                     </CardActionArea>
+                  </Card> */}
+
+                  <Card
+                    sx={{
+                      width: 498,
+                      padding: "24px",
+                      borderRadius: "20px",
+                      background: "rgba(177, 164, 164, 0.40)",
+                      transform: "rotate(180deg)",
+                      boxShadow: "none",
+                      position: "absolute",
+                      top: 20,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: "100%",
+                          font: `normal normal 400 normal 16px/23.2px ${Fonts.primary}`,
+                          color: "#010101",
+                          m: 0,
+                        }}
+                      >
+                        As a tech entrepreneur, I&apos;ve seen firsthand the
+                        value of coding skills. It&apos;s not just about
+                        programming, but also about developing problem-solving
+                        and critical thinking. Peer Learning&apos;s approach has
+                        been fantastic. They&apos;re learning valuable skills
+                        while building confidence. I highly recommend.
+                      </Box>
+                      <Box
+                        sx={{
+                          font: `normal normal 400 normal 15px/22px ${Fonts.primary}`,
+                          color: "#010101",
+                        }}
+                      >
+                        Hameed, Alabama, United States
+                      </Box>
+                    </Box>
                   </Card>
                 </Box>
               </Box>

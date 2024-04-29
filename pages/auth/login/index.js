@@ -14,7 +14,6 @@ import {
 } from "../../../src/components/forms/textFields"
 import PageLoader from "../../../src/components/lottie/page-loader"
 import Snackbars from "../../../src/components/snackbar"
-import { EmailIcon } from "../../../src/components/svg"
 import { Colors } from "../../../src/components/themes/colors"
 import { Fonts } from "../../../src/components/themes/fonts"
 import { login } from "../../../src/redux/slices/auth"
@@ -168,7 +167,6 @@ export default function LoginPage() {
                   error={errors.username ? true : false}
                   helper={errors.username?.message}
                   disabled={loading}
-                  icon={<EmailIcon />}
                 />
               </Grid>
               <Grid item xs={12}>

@@ -80,8 +80,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
                 textAlign: "lefft",
                 color: Colors.light,
@@ -295,8 +295,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
 
                 textAlign: "lefft",
@@ -510,8 +510,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
 
                 textAlign: "lefft",
@@ -734,8 +734,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
 
                 textAlign: "lefft",
@@ -952,8 +952,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
 
                 textAlign: "lefft",
@@ -1168,8 +1168,8 @@ export default function Courses() {
               sx={{
                 width: "100%",
                 font: {
-                  xs: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
-                  sm: `normal normal 700 normal 32px/40px ${Fonts.primaryBold}`,
+                  xs: `normal normal 700 normal 28px/38px ${Fonts.primaryBold}`,
+                  sm: `normal normal 700 normal 30px/40px ${Fonts.primaryBold}`,
                 },
 
                 textAlign: "lefft",

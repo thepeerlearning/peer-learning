@@ -1,4 +1,11 @@
-import { Box, Button, CssBaseline, Typography } from "@mui/material"
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  CssBaseline,
+  Typography,
+} from "@mui/material"
 import Image from "next/image"
 import React from "react"
 import smilinglady from "../../public/images/smiling-people.svg"
@@ -13,6 +20,7 @@ import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
 import HomePageLayout from "../../src/views/home/layout"
 import MetaData from "../../src/utils/meta"
+import { CldImage } from "next-cloudinary"
 
 export default function AboutUsPage() {
   return (
@@ -245,12 +253,48 @@ export default function AboutUsPage() {
               },
             }}
           >
-            <Image
-              style={{ width: "100%", height: "100%" }}
-              src={smilinglady}
-              alt="People smiling"
-              priority
-            />
+            <Badge
+              overlap="circular"
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              badgeContent={
+                <Avatar
+                  alt="Smiling boy"
+                  src=""
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    bgcolor: "transparent",
+                    position: "absolute",
+                    top: -120,
+                    left: 0,
+                  }}
+                >
+                  <CldImage
+                    alt="Smiling boy"
+                    src="Ellipse_73_hwr1e9"
+                    width="108"
+                    height="108"
+                    crop="thumb"
+                    gravity="auto"
+                  />
+                </Avatar>
+              }
+            >
+              <CldImage
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "10px",
+                }}
+                src="t9inkopzvjaw7x136htl"
+                alt="Lady smiling"
+                crop="thumb"
+                gravity="auto"
+                width="515"
+                height="618"
+                loading="lazy"
+              />
+            </Badge>
           </Box>
           <Box
             sx={{
@@ -351,16 +395,58 @@ export default function AboutUsPage() {
                 gap: { xs: 0, sm: 2 },
               }}
             >
-              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
-                <Image src={surrey} alt="university of Surrey" priority />{" "}
-                <Image src={illinois} alt="Illinois university" priority />{" "}
-                <Image src={caltech} alt="Caltech" priority />
-                <Image src={uci} alt="University of california" priority />
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <CldImage
+                  src="surrey_pt2wr9"
+                  alt="university of Surrey"
+                  width="137"
+                  height="32"
+                  crop="fill"
+                />{" "}
+                <CldImage
+                  src="illinois_gr2043"
+                  alt="Illinois university"
+                  width="165"
+                  height="28"
+                  crop="fill"
+                />{" "}
+                <CldImage
+                  src="caltech_bvvgqy"
+                  alt="Caltech"
+                  width="111"
+                  height="27"
+                  crop="fill"
+                />
+                <CldImage
+                  src="uci_z6y0iu"
+                  alt="University of california"
+                  width={171}
+                  height={40}
+                  crop="fill"
+                />
               </Box>
-              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
-                <Image src={springboard} alt="springboard" priority />
-                <Image src={synthesis} alt="synthesis" priority />
-                <Image src={andela} alt="Andela" priority />
+              <Box sx={{ width: "100%", display: "flex", gap: 4, height: 45 }}>
+                <CldImage
+                  src="springboard_t75fm8"
+                  alt="springboard"
+                  width={214}
+                  height={38}
+                  crop="fit"
+                />
+                <CldImage
+                  src="synthesis_mton9q"
+                  alt="synthesis"
+                  width={288}
+                  height={32}
+                  crop="fit"
+                />
+                <CldImage
+                  src="andela_aawta2"
+                  alt="Andela"
+                  width={143}
+                  height={38}
+                  crop="fill"
+                />
               </Box>
             </Box>
             <Box
@@ -370,55 +456,61 @@ export default function AboutUsPage() {
                 height: 141,
                 display: { xs: "flex", sm: "none" },
                 gap: { xs: 2, sm: 2 },
-                my: 2,
               }}
             >
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 26 }}>
-                <Image
-                  src={surrey}
+                <CldImage
+                  src="surrey_pt2wr9"
                   alt="university of Surrey"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={110}
+                  height={28}
+                  crop="fill"
                 />{" "}
-                <Image
-                  src={illinois}
+                <CldImage
+                  src="illinois_gr2043"
                   alt="Illinois university"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={127}
+                  height={21}
+                  crop="fill"
                 />{" "}
-                <Image
-                  src={caltech}
+                <CldImage
+                  src="caltech_bvvgqy"
                   alt="Caltech"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={97}
+                  height={24}
+                  crop="fill"
                 />
               </Box>
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 39 }}>
-                <Image
-                  src={uci}
+                <CldImage
+                  src="uci_z6y0iu"
                   alt="University of california"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={167}
+                  height={39}
+                  crop="fill"
                 />
-                <Image
-                  src={andela}
+                <CldImage
+                  src="andela_aawta2"
                   alt="Andela"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={135}
+                  height={36}
+                  crop="fill"
                 />
               </Box>
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 30 }}>
-                <Image
-                  src={springboard}
+                <CldImage
+                  src="springboard_t75fm8"
                   alt="springboard"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={177}
+                  height={30}
+                  crop="fill"
                 />
-                <Image
-                  src={synthesis}
+                <CldImage
+                  src="synthesis_mton9q"
                   alt="synthesis"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={159}
+                  height={22}
+                  crop="fill"
                 />
               </Box>
             </Box>
@@ -429,14 +521,51 @@ export default function AboutUsPage() {
                 ml: 2,
                 width: "100%",
                 height: 475,
+                position: "relative",
               }}
             >
-              <Image
-                style={{ width: "100%", height: "100%" }}
-                src={smilinglady}
-                alt="People smiling"
-                priority
-              />
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                badgeContent={
+                  <Avatar
+                    alt="Smiling boy"
+                    src=""
+                    sx={{
+                      width: 120,
+                      height: 120,
+                      bgcolor: "transparent",
+                      position: "absolute",
+                      top: -90,
+                      left: -40,
+                    }}
+                  >
+                    <CldImage
+                      alt="Smiling boy"
+                      src="Ellipse_73_hwr1e9"
+                      width={108}
+                      height={108}
+                      crop="thumb"
+                      gravity="auto"
+                    />
+                  </Avatar>
+                }
+              >
+                <CldImage
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "10px",
+                  }}
+                  src="t9inkopzvjaw7x136htl"
+                  alt="Lady smiling"
+                  // crop="thumb"
+                  // gravity="auto"
+                  width={340}
+                  height={475}
+                  loading="lazy"
+                />
+              </Badge>
             </Box>
             <Box
               sx={{
@@ -450,13 +579,13 @@ export default function AboutUsPage() {
               <Button
                 onClick={() => router.push("/signup")}
                 sx={{
-                  width: 165.2,
+                  width: 289,
                   height: 40,
-                  padding: "12px 18px",
-                  font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                  padding: "18px 16px",
+                  font: `normal normal 500 normal 16px/20px ${Fonts.primaryMedium}`,
+                  letterSpacing: "0.25px",
                   color: Colors.light,
                   textTransform: "none",
-                  letterSpacing: 0.25,
                   border: `1px solid ${Colors.primary}`,
                   borderRadius: "8px",
                   background: Colors.primary,
@@ -465,7 +594,7 @@ export default function AboutUsPage() {
                   },
                 }}
               >
-                Register my child
+                Start with a Free 1-Month Class
               </Button>
             </Box>
           </Box>

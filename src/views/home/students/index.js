@@ -7,36 +7,41 @@ import "swiper/css/free-mode"
 import "swiper/css/pagination"
 // import required modules
 import { Box, Button } from "@mui/material"
-import Image from "next/image"
+import { CldImage } from "next-cloudinary"
 import { Autoplay } from "swiper/modules"
 import { Colors } from "../../../components/themes/colors"
 import { Fonts } from "../../../components/themes/fonts"
-import pythongirl from "../../../../public/images/python-girl.svg"
-import webboy from "../../../../public/images/web-boy.svg"
-import scratchgirl from "../../../../public/images/scratch-girl.svg"
-import uiuxboy from "../../../../public/images/uiux-boy.svg"
-import jsboy from "../../../../public/images/js-girl.svg"
 
 export const images = [
   {
     course: "python",
-    imgPath: pythongirl,
+    imgPath: "python-girl_kkjkqp",
+    width: 276,
+    height: 290,
   },
   {
     course: "Web development",
-    imgPath: webboy,
+    imgPath: "web_i5bjei",
+    width: 276,
+    height: 290,
   },
   {
     course: "Scratch",
-    imgPath: scratchgirl,
+    imgPath: "scrach-girl_slb6lk",
+    width: 276,
+    height: 290,
   },
   {
     course: "UX/UI Design",
-    imgPath: uiuxboy,
+    imgPath: "Rectangle_5108_tkfo8f",
+    width: 276,
+    height: 290,
   },
   {
     course: "Javascript",
-    imgPath: jsboy,
+    imgPath: "js-girl_awnwj8",
+    width: 276,
+    height: 290,
   },
 ]
 export default function StudentImages() {
@@ -49,7 +54,7 @@ export default function StudentImages() {
     >
       <Swiper
         slidesPerView={1.75}
-        spaceBetween={35}
+        spaceBetween={10}
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -96,16 +101,18 @@ export default function StudentImages() {
                 position: "relative",
               }}
             >
-              <Image
-                sx={{
-                  width: "100%",
-                  height: "100%",
+              <CldImage
+                style={{
                   position: "relative",
+                  borderRadius: "10px",
                 }}
+                width={img.width}
+                height={img.height}
                 src={img.imgPath}
                 alt={img.course}
-                priority
-                style={{ position: "relative" }}
+                crop="fill"
+                gravity="auto"
+                loading="lazy"
               />
 
               <Button

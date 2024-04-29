@@ -368,7 +368,7 @@ export default function HomePageLayout({ children }) {
                   },
                 }}
               >
-                Register my child
+                Start with a Free 1-Month Class
               </Button>
             </Box>
           </StyledList>
@@ -626,9 +626,9 @@ export default function HomePageLayout({ children }) {
                 sx={{
                   width: { xs: 165.2 },
                   height: 36,
-                  padding: "10px 16px",
+                  padding: "18px 16px",
                   display: { xs: "none", md: "flex" },
-                  font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                  font: `normal normal 500 normal 14px/15px ${Fonts.primaryMedium}`,
                   color: Colors.light,
                   textTransform: "none",
                   letterSpacing: 0.25,
@@ -640,7 +640,7 @@ export default function HomePageLayout({ children }) {
                   },
                 }}
               >
-                Register my child
+                Start with a Free 1-Month Class
               </Button>
             </Box>
           </Toolbar>

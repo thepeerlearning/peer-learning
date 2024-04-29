@@ -137,7 +137,7 @@ export const PasswordNolabelIcon = styled.span`
 export const InputLabel = styled.label`
   width: ${(props) => (props.width ? props.width : "100%")};
   text-align: left;
-  font: normal normal 500 normal 16px/20px ${Fonts.primary};
+  font: normal normal 500 normal 16px/20px ${Fonts.primaryMedium};
   color: ${Colors.dark};
   text-transform: capitalize;
   margin-left: 5px;
@@ -155,7 +155,8 @@ export const InputTextElement = styled.input`
   height: ${(props) => (props.height ? props.height : "44px")};
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
-  padding: 10.5px 10px 10.5px 45px;
+  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+    ${(props) => (props.hpadding ? props.hpadding : "17px")};
   font: normal normal 400 normal 16px/20px ${Fonts.primary};
   border: ${(props) =>
     props?.disabled
@@ -307,8 +308,8 @@ export const SelectInput = styled.select`
   display: flex;
   white-space: pre;
   min-height: 20px;
-  padding: 10.5px 10px 10.5px 45px;
-  // padding: 10.5px 10px 10.5px 18px;
+  padding: ${(props) => (props.vpadding ? props.vpadding : "16px")}
+    ${(props) => (props.hpadding ? props.hpadding : "17px")};
   margin: ${(props) => (props.vmargin ? props.vmargin : "10px")}
     ${(props) => (props.hmargin ? hmargin : 0)};
   font: normal normal 400 normal 16px/20px ${Fonts.primary};

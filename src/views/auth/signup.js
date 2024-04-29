@@ -27,6 +27,7 @@ export default function SignupForm({ next }) {
   const validationSchema = Yup.object().shape({
     fullname: Yup.string().required("Parent name is required"),
     childname: Yup.string().required("Child's name is required"),
+    childusername: Yup.string().required("Child's username is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     phone: Yup.string().required("Phone number is required"),
     password: Yup.string().required("Password is required"),
@@ -46,11 +47,12 @@ export default function SignupForm({ next }) {
   })
 
   function onSubmit(data) {
-    const { email, password, phone, fullname, childname } = data
+    const { email, password, phone, fullname, childname, childusername } = data
 
     const inputData = {
       child_full_name: childname,
       parent_full_name: fullname,
+      username: childusername,
       email: email,
       password: password,
       phone: phone,
@@ -85,13 +87,12 @@ export default function SignupForm({ next }) {
               htmlFor="fullname"
               name="fullname"
               label="Parent full name"
-              placeholder="John Doe"
+              placeholder="Full Name"
               type="text"
               register={register}
               error={errors.fullname ? true : false}
               helper={errors.fullname?.message}
               disabled={loading}
-              icon={<UserIcon />}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -100,20 +101,19 @@ export default function SignupForm({ next }) {
               htmlFor="childname"
               label="Child's name"
               name="childname"
-              placeholder="Jane Doe"
+              placeholder="Full Name"
               type="text"
               register={register}
               error={errors.childname ? true : false}
               helper={errors.childname?.message}
               disabled={loading}
-              icon={<UserIcon />}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               id="email"
               htmlFor="email"
-              label="email"
+              label="Parent email"
               name="email"
               placeholder="john.doe@gmail.com"
               type="email"
@@ -121,7 +121,6 @@ export default function SignupForm({ next }) {
               error={errors.email ? true : false}
               helper={errors.email?.message}
               disabled={loading}
-              icon={<EmailIcon />}
             />
           </Grid>
           <Grid item xs={12}>
@@ -135,7 +134,7 @@ export default function SignupForm({ next }) {
                 <PhoneNumberInput
                   id="phone"
                   htmlFor="phone"
-                  label="Phone"
+                  label="Phone number (preferably a WhatsApp no)"
                   name={name}
                   value={value}
                   onBlur={onBlur}
@@ -145,6 +144,20 @@ export default function SignupForm({ next }) {
                   disabled={loading}
                 />
               )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="childusername"
+              htmlFor="childusername"
+              label="Child's username"
+              name="childusername"
+              placeholder="Ex. ZoeCodes"
+              type="text"
+              register={register}
+              error={errors.childusername ? true : false}
+              helper={errors.childusername?.message}
+              disabled={loading}
             />
           </Grid>
           <Grid item xs={12}>
@@ -173,12 +186,13 @@ export default function SignupForm({ next }) {
                 my: 2,
               }}
             >
-              By clicking continue, you agree to abide by our{" "}
+              By signing up, you confirm that you agree to our{" "}
               <Link
                 href="/terms"
                 underline="hover"
                 sx={{
                   color: Colors.primary,
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
                 }}
               >
                 {" "}
@@ -190,6 +204,7 @@ export default function SignupForm({ next }) {
                 underline="hover"
                 sx={{
                   color: Colors.primary,
+                  font: `normal normal 500 normal 16px/24px ${Fonts.primaryMedium}`,
                 }}
               >
                 Privacy Policy
@@ -212,7 +227,6 @@ export default function SignupForm({ next }) {
               display: "flex",
               justifyContent: "center",
               mt: "36px",
-              // pr: "17px",
             }}
           >
             <Box

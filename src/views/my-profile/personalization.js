@@ -13,9 +13,6 @@ import {
   TextArea,
   TextField,
 } from "../../components/forms/textFields"
-import { Colors } from "../../components/themes/colors"
-import { Fonts } from "../../components/themes/fonts"
-import { Countries } from "../../utils/data"
 import Snackbars from "../../components/snackbar"
 import {
   EmailIcon,
@@ -23,7 +20,10 @@ import {
   QuestionMarkIcon,
   TimeIcon,
 } from "../../components/svg"
+import { Colors } from "../../components/themes/colors"
+import { Fonts } from "../../components/themes/fonts"
 import { getProfile, updateProfile } from "../../redux/slices/student"
+import { Countries } from "../../utils/data"
 
 export default function PersonalizationPage() {
   const matches = useMediaQuery("(min-width:600px)")
@@ -304,7 +304,6 @@ export default function PersonalizationPage() {
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
                   disabled
-                  icon={<EmailIcon />}
                 />
               </Stack>
             </Box>
@@ -537,27 +536,6 @@ export default function PersonalizationPage() {
                   error={errors.country ? true : false}
                   helper={errors.country?.message}
                   disabled={loading}
-                  icon={
-                    <Box
-                      sx={{
-                        "& > img": {
-                          width: 18,
-                          height: 18,
-                          background: Colors.light,
-                          border: `1px solid #EAECF0`,
-                          borderRadius: "100%",
-                        },
-                      }}
-                    >
-                      <img
-                        loading="lazy"
-                        width="20"
-                        srcSet={`https://flagcdn.com/w40/${code?.toLowerCase()}.png 2x`}
-                        src={`https://flagcdn.com/w20/${code?.toLowerCase()}.png`}
-                        alt=""
-                      />
-                    </Box>
-                  }
                 >
                   {Countries.map((country) => (
                     <option key={country.name} value={country.name}>
@@ -671,7 +649,6 @@ export default function PersonalizationPage() {
                   error={errors.tz ? true : false}
                   helper={errors.tz?.message}
                   disabled={loading}
-                  icon={<TimeIcon />}
                 >
                   {timezone?.map((time) => (
                     <option value={time} key={"time" + time}>
@@ -751,7 +728,6 @@ export default function PersonalizationPage() {
                   error={errors.dob ? true : false}
                   helper={errors.dob?.message}
                   disabled={loading}
-                  icon={<TimeIcon />}
                 />
               </Stack>
             </Box>
@@ -799,7 +775,6 @@ export default function PersonalizationPage() {
                   error={errors.email ? true : false}
                   helper={errors.email?.message}
                   disabled
-                  icon={<EmailIcon />}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -1002,27 +977,6 @@ export default function PersonalizationPage() {
                   error={errors.country ? true : false}
                   helper={errors.country?.message}
                   disabled={loading}
-                  icon={
-                    <Box
-                      sx={{
-                        "& > img": {
-                          width: 18,
-                          height: 18,
-                          background: Colors.light,
-                          border: `1px solid #EAECF0`,
-                          borderRadius: "100%",
-                        },
-                      }}
-                    >
-                      <img
-                        loading="lazy"
-                        width="20"
-                        srcSet={`https://flagcdn.com/w40/${code?.toLowerCase()}.png 2x`}
-                        src={`https://flagcdn.com/w20/${code?.toLowerCase()}.png`}
-                        alt=""
-                      />
-                    </Box>
-                  }
                 >
                   {Countries.map((country) => (
                     <option key={country.name} value={country.name}>
@@ -1042,7 +996,6 @@ export default function PersonalizationPage() {
                   error={errors.tz ? true : false}
                   helper={errors.tz?.message}
                   disabled={loading}
-                  icon={<TimeIcon />}
                 >
                   {timezone?.map((time) => (
                     <option value={time} key={"time" + time}>
@@ -1078,7 +1031,6 @@ export default function PersonalizationPage() {
                   error={errors.dob ? true : false}
                   helper={errors.dob?.message}
                   disabled={loading}
-                  icon={<TimeIcon />}
                 />
               </Grid>
             </Grid>

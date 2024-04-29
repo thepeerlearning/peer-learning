@@ -264,19 +264,6 @@ export function TextField({
       <InputLabel htmlFor={htmlFor}>
         {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
       </InputLabel>
-      {nolabel ? (
-        <TextNoLabelIconStyle>
-          <span>
-            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
-          </span>
-        </TextNoLabelIconStyle>
-      ) : (
-        <TextIconStyle>
-          <span>
-            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
-          </span>
-        </TextIconStyle>
-      )}
       {register ? (
         <InputTextElement
           id={id}
@@ -492,19 +479,6 @@ export function Select({
       <InputLabel htmlFor={htmlFor}>
         {label} {required ? <sup style={{ color: "#ED3572" }}>*</sup> : ""}
       </InputLabel>
-      {nolabel ? (
-        <SelectNoLabelIconStyle>
-          <span>
-            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
-          </span>
-        </SelectNoLabelIconStyle>
-      ) : (
-        <TextIconStyle>
-          <span>
-            {icon === "string" ? <Image src={icon} alt="text icon" /> : icon}
-          </span>
-        </TextIconStyle>
-      )}
       {register ? (
         <SelectInput
           id={id}

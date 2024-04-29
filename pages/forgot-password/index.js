@@ -9,7 +9,6 @@ import * as Yup from "yup"
 import { SubmitButton } from "../../src/components/forms/buttons"
 import { TextField } from "../../src/components/forms/textFields"
 import Snackbars from "../../src/components/snackbar"
-import { EmailIcon } from "../../src/components/svg"
 import { PasswordIcon } from "../../src/components/svg/menuIcons"
 import { Colors } from "../../src/components/themes/colors"
 import { Fonts } from "../../src/components/themes/fonts"
@@ -150,7 +149,6 @@ export default function ForgotPasswordPage() {
                     error={errors.email ? true : false}
                     helper={errors.email?.message}
                     disabled={loading}
-                    icon={<EmailIcon />}
                   />
                 </Grid>
                 <Grid item xs={12}>

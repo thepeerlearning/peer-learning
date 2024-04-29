@@ -2,14 +2,12 @@ import { Box } from "@mui/material"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import Cookies from "js-cookie"
-import Image from "next/image"
 import * as React from "react"
 import { useDispatch } from "react-redux"
-import cardmockup from "../../../../public/images/Card.png"
 import { Colors } from "../../../components/themes/colors"
+import { Fonts } from "../../../components/themes/fonts"
 import { initiatePayment } from "../../../redux/slices/auth"
 import CheckoutForm from "./stripe/form"
-import { Fonts } from "../../../components/themes/fonts"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY)
 export default function CoursesPayment() {
@@ -117,9 +115,6 @@ export default function CoursesPayment() {
       }}
     >
       <Box sx={{ width: "100%", p: 3 }}>
-        <Box sx={{ mb: 2 }}>
-          <Image src={cardmockup} alt="peer learning card mockup" />
-        </Box>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm amount={amount} />

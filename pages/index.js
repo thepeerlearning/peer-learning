@@ -1,23 +1,20 @@
-import { Box, Button, CssBaseline, Typography } from "@mui/material"
-import Image from "next/image"
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  CssBaseline,
+  Typography,
+} from "@mui/material"
+import { CldImage } from "next-cloudinary"
 import { useRouter } from "next/router"
 import React from "react"
-import heroImage from "../public/images/svgs/hero-bg.svg"
 import { Colors } from "../src/components/themes/colors"
 import { Fonts } from "../src/components/themes/fonts"
 import MetaData from "../src/utils/meta"
 import HomePageLayout from "../src/views/home/layout"
 import StudentImages from "../src/views/home/students"
 import HomeCoursesTab from "../src/views/home/tab"
-import smilinglady from "../public/images/smiling-people.svg"
-import surrey from "../public/images/surrey.svg"
-import illinois from "../public/images/illinois.svg"
-import andela from "../public/images/andela.svg"
-import synthesis from "../public/images/synthesis.svg"
-import uci from "../public/images/uci.svg"
-import springboard from "../public/images/springboard.svg"
-import caltech from "../public/images/caltech.svg"
-import parent from "../public/images/parent.svg"
 // import Testimonies from "../src/views/home/testimony"
 
 export default function HomePage() {
@@ -33,7 +30,10 @@ export default function HomePage() {
       }}
     >
       <CssBaseline />
-      <MetaData />
+      <MetaData
+        title="Welcome to the peer learning platform"
+        content="The peer learning homepage"
+      />
       <Box
         id="hero-section"
         component="div"
@@ -58,10 +58,10 @@ export default function HomePage() {
             backgroundColor: Colors.primary,
             backgroundImage: {
               xs: "transparent",
-              sm: `url("/images/hero-image.svg")`,
+              sm: `url("https://res.cloudinary.com/dfkhpgcij/image/upload/Group_1000006881_bh6xpb")`,
             },
             backgroundSize: "cover",
-            backgroundPosition: { sm: "center 45px", xl: "center 50px" },
+            backgroundPosition: { sm: "center 45px", xl: "right 40px" },
             backgroundRepeat: "no-repeat",
             // pt: 30,
           }}
@@ -151,10 +151,11 @@ export default function HomePage() {
                 <Button
                   onClick={() => router.push("/signup")}
                   sx={{
-                    width: { xs: "100%", sm: 179.2 },
-                    height: 56,
+                    width: { xs: "100%", sm: 289 },
+                    height: 50,
                     padding: "18px 16px",
-                    font: `normal normal 500 normal 16px/20.42px ${Fonts.primaryMedium}`,
+                    font: `normal normal 500 normal 16px/20px ${Fonts.primaryMedium}`,
+                    letterSpacing: "0.25px",
                     color: "#0C1419",
                     textTransform: "none",
                     border: `1px solid ${Colors.light}`,
@@ -165,14 +166,14 @@ export default function HomePage() {
                     },
                   }}
                 >
-                  Register my child
+                  Start with a Free 1-Month Class
                 </Button>
                 <Button
                   onClick={() => router.push("/auth/login")}
                   variant="outline"
                   sx={{
                     width: "100%",
-                    height: 56,
+                    height: 52,
                     padding: "18px 16px",
                     display: { xs: "block", sm: "none" },
                     font: `normal normal 500 normal 16px/20.42px ${Fonts.primaryMedium}`,
@@ -271,11 +272,12 @@ export default function HomePage() {
         <Button
           onClick={() => router.push("/signup")}
           sx={{
-            width: 179.2,
+            width: 289,
             height: 50,
             padding: "18px 16px",
             mt: "20px",
-            font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+            font: `normal normal 500 normal 16px/20px ${Fonts.primaryMedium}`,
+            letterSpacing: "0.25px",
             color: Colors.light,
             textTransform: "none",
             border: `1px solid ${Colors.primary}`,
@@ -286,7 +288,7 @@ export default function HomePage() {
             },
           }}
         >
-          Register my child
+          Start with a Free 1-Month Class
         </Button>
       </Box>
 
@@ -303,7 +305,6 @@ export default function HomePage() {
           backgroundImage: `url("/images/svgs/grid-bg.svg")`,
           backgroundSize: "cover",
           backgroundPosition: "right center",
-          backgroundAttachment: "fixed",
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -358,11 +359,14 @@ export default function HomePage() {
           </Box>
         </Box>
 
-        <Image
-          src={heroImage}
-          width={1339}
-          height={915}
+        <CldImage
+          src="hero_ugi6ij"
+          width="1339"
+          height="915"
           alt="hero background image"
+          crop="fill"
+          gravity="auto"
+          loading="lazy"
         />
       </Box>
       {/* SECTION TWO */}
@@ -401,12 +405,46 @@ export default function HomePage() {
               },
             }}
           >
-            <Image
-              style={{ width: "100%", height: "100%" }}
-              src={smilinglady}
-              alt="People smiling"
-              priority
-            />
+            <Badge
+              overlap="circular"
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              badgeContent={
+                <Avatar
+                  alt="Smiling boy"
+                  src=""
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    bgcolor: "transparent",
+                    position: "absolute",
+                    top: -120,
+                    left: 0,
+                  }}
+                >
+                  <CldImage
+                    alt="Smiling boy"
+                    src="Ellipse_73_hwr1e9"
+                    width="108"
+                    height="108"
+                    crop="thumb"
+                    gravity="auto"
+                  />
+                </Avatar>
+              }
+            >
+              <CldImage
+                style={{
+                  borderRadius: "10px",
+                }}
+                src="t9inkopzvjaw7x136htl"
+                alt="Lady smiling"
+                crop="thumb"
+                gravity="auto"
+                width="515"
+                height="618"
+                loading="lazy"
+              />
+            </Badge>
           </Box>
           <Box
             sx={{
@@ -507,16 +545,58 @@ export default function HomePage() {
                 gap: { xs: 0, sm: 2 },
               }}
             >
-              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
-                <Image src={surrey} alt="university of Surrey" priority />{" "}
-                <Image src={illinois} alt="Illinois university" priority />{" "}
-                <Image src={caltech} alt="Caltech" priority />
-                <Image src={uci} alt="University of california" priority />
+              <Box sx={{ width: "100%", display: "flex", gap: 2 }}>
+                <CldImage
+                  src="surrey_pt2wr9"
+                  alt="university of Surrey"
+                  width="137"
+                  height="32"
+                  crop="fill"
+                />{" "}
+                <CldImage
+                  src="illinois_gr2043"
+                  alt="Illinois university"
+                  width="165"
+                  height="28"
+                  crop="fill"
+                />{" "}
+                <CldImage
+                  src="caltech_bvvgqy"
+                  alt="Caltech"
+                  width="111"
+                  height="27"
+                  crop="fill"
+                />
+                <CldImage
+                  src="uci_z6y0iu"
+                  alt="University of california"
+                  width={171}
+                  height={40}
+                  crop="fill"
+                />
               </Box>
-              <Box sx={{ width: "100%", display: "flex", gap: 2, height: 45 }}>
-                <Image src={springboard} alt="springboard" priority />
-                <Image src={synthesis} alt="synthesis" priority />
-                <Image src={andela} alt="Andela" priority />
+              <Box sx={{ width: "100%", display: "flex", gap: 4, height: 45 }}>
+                <CldImage
+                  src="springboard_t75fm8"
+                  alt="springboard"
+                  width={214}
+                  height={38}
+                  crop="fit"
+                />
+                <CldImage
+                  src="synthesis_mton9q"
+                  alt="synthesis"
+                  width={288}
+                  height={32}
+                  crop="fit"
+                />
+                <CldImage
+                  src="andela_aawta2"
+                  alt="Andela"
+                  width={143}
+                  height={38}
+                  crop="fill"
+                />
               </Box>
             </Box>
             <Box
@@ -529,51 +609,58 @@ export default function HomePage() {
               }}
             >
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 26 }}>
-                <Image
-                  src={surrey}
+                <CldImage
+                  src="surrey_pt2wr9"
                   alt="university of Surrey"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={110}
+                  height={28}
+                  crop="fill"
                 />{" "}
-                <Image
-                  src={illinois}
+                <CldImage
+                  src="illinois_gr2043"
                   alt="Illinois university"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={127}
+                  height={21}
+                  crop="fill"
                 />{" "}
-                <Image
-                  src={caltech}
+                <CldImage
+                  src="caltech_bvvgqy"
                   alt="Caltech"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={97}
+                  height={24}
+                  crop="fill"
                 />
               </Box>
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 39 }}>
-                <Image
-                  src={uci}
+                <CldImage
+                  src="uci_z6y0iu"
                   alt="University of california"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={167}
+                  height={39}
+                  crop="fill"
                 />
-                <Image
-                  src={andela}
+                <CldImage
+                  src="andela_aawta2"
                   alt="Andela"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={135}
+                  height={36}
+                  crop="fill"
                 />
               </Box>
               <Box sx={{ width: "100%", display: "flex", gap: 2, height: 30 }}>
-                <Image
-                  src={springboard}
+                <CldImage
+                  src="springboard_t75fm8"
                   alt="springboard"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={177}
+                  height={30}
+                  crop="fill"
                 />
-                <Image
-                  src={synthesis}
+                <CldImage
+                  src="synthesis_mton9q"
                   alt="synthesis"
-                  priority
-                  style={{ width: "100%", height: "100%" }}
+                  width={159}
+                  height={22}
+                  crop="fill"
                 />
               </Box>
             </Box>
@@ -584,14 +671,51 @@ export default function HomePage() {
                 ml: 2,
                 width: "100%",
                 height: 475,
+                position: "relative",
               }}
             >
-              <Image
-                style={{ width: "100%", height: "100%" }}
-                src={smilinglady}
-                alt="People smiling"
-                priority
-              />
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                badgeContent={
+                  <Avatar
+                    alt="Smiling boy"
+                    src=""
+                    sx={{
+                      width: 120,
+                      height: 120,
+                      bgcolor: "transparent",
+                      position: "absolute",
+                      top: -90,
+                      left: -40,
+                    }}
+                  >
+                    <CldImage
+                      alt="Smiling boy"
+                      src="Ellipse_73_hwr1e9"
+                      width={108}
+                      height={108}
+                      crop="thumb"
+                      gravity="auto"
+                    />
+                  </Avatar>
+                }
+              >
+                <CldImage
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "10px",
+                  }}
+                  src="t9inkopzvjaw7x136htl"
+                  alt="Lady smiling"
+                  // crop="thumb"
+                  // gravity="auto"
+                  width={340}
+                  height={475}
+                  loading="lazy"
+                />
+              </Badge>
             </Box>
             <Box
               sx={{
@@ -605,13 +729,13 @@ export default function HomePage() {
               <Button
                 onClick={() => router.push("/signup")}
                 sx={{
-                  width: 165.2,
+                  width: 289,
                   height: 40,
-                  padding: "12px 18px",
-                  font: `normal normal 500 normal 14px/20px ${Fonts.primaryMedium}`,
+                  padding: "18px 16px",
+                  font: `normal normal 500 normal 16px/20px ${Fonts.primaryMedium}`,
+                  letterSpacing: "0.25px",
                   color: Colors.light,
                   textTransform: "none",
-                  letterSpacing: 0.25,
                   border: `1px solid ${Colors.primary}`,
                   borderRadius: "8px",
                   background: Colors.primary,
@@ -620,7 +744,7 @@ export default function HomePage() {
                   },
                 }}
               >
-                Register my child
+                Start with a Free 1-Month Class
               </Button>
             </Box>
           </Box>
@@ -785,8 +909,8 @@ export default function HomePage() {
               <Box
                 sx={{
                   font: `normal normal 400 normal 15px/22px ${Fonts.primary}`,
-                  fontFeatureSettings: `cv04' on, 'cv03' on, 'cv01' on;`,
-                  color: "rgba(255, 255, 255, 0.7)",
+                  color: "#FFFFFFB2",
+                  text: "left",
                 }}
               >
                 Hameed, Alabama, United States
@@ -798,7 +922,15 @@ export default function HomePage() {
               position: "relative",
             }}
           >
-            <Image src={parent} alt="parent testimony" priority />
+            <CldImage
+              src="hhxbqv8os3myua39gtzd"
+              alt="parent testimony"
+              width={487}
+              height={462}
+              crop="thumb"
+              gravity="auto"
+              loading="lazy"
+            />
           </Box>
         </Box>
       </Box>
