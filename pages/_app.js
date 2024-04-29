@@ -5,7 +5,6 @@ import Snackbar from "@mui/material/Snackbar"
 import { ThemeProvider } from "@mui/material/styles"
 import AOS from "aos"
 import "aos/dist/aos.css"
-import Head from "next/head"
 import PropTypes from "prop-types"
 import { forwardRef, useEffect, useState } from "react"
 import "react-phone-number-input/style.css"
@@ -14,9 +13,9 @@ import { PersistGate } from "redux-persist/integration/react"
 import { Fonts } from "../src/components/themes/fonts"
 import createEmotionCache from "../src/lib/createEmotionCache"
 import { wrapper } from "../src/redux/store"
+import MetaData from "../src/utils/meta"
 import "../styles/globals.css"
 import theme from "../styles/muiTheme"
-import MetaData from "../src/utils/meta"
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />

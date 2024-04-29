@@ -125,7 +125,6 @@ export default function Courses() {
             games and animations. They&apos;ll code and master essential
             programming concepts.
           </Typography>
-
           <Button
             onClick={() => router.push("/signup")}
             sx={{
@@ -135,11 +134,11 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
-              letterSpacing: 0.1,
+              letterSpacing: 0.25,
               border: `1px solid #EDEDED`,
               borderRadius: "8px",
               background: `#EDEDED !important`,
@@ -151,7 +150,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{
@@ -351,8 +350,8 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -367,7 +366,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{
@@ -565,14 +564,15 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
               letterSpacing: 0.25,
               border: `1px solid #EDEDED`,
               borderRadius: "8px",
               background: `#EDEDED !important`,
+              textTransform: "none",
               boxShadow:
                 "0px 6px 16px 0px rgba(12, 43, 100, 0.32), 0px 1px 2px 0px rgba(12, 43, 100, 0.32), 0px 0px 0px 1px #EDEDED",
               "&:hover": {
@@ -580,7 +580,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{
@@ -792,8 +792,8 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -808,7 +808,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{
@@ -1008,8 +1008,8 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -1024,7 +1024,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{
@@ -1225,8 +1225,8 @@ export default function Courses() {
               justifyContent: "center",
               alignItems: "center",
               cursor: "pointer",
-              padding: "10px 16px",
-              font: `normal normal 700 normal 15.88px/20px ${Fonts.primaryBold}`,
+              padding: "18px 0px",
+              font: `normal normal 700 normal 16px/24px ${Fonts.primaryBold}`,
               color: Colors.black,
               textTransform: "none",
               letterSpacing: 0.25,
@@ -1241,7 +1241,7 @@ export default function Courses() {
               },
             }}
           >
-            Register my child
+            Start with a Free 1-Month Class
           </Button>
           <Box
             sx={{

@@ -144,7 +144,7 @@ export default function AuthLayout({ children }) {
                   sx={{
                     transform: "rotate(179.886deg)",
                     position: "fixed",
-                    bottom: 190,
+                    bottom: { xs: 0, sm: 80, xs: 190 },
                   }}
                 >
                   <CldImage
@@ -162,7 +162,7 @@ export default function AuthLayout({ children }) {
                   sx={{
                     width: "100%",
                     position: "fixed",
-                    top: 70,
+                    top: 0,
                   }}
                 >
                   {/* <Card
