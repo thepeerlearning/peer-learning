@@ -353,7 +353,8 @@ export default function HomePage() {
               }}
             >
               All your child&apos;s learning needs are here! From their
-              assignments to projects to the course roadmap, we&apos;ve got it
+              assignments 
+              to projects to the course roadmap, we&apos;ve got it
               covered.
             </Typography>
           </Box>
