@@ -91,7 +91,7 @@ export default function CompanyPage() {
             >
               At Peer Learning, we empower kids with the essential skills they
               need to thrive in the digital world. We do this by equipping them
-              with coding, AI, and design, combined with real-world
+              with Coding, AI, and design, combined with real-world
               problem-solving. Our core belief&apos;is that learning should be
               engaging, challenging, and personalized.
             </Typography>
